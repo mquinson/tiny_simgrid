@@ -58,7 +58,6 @@ int main() {
 		t2.actor_id = 3;
 		EventSet cause1, s1 ,s3;
 
-
 		UnfoldingEvent *ee = new UnfoldingEvent(1, t1, cause1);
 		UnfoldingEvent *ee1 = new UnfoldingEvent(2, t1, cause1);
 
@@ -68,66 +67,6 @@ int main() {
 		s1.insert(ee);
 
 		s3.insert(ee1);
-		if (s1 == s3) std::cout <<" \n hai cai bang nhau ";
-		std::cout<<"\n hien s1 ";
-		for(auto it: s1.events_)   it->print();
-
-
-		s1.insert(ee1);
-		std::cout<<"\n hien s1 sau insert ";
-		for(auto it: s1.events_)   it->print();
-		s1.erase(ee1);
-		std::cout<<"\n hien s1 sau erase ";
-	for(auto it: s1.events_)it->print();
-	std::cout<<"\n het hien thi sau erase";
-
-
-		s1 = s1.plus(ee1);
-		std::cout<<"\n hien s1 sau plus ";
-
-		for(auto it: s1.events_)   it->print();
-
-
-		EventSet s2 ; s2 = s1;
-		std::cout<<"\n hien s2 ";
-
-		for(auto it: s2.events_)   it->print();
-
-		s2 = s2.plus(ee2);
-		std::cout<<"\n hien s2 ";
-
-		for(auto it: s2.events_)   it->print();
-
-		s3 = s2; s3.erase(ee2);
-
-		std::cout<<"\n sau khi erase s2 la  ";
-
-			for(auto it: s2.events_)   it->print();
-
-			std::cout<<"\n sau khi erase s3 la  ";
-
-					for(auto it: s3.events_)   it->print();
-
-			std::list<EventSet> l;
-			EventSet es1, es2;
-			es1.insert(ee);
-			es2.insert(ee2);
-			l.push_back(es1);
-			l.push_back(es2);
-
-			std::cout<<"\n hien thi list   ";
-
-			for(auto it: l)
-			{	std::cout<<" \n hien thi :";
-				for(auto it1: it.events_)it1->print();
-			}
-			std::cout<<"\n sau khi erase s2 la  ";
-
-
-
-			std::cout<<" \nhet ";			std::cout<<" \nhet ";
-			std::cout<<" \nhet ";
-			std::cout<<" \nhet ";
 
 		usleep(300000000);
 
