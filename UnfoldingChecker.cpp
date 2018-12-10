@@ -3,8 +3,7 @@
 #include <string>
 #include <utility>
 #include <vector>
-#include <math.h>
-
+#include<math.h>
 #include <unistd.h>
 //#include "src/mc/mc_state.h"
 

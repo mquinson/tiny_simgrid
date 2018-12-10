@@ -54,11 +54,11 @@ class Actor {
 public:
 	int id = 0;
 	int nb_trans = 0;
-	std::array<Transition, 10> trans;
+	std::array<Transition, 30> trans;
 	Actor() {
 	}
 	;
-	Actor(int id, int nb_trans, std::array<Transition, 10> &trans);
+	Actor(int id, int nb_trans, std::array<Transition, 30> &trans);
 	bool operator<(const Actor& other) const;
 
 };

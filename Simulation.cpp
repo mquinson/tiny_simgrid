@@ -58,7 +58,7 @@ bool Transition::isDependent(Transition other) {
 	return false;
 }
 
-Actor::Actor(int id, int nb_trans, std::array<Transition, 10> &trans) {
+Actor::Actor(int id, int nb_trans, std::array<Transition, 30> &trans) {
 	this->id = id;
 	this->nb_trans = nb_trans;
 	this->trans = trans;
@@ -197,7 +197,7 @@ std::set<Transition> trans_set;
 						if (p.trans[j].mailbox_id == mb.id
 								and (not mb.checkComm(p.trans[j])))
 							chk = false;
-
+						//else std::cout<<"\n" <<  p.trans[j].type <<" " << p.trans[j].id <<" of P" << p.id <<" not ready :\n" ;
 					//	if(chk and p.trans[j].actor_id == 1) std::cout<<" \n thang wait  " << p.trans[j].id <<" cua " <<p.trans[j].actor_id <<" co enabled \n";
 				}
 
@@ -207,6 +207,7 @@ std::set<Transition> trans_set;
 				break;
 			}
 
+
 /*
 	std::cout<<"\n enabled transitions : \n";
 	 for(auto tr : trans_set)
@@ -214,6 +215,7 @@ std::set<Transition> trans_set;
 	 << " type ="<<tr.type <<"\n";
 	 std::cout<<" \n het ---\n";
 */
+
 
 
 
