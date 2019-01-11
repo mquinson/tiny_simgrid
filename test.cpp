@@ -1,12 +1,3 @@
-//============================================================================
-// Name        : test.cpp
-// Author      : 
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
-//============================================================================
-
-
 
 #include "UnfoldingChecker.hpp"
 
@@ -1321,7 +1312,7 @@ int main() {
 			break;
 
 
-	case 25: { // the first simix model -> 6 traces
+	case 25: { //
 
 				//transition (maiboxid, commid, type)
 
@@ -1457,7 +1448,7 @@ int main() {
 				EventSet emptyS;
 				std::list<EventSet> maxEvtHistory;
 				maxEvtHistory.push_back(emptyS);
-				//UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+				UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
 
 
 				std::cout<<"\n explore full state space :\n";
@@ -1465,14 +1456,14 @@ int main() {
 				State initState1(4, actor_set, mailboxes);
 				initState1.initialState = true;
 				stateStack.push_back(initState1);
-				exhautiveExplore(stateStack,transList);
+				//exhautiveExplore(stateStack,transList);
 
 
 
 			}
 				break;
 
-	case 26: { // the first simix model -> 6 traces
+	case 26: { //  master- slaver
 
 					//transition (maiboxid, commid, type)
 
@@ -1770,7 +1761,7 @@ int main() {
 						EventSet emptyS;
 						std::list<EventSet> maxEvtHistory;
 						maxEvtHistory.push_back(emptyS);
-						//UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+						UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
 
 
 						std::cout<<"\n explore full state space :\n";
@@ -1778,7 +1769,7 @@ int main() {
 						State initState1(5, actor_set, mailboxes);
 						initState1.initialState = true;
 						stateStack.push_back(initState1);
-						exhautiveExplore(stateStack,transList);
+						//exhautiveExplore(stateStack,transList);
 
 
 
@@ -1902,7 +1893,7 @@ int main() {
 			EventSet emptyS;
 			std::list<EventSet> maxEvtHistory;
 			maxEvtHistory.push_back(emptyS);
-			UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
 
 
 			std::cout<<"\n explore full state space :\n";
@@ -1910,7 +1901,7 @@ int main() {
 			State initState1(3, actor_set, mailboxes);
 			initState1.initialState = true;
 			stateStack.push_back(initState1);
-			exhautiveExplore(stateStack,transList);
+			//exhautiveExplore(stateStack,transList);
 
 
 
@@ -1945,14 +1936,12 @@ if (nprocs < 2)
 */
 		//transition (maiboxid, commid, type)
 			//node 0
-
-
 			Transition t0(0, 1, "Ireceive");
 			Transition t1(0, 1, "Wait");
 
 
-			Transition t2(1, 1, "Isend");
-			Transition t3(1, 1, "Wait");
+			Transition t2(1, 2, "Isend");
+			Transition t3(1, 2, "Wait");
 
 
 			// node1
@@ -2011,7 +2000,7 @@ if (nprocs < 2)
 			EventSet emptyS;
 			std::list<EventSet> maxEvtHistory;
 			maxEvtHistory.push_back(emptyS);
-			UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+			//UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
 
 
 			std::cout<<"\n explore full state space :\n";
@@ -2020,7 +2009,6 @@ if (nprocs < 2)
 			initState1.initialState = true;
 			stateStack.push_back(initState1);
 			exhautiveExplore(stateStack,transList);
-
 
 						}
 							break;
@@ -2094,12 +2082,6 @@ if (nprocs < 2)
 			Transition t14(2, 1, "Ireceive");
 			Transition t15(2, 1, "Wait");
 
-
-
-
-
-
-
 			std::array<Transition, 30> trans1, trans2, trans3, trans4,trans5 ;
 			trans1[0] = t0;
 			trans1[1] = t1;
@@ -2171,11 +2153,402 @@ if (nprocs < 2)
 							break;
 
 
-	}
 
+
+	case 32: { /*		no-error-wait-any_src
+ if (nprocs < 2)
+    {
+      printf ("not enough tasks\n");
+    }
+  else if (rank == 0)
+    {
+      memset (buf0, 0, buf_size);
+      MPI_Irecv (buf1, buf_size, MPI_INT,  MPI_ANY_SOURCE, 0, MPI_COMM_WORLD, &req);
+
+      MPI_Send (buf0, buf_size, MPI_INT, 1, 0, MPI_COMM_WORLD);
+
+      MPI_Wait (&req, &status);
+    }
+  else if (rank == 1)
+    {
+      memset (buf1, 1, buf_size);
+
+      MPI_Irecv (buf0, buf_size, MPI_INT, MPI_ANY_SOURCE, 0, MPI_COMM_WORLD, &req);
+
+      MPI_Wait (&req, &status);
+
+      MPI_Send (buf1, buf_size, MPI_INT, 0, 0, MPI_COMM_WORLD);
+    }
+
+*/
+		//transition (maiboxid, commid, type)
+			//node 0
+			Transition t0(0, 1, "Ireceive");
+			Transition t1(1, 2, "Isend");
+			Transition t2(1, 2, "Wait");
+			Transition t3(0, 1, "Wait");
+
+			// node1
+
+			Transition t4(1, 1, "Ireceive");
+			Transition t5(1, 1, "Wait");
+
+			Transition t6(0, 2, "Isend");
+			Transition t7(0, 2, "Wait");
+
+
+
+
+			std::array<Transition, 30> trans1, trans2, trans3, trans4,trans5 ;
+			trans1[0] = t0;
+			trans1[1] = t1;
+			trans1[2] = t2;
+			trans1[3] = t3;
+
+
+
+			trans2[0] = t4;
+			trans2[1] = t5;
+			trans2[2] = t6;
+			trans2[3] = t7;
+
+
+
+
+			//Actor(id, number of Transition, transition array )
+
+			Actor actor1(1, 4, trans1);
+			Actor actor2(2, 4, trans2);
+
+
+			actor_set.insert(actor1);
+			actor_set.insert(actor2);
+
+
+			Mailbox mailbox0,mailbox1,mailbox2;
+			mailbox0.id = 0;
+			mailbox1.id = 1;
+
+
+
+			mailboxes.insert(mailbox0);
+			mailboxes.insert(mailbox1);
+
+
+			initState = new State(2, actor_set, mailboxes);
+
+			initState->initialState = true;
+			UnfoldingEvent *e = new UnfoldingEvent();
+			e->appState = *initState;
+
+			EventSet emptyS;
+			std::list<EventSet> maxEvtHistory;
+			maxEvtHistory.push_back(emptyS);
+			//UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+
+
+			std::cout<<"\n explore full state space :\n";
+
+			State initState1(2, actor_set, mailboxes);
+			initState1.initialState = true;
+			stateStack.push_back(initState1);
+			exhautiveExplore(stateStack,transList);
+
+
+						}
+							break;
+
+	case 33: { /*		send-neighbors
+*/
+
+		//transition (maiboxid, commid, type)
+			//node 0
+
+			Transition t0(1, 1, "Isend");
+			Transition t1(2, 2, "Isend");
+			Transition t2(0, 3, "Ireceive");
+			Transition t3(0, 4, "Ireceive");
+
+
+			Transition t4(1, 1, "Wait");
+			Transition t5(2, 2, "Wait");
+			Transition t6(0, 3, "Wait");
+			Transition t7(0, 4, "Wait");
+
+			// node1
+
+			Transition t8(0, 1, "Isend");
+			Transition t9(2, 2, "Isend");
+			Transition t10(1, 3, "Ireceive");
+			Transition t11(1, 4, "Ireceive");
+
+
+			Transition t12(0, 1, "Wait");
+			Transition t13(2, 2, "Wait");
+			Transition t14(1, 3, "Wait");
+			Transition t15(1, 4, "Wait");
+
+			//node 2
+
+			Transition t16(0, 1, "Isend");
+			Transition t17(1, 2, "Isend");
+			Transition t18(2, 3, "Ireceive");
+			Transition t19(2, 4, "Ireceive");
+
+
+			Transition t20(0, 1, "Wait");
+			Transition t21(1, 2, "Wait");
+			Transition t22(2, 3, "Wait");
+			Transition t23(2, 4, "Wait");
+
+
+
+			std::array<Transition, 30> trans1, trans2, trans3, trans4,trans5 ;
+			trans1[0] = t0;
+			trans1[1] = t1;
+			trans1[2] = t2;
+			trans1[3] = t3;
+
+
+
+			trans1[4] = t4;
+			trans1[5] = t5;
+			trans1[6] = t6;
+			trans1[7] = t7;
+
+
+
+			trans2[0] = t8;
+			trans2[1] = t9;
+			trans2[2] = t10;
+			trans2[3] = t11;
+
+
+
+			trans2[4] = t12;
+			trans2[5] = t13;
+			trans2[6] = t14;
+			trans2[7] = t15;
+
+
+
+			trans3[0] = t16;
+			trans3[1] = t17;
+			trans3[2] = t18;
+			trans3[3] = t19;
+			trans3[4] = t20;
+			trans3[5] = t21;
+			trans3[6] = t22;
+			trans3[7] = t23;
+
+			//Actor(id, number of Transition, transition array )
+
+			Actor actor1(1, 8, trans1);
+			Actor actor2(2, 8, trans2);
+			Actor actor3(3, 8, trans3);
+
+
+			actor_set.insert(actor1);
+			actor_set.insert(actor2);
+			actor_set.insert(actor3);
+
+
+			Mailbox mailbox0,mailbox1,mailbox2;
+			mailbox0.id = 0;
+			mailbox1.id = 1;
+			mailbox2.id = 2;
+
+
+
+			mailboxes.insert(mailbox0);
+			mailboxes.insert(mailbox1);
+			mailboxes.insert(mailbox2);
+
+
+			initState = new State(3, actor_set, mailboxes);
+
+			initState->initialState = true;
+			UnfoldingEvent *e = new UnfoldingEvent();
+			e->appState = *initState;
+
+			EventSet emptyS;
+			std::list<EventSet> maxEvtHistory;
+			maxEvtHistory.push_back(emptyS);
+			UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+
+
+			std::cout<<"\n explore full state space :\n";
+
+			State initState1(3, actor_set, mailboxes);
+			initState1.initialState = true;
+			stateStack.push_back(initState1);
+			//exhautiveExplore(stateStack,transList);
+
+
+						}
+							break;
+
+	case 34: { /*send-neighbors
+*/
+
+		//transition (maiboxid, commid, type)
+			//node 0
+
+			Transition t0(1, 1, "Isend");
+			Transition t1(3, 2, "Isend");
+			Transition t2(0, 3, "Ireceive");
+			Transition t3(0, 4, "Ireceive");
+
+
+			Transition t4(1, 1, "Wait");
+			Transition t5(3, 2, "Wait");
+			Transition t6(0, 3, "Wait");
+			Transition t7(0, 4, "Wait");
+
+			// node1
+
+			Transition t8(0, 1, "Isend");
+			Transition t9(2, 2, "Isend");
+			Transition t10(1, 3, "Ireceive");
+			Transition t11(1, 4, "Ireceive");
+
+
+			Transition t12(0, 1, "Wait");
+			Transition t13(2, 2, "Wait");
+			Transition t14(1, 3, "Wait");
+			Transition t15(1, 4, "Wait");
+
+			//node 2
+
+			Transition t16(3, 1, "Isend");
+			Transition t17(1, 2, "Isend");
+			Transition t18(2, 3, "Ireceive");
+			Transition t19(2, 4, "Ireceive");
+
+
+			Transition t20(3, 1, "Wait");
+			Transition t21(1, 2, "Wait");
+			Transition t22(2, 3, "Wait");
+			Transition t23(2, 4, "Wait");
+
+
+			//node 3
+
+			Transition t24(0, 1, "Isend");
+			Transition t25(2, 2, "Isend");
+			Transition t26(3, 3, "Ireceive");
+			Transition t27(3, 4, "Ireceive");
+
+
+			Transition t28(0, 1, "Wait");
+			Transition t29(2, 2, "Wait");
+			Transition t30(3, 3, "Wait");
+			Transition t31(3, 4, "Wait");
+
+
+
+
+
+			std::array<Transition, 30> trans1, trans2, trans3, trans4,trans5 ;
+			trans1[0] = t0;
+			trans1[1] = t1;
+			trans1[2] = t2;
+			trans1[3] = t3;
+			trans1[4] = t4;
+			trans1[5] = t5;
+			trans1[6] = t6;
+			trans1[7] = t7;
+
+
+
+			trans2[0] = t8;
+			trans2[1] = t9;
+			trans2[2] = t10;
+			trans2[3] = t11;
+			trans2[4] = t12;
+			trans2[5] = t13;
+			trans2[6] = t14;
+			trans2[7] = t15;
+
+
+
+			trans3[0] = t16;
+			trans3[1] = t17;
+			trans3[2] = t18;
+			trans3[3] = t19;
+			trans3[4] = t20;
+			trans3[5] = t21;
+			trans3[6] = t22;
+			trans3[7] = t23;
+
+			trans4[0] = t24;
+			trans4[1] = t25;
+			trans4[2] = t26;
+			trans4[3] = t27;
+			trans4[4] = t28;
+			trans4[5] = t29;
+			trans4[6] = t30;
+			trans4[7] = t31;
+
+
+			//Actor(id, number of Transition, transition array )
+
+			Actor actor1(1, 8, trans1);
+			Actor actor2(2, 8, trans2);
+			Actor actor3(3, 8, trans3);
+			Actor actor4(4, 8, trans4);
+
+
+			actor_set.insert(actor1);
+			actor_set.insert(actor2);
+			actor_set.insert(actor3);
+			actor_set.insert(actor4);
+
+
+			Mailbox mailbox0,mailbox1,mailbox2, mailbox3;
+			mailbox0.id = 0;
+			mailbox1.id = 1;
+			mailbox2.id = 2;
+			mailbox3.id = 3;
+
+
+
+			mailboxes.insert(mailbox0);
+			mailboxes.insert(mailbox1);
+			mailboxes.insert(mailbox2);
+			mailboxes.insert(mailbox3);
+
+
+			initState = new State(4, actor_set, mailboxes);
+
+			initState->initialState = true;
+			UnfoldingEvent *e = new UnfoldingEvent();
+			e->appState = *initState;
+
+			EventSet emptyS;
+			std::list<EventSet> maxEvtHistory;
+			maxEvtHistory.push_back(emptyS);
+			UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+
+
+			std::cout<<"\n explore full state space :\n";
+
+			State initState1(4, actor_set, mailboxes);
+			initState1.initialState = true;
+			stateStack.push_back(initState1);
+			//exhautiveExplore(stateStack,transList);
+
+
+						}
+							break;
+
+	}
 	  clock_t end = clock();
 	  double elapsed_secs = double(end - begin) / ( 60*CLOCKS_PER_SEC);
-	 std::cout<<" Time = " << elapsed_secs << "  \n";
+
+	  std::cout<<" Time in second= " <<  double(end - begin) / (CLOCKS_PER_SEC) << "  \n";
+      std::cout<<" Time in minutes= " << elapsed_secs << "  \n";
+
 	std::cout << " \n main() finished ";
 	return 0;
 }
