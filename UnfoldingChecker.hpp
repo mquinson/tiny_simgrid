@@ -168,7 +168,7 @@ public:
 	EventSet causes;       // used to store directed ancestors of event e
 	EventSet conflictEvts; // used for Test and Send/Receive events, storing conflicts events with me (concern the same communication)
 
-	UnfoldingEvent() {
+    UnfoldingEvent(State* s) : appState(*s) {
     }
 
 	UnfoldingEvent(int nb_events, Transition t, EventSet causes);
