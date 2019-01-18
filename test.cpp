@@ -172,7 +172,6 @@ int main() {
 		initState = new State(2, actor_set, mailboxes);
 
         UnfoldingEvent *e = new UnfoldingEvent(initState);
-
         UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 	}
@@ -203,7 +202,6 @@ int main() {
 		initState = new State(2, actor_set, mailboxes);
 
         UnfoldingEvent *e = new UnfoldingEvent(initState);
-
         UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
@@ -233,7 +231,6 @@ int main() {
 		initState = new State(3, actor_set, mailboxes);
 
         UnfoldingEvent *e = new UnfoldingEvent(initState);
-
         UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
@@ -262,7 +259,6 @@ int main() {
 		initState = new State(2, actor_set, mailboxes);
 
         UnfoldingEvent *e = new UnfoldingEvent(initState);
-
         UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
@@ -295,7 +291,6 @@ int main() {
 		initState = new State(2, actor_set, mailboxes);
 
         UnfoldingEvent *e = new UnfoldingEvent(initState);
-
         UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
@@ -324,7 +319,6 @@ int main() {
 		initState = new State(2, actor_set, mailboxes);
 
         UnfoldingEvent *e = new UnfoldingEvent(initState);
-
         UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
@@ -360,9 +354,7 @@ int main() {
 		initState = new State(3, actor_set, mailboxes);
 
         UnfoldingEvent *e = new UnfoldingEvent(initState);
-
         UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
-
 	}
 		break;
 
@@ -402,7 +394,6 @@ int main() {
 		initState = new State(3, actor_set, mailboxes);
 
         UnfoldingEvent *e = new UnfoldingEvent(initState);
-
         UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
@@ -447,7 +438,6 @@ int main() {
 		initState = new State(3, actor_set, mailboxes);
 
         UnfoldingEvent *e = new UnfoldingEvent(initState);
-
         UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
@@ -498,7 +488,6 @@ int main() {
 		initState = new State(3, actor_set, mailboxes);
 
         UnfoldingEvent *e = new UnfoldingEvent(initState);
-
         UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 	}
@@ -558,7 +547,6 @@ int main() {
 		initState = new State(4, actor_set, mailboxes);
 
         UnfoldingEvent *e = new UnfoldingEvent(initState);
-
         UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 	}
@@ -625,9 +613,7 @@ int main() {
 		initState = new State(4, actor_set, mailboxes);
 
         UnfoldingEvent *e = new UnfoldingEvent(initState);
-
         UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
-
 	}
 		break;
 
@@ -671,9 +657,7 @@ int main() {
 		initState = new State(3, actor_set, mailboxes);
 
         UnfoldingEvent *e = new UnfoldingEvent(initState);
-
         UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
-
 	}
 		break;
 
@@ -739,10 +723,7 @@ int main() {
 		initState = new State(4, actor_set, mailboxes);
 
         UnfoldingEvent *e = new UnfoldingEvent(initState);
-
-
         UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
-
 	}
 		break;
 
@@ -798,9 +779,7 @@ int main() {
 			initState = new State(3, actor_set, mailboxes);
 
             UnfoldingEvent *e = new UnfoldingEvent(initState);
-
             UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
-
 		}
 			break;
 
@@ -859,9 +838,7 @@ int main() {
 			initState = new State(3, actor_set, mailboxes);
 
             UnfoldingEvent *e = new UnfoldingEvent(initState);
-
             UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
-
 		}
 			break;
 
@@ -925,9 +902,7 @@ int main() {
 		initState = new State(4, actor_set, mailboxes);
 
         UnfoldingEvent *e = new UnfoldingEvent(initState);
-
         UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
-
 	}
 		break;
 
@@ -1013,9 +988,7 @@ int main() {
 		initState = new State(5, actor_set, mailboxes);
 
         UnfoldingEvent *e = new UnfoldingEvent(initState);
-
         UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
-
 	}
 		break;
 
@@ -1074,9 +1047,7 @@ int main() {
 			initState = new State(4, actor_set, mailboxes);
 
             UnfoldingEvent *e = new UnfoldingEvent(initState);
-
             UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
-
 		}
 			break;
 
@@ -1139,9 +1110,7 @@ int main() {
 				initState = new State(4, actor_set, mailboxes);
 
                 UnfoldingEvent *e = new UnfoldingEvent(initState);
-
                 UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
-
 		}
 			break;
 
@@ -1276,9 +1245,7 @@ int main() {
 				initState = new State(4, actor_set, mailboxes);
 
                 UnfoldingEvent *e = new UnfoldingEvent(initState);
-
                 UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
-
 
 				std::cout<<"\n explore full state space :\n";
 
@@ -1442,7 +1409,6 @@ int main() {
 			initState = new State(2, actor_set, mailboxes);
 
             UnfoldingEvent *e = new UnfoldingEvent(initState);
-
             UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 			std::cout<<"\n explore full state space :\n";
@@ -1569,9 +1535,7 @@ int main() {
 						initState = new State(5, actor_set, mailboxes);
 
                         UnfoldingEvent *e = new UnfoldingEvent(initState);
-
                         UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
-
 
 						std::cout<<"\n explore full state space :\n";
 
@@ -1797,7 +1761,6 @@ if (nprocs < 2)
             //UnfoldingEvent *e = new UnfoldingEvent(initState);
             //UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
-
 			std::cout<<"\n explore full state space :\n";
 
 			State initState1(3, actor_set, mailboxes);
@@ -1927,7 +1890,6 @@ if (nprocs < 2)
             UnfoldingEvent *e = new UnfoldingEvent(initState);
             UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
-
 			std::cout<<"\n explore full state space :\n";
 
 			State initState1(3, actor_set, mailboxes);
@@ -2026,7 +1988,6 @@ if (nprocs < 2)
 
             //UnfoldingEvent *e = new UnfoldingEvent(initState);
             //UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
-
 
 			std::cout<<"\n explore full state space :\n";
 
@@ -2148,7 +2109,6 @@ if (nprocs < 2)
 			initState = new State(3, actor_set, mailboxes);
 
             UnfoldingEvent *e = new UnfoldingEvent(initState);
-
             UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 

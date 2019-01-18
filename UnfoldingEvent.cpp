@@ -2,7 +2,7 @@
 
 #include <unistd.h>
 
-UnfoldingEvent::UnfoldingEvent(int nb_events, Transition t, EventSet causes) {
+UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, Transition t, EventSet causes) {
 
 	this->id = nb_events;
 	this->causes = causes;

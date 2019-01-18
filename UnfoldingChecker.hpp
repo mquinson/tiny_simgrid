@@ -76,8 +76,8 @@ struct Comunication {
 class Mailbox {
 public:
     int id=0;
-    int nbSend = 0;
-    int nbReceive = 0;
+    unsigned int nbSend = 0;
+    unsigned int nbReceive = 0;
 
 	std::array<Comunication, 20> sendList;
 	std::array<Comunication, 20> receiveList;
@@ -97,8 +97,11 @@ public:
 
 	State() {
 	}
-	State(int nb_actor, std::set<Actor> actors, std::set<Mailbox> mailboxes);
-	std::set<Transition> getEnabledTransition();
+    State(int nb_actor, std::set<Actor> actors, std::set<Mailbox> mailboxes);
+    State(std::set<Actor> actors, std::set<Mailbox> mailboxes) {
+        State(actors.size(), actors, mailboxes);
+    }
+    std::set<Transition> getEnabledTransition();
 	State execute(Transition t);
 
 
@@ -162,7 +165,7 @@ public:
 
 class UnfoldingEvent {
 public:
-	int id = -1;
+    int id = -1;
 	State appState;
 	Transition transition; // The last transition made to reach that state
 	EventSet causes;       // used to store directed ancestors of event e
@@ -171,7 +174,7 @@ public:
     UnfoldingEvent(State* s) : appState(*s) {
     }
 
-	UnfoldingEvent(int nb_events, Transition t, EventSet causes);
+    UnfoldingEvent(unsigned int nb_events, Transition t, EventSet causes);
 
 	EventSet getHistory() const;
 

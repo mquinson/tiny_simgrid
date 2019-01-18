@@ -96,7 +96,7 @@ void Mailbox::update(Transition t) {
 	//comm.status="pending";
 
 	if (t.type == "Isend") {
-		for (int i = 0; i < this->nbReceive; i++)
+        for (unsigned long i = 0; i < this->nbReceive; i++)
 			if (receiveList[i].status == "pending") {
 				receiveList[i].status = "ready";
 				comm.status = "ready";
@@ -109,7 +109,7 @@ void Mailbox::update(Transition t) {
 	}
 
 	if (t.type == "Ireceive") {
-		for (int i = 0; i < this->nbSend; i++)
+        for (unsigned long i = 0; i < this->nbSend; i++)
 			if (sendList[i].status == "pending") {
 
 				sendList[i].status = "ready";
@@ -130,12 +130,12 @@ void Mailbox::update(Transition t) {
 
 bool Mailbox::checkComm(Transition t) {
 
-	for (int i = 0; i < nbSend; i++)
+    for (unsigned long i = 0; i < nbSend; i++)
 		if (t.actor_id == sendList[i].actorId and t.commId == sendList[i].commId
 				and sendList[i].status == "ready")
 			return true;
 
-	for (int i = 0; i < nbReceive; i++)
+    for (unsigned long i = 0; i < nbReceive; i++)
 		if (t.actor_id == receiveList[i].actorId
 				and t.commId == receiveList[i].commId
 				and receiveList[i].status == "ready")
@@ -191,7 +191,7 @@ std::set<Transition> State::getEnabledTransition() {
 std::set<Transition> trans_set;
 
 	for (auto p : this->actors)
-		for (int j = 0; j < p.nb_trans; j++)
+        for (unsigned long j = 0; j < p.nb_trans; j++)
 			if (not p.trans[j].executed) {
 				// std::cout<< "hien thi not executed : \n";
 				// std::cout<< "actorid =" << p.id <<" type ="<< p.trans[j].type <<"   :\n";
@@ -234,7 +234,7 @@ std::set<Transition> trans_set;
 void State::print() {
 	std::cout << "s = (";
 	for (auto p : this->actors)
-		for (int j = 0; j < p.nb_trans; j++)
+        for (unsigned long j = 0; j < p.nb_trans; j++)
 			if (p.trans[j].executed)
 				std::cout << "t" << j << "-p" << p.id << " is executed";
 	std::cout << ")";
