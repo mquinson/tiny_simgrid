@@ -11,7 +11,7 @@
 
 unsigned int nb_events=0;
 unsigned int nb_traces=0;
-int comId = -1;
+static int comId = -1;
 EventSet U, G, gD;
 
 /*void UnfoldingChecker::computeAlt(EventSet& J, EventSet D, Configuration C,

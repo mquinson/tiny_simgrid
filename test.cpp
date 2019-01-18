@@ -67,14 +67,13 @@ int main() {
 	case 1: { // the first example (in the paper)
 		// Transition(read_write, access_variable)
 
-        actor_set.insert(Actor(1, {Transition(1, 0)}));
-        actor_set.insert(Actor(2, {Transition(0, 0)}));
-        actor_set.insert(Actor(3, {Transition(0, 0)}));
-
-		Mailbox mailbox1;
-		mailboxes.insert(mailbox1);
-
-		initState = new State(3, actor_set, mailboxes);
+        initState = new State(3, {
+                                  Actor(1, {Transition(1, 0)}),
+                                  Actor(2, {Transition(0, 0)}),
+                                  Actor(3, {Transition(0, 0)})
+                              }, {
+                                  Mailbox()
+                              });
 
 		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
