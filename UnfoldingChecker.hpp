@@ -24,7 +24,7 @@ class Transition {
 public:
 
 	int actor_id = 0;
-	int id = 0;
+    unsigned int id = 0;
 
 	bool executed = false;
 	int read_write = 0; // default value is read (= 0), write =1, if mutex lock = 2, unlock = 3
@@ -50,14 +50,13 @@ public:
 class Actor {
 public:
 	int id = 0;
-	int nb_trans = 0;
-	std::array<Transition, 30> trans;
-	Actor() {
-	}
+    unsigned long nb_trans = 0;
+    std::vector<Transition> trans;
+    Actor() {}
 
-	Actor(int id, int nb_trans, std::array<Transition, 30> &trans);
-	bool operator<(const Actor& other) const;
-
+    Actor(int id, unsigned int nb_trans, std::array<Transition, 30> &trans);
+    Actor(int id, std::vector<Transition> trans);
+    bool operator<(const Actor& other) const;
 };
 /*
 class Comunication {

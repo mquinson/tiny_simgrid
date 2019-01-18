@@ -12,7 +12,7 @@
 
 using namespace std;
 
-int nbInt =0;
+static int nbInt =0;
 void exhautiveExplore(std::list<State > stateStack,  std::list<Transition> transList) {
     State	s = stateStack.back();
     std::set<Transition> trans_set =  s.getEnabledTransition();
@@ -59,28 +59,17 @@ int main() {
 	// keep history of maximal event when exploring C
 	std::list<set<int> > maxEventHis;
 
-	int example = 0;
-	std::cout << " enter example:";
-	std::cin >> example;
+    int example = 1;
+    std::cout << " enter example:";
+    //std::cin >> example;
 
 	switch (example) {
 	case 1: { // the first example (in the paper)
 		// Transition(read_write, access_variable)
-		Transition t1(1, 0);
-		Transition t2(0, 0);
-		Transition t3(0, 0);
 
-		std::array<Transition, 30> trans1, trans2, trans3;
-		trans1[0] = t1;
-		trans2[0] = t2;
-		trans3[0] = t3;
-		Actor actor1(1, 1, trans1);
-		Actor actor2(2, 1, trans2);
-		Actor actor3(3, 1, trans3);
-
-		actor_set.insert(actor1);
-		actor_set.insert(actor2);
-		actor_set.insert(actor3);
+        actor_set.insert(Actor(1, {Transition(1, 0)}));
+        actor_set.insert(Actor(2, {Transition(0, 0)}));
+        actor_set.insert(Actor(3, {Transition(0, 0)}));
 
 		Mailbox mailbox1;
 		mailboxes.insert(mailbox1);
