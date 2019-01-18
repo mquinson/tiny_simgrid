@@ -76,7 +76,6 @@ int main() {
 
 		initState = new State(3, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -96,7 +95,6 @@ int main() {
 
 		initState = new State(2, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -129,7 +127,6 @@ int main() {
 
 		initState = new State(3, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -162,7 +159,6 @@ int main() {
 
 		initState = new State(3, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -197,7 +193,6 @@ int main() {
 
 		initState = new State(2, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -233,7 +228,6 @@ int main() {
 
 		initState = new State(2, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -268,7 +262,6 @@ int main() {
 		mailboxes.insert(mailbox1);
 		initState = new State(3, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -302,7 +295,6 @@ int main() {
 		mailboxes.insert(mailbox1);
 		initState = new State(2, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -340,7 +332,6 @@ int main() {
 		mailboxes.insert(mailbox1);
 		initState = new State(2, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -374,7 +365,6 @@ int main() {
 		mailboxes.insert(mailbox1);
 		initState = new State(2, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -415,7 +405,6 @@ int main() {
 
 		initState = new State(3, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -462,7 +451,6 @@ int main() {
 
 		initState = new State(3, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -513,7 +501,6 @@ int main() {
 
 		initState = new State(3, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -570,7 +557,6 @@ int main() {
 
 		initState = new State(3, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -635,7 +621,6 @@ int main() {
 
 		initState = new State(4, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -707,7 +692,6 @@ int main() {
 
 		initState = new State(4, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -758,7 +742,6 @@ int main() {
 
 		initState = new State(3, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -831,7 +814,6 @@ int main() {
 
 		initState = new State(4, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -898,7 +880,6 @@ int main() {
 
 			initState = new State(3, actor_set, mailboxes);
 
-			initState->initialState = true;
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
@@ -967,7 +948,6 @@ int main() {
 
 			initState = new State(3, actor_set, mailboxes);
 
-			initState->initialState = true;
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
@@ -1040,7 +1020,6 @@ int main() {
 
 		initState = new State(4, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
@@ -1135,10 +1114,8 @@ int main() {
 
 		initState = new State(5, actor_set, mailboxes);
 
-		initState->initialState = true;
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
-		IntSet *setInt = new IntSet();
 
 		EventSet emptyS;
 		std::list<EventSet> maxEvtHistory;
@@ -1203,7 +1180,6 @@ int main() {
 
 			initState = new State(4, actor_set, mailboxes);
 
-			initState->initialState = true;
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
@@ -1274,10 +1250,8 @@ int main() {
 
 				initState = new State(4, actor_set, mailboxes);
 
-				initState->initialState = true;
-				UnfoldingEvent *e = new UnfoldingEvent();
+                UnfoldingEvent *e = new UnfoldingEvent();
 				e->appState = *initState;
-				IntSet *setInt = new IntSet();
 
 				EventSet emptyS;
 				std::list<EventSet> maxEvtHistory;
@@ -1418,7 +1392,6 @@ int main() {
 
 				initState = new State(4, actor_set, mailboxes);
 
-				initState->initialState = true;
 				UnfoldingEvent *e = new UnfoldingEvent();
 				e->appState = *initState;
 
@@ -1431,7 +1404,6 @@ int main() {
 				std::cout<<"\n explore full state space :\n";
 
 				State initState1(4, actor_set, mailboxes);
-				initState1.initialState = true;
 				stateStack.push_back(initState1);
 				//exhautiveExplore(stateStack,transList);
 
@@ -1543,7 +1515,6 @@ int main() {
 
 					initState = new State(3, actor_set, mailboxes);
 
-					initState->initialState = true;
 					UnfoldingEvent *e = new UnfoldingEvent();
 					e->appState = *initState;
 
@@ -1556,7 +1527,6 @@ int main() {
 					std::cout<<"\n explore full state space :\n";
 
 					State initState1(4, actor_set, mailboxes);
-					initState1.initialState = true;
 					stateStack.push_back(initState1);
 					exhautiveExplore(stateStack,transList);
 
@@ -1598,7 +1568,6 @@ int main() {
 
 			initState = new State(2, actor_set, mailboxes);
 
-			initState->initialState = true;
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
@@ -1610,7 +1579,6 @@ int main() {
 			std::cout<<"\n explore full state space :\n";
 
 			State initState1(4, actor_set, mailboxes);
-			initState1.initialState = true;
 			stateStack.push_back(initState1);
 			exhautiveExplore(stateStack,transList);
 
@@ -1731,7 +1699,6 @@ int main() {
 
 						initState = new State(5, actor_set, mailboxes);
 
-						initState->initialState = true;
 						UnfoldingEvent *e = new UnfoldingEvent();
 						e->appState = *initState;
 
@@ -1744,7 +1711,6 @@ int main() {
 						std::cout<<"\n explore full state space :\n";
 
 						State initState1(5, actor_set, mailboxes);
-						initState1.initialState = true;
 						stateStack.push_back(initState1);
 						//exhautiveExplore(stateStack,transList);
 
@@ -1863,7 +1829,6 @@ int main() {
 
 			initState = new State(3, actor_set, mailboxes);
 
-			initState->initialState = true;
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
@@ -1876,7 +1841,6 @@ int main() {
 			std::cout<<"\n explore full state space :\n";
 
 			State initState1(3, actor_set, mailboxes);
-			initState1.initialState = true;
 			stateStack.push_back(initState1);
 			//exhautiveExplore(stateStack,transList);
 
@@ -1970,7 +1934,6 @@ if (nprocs < 2)
 
 			initState = new State(2, actor_set, mailboxes);
 
-			initState->initialState = true;
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
@@ -1983,7 +1946,6 @@ if (nprocs < 2)
 			std::cout<<"\n explore full state space :\n";
 
 			State initState1(3, actor_set, mailboxes);
-			initState1.initialState = true;
 			stateStack.push_back(initState1);
 			exhautiveExplore(stateStack,transList);
 
@@ -2107,7 +2069,6 @@ if (nprocs < 2)
 
 			initState = new State(3, actor_set, mailboxes);
 
-			initState->initialState = true;
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
@@ -2120,8 +2081,7 @@ if (nprocs < 2)
 			std::cout<<"\n explore full state space :\n";
 
 			State initState1(3, actor_set, mailboxes);
-			initState1.initialState = true;
-			stateStack.push_back(initState1);
+            stateStack.push_back(initState1);
 			//exhautiveExplore(stateStack,transList);
 
 
@@ -2214,7 +2174,6 @@ if (nprocs < 2)
 
 			initState = new State(2, actor_set, mailboxes);
 
-			initState->initialState = true;
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
@@ -2227,7 +2186,6 @@ if (nprocs < 2)
 			std::cout<<"\n explore full state space :\n";
 
 			State initState1(2, actor_set, mailboxes);
-			initState1.initialState = true;
 			stateStack.push_back(initState1);
 			exhautiveExplore(stateStack,transList);
 
@@ -2344,7 +2302,6 @@ if (nprocs < 2)
 
 			initState = new State(3, actor_set, mailboxes);
 
-			initState->initialState = true;
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
@@ -2357,7 +2314,6 @@ if (nprocs < 2)
 			std::cout<<"\n explore full state space :\n";
 
 			State initState1(3, actor_set, mailboxes);
-			initState1.initialState = true;
 			stateStack.push_back(initState1);
 			//exhautiveExplore(stateStack,transList);
 
@@ -2498,7 +2454,6 @@ if (nprocs < 2)
 
 			initState = new State(4, actor_set, mailboxes);
 
-			initState->initialState = true;
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
@@ -2511,7 +2466,6 @@ if (nprocs < 2)
 			std::cout<<"\n explore full state space :\n";
 
 			State initState1(4, actor_set, mailboxes);
-			initState1.initialState = true;
 			stateStack.push_back(initState1);
 			//exhautiveExplore(stateStack,transList);
 
