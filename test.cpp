@@ -71,19 +71,12 @@ int main() {
         actor_set.insert(Actor(2, {Transition(0, 0)}));
         actor_set.insert(Actor(3, {Transition(0, 0)}));
 
-		Mailbox mailbox1;
-		mailboxes.insert(mailbox1);
-
-		initState = new State(3, actor_set, mailboxes);
+        initState = new State(3, actor_set, {Mailbox()});
 
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
-
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
 
@@ -98,10 +91,7 @@ int main() {
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
 
@@ -130,10 +120,7 @@ int main() {
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
 
@@ -162,10 +149,7 @@ int main() {
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
 
@@ -196,10 +180,7 @@ int main() {
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 	}
 		break;
@@ -231,10 +212,7 @@ int main() {
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
 
@@ -265,10 +243,7 @@ int main() {
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
 
@@ -298,10 +273,7 @@ int main() {
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
 
@@ -335,10 +307,7 @@ int main() {
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
 
@@ -368,10 +337,7 @@ int main() {
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
 
@@ -408,10 +374,7 @@ int main() {
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 	}
 		break;
@@ -454,11 +417,7 @@ int main() {
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
-
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
 
@@ -504,11 +463,7 @@ int main() {
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
-
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
 
@@ -560,10 +515,7 @@ int main() {
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 	}
 		break;
@@ -624,10 +576,7 @@ int main() {
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 	}
 		break;
@@ -695,10 +644,7 @@ int main() {
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 	}
 		break;
@@ -745,10 +691,7 @@ int main() {
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 	}
 		break;
@@ -818,13 +761,7 @@ int main() {
 		e->appState = *initState;
 
 
-
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-
-
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 	}
 		break;
@@ -883,13 +820,7 @@ int main() {
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
-
-			EventSet emptyS;
-			std::list<EventSet> maxEvtHistory;
-			maxEvtHistory.push_back(emptyS);
-
-
-			UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+            UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 		}
 			break;
@@ -952,11 +883,7 @@ int main() {
 			e->appState = *initState;
 
 
-			EventSet emptyS;
-			std::list<EventSet> maxEvtHistory;
-			maxEvtHistory.push_back(emptyS);
-
-			UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+            UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 		}
 			break;
@@ -1024,11 +951,7 @@ int main() {
 		e->appState = *initState;
 
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 	}
 		break;
@@ -1117,11 +1040,7 @@ int main() {
 		UnfoldingEvent *e = new UnfoldingEvent();
 		e->appState = *initState;
 
-		EventSet emptyS;
-		std::list<EventSet> maxEvtHistory;
-		maxEvtHistory.push_back(emptyS);
-
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 	}
 		break;
@@ -1183,11 +1102,7 @@ int main() {
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
-			EventSet emptyS;
-			std::list<EventSet> maxEvtHistory;
-			maxEvtHistory.push_back(emptyS);
-
-			UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+            UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 		}
 			break;
@@ -1253,11 +1168,7 @@ int main() {
                 UnfoldingEvent *e = new UnfoldingEvent();
 				e->appState = *initState;
 
-				EventSet emptyS;
-				std::list<EventSet> maxEvtHistory;
-				maxEvtHistory.push_back(emptyS);
-
-				UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+                UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 		}
 			break;
@@ -1395,10 +1306,7 @@ int main() {
 				UnfoldingEvent *e = new UnfoldingEvent();
 				e->appState = *initState;
 
-				EventSet emptyS;
-				std::list<EventSet> maxEvtHistory;
-				maxEvtHistory.push_back(emptyS);
-				UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+                UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 
 				std::cout<<"\n explore full state space :\n";
@@ -1518,10 +1426,7 @@ int main() {
 					UnfoldingEvent *e = new UnfoldingEvent();
 					e->appState = *initState;
 
-					EventSet emptyS;
-					std::list<EventSet> maxEvtHistory;
-					maxEvtHistory.push_back(emptyS);
-					//UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+                    //UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 
 					std::cout<<"\n explore full state space :\n";
@@ -1571,10 +1476,7 @@ int main() {
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
-			EventSet emptyS;
-			std::list<EventSet> maxEvtHistory;
-			maxEvtHistory.push_back(emptyS);
-			UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+            UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 			std::cout<<"\n explore full state space :\n";
 
@@ -1702,10 +1604,7 @@ int main() {
 						UnfoldingEvent *e = new UnfoldingEvent();
 						e->appState = *initState;
 
-						EventSet emptyS;
-						std::list<EventSet> maxEvtHistory;
-						maxEvtHistory.push_back(emptyS);
-						UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+                        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 
 						std::cout<<"\n explore full state space :\n";
@@ -1832,10 +1731,7 @@ int main() {
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
-			EventSet emptyS;
-			std::list<EventSet> maxEvtHistory;
-			maxEvtHistory.push_back(emptyS);
-		UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 
 			std::cout<<"\n explore full state space :\n";
@@ -1937,10 +1833,7 @@ if (nprocs < 2)
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
-			EventSet emptyS;
-			std::list<EventSet> maxEvtHistory;
-			maxEvtHistory.push_back(emptyS);
-			//UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+            //UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 
 			std::cout<<"\n explore full state space :\n";
@@ -2072,10 +1965,7 @@ if (nprocs < 2)
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
-			EventSet emptyS;
-			std::list<EventSet> maxEvtHistory;
-			maxEvtHistory.push_back(emptyS);
-			UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+            UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 
 			std::cout<<"\n explore full state space :\n";
@@ -2177,10 +2067,7 @@ if (nprocs < 2)
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
-			EventSet emptyS;
-			std::list<EventSet> maxEvtHistory;
-			maxEvtHistory.push_back(emptyS);
-			//UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+            //UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 
 			std::cout<<"\n explore full state space :\n";
@@ -2305,10 +2192,7 @@ if (nprocs < 2)
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
-			EventSet emptyS;
-			std::list<EventSet> maxEvtHistory;
-			maxEvtHistory.push_back(emptyS);
-			UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+            UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 
 			std::cout<<"\n explore full state space :\n";
@@ -2457,10 +2341,7 @@ if (nprocs < 2)
 			UnfoldingEvent *e = new UnfoldingEvent();
 			e->appState = *initState;
 
-			EventSet emptyS;
-			std::list<EventSet> maxEvtHistory;
-			maxEvtHistory.push_back(emptyS);
-			UC.explore(C, maxEvtHistory, D, A, e, prev_exC, actor_set);
+            UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 
 			std::cout<<"\n explore full state space :\n";
