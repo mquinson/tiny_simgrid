@@ -89,22 +89,10 @@ int main() {
 		break;
 
 	case 2: { // the second example
-		Transition t1(1, 0);
-		Transition t2(1, 1);
-		Transition t3(1, 0);
+        actor_set.insert(Actor(1, {Transition(1, 0)}));
+        actor_set.insert(Actor(2, {Transition(1, 1), Transition(1, 0)}));
 
-		std::array<Transition, 30> trans1, trans2, trans3;
-		trans1[0] = t1;
-		trans2[0] = t2;
-		trans2[1] = t3;
-		Actor actor1(1, 1, trans1);
-		Actor actor2(2, 2, trans2);
-
-		actor_set.insert(actor1);
-		actor_set.insert(actor2);
-
-		Mailbox mailbox1;
-		mailboxes.insert(mailbox1);
+        mailboxes.insert(Mailbox());
 
 		initState = new State(2, actor_set, mailboxes);
 
