@@ -64,12 +64,10 @@ Actor::Actor(int id, int nb_trans, std::array<Transition, 30> &trans) {
 	this->trans = trans;
 	int tid = 0;
 
-	for (int i = 0; i < nb_trans; i++) {
+    for (unsigned int i = 0; i < nb_trans; i++) {
 		this->trans[i].id = tid++;
 		this->trans[i].actor_id = id;
-
 	}
-
 }
 
 bool Actor::operator<(const Actor& other) const {

@@ -10,8 +10,6 @@
 #include <queue>
 using namespace std;
 
-
-
 class UnfoldingEvent;
 class EventSet;
 class Transition;
@@ -41,7 +39,6 @@ public:
 	bool isDependent(Transition other);
 	Transition() {
 	}
-	;
 
 	bool operator<(const Transition& other) const;
 	bool operator==(const Transition& other) const;
@@ -57,7 +54,7 @@ public:
 	std::array<Transition, 30> trans;
 	Actor() {
 	}
-	;
+
 	Actor(int id, int nb_trans, std::array<Transition, 30> &trans);
 	bool operator<(const Actor& other) const;
 
@@ -79,7 +76,9 @@ struct Comunication {
 
 class Mailbox {
 public:
-	int id=0, nbSend = 0, nbReceive = 0;
+    int id=0;
+    int nbSend = 0;
+    int nbReceive = 0;
 
 	std::array<Comunication, 20> sendList;
 	std::array<Comunication, 20> receiveList;
@@ -100,7 +99,6 @@ public:
 
 	State() {
 	}
-	;
 	State(int nb_actor, std::set<Actor> actors, std::set<Mailbox> mailboxes);
 	std::set<Transition> getEnabledTransition();
 	State execute(Transition t);
@@ -159,10 +157,9 @@ public:
 	std::set<int> ints;
 	IntSet() {
 	}
-	;
+
 	void insert(int e);
 	bool inculude(IntSet other);
-
 };
 
 class UnfoldingEvent {
@@ -174,7 +171,7 @@ public:
 	EventSet conflictEvts; // used for Test and Send/Receive events, storing conflicts events with me (concern the same communication)
 
 	UnfoldingEvent() {
-	};
+    }
 
 	UnfoldingEvent(int nb_events, Transition t, EventSet causes);
 
