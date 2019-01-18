@@ -92,7 +92,6 @@ public:
 class State {
 public:
 	int nb_actor = 0;
-	bool initialState = false;
 	std::set<Actor> actors;
 	std::set<Mailbox> mailboxes;
 
