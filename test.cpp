@@ -41,7 +41,7 @@ void exhautiveExplore(std::list<State > stateStack,  std::list<Transition> trans
 
 }
 
-int main() {
+int main(int argc, char** argv) {
 
 	clock_t begin = clock();
 	nb_events = 0;
@@ -60,7 +60,10 @@ int main() {
 
     int example = 1;
     std::cout << " enter example:";
-    std::cin >> example;
+   if (argc == 2)
+     example = std::atoi(argv[1]);
+   else
+     std::cin >> example;
 
 	switch (example) {
 	case 1: { // the first example (in the paper)
