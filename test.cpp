@@ -552,13 +552,13 @@ int main(int argc, char** argv) {
 				{ Mailbox(1), Mailbox(2), Mailbox(3) });
 
 		UnfoldingEvent *e = new UnfoldingEvent(initState);
-		//UC.explore(C, { EventSet() }, D, A, e, prev_exC, actor_set);
+        UC.explore(C, { EventSet() }, D, A, e, prev_exC, actor_set);
 
 		std::cout << "\n explore full state space :\n";
 
 		State initState1(3, actor_set, { Mailbox(1), Mailbox(2), Mailbox(3) });
 		stateStack.push_back(initState1);
-		exhautiveExplore(stateStack, transList);
+        //exhautiveExplore(stateStack, transList);
 
 
 
@@ -584,12 +584,12 @@ int main(int argc, char** argv) {
 
 		initState = new State(5, actor_set, {Mailbox(1), Mailbox(2),Mailbox(3),Mailbox(4),Mailbox(5)});
 		UnfoldingEvent *e = new UnfoldingEvent(initState);
-		//UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 		std::cout<<"\n explore full state space :\n";
 		State initState1(5, actor_set, {Mailbox(1), Mailbox(2),Mailbox(3),Mailbox(4),Mailbox(5)});
 		stateStack.push_back(initState1);
-		exhautiveExplore(stateStack,transList);
+        //exhautiveExplore(stateStack,transList);
 
 					}
 						break;
@@ -641,13 +641,13 @@ int main(int argc, char** argv) {
 		 initState = new State(3, actor_set, {Mailbox(0), Mailbox(1),Mailbox(2)});
 
          UnfoldingEvent *e = new UnfoldingEvent(initState);
-         //UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+         UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 		 std::cout<<"\n explore full state space :\n";
 
 		 State initState1(3, actor_set, {Mailbox(0), Mailbox(1),Mailbox(2)});
 		 stateStack.push_back(initState1);
-		 exhautiveExplore(stateStack,transList);
+         //exhautiveExplore(stateStack,transList);
 
 
 						}
@@ -690,12 +690,12 @@ int main(int argc, char** argv) {
 			 std::cout<<"\n UDPOR state space :\n";
 
 	         UnfoldingEvent *e = new UnfoldingEvent(initState);
-	        // UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+             UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 			 std::cout<<"\n explore full state space :\n";
 			 State initState1(2, actor_set, {Mailbox(0), Mailbox(1)});
 			 stateStack.push_back(initState1);
-			 exhautiveExplore(stateStack,transList);
+             //exhautiveExplore(stateStack,transList);
 
 
 						}
@@ -859,13 +859,13 @@ int main(int argc, char** argv) {
 		initState = new State(3, actor_set,	{ Mailbox(0), Mailbox(1), Mailbox(2) });
 
 		UnfoldingEvent *e = new UnfoldingEvent(initState);
-		//UC.explore(C, { EventSet() }, D, A, e, prev_exC, actor_set);
+        UC.explore(C, { EventSet() }, D, A, e, prev_exC, actor_set);
 
 		std::cout << "\n explore full state space :\n";
 
 		State initState1(3, actor_set, { Mailbox(0), Mailbox(1), Mailbox(2) });
 		stateStack.push_back(initState1);
-		exhautiveExplore(stateStack,transList);
+        //exhautiveExplore(stateStack,transList);
 	}
 		break;
 
