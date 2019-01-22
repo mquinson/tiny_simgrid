@@ -41,6 +41,17 @@ void exhautiveExplore(std::list<State > stateStack,  std::list<Transition> trans
 
 }
 
+bool test_reduction(std::set<Actor> actors, std::set<Mailbox> mailboxes, std::vector<int> confs) {
+    EventSet A, D;
+    UnfoldingChecker UC;
+    Configuration C;
+    EventSet prev_exC;
+    State* state = new State(actors.size(), actors, mailboxes);
+
+    UC.explore(C, {EventSet()}, D, A, new UnfoldingEvent(state), prev_exC, state->actors);
+    return true;
+}
+
 int main() {
 
 	  clock_t begin = clock();
@@ -67,14 +78,13 @@ int main() {
 	case 1: { // the first example (in the paper)
 		// Transition(read_write, access_variable)
 
-        actor_set.insert(Actor(1, {Transition(1, 0)}));
-        actor_set.insert(Actor(2, {Transition(0, 0)}));
-        actor_set.insert(Actor(3, {Transition(0, 0)}));
-
-        initState = new State(3, actor_set, {Mailbox()});
-
-        UnfoldingEvent *e = new UnfoldingEvent(initState);
-        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+        test_reduction({
+                           Actor(1, {Transition(1, 0)}),
+                           Actor(2, {Transition(0, 0)}),
+                           Actor(3, {Transition(0, 0)})
+                       }, {
+                           Mailbox()
+                       }, {2,3,3});
 	}
 		break;
 

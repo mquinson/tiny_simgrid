@@ -195,13 +195,15 @@ public:
 };
 
 class UnfoldingChecker {
-	EventSet A, D;
-	Configuration C;
-	unsigned long expandedStatesCount_ = 0;
-	int Mode = 1; // Mode = 1 is a mutexed model
-//  static Session& getSession();
+    unsigned long expandedStatesCount_ = 0;
+    //int Mode = 1; // Mode = 1 is a mutexed model
+    std::vector<int> confs_expected_;
+    bool confs_check_ = false;
 
 public:
+    UnfoldingChecker() = default;
+    UnfoldingChecker(std::vector<int> confs) : confs_expected_(confs), confs_check_(true) {}
+
 	void explore(Configuration C, std::list<EventSet> maxEvtHistory, EventSet D,
 			EventSet A, UnfoldingEvent *currentEvt, EventSet prev_enC,
 			std::set<Actor> proc);
@@ -215,7 +217,6 @@ public:
 	void genEventFromCandidate(EventSet& result, Transition t,
 			UnfoldingEvent* preEvt, EventSet U1, EventSet Uc);
 	EventSet filter(Configuration C, EventSet U);
-//  static Session& session;
 };
 
 
