@@ -1477,7 +1477,8 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C,
 			bool chk = true;
 			EventSet evtHisty = evt->getHistory();
 
-			/*for (auto evt1 : C.events_)
+            /* This seems to be another way to compute the conflict. Maybe even faster, but still to be tested
+             * for (auto evt1 : C.events_)
 				if (not evtHisty.contains(evt1))
 						 {
 							if (evt1->transition.isDependent(evt->transition)) {chk = false; break;}
@@ -1561,11 +1562,6 @@ void UnfoldingChecker::explore(Configuration C,
 				evt->print();
 			}
 
-/*			if(C.size() < 16)
-			{std::cout <<" \n co bien nhe ";
-			std::cout <<" \n co bien nhe ";
-			usleep(999999999);
-			}*/
 			std::cout
 					<< "\n-----------------------------------------------------------"
 							"-------------------------------------------------------------------"

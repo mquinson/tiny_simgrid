@@ -77,12 +77,12 @@ int main() {
 
 	switch (example) {
 	case 1: { // the first example (in the paper)
-		// Transition(read_write, access_variable)
+        // Transition(0:read or 1: write, access_variable)
 
         test_reduction({
-                           Actor(0, {Transition(1, 0)}),
-                           Actor(1, {Transition(0, 0)}),
-                           Actor(2, {Transition(0, 0)})
+                           Actor(0, {Transition(1, 0)}), // write x
+                           Actor(1, {Transition(0, 0)}), // read x
+                           Actor(2, {Transition(0, 0)})  // read x
                        }, {
                            Mailbox()
                        }, {3,3,3,3}, 20);
