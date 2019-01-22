@@ -75,6 +75,8 @@ struct Comunication {
 
 class Mailbox {
 public:
+    Mailbox() = default;
+    Mailbox(int id):id(id){}
     int id=0;
     unsigned int nbSend = 0;
     unsigned int nbReceive = 0;
