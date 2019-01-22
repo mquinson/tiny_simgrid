@@ -41,19 +41,6 @@ void exhautiveExplore(std::list<State > stateStack,  std::list<Transition> trans
 
 }
 
-bool test_reduction(std::set<Actor> actors, std::set<Mailbox> mailboxes, std::vector<unsigned int> confs, unsigned int evt_count) {
-    UnfoldingChecker UC(confs, evt_count);
-
-    UC.explore(new State(actors.size(), actors, mailboxes));
-
-    if (UC.error_count()>0) {
-        std::cerr << "\n\nSOMETHING WENT WRONG. Error count: "<<UC.error_count()<<"\n";
-        return false;
-    } else {
-        return true;
-    }
-}
-
 int main() {
 
 	clock_t begin = clock();
@@ -77,15 +64,16 @@ int main() {
 
 	switch (example) {
 	case 1: { // the first example (in the paper)
-        // Transition(0:read or 1: write, access_variable)
+		// Transition(read_write, access_variable)
 
-        test_reduction({
-                           Actor(0, {Transition(1, 0)}), // write x
-                           Actor(1, {Transition(0, 0)}), // read x
-                           Actor(2, {Transition(0, 0)})  // read x
-                       }, {
-                           Mailbox()
-                       }, {3,3,3,3}, 20);
+        actor_set.insert(Actor(0, {Transition(1, 0)}));
+        actor_set.insert(Actor(1, {Transition(0, 0)}));
+        actor_set.insert(Actor(2, {Transition(0, 0)}));
+
+        initState = new State(3, actor_set, {Mailbox()});
+
+        UnfoldingEvent *e = new UnfoldingEvent(initState);
+        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 	}
 		break;
 
@@ -591,9 +579,9 @@ int main() {
 		actor_set.insert(Actor(4, {Transition (3, 1, "Isend"),	Transition (3, 1, "Wait")}));
 
 
- initState = new State(5, actor_set, {Mailbox(1), Mailbox(2),Mailbox(3),Mailbox(4),Mailbox(5)});
- //UnfoldingEvent *e = new UnfoldingEvent(initState);
- //UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+		initState = new State(5, actor_set, {Mailbox(1), Mailbox(2),Mailbox(3),Mailbox(4),Mailbox(5)});
+		UnfoldingEvent *e = new UnfoldingEvent(initState);
+		//UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 		std::cout<<"\n explore full state space :\n";
 		State initState1(5, actor_set, {Mailbox(1), Mailbox(2),Mailbox(3),Mailbox(4),Mailbox(5)});
@@ -649,7 +637,7 @@ int main() {
 
 		 initState = new State(3, actor_set, {Mailbox(0), Mailbox(1),Mailbox(2)});
 
-         //UnfoldingEvent *e = new UnfoldingEvent(initState);
+         UnfoldingEvent *e = new UnfoldingEvent(initState);
          //UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 		 std::cout<<"\n explore full state space :\n";
@@ -698,7 +686,7 @@ int main() {
 			 initState = new State(2, actor_set, {Mailbox(0), Mailbox(1)});
 			 std::cout<<"\n UDPOR state space :\n";
 
-             //UnfoldingEvent *e = new UnfoldingEvent(initState);
+	         UnfoldingEvent *e = new UnfoldingEvent(initState);
 	        // UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
 			 std::cout<<"\n explore full state space :\n";
@@ -867,7 +855,7 @@ int main() {
 
 		initState = new State(3, actor_set,	{ Mailbox(0), Mailbox(1), Mailbox(2) });
 
-        //UnfoldingEvent *e = new UnfoldingEvent(initState);
+		UnfoldingEvent *e = new UnfoldingEvent(initState);
 		//UC.explore(C, { EventSet() }, D, A, e, prev_exC, actor_set);
 
 		std::cout << "\n explore full state space :\n";

@@ -69,6 +69,8 @@ Actor::Actor(int id, std::vector<Transition> trans) {
         this->trans[i].actor_id = id;
     }
 }
+Mailbox::Mailbox(int id) {this->id = id;}
+
 Actor::Actor(int id, unsigned int nb_trans, std::array<Transition, 30> &trans) {
     this->id = id;
     this->nb_trans = nb_trans;
@@ -144,9 +146,12 @@ bool Mailbox::checkComm(Transition t) {
 	return false;
 }
 
-State::State(unsigned int nb_actor, std::set<Actor> actors, std::set<Mailbox> mailboxes)
-    : nb_actor(nb_actor), actors(actors), mailboxes(mailboxes)
-{}
+State::State(int nb_actor, std::set<Actor> actors,
+		std::set<Mailbox> mailboxes) {
+	this->nb_actor = nb_actor;
+	this->actors = actors;
+	this->mailboxes = mailboxes;
+}
 
 /* this function execute a transition from a given state, returning a next state*/
 State State::execute(Transition t) {
