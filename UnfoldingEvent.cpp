@@ -368,8 +368,12 @@ void Configuration::updateMaxEvent(UnfoldingEvent *e) {
 	/* update the maximal events for the actor=>
 	 removing the evt shares the same actor with e, then adding e to the actorMaxEvent */
 
+    std::set<UnfoldingEvent*> to_remove;
+
 	for (auto evt : actorMaxEvent.events_)
-		if (evt->transition.actor_id == e->transition.actor_id)
+        if (evt->transition.actor_id == e->transition.actor_id)
+            to_remove.insert(evt);
+    for (auto evt : to_remove)
 			actorMaxEvent.erase(evt);
 	actorMaxEvent.insert(e);
 
