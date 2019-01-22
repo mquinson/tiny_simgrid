@@ -40,6 +40,18 @@ void exhautiveExplore(std::list<State > stateStack,  std::list<Transition> trans
 
 
 }
+bool test_reduction(std::set<Actor> actors, std::set<Mailbox> mailboxes, std::vector<unsigned int> confs, unsigned int evt_count) {
+    UnfoldingChecker UC(confs, evt_count);
+
+    UC.explore(new State(actors.size(), actors, mailboxes));
+
+    if (UC.error_count()>0) {
+        std::cerr << "\n\nSOMETHING WENT WRONG. Error count: "<<UC.error_count()<<"\n";
+        return false;
+    } else {
+        return true;
+    }
+}
 
 int main(int argc, char** argv) {
 
@@ -69,15 +81,14 @@ int main(int argc, char** argv) {
 	case 1: { // the first example (in the paper)
 		// Transition(read_write, access_variable)
 
-        actor_set.insert(Actor(0, {Transition(1, 0)}));
-        actor_set.insert(Actor(1, {Transition(0, 0)}));
-        actor_set.insert(Actor(2, {Transition(0, 0)}));
-
-        initState = new State(3, actor_set, {Mailbox()});
-
-        UnfoldingEvent *e = new UnfoldingEvent(initState);
-        UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
-	}
+        test_reduction({
+                           Actor(0, {Transition(1, 0)}), // write x
+                           Actor(1, {Transition(0, 0)}), // read x
+                           Actor(2, {Transition(0, 0)})  // read x
+                       }, {
+                           Mailbox()
+                       }, {3,3,3,3}, 20);
+    }
 		break;
 
 	case 2: { // the second example

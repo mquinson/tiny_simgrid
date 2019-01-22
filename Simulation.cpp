@@ -69,7 +69,6 @@ Actor::Actor(int id, std::vector<Transition> trans) {
         this->trans[i].actor_id = id;
     }
 }
-Mailbox::Mailbox(int id) {this->id = id;}
 
 Actor::Actor(int id, unsigned int nb_trans, std::array<Transition, 30> &trans) {
     this->id = id;
@@ -146,7 +145,7 @@ bool Mailbox::checkComm(Transition t) {
 	return false;
 }
 
-State::State(int nb_actor, std::set<Actor> actors,
+State::State(unsigned long nb_actor, std::set<Actor> actors,
 		std::set<Mailbox> mailboxes) {
 	this->nb_actor = nb_actor;
 	this->actors = actors;
