@@ -144,12 +144,9 @@ bool Mailbox::checkComm(Transition t) {
 	return false;
 }
 
-State::State(int nb_actor, std::set<Actor> actors,
-		std::set<Mailbox> mailboxes) {
-	this->nb_actor = nb_actor;
-	this->actors = actors;
-	this->mailboxes = mailboxes;
-}
+State::State(unsigned int nb_actor, std::set<Actor> actors, std::set<Mailbox> mailboxes)
+    : nb_actor(nb_actor), actors(actors), mailboxes(mailboxes)
+{}
 
 /* this function execute a transition from a given state, returning a next state*/
 State State::execute(Transition t) {
