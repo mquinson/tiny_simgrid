@@ -533,9 +533,11 @@ int main() {
 	case 26: { //  master- slaver 3 nodes
 
 		//master node
+		//Transition (maiboxid, commid, type)
+
 		actor_set.insert(Actor(0,{ Transition (2, 1, "Isend"), Transition (2, 1, "Wait"), Transition (3, 2, "Isend"),
-								   Transition (3, 2, "Wait"), Transition (1, 4, "Ireceive"), Transition (1, 4, "Wait"),
-								   Transition (1, 5, "Ireceive"), Transition (1, 5, "Wait")	}));
+								   Transition (3, 2, "Wait"), Transition (1, 3, "Ireceive"), Transition (1, 3, "Wait"),
+								   Transition (1, 4, "Ireceive"), Transition (1, 4, "Wait")	}));
 		// client 1
 		actor_set.insert( Actor(1, { Transition (2, 1, "Ireceive"),	Transition (2, 1, "Wait"), Transition(0, 0, "localComp"),
 									 Transition (1, 2, "Isend"), Transition (1, 2, "Wait")}));
@@ -544,16 +546,16 @@ int main() {
 									Transition (1, 2, "Isend"), Transition (1, 2, "Wait")}));
 
 		initState = new State(3, actor_set,
-				{ Mailbox(0), Mailbox(1), Mailbox(2) });
+				{ Mailbox(1), Mailbox(2), Mailbox(3) });
 
 		UnfoldingEvent *e = new UnfoldingEvent(initState);
-		UC.explore(C, { EventSet() }, D, A, e, prev_exC, actor_set);
+		//UC.explore(C, { EventSet() }, D, A, e, prev_exC, actor_set);
 
 		std::cout << "\n explore full state space :\n";
 
-		State initState1(3, actor_set, { Mailbox(0), Mailbox(1), Mailbox(2) });
+		State initState1(3, actor_set, { Mailbox(1), Mailbox(2), Mailbox(3) });
 		stateStack.push_back(initState1);
-		//exhautiveExplore(stateStack, transList);
+		exhautiveExplore(stateStack, transList);
 
 
 
