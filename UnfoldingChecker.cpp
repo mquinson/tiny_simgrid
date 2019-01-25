@@ -305,20 +305,6 @@ EventSet UnfoldingChecker::computeAlt(EventSet D, Configuration C)
   return evtS;
 }
 
-void IntSet::insert(int e)
-{
-  this->ints.insert(e);
-}
-
-bool IntSet::inculude(IntSet other)
-{
-  for (auto it : other.ints)
-    if (not(this->ints.find(it) != this->ints.end()))
-      return false;
-
-  return true;
-}
-
 /*check whether a mutex wait is enabled ?*/
 bool isMwaitEnabled(Configuration C, EventSet causalityEvt, Transition trans)
 {

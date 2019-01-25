@@ -14,7 +14,6 @@ class UnfoldingEvent;
 class EventSet;
 class Transition;
 class Actor;
-class IntSet;
 extern unsigned int nb_events;
 extern unsigned int nb_traces;
 
@@ -140,14 +139,6 @@ public:
   UnfoldingEvent* findActorMaxEvt(int actorId); // find maximal event of a Actor whose id = actorId
 
   UnfoldingEvent* findTestedComm(UnfoldingEvent* testEvt); // find comm tested by action testTrans
-};
-class IntSet {
-public:
-  std::set<int> ints;
-  IntSet() {}
-
-  void insert(int e);
-  bool inculude(IntSet other);
 };
 
 class UnfoldingEvent {
