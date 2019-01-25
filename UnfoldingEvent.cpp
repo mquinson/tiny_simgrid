@@ -404,8 +404,7 @@ bool EventSet::contains(UnfoldingEvent *e) {
 
 void   EventSet::subtruct(EventSet otherSet) {
 	for (auto evt : otherSet.events_)
-		if (this->contains(evt)) this->erase(evt);
-
+        this->erase(evt);
 }
 
 UnfoldingEvent* EventSet::find(UnfoldingEvent *e) {
