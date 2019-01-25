@@ -464,8 +464,8 @@ int main(int argc, char** argv) {
 
 	case 25: { 	 //  master- slaver 4 nodes
 		//master node
-		actor_set.insert(Actor(0,{ Transition(2, 1, "Isend"), Transition(2, 1, "Wait"),
-									Transition(3, 2, "Isend"), Transition(3, 2,	"Wait"), Transition(4, 3, "Isend"),
+		actor_set.insert(Actor(0,{ Transition(2, 1, "Isend"), Transition(3, 2, "Isend"),Transition(4, 3, "Isend"),
+								   Transition(2, 1, "Wait"), Transition(3, 2,	"Wait"),
 									Transition(4, 3, "Wait"), Transition(1, 4,"Ireceive"), Transition(1, 4, "Wait"),
 									Transition(1, 5, "Ireceive"), Transition(1, 5,	"Wait"), Transition(1, 6, "Ireceive"),
 									Transition(1, 6, "Wait") }));
@@ -499,7 +499,7 @@ int main(int argc, char** argv) {
 		//master node
 		//Transition (maiboxid, commid, type)
 
-		actor_set.insert(Actor(0,{ Transition (2, 1, "Isend"), Transition (2, 1, "Wait"), Transition (3, 2, "Isend"),
+		actor_set.insert(Actor(0,{ Transition (2, 1, "Isend"), Transition (3, 2, "Isend"), Transition (2, 1, "Wait"),
 								   Transition (3, 2, "Wait"), Transition (1, 3, "Ireceive"), Transition (1, 3, "Wait"),
 								   Transition (1, 4, "Ireceive"), Transition (1, 4, "Wait")	}));
 		// client 1
