@@ -5,13 +5,11 @@
 #include <unistd.h>
 #include <utility>
 #include <vector>
-//#include "src/mc/mc_state.h"
 
 #include "UnfoldingChecker.hpp"
 
 unsigned int nb_events = 0;
 unsigned int nb_traces = 0;
-static int comId       = -1;
 EventSet U, G, gD;
 
 /*void UnfoldingChecker::computeAlt(EventSet& J, EventSet D, Configuration C,
@@ -84,7 +82,8 @@ EventSet UnfoldingChecker::filter(Configuration C, EventSet U)
  *  if they are not conflict with each other -> return the set J
  */
 
-void ksubset(int sizeD, std::list<UnfoldingEvent*> EvtList, std::list<EventSet> list, int n, EventSet& J)
+void ksubset(unsigned long sizeD, std::list<UnfoldingEvent*> EvtList, std::list<EventSet> list, unsigned int n,
+             EventSet& J)
 {
 
   if (J.size() > 0)
@@ -119,10 +118,11 @@ void ksubset(int sizeD, std::list<UnfoldingEvent*> EvtList, std::list<EventSet> 
       EvtList1.push_back(it);
 
       if (n == sizeD - 1) {
-        int chk = true;
 
         // check there is no conflict between 2 events in the list
-        /*	std::list<UnfoldingEvent*> EvtList2 = EvtList1;
+        /*
+          int chk = true;
+         std::list<UnfoldingEvent*> EvtList2 = EvtList1;
          for (auto it1 : EvtList1) for (auto it2 : EvtList2)
          if (it1->isConflict(it2))
          { chk = false; break;}
@@ -220,7 +220,7 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C)
     }
 
     // building J by chosing one event in each spike such that there are not 2 conflict events in J
-    int n = 0;
+    unsigned int n = 0;
     std::list<UnfoldingEvent*> EvtList;
 
     ksubset(D.size(), EvtList, kSet1, n, J1);
@@ -269,7 +269,7 @@ EventSet UnfoldingChecker::computeAlt(EventSet D, Configuration C)
     EventSet U1;
     int k = 0;
 
-    for (int i = 0; i < Uc.size(); i++)
+    for (unsigned int i = 0; i < Uc.size(); i++)
       B[i] = 0;
 
     intTobinary(i, B);
