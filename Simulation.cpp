@@ -95,7 +95,7 @@ bool Mailbox::operator<(const Mailbox& other) const
 
 void Mailbox::update(Transition t)
 {
-  Comunication comm;
+  Communication comm;
 
   comm.actorId = t.actor_id;
   comm.commId  = t.commId;
@@ -143,9 +143,9 @@ bool Mailbox::checkComm(Transition t)
 
 State::State(unsigned long nb_actor, std::set<Actor> actors, std::set<Mailbox> mailboxes)
 {
-  this->nb_actor  = nb_actor;
-  this->actors    = actors;
-  this->mailboxes = mailboxes;
+  this->nb_actors_ = nb_actor;
+  this->actors_    = actors;
+  this->mailboxes_ = mailboxes;
 }
 
 /* this function execute a transition from a given state, returning a next state*/
@@ -154,9 +154,9 @@ State State::execute(Transition t)
   std::set<Actor> actors, actors1;
   std::set<Mailbox> mail_box;
 
-  mail_box = this->mailboxes;
-  actors   = this->actors;
-  actors1  = this->actors;
+  mail_box = this->mailboxes_;
+  actors   = this->actors_;
+  actors1  = this->actors_;
 
   // update the status of the actors of the State, set "executed" = true for the executing transition (t)
   for (auto p : actors)
@@ -165,11 +165,10 @@ State State::execute(Transition t)
       p.trans[t.id].executed = true;
       actors1.insert(p);
     }
-  /*if t is send or receive transition, then update the mailbox
-   */
+  /* if t is send or receive transition, then update the mailbox */
 
   if (t.type == "Isend" or t.type == "Ireceive")
-    for (auto mb : mailboxes)
+    for (auto mb : mailboxes_)
       if (mb.id == t.mailbox_id) {
         mail_box.erase(mb);
         mb.update(t);
@@ -177,9 +176,7 @@ State State::execute(Transition t)
         break;
       }
 
-  State nextState(this->nb_actor, actors1, mail_box);
-
-  return nextState;
+  return State(this->nb_actors_, actors1, mail_box);
 }
 
 std::set<Transition> State::getEnabledTransition()
@@ -187,7 +184,7 @@ std::set<Transition> State::getEnabledTransition()
 
   std::set<Transition> trans_set;
 
-  for (auto p : this->actors)
+  for (auto p : this->actors_)
     for (unsigned long j = 0; j < p.nb_trans; j++)
       if (not p.trans[j].executed) {
         // std::cout<< "hien thi not executed : \n";
@@ -197,7 +194,7 @@ std::set<Transition> State::getEnabledTransition()
         bool chk = true;
         if (p.trans[j].type == "Wait") {
 
-          for (auto mb : this->mailboxes)
+          for (auto mb : this->mailboxes_)
             if (p.trans[j].mailbox_id == mb.id and (not mb.checkComm(p.trans[j])))
               chk = false;
           // else std::cout<<"\n" <<  p.trans[j].type <<" " << p.trans[j].id <<" of P" << p.id <<" not ready :\n" ;
@@ -225,7 +222,7 @@ std::set<Transition> State::getEnabledTransition()
 void State::print()
 {
   std::cout << "s = (";
-  for (auto p : this->actors)
+  for (auto p : this->actors_)
     for (unsigned long j = 0; j < p.nb_trans; j++)
       if (p.trans[j].executed)
         std::cout << "t" << j << "-p" << p.id << " is executed";

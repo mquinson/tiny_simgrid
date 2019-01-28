@@ -248,13 +248,6 @@ bool UnfoldingEvent::isImmediateConflict1(UnfoldingEvent* evt1, UnfoldingEvent* 
 
   bool chk1 = false, chk2 = false;
 
-  /*	if (evt1->id == 28 and evt2->id ==19) if (evt1->transition.isDependent(evt2->transition)){
-
-                  std::cout <<"\n hai tran depend voi nhau \n ";
-
-
-          }*/
-
   if (not evt1->transition.isDependent(evt2->transition)) {
 
     chk1 = true;
@@ -295,20 +288,12 @@ bool UnfoldingEvent::isImmediateConflict1(UnfoldingEvent* evt1, UnfoldingEvent* 
       hist21.erase(e1);
     }
 
-  // if(hist11.empty() or hist21.empty()) if (evt1->id == 28 and evt2->id == 19) std::cout<<" \n kt depend trong ham
-  // isImmidiate empy no roi";
-
-  // std::cout <<"\n  kiem tra dk depends \n ";
-
   EventSet evtS1, evtS2;
 
   evtS1.insert(evt1);
   evtS2.insert(evt2);
 
   if (hist11.depends(hist21) or evtS1.depends(hist21) or evtS2.depends(hist11)) {
-
-    // std::cout <<" DEPENDS HISTORY roi\n ";
-
     return false;
   }
 
@@ -416,6 +401,7 @@ UnfoldingEvent* EventSet::find(UnfoldingEvent* e)
     if (*evt == *e) {
       return evt;
     }
+  return nullptr;
 }
 
 UnfoldingEvent* Configuration ::findTestedComm(UnfoldingEvent* testEvt)
@@ -424,12 +410,11 @@ UnfoldingEvent* Configuration ::findTestedComm(UnfoldingEvent* testEvt)
     if (it->transition.commId == testEvt->transition.commId and it->transition.type != "Test" and
         it->transition.actor_id == testEvt->transition.actor_id)
       return it;
+  return nullptr;
 }
 
 /** @brief Check if I'm dependent with another EventSet
- * Here we suppose that 2 given event sets do not have common events
- *  */
-
+ * Here we suppose that 2 given event sets do not have common events */
 bool EventSet::depends(EventSet s2)
 {
   if (this->events_.empty() or s2.events_.empty())

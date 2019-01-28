@@ -53,15 +53,7 @@ public:
   Actor(int id, std::vector<Transition> trans);
   bool operator<(const Actor& other) const;
 };
-/*
-class Comunication {
-        int comId = -1;
-        int id_send;
-        int id_receive;
-
-};
-*/
-struct Comunication {
+struct Communication {
   int actorId   = -1;
   int commId    = -1;
   string status = "pending";
@@ -73,8 +65,8 @@ public:
   unsigned int nbSend    = 0;
   unsigned int nbReceive = 0;
 
-  std::array<Comunication, 20> sendList;
-  std::array<Comunication, 20> receiveList;
+  std::array<Communication, 20> sendList;
+  std::array<Communication, 20> receiveList;
   void update(Transition t);
   bool checkComm(Transition t);
   bool operator<(const Mailbox& other) const;
@@ -85,12 +77,12 @@ public:
 
 class State {
 public:
-  unsigned long nb_actor = 0;
-  std::set<Actor> actors;
-  std::set<Mailbox> mailboxes;
+  unsigned long nb_actors_ = 0;
+  std::set<Actor> actors_;
+  std::set<Mailbox> mailboxes_;
 
   State() = default;
-  State(unsigned long nb_actor, std::set<Actor> actors, std::set<Mailbox> mailboxes);
+  State(unsigned long nb_actors_, std::set<Actor> actors_, std::set<Mailbox> mailboxes_);
   State(std::set<Actor> actors, std::set<Mailbox> mailboxes) : State(actors.size(), actors, mailboxes) {}
 
   std::set<Transition> getEnabledTransition();

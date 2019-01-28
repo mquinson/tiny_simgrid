@@ -1466,7 +1466,7 @@ void UnfoldingChecker::explore(State* state)
   Configuration C;
   EventSet prev_exC;
 
-  explore(C, {EventSet()}, D, A, new UnfoldingEvent(state), prev_exC, state->actors);
+  explore(C, {EventSet()}, D, A, new UnfoldingEvent(state), prev_exC, state->actors_);
   std::cout.flush();
   if (nb_traces != confs_expected_.size()) {
     std::cerr << "ERROR: " << confs_expected_.size() << " traces expected, but " << nb_traces << " observed.\n";
