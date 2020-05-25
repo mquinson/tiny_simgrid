@@ -1,0 +1,10 @@
+#! /bin/sh
+
+set -e
+
+make -j4 proto
+# Example 22 is really long
+for i in `seq 1 21` `seq 23 33`   ; do
+  echo "XXXXXXXXX Testing $i"
+  time ./proto $i >/dev/null
+done
