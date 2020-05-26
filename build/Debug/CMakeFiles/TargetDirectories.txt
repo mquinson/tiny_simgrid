@@ -1,0 +1,7 @@
+/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/install/strip.dir
+/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/edit_cache.dir
+/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/rebuild_cache.dir
+/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/list_install_components.dir
+/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir
+/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/install/local.dir
+/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/install.dir
