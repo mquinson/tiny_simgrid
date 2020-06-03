@@ -169,6 +169,33 @@ prototype_git/fast:
 	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/build
 .PHONY : prototype_git/fast
 
+src/EventSet/eventset.o: src/EventSet/eventset.cpp.o
+
+.PHONY : src/EventSet/eventset.o
+
+# target to build an object file
+src/EventSet/eventset.cpp.o:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.o
+.PHONY : src/EventSet/eventset.cpp.o
+
+src/EventSet/eventset.i: src/EventSet/eventset.cpp.i
+
+.PHONY : src/EventSet/eventset.i
+
+# target to preprocess a source file
+src/EventSet/eventset.cpp.i:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.i
+.PHONY : src/EventSet/eventset.cpp.i
+
+src/EventSet/eventset.s: src/EventSet/eventset.cpp.s
+
+.PHONY : src/EventSet/eventset.s
+
+# target to generate assembly for a file
+src/EventSet/eventset.cpp.s:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.s
+.PHONY : src/EventSet/eventset.cpp.s
+
 src/Simulation.o: src/Simulation.cpp.o
 
 .PHONY : src/Simulation.o
@@ -223,32 +250,32 @@ src/UnfoldingChecker.cpp.s:
 	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.s
 .PHONY : src/UnfoldingChecker.cpp.s
 
-src/UnfoldingEvent.o: src/UnfoldingEvent.cpp.o
+src/UnfoldingEvent/unfoldingevent.o: src/UnfoldingEvent/unfoldingevent.cpp.o
 
-.PHONY : src/UnfoldingEvent.o
+.PHONY : src/UnfoldingEvent/unfoldingevent.o
 
 # target to build an object file
-src/UnfoldingEvent.cpp.o:
-	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.o
-.PHONY : src/UnfoldingEvent.cpp.o
+src/UnfoldingEvent/unfoldingevent.cpp.o:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.o
+.PHONY : src/UnfoldingEvent/unfoldingevent.cpp.o
 
-src/UnfoldingEvent.i: src/UnfoldingEvent.cpp.i
+src/UnfoldingEvent/unfoldingevent.i: src/UnfoldingEvent/unfoldingevent.cpp.i
 
-.PHONY : src/UnfoldingEvent.i
+.PHONY : src/UnfoldingEvent/unfoldingevent.i
 
 # target to preprocess a source file
-src/UnfoldingEvent.cpp.i:
-	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.i
-.PHONY : src/UnfoldingEvent.cpp.i
+src/UnfoldingEvent/unfoldingevent.cpp.i:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.i
+.PHONY : src/UnfoldingEvent/unfoldingevent.cpp.i
 
-src/UnfoldingEvent.s: src/UnfoldingEvent.cpp.s
+src/UnfoldingEvent/unfoldingevent.s: src/UnfoldingEvent/unfoldingevent.cpp.s
 
-.PHONY : src/UnfoldingEvent.s
+.PHONY : src/UnfoldingEvent/unfoldingevent.s
 
 # target to generate assembly for a file
-src/UnfoldingEvent.cpp.s:
-	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.s
-.PHONY : src/UnfoldingEvent.cpp.s
+src/UnfoldingEvent/unfoldingevent.cpp.s:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.s
+.PHONY : src/UnfoldingEvent/unfoldingevent.cpp.s
 
 src/actor/actor.o: src/actor/actor.cpp.o
 
@@ -276,6 +303,33 @@ src/actor/actor.s: src/actor/actor.cpp.s
 src/actor/actor.cpp.s:
 	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/actor/actor.cpp.s
 .PHONY : src/actor/actor.cpp.s
+
+src/configuration/configuration.o: src/configuration/configuration.cpp.o
+
+.PHONY : src/configuration/configuration.o
+
+# target to build an object file
+src/configuration/configuration.cpp.o:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/configuration/configuration.cpp.o
+.PHONY : src/configuration/configuration.cpp.o
+
+src/configuration/configuration.i: src/configuration/configuration.cpp.i
+
+.PHONY : src/configuration/configuration.i
+
+# target to preprocess a source file
+src/configuration/configuration.cpp.i:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/configuration/configuration.cpp.i
+.PHONY : src/configuration/configuration.cpp.i
+
+src/configuration/configuration.s: src/configuration/configuration.cpp.s
+
+.PHONY : src/configuration/configuration.s
+
+# target to generate assembly for a file
+src/configuration/configuration.cpp.s:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/configuration/configuration.cpp.s
+.PHONY : src/configuration/configuration.cpp.s
 
 src/mailbox/mailbox.o: src/mailbox/mailbox.cpp.o
 
@@ -398,18 +452,24 @@ help:
 	@echo "... prototype_git"
 	@echo "... install/local"
 	@echo "... install"
+	@echo "... src/EventSet/eventset.o"
+	@echo "... src/EventSet/eventset.i"
+	@echo "... src/EventSet/eventset.s"
 	@echo "... src/Simulation.o"
 	@echo "... src/Simulation.i"
 	@echo "... src/Simulation.s"
 	@echo "... src/UnfoldingChecker.o"
 	@echo "... src/UnfoldingChecker.i"
 	@echo "... src/UnfoldingChecker.s"
-	@echo "... src/UnfoldingEvent.o"
-	@echo "... src/UnfoldingEvent.i"
-	@echo "... src/UnfoldingEvent.s"
+	@echo "... src/UnfoldingEvent/unfoldingevent.o"
+	@echo "... src/UnfoldingEvent/unfoldingevent.i"
+	@echo "... src/UnfoldingEvent/unfoldingevent.s"
 	@echo "... src/actor/actor.o"
 	@echo "... src/actor/actor.i"
 	@echo "... src/actor/actor.s"
+	@echo "... src/configuration/configuration.o"
+	@echo "... src/configuration/configuration.i"
+	@echo "... src/configuration/configuration.s"
 	@echo "... src/mailbox/mailbox.o"
 	@echo "... src/mailbox/mailbox.i"
 	@echo "... src/mailbox/mailbox.s"

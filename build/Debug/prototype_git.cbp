@@ -124,6 +124,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/ehsan/projects/prototype_git/src/EventSet/eventset.cpp">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/ehsan/projects/prototype_git/src/EventSet/eventset.h">
+			<Option target="prototype_git"/>
+		</Unit>
 		<Unit filename="/home/ehsan/projects/prototype_git/src/Simulation.cpp">
 			<Option target="prototype_git"/>
 		</Unit>
@@ -133,13 +139,22 @@
 		<Unit filename="/home/ehsan/projects/prototype_git/src/UnfoldingChecker.hpp">
 			<Option target="prototype_git"/>
 		</Unit>
-		<Unit filename="/home/ehsan/projects/prototype_git/src/UnfoldingEvent.cpp">
+		<Unit filename="/home/ehsan/projects/prototype_git/src/UnfoldingEvent/unfoldingevent.cpp">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/ehsan/projects/prototype_git/src/UnfoldingEvent/unfoldingevent.h">
 			<Option target="prototype_git"/>
 		</Unit>
 		<Unit filename="/home/ehsan/projects/prototype_git/src/actor/actor.cpp">
 			<Option target="prototype_git"/>
 		</Unit>
 		<Unit filename="/home/ehsan/projects/prototype_git/src/actor/actor.h">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/ehsan/projects/prototype_git/src/configuration/configuration.cpp">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/ehsan/projects/prototype_git/src/configuration/configuration.h">
 			<Option target="prototype_git"/>
 		</Unit>
 		<Unit filename="/home/ehsan/projects/prototype_git/src/mailbox/mailbox.cpp">
