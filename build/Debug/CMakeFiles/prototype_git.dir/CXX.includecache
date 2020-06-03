@@ -49,10 +49,12 @@ utility
 -
 vector
 -
-transition/transition.h
-/home/ehsan/projects/prototype_git/src/transition/transition.h
 actor/actor.h
 /home/ehsan/projects/prototype_git/src/actor/actor.h
+transition/transition.h
+/home/ehsan/projects/prototype_git/src/transition/transition.h
+state/state.h
+/home/ehsan/projects/prototype_git/src/state/state.h
 
 /home/ehsan/projects/prototype_git/src/UnfoldingEvent.cpp
 UnfoldingChecker.hpp
@@ -73,6 +75,32 @@ vector
 -
 ../transition/transition.h
 /home/ehsan/projects/prototype_git/src/transition/transition.h
+
+/home/ehsan/projects/prototype_git/src/mailbox/mailbox.cpp
+mailbox.h
+/home/ehsan/projects/prototype_git/src/mailbox/mailbox.h
+
+/home/ehsan/projects/prototype_git/src/mailbox/mailbox.h
+iostream
+-
+array
+-
+../transition/transition.h
+/home/ehsan/projects/prototype_git/src/transition/transition.h
+
+/home/ehsan/projects/prototype_git/src/state/state.cpp
+state.h
+/home/ehsan/projects/prototype_git/src/state/state.h
+
+/home/ehsan/projects/prototype_git/src/state/state.h
+iostream
+-
+set
+-
+../actor/actor.h
+/home/ehsan/projects/prototype_git/src/actor/actor.h
+../mailbox/mailbox.h
+/home/ehsan/projects/prototype_git/src/mailbox/mailbox.h
 
 /home/ehsan/projects/prototype_git/src/test.cpp
 UnfoldingChecker.hpp

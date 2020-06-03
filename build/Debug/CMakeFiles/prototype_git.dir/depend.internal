@@ -5,24 +5,42 @@ CMakeFiles/prototype_git.dir/src/Simulation.cpp.o
  /home/ehsan/projects/prototype_git/src/Simulation.cpp
  /home/ehsan/projects/prototype_git/src/UnfoldingChecker.hpp
  /home/ehsan/projects/prototype_git/src/actor/actor.h
+ /home/ehsan/projects/prototype_git/src/mailbox/mailbox.h
+ /home/ehsan/projects/prototype_git/src/state/state.h
  /home/ehsan/projects/prototype_git/src/transition/transition.h
 CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o
  /home/ehsan/projects/prototype_git/src/UnfoldingChecker.cpp
  /home/ehsan/projects/prototype_git/src/UnfoldingChecker.hpp
  /home/ehsan/projects/prototype_git/src/actor/actor.h
+ /home/ehsan/projects/prototype_git/src/mailbox/mailbox.h
+ /home/ehsan/projects/prototype_git/src/state/state.h
  /home/ehsan/projects/prototype_git/src/transition/transition.h
 CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.o
  /home/ehsan/projects/prototype_git/src/UnfoldingChecker.hpp
  /home/ehsan/projects/prototype_git/src/UnfoldingEvent.cpp
  /home/ehsan/projects/prototype_git/src/actor/actor.h
+ /home/ehsan/projects/prototype_git/src/mailbox/mailbox.h
+ /home/ehsan/projects/prototype_git/src/state/state.h
  /home/ehsan/projects/prototype_git/src/transition/transition.h
 CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o
  /home/ehsan/projects/prototype_git/src/actor/actor.cpp
  /home/ehsan/projects/prototype_git/src/actor/actor.h
  /home/ehsan/projects/prototype_git/src/transition/transition.h
+CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.o
+ /home/ehsan/projects/prototype_git/src/mailbox/mailbox.cpp
+ /home/ehsan/projects/prototype_git/src/mailbox/mailbox.h
+ /home/ehsan/projects/prototype_git/src/transition/transition.h
+CMakeFiles/prototype_git.dir/src/state/state.cpp.o
+ /home/ehsan/projects/prototype_git/src/actor/actor.h
+ /home/ehsan/projects/prototype_git/src/mailbox/mailbox.h
+ /home/ehsan/projects/prototype_git/src/state/state.cpp
+ /home/ehsan/projects/prototype_git/src/state/state.h
+ /home/ehsan/projects/prototype_git/src/transition/transition.h
 CMakeFiles/prototype_git.dir/src/test.cpp.o
  /home/ehsan/projects/prototype_git/src/UnfoldingChecker.hpp
  /home/ehsan/projects/prototype_git/src/actor/actor.h
+ /home/ehsan/projects/prototype_git/src/mailbox/mailbox.h
+ /home/ehsan/projects/prototype_git/src/state/state.h
  /home/ehsan/projects/prototype_git/src/test.cpp
  /home/ehsan/projects/prototype_git/src/transition/transition.h
 CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o

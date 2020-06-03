@@ -13,13 +13,16 @@ add_executable(${PROJECT} ${SRC_DIR}/test.cpp
 	${SRC_DIR}/UnfoldingChecker.cpp
 	${SRC_DIR}/UnfoldingChecker.hpp
         ${SRC_DIR}/UnfoldingEvent.cpp
-
         ${SRC_DIR}/actor/actor.h
         ${SRC_DIR}/actor/actor.cpp
-        #${SRC_DIR}/state/.cpp
+        ${SRC_DIR}/state/state.h
+        ${SRC_DIR}/state/state.cpp
         ${SRC_DIR}/transition/transition.h
         ${SRC_DIR}/transition/transition.cpp
+        ${SRC_DIR}/mailbox/mailbox.h
+        ${SRC_DIR}/mailbox/mailbox.cpp
+#        ${SRC_DIR}/communication/communication.h
+#        ${SRC_DIR}/communication/communication.cpp
 )
-
 
 install(TARGETS ${PROJECTS} DESTINATION build)

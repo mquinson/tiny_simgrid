@@ -277,6 +277,60 @@ src/actor/actor.cpp.s:
 	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/actor/actor.cpp.s
 .PHONY : src/actor/actor.cpp.s
 
+src/mailbox/mailbox.o: src/mailbox/mailbox.cpp.o
+
+.PHONY : src/mailbox/mailbox.o
+
+# target to build an object file
+src/mailbox/mailbox.cpp.o:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.o
+.PHONY : src/mailbox/mailbox.cpp.o
+
+src/mailbox/mailbox.i: src/mailbox/mailbox.cpp.i
+
+.PHONY : src/mailbox/mailbox.i
+
+# target to preprocess a source file
+src/mailbox/mailbox.cpp.i:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.i
+.PHONY : src/mailbox/mailbox.cpp.i
+
+src/mailbox/mailbox.s: src/mailbox/mailbox.cpp.s
+
+.PHONY : src/mailbox/mailbox.s
+
+# target to generate assembly for a file
+src/mailbox/mailbox.cpp.s:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.s
+.PHONY : src/mailbox/mailbox.cpp.s
+
+src/state/state.o: src/state/state.cpp.o
+
+.PHONY : src/state/state.o
+
+# target to build an object file
+src/state/state.cpp.o:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/state/state.cpp.o
+.PHONY : src/state/state.cpp.o
+
+src/state/state.i: src/state/state.cpp.i
+
+.PHONY : src/state/state.i
+
+# target to preprocess a source file
+src/state/state.cpp.i:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/state/state.cpp.i
+.PHONY : src/state/state.cpp.i
+
+src/state/state.s: src/state/state.cpp.s
+
+.PHONY : src/state/state.s
+
+# target to generate assembly for a file
+src/state/state.cpp.s:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/state/state.cpp.s
+.PHONY : src/state/state.cpp.s
+
 src/test.o: src/test.cpp.o
 
 .PHONY : src/test.o
@@ -356,6 +410,12 @@ help:
 	@echo "... src/actor/actor.o"
 	@echo "... src/actor/actor.i"
 	@echo "... src/actor/actor.s"
+	@echo "... src/mailbox/mailbox.o"
+	@echo "... src/mailbox/mailbox.i"
+	@echo "... src/mailbox/mailbox.s"
+	@echo "... src/state/state.o"
+	@echo "... src/state/state.i"
+	@echo "... src/state/state.s"
 	@echo "... src/test.o"
 	@echo "... src/test.i"
 	@echo "... src/test.s"

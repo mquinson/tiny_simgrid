@@ -9,57 +9,18 @@
 #include <utility>
 #include <vector>
 
-#include "transition/transition.h"
 #include "actor/actor.h"
+#include "transition/transition.h"
+#include "state/state.h"
 
 using namespace std;
 
 class UnfoldingEvent;
 class EventSet;
-class Transition;
-class Actor;
 extern unsigned int nb_events;
 extern unsigned int nb_traces;
 
 extern EventSet U, G, gD;
-
-struct Communication {
-  int actorId   = -1;
-  int commId    = -1;
-  string status = "pending";
-};
-
-class Mailbox {
-public:
-  int id                 = 0;
-  unsigned int nbSend    = 0;
-  unsigned int nbReceive = 0;
-
-  std::array<Communication, 20> sendList;
-  std::array<Communication, 20> receiveList;
-  void update(Transition t);
-  bool checkComm(Transition t);
-  bool operator<(const Mailbox& other) const;
-
-  Mailbox(int i) : id(i) {}
-  Mailbox() = default;
-};
-
-class State {
-public:
-  unsigned long nb_actors_ = 0;
-  std::set<Actor> actors_;
-  std::set<Mailbox> mailboxes_;
-
-  State() = default;
-  State(unsigned long nb_actors_, std::set<Actor> actors_, std::set<Mailbox> mailboxes_);
-  State(std::set<Actor> actors, std::set<Mailbox> mailboxes) : State(actors.size(), actors, mailboxes) {}
-
-  std::set<Transition> getEnabledTransition();
-  State execute(Transition t);
-
-  void print();
-};
 
 class EventSet {
 public:

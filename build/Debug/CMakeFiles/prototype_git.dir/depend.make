@@ -4,24 +4,42 @@
 CMakeFiles/prototype_git.dir/src/Simulation.cpp.o: ../../src/Simulation.cpp
 CMakeFiles/prototype_git.dir/src/Simulation.cpp.o: ../../src/UnfoldingChecker.hpp
 CMakeFiles/prototype_git.dir/src/Simulation.cpp.o: ../../src/actor/actor.h
+CMakeFiles/prototype_git.dir/src/Simulation.cpp.o: ../../src/mailbox/mailbox.h
+CMakeFiles/prototype_git.dir/src/Simulation.cpp.o: ../../src/state/state.h
 CMakeFiles/prototype_git.dir/src/Simulation.cpp.o: ../../src/transition/transition.h
 
 CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o: ../../src/UnfoldingChecker.cpp
 CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o: ../../src/UnfoldingChecker.hpp
 CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o: ../../src/actor/actor.h
+CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o: ../../src/mailbox/mailbox.h
+CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o: ../../src/state/state.h
 CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o: ../../src/transition/transition.h
 
 CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.o: ../../src/UnfoldingChecker.hpp
 CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.o: ../../src/UnfoldingEvent.cpp
 CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.o: ../../src/actor/actor.h
+CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.o: ../../src/mailbox/mailbox.h
+CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.o: ../../src/state/state.h
 CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.o: ../../src/transition/transition.h
 
 CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o: ../../src/actor/actor.cpp
 CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o: ../../src/actor/actor.h
 CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o: ../../src/transition/transition.h
 
+CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.o: ../../src/mailbox/mailbox.cpp
+CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.o: ../../src/mailbox/mailbox.h
+CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.o: ../../src/transition/transition.h
+
+CMakeFiles/prototype_git.dir/src/state/state.cpp.o: ../../src/actor/actor.h
+CMakeFiles/prototype_git.dir/src/state/state.cpp.o: ../../src/mailbox/mailbox.h
+CMakeFiles/prototype_git.dir/src/state/state.cpp.o: ../../src/state/state.cpp
+CMakeFiles/prototype_git.dir/src/state/state.cpp.o: ../../src/state/state.h
+CMakeFiles/prototype_git.dir/src/state/state.cpp.o: ../../src/transition/transition.h
+
 CMakeFiles/prototype_git.dir/src/test.cpp.o: ../../src/UnfoldingChecker.hpp
 CMakeFiles/prototype_git.dir/src/test.cpp.o: ../../src/actor/actor.h
+CMakeFiles/prototype_git.dir/src/test.cpp.o: ../../src/mailbox/mailbox.h
+CMakeFiles/prototype_git.dir/src/test.cpp.o: ../../src/state/state.h
 CMakeFiles/prototype_git.dir/src/test.cpp.o: ../../src/test.cpp
 CMakeFiles/prototype_git.dir/src/test.cpp.o: ../../src/transition/transition.h
 
