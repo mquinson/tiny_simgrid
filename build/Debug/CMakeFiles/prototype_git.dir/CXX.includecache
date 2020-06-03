@@ -49,12 +49,30 @@ utility
 -
 vector
 -
+transition/transition.h
+/home/ehsan/projects/prototype_git/src/transition/transition.h
+actor/actor.h
+/home/ehsan/projects/prototype_git/src/actor/actor.h
 
 /home/ehsan/projects/prototype_git/src/UnfoldingEvent.cpp
 UnfoldingChecker.hpp
 /home/ehsan/projects/prototype_git/src/UnfoldingChecker.hpp
 unistd.h
 -
+
+/home/ehsan/projects/prototype_git/src/actor/actor.cpp
+actor.h
+/home/ehsan/projects/prototype_git/src/actor/actor.h
+
+/home/ehsan/projects/prototype_git/src/actor/actor.h
+iostream
+-
+array
+-
+vector
+-
+../transition/transition.h
+/home/ehsan/projects/prototype_git/src/transition/transition.h
 
 /home/ehsan/projects/prototype_git/src/test.cpp
 UnfoldingChecker.hpp
@@ -72,5 +90,13 @@ set
 string
 -
 unistd.h
+-
+
+/home/ehsan/projects/prototype_git/src/transition/transition.cpp
+transition.h
+/home/ehsan/projects/prototype_git/src/transition/transition.h
+
+/home/ehsan/projects/prototype_git/src/transition/transition.h
+iostream
 -
 

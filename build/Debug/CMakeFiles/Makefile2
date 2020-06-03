@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /home/ehsan/projects/prototype_git/build/Debug
 CMakeFiles/prototype_git.dir/all:
 	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/depend
 	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=1,2,3,4,5 "Built target prototype_git"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target prototype_git"
 .PHONY : CMakeFiles/prototype_git.dir/all
 
 # Include target in all.
@@ -76,7 +76,7 @@ all: CMakeFiles/prototype_git.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/prototype_git.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ehsan/projects/prototype_git/build/Debug/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ehsan/projects/prototype_git/build/Debug/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/prototype_git.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ehsan/projects/prototype_git/build/Debug/CMakeFiles 0
 .PHONY : CMakeFiles/prototype_git.dir/rule

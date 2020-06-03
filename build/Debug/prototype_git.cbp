@@ -136,7 +136,19 @@
 		<Unit filename="/home/ehsan/projects/prototype_git/src/UnfoldingEvent.cpp">
 			<Option target="prototype_git"/>
 		</Unit>
+		<Unit filename="/home/ehsan/projects/prototype_git/src/actor/actor.cpp">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/ehsan/projects/prototype_git/src/actor/actor.h">
+			<Option target="prototype_git"/>
+		</Unit>
 		<Unit filename="/home/ehsan/projects/prototype_git/src/test.cpp">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/ehsan/projects/prototype_git/src/transition/transition.cpp">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/ehsan/projects/prototype_git/src/transition/transition.h">
 			<Option target="prototype_git"/>
 		</Unit>
 		<Unit filename="/home/ehsan/projects/prototype_git/CMakeLists.txt">

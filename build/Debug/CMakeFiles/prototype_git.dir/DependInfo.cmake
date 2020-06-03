@@ -7,7 +7,9 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/ehsan/projects/prototype_git/src/Simulation.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/Simulation.cpp.o"
   "/home/ehsan/projects/prototype_git/src/UnfoldingChecker.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o"
   "/home/ehsan/projects/prototype_git/src/UnfoldingEvent.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.o"
+  "/home/ehsan/projects/prototype_git/src/actor/actor.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o"
   "/home/ehsan/projects/prototype_git/src/test.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/test.cpp.o"
+  "/home/ehsan/projects/prototype_git/src/transition/transition.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

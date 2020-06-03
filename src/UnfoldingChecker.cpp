@@ -12,52 +12,6 @@ unsigned int nb_events = 0;
 unsigned int nb_traces = 0;
 EventSet U, G, gD;
 
-/*void UnfoldingChecker::computeAlt(EventSet& J, EventSet D, Configuration C,
- EventSet U1, EventSet Uc) {
- if (not J.empty())
- return;
-
- if (Uc.empty()) {
- U1 is a subset of U, we cheking that C1 \union U1 is configuration ?
- and for all e \in D, exist e' \in  (C1 \union U1): e' immediate  conflict with e
-
- EventSet C1 = C.makeUnion(C, U1);
-
- if (C1.isConfig()) {
- size_t count = 0;
- for (auto evt : D.events_)
- for (auto evt1 : C1.events_)
- if (evt->isImmediateConflict(evt1) and U.contains(evt1)) {
- count++;
- break;
- }
-
- if (count == D.size()) {
- J = U1;
-
- }
- }
- std::cout<<"\n return nhe ==================\n";
- return;
- }
-
- else {
- UnfoldingEvent *a = Uc.begin();
- EventSet evtSet1, evtSet2, evtSet3, evtSet4;
- evtSet1 = U1;
- evtSet3 = Uc;
- evtSet1.insert(a);
- evtSet3.erase(a);
- computeAlt(J, D, C, evtSet1, evtSet3);
-
- evtSet2 = U1;
- evtSet4 = Uc;
- evtSet4.erase(a);
-
- computeAlt(J, D, C, evtSet2, evtSet4);
- }
-
- }*/
 void intTobinary(int n, int p[])
 {
   int i = 0;

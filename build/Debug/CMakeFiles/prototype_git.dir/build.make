@@ -153,12 +153,62 @@ CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.o.provides: CMakeFiles/proto
 CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.o.provides.build: CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.o
 
 
+CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o: CMakeFiles/prototype_git.dir/flags.make
+CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o: ../../src/actor/actor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o -c /home/ehsan/projects/prototype_git/src/actor/actor.cpp
+
+CMakeFiles/prototype_git.dir/src/actor/actor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/prototype_git.dir/src/actor/actor.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ehsan/projects/prototype_git/src/actor/actor.cpp > CMakeFiles/prototype_git.dir/src/actor/actor.cpp.i
+
+CMakeFiles/prototype_git.dir/src/actor/actor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/prototype_git.dir/src/actor/actor.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ehsan/projects/prototype_git/src/actor/actor.cpp -o CMakeFiles/prototype_git.dir/src/actor/actor.cpp.s
+
+CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o.requires:
+
+.PHONY : CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o.requires
+
+CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o.provides: CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o.requires
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o.provides.build
+.PHONY : CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o.provides
+
+CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o.provides.build: CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o
+
+
+CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o: CMakeFiles/prototype_git.dir/flags.make
+CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o: ../../src/transition/transition.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o -c /home/ehsan/projects/prototype_git/src/transition/transition.cpp
+
+CMakeFiles/prototype_git.dir/src/transition/transition.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/prototype_git.dir/src/transition/transition.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ehsan/projects/prototype_git/src/transition/transition.cpp > CMakeFiles/prototype_git.dir/src/transition/transition.cpp.i
+
+CMakeFiles/prototype_git.dir/src/transition/transition.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/prototype_git.dir/src/transition/transition.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ehsan/projects/prototype_git/src/transition/transition.cpp -o CMakeFiles/prototype_git.dir/src/transition/transition.cpp.s
+
+CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o.requires:
+
+.PHONY : CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o.requires
+
+CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o.provides: CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o.requires
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o.provides.build
+.PHONY : CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o.provides
+
+CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o.provides.build: CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o
+
+
 # Object files for target prototype_git
 prototype_git_OBJECTS = \
 "CMakeFiles/prototype_git.dir/src/test.cpp.o" \
 "CMakeFiles/prototype_git.dir/src/Simulation.cpp.o" \
 "CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o" \
-"CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.o"
+"CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.o" \
+"CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o" \
+"CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o"
 
 # External object files for target prototype_git
 prototype_git_EXTERNAL_OBJECTS =
@@ -167,9 +217,11 @@ prototype_git: CMakeFiles/prototype_git.dir/src/test.cpp.o
 prototype_git: CMakeFiles/prototype_git.dir/src/Simulation.cpp.o
 prototype_git: CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o
 prototype_git: CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.o
+prototype_git: CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o
+prototype_git: CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o
 prototype_git: CMakeFiles/prototype_git.dir/build.make
 prototype_git: CMakeFiles/prototype_git.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable prototype_git"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable prototype_git"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/prototype_git.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -181,6 +233,8 @@ CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/test.cpp
 CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/Simulation.cpp.o.requires
 CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o.requires
 CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.o.requires
+CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o.requires
+CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o.requires
 
 .PHONY : CMakeFiles/prototype_git.dir/requires
 

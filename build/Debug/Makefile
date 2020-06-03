@@ -250,6 +250,33 @@ src/UnfoldingEvent.cpp.s:
 	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.s
 .PHONY : src/UnfoldingEvent.cpp.s
 
+src/actor/actor.o: src/actor/actor.cpp.o
+
+.PHONY : src/actor/actor.o
+
+# target to build an object file
+src/actor/actor.cpp.o:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o
+.PHONY : src/actor/actor.cpp.o
+
+src/actor/actor.i: src/actor/actor.cpp.i
+
+.PHONY : src/actor/actor.i
+
+# target to preprocess a source file
+src/actor/actor.cpp.i:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/actor/actor.cpp.i
+.PHONY : src/actor/actor.cpp.i
+
+src/actor/actor.s: src/actor/actor.cpp.s
+
+.PHONY : src/actor/actor.s
+
+# target to generate assembly for a file
+src/actor/actor.cpp.s:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/actor/actor.cpp.s
+.PHONY : src/actor/actor.cpp.s
+
 src/test.o: src/test.cpp.o
 
 .PHONY : src/test.o
@@ -277,6 +304,33 @@ src/test.cpp.s:
 	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/test.cpp.s
 .PHONY : src/test.cpp.s
 
+src/transition/transition.o: src/transition/transition.cpp.o
+
+.PHONY : src/transition/transition.o
+
+# target to build an object file
+src/transition/transition.cpp.o:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o
+.PHONY : src/transition/transition.cpp.o
+
+src/transition/transition.i: src/transition/transition.cpp.i
+
+.PHONY : src/transition/transition.i
+
+# target to preprocess a source file
+src/transition/transition.cpp.i:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/transition/transition.cpp.i
+.PHONY : src/transition/transition.cpp.i
+
+src/transition/transition.s: src/transition/transition.cpp.s
+
+.PHONY : src/transition/transition.s
+
+# target to generate assembly for a file
+src/transition/transition.cpp.s:
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/transition/transition.cpp.s
+.PHONY : src/transition/transition.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -299,9 +353,15 @@ help:
 	@echo "... src/UnfoldingEvent.o"
 	@echo "... src/UnfoldingEvent.i"
 	@echo "... src/UnfoldingEvent.s"
+	@echo "... src/actor/actor.o"
+	@echo "... src/actor/actor.i"
+	@echo "... src/actor/actor.s"
 	@echo "... src/test.o"
 	@echo "... src/test.i"
 	@echo "... src/test.s"
+	@echo "... src/transition/transition.o"
+	@echo "... src/transition/transition.i"
+	@echo "... src/transition/transition.s"
 .PHONY : help
 
 
