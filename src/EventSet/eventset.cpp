@@ -1,10 +1,5 @@
 #include "eventset.h"
 
-EventSet::EventSet()
-{
-
-}
-
 bool EventSet::contains(UnfoldingEvent* e)
 {
   for (auto evt : this->events_)
@@ -69,16 +64,12 @@ bool EventSet::isConfig()
       if (not(this->contains(ancestor)))
         return false;
   }
-
   return true;
 }
 
 EventSet EventSet::makeUnion(EventSet s1, EventSet s2)
 {
   EventSet res = s1;
-  //	res.events_.insert(s1.events_.begin(), s1.events_.end());
-  //	res.events_.insert(s2.events_.begin(), s2.events_.end());
-
   for (auto evt : s2.events_)
     res.insert(evt);
 
@@ -95,13 +86,11 @@ EventSet EventSet::makeIntersection(EventSet s1, EventSet s2)
 
 EventSet EventSet::minus(UnfoldingEvent* evt)
 {
-
   EventSet res;
   res.events_ = this->events_;
   for (auto e : this->events_)
     if (*e == *evt)
       res.erase(e);
-
   return res;
 }
 
@@ -114,31 +103,6 @@ EventSet EventSet::plus(UnfoldingEvent* evt)
   return res;
 }
 
-size_t EventSet::size() const
-{
-  return events_.size();
-}
-
-bool EventSet::empty() const
-{
-  return this->events_.empty();
-}
-
-UnfoldingEvent* EventSet::begin() const
-{
-  return *events_.begin();
-}
-
-UnfoldingEvent* EventSet::end() const
-{
-  return *events_.end();
-}
-
-bool EventSet::operator==(const EventSet& other) const
-{
-
-  return this->events_ == other.events_;
-}
 void EventSet::insert(UnfoldingEvent* e)
 {
   if (not this->contains(e))
@@ -164,7 +128,6 @@ bool EventSet::conflictWithEvt(UnfoldingEvent* e)
 
 bool EventSet::isEmptyIntersection(EventSet evtS1, EventSet evtS2)
 {
-
   if (evtS1.size() == 0 or evtS2.size() == 0)
     return false;
 
@@ -174,5 +137,3 @@ bool EventSet::isEmptyIntersection(EventSet evtS1, EventSet evtS2)
 
   return true;
 }
-
-

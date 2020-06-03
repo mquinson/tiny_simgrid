@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <set>
+#include <algorithm>
+#include "../UnfoldingEvent/unfoldingevent.h"
 
 using namespace std;
 
@@ -14,7 +16,6 @@ public:
     void subtruct(EventSet otherSet);
     bool depends(EventSet s2);
     bool isConfig();
-    size_t size() const;
     std::set<UnfoldingEvent*> events_;
     bool conflictWithEvt(UnfoldingEvent* e);
     bool isEmptyIntersection(EventSet evtS1, EventSet evtS2);
@@ -22,13 +23,15 @@ public:
     static EventSet makeUnion(EventSet s1, EventSet s2);
     static EventSet makeIntersection(EventSet s1, EventSet s2);
     const UnfoldingEvent* first();
-    bool empty() const;
-    UnfoldingEvent* begin() const;
-    UnfoldingEvent* end() const;
+
+    size_t size() const { return events_.size(); }
+    bool empty() const { return this->events_.empty(); }
+    UnfoldingEvent* begin() const { return *events_.begin(); }
+    UnfoldingEvent* end() const { return *events_.end(); }
 
     void insert(UnfoldingEvent*);
     void erase(UnfoldingEvent*);
-    bool operator==(const EventSet& other) const;
+    bool operator==(const EventSet& other) const { return this->events_ == other.events_; }
 
     EventSet minus(UnfoldingEvent* evt);
     EventSet plus(UnfoldingEvent*);
