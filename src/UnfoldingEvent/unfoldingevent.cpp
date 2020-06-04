@@ -1,56 +1,7 @@
 #include "unfoldingevent.h"
+#include "../EventSet/eventset.h"
 
-UnfoldingEvent::UnfoldingEvent()
-{
-
-}
-
-UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, Transition t, EventSet causes)
-{
-
-  this->id         = nb_events;
-  this->causes     = causes;
-  this->transition = t;
-}
-
-void UnfoldingEvent::print()
-{
-
-  std::cout << "e" << this->id << " =  < t" << this->transition.id << "-p" << this->transition.actor_id << "(";
-  if (this->transition.type.length() > 1)
-    std::cout << this->transition.type << ")"
-              << ","
-              << "(";
-  if (this->causes.empty())
-    std::cout << "-) >";
-  else {
-    for (auto evt : this->causes.events_)
-      std::cout << "e" << evt->id << ",";
-    std::cout << " ) >";
-  }
-}
-
-// Recursively compute the history of a given event by adding the causes of all ancestors
-EventSet UnfoldingEvent::getHistory() const
-{
-  if (causes.empty()) // No direct ancestor => empty history
-    return causes;
-  else {
-    // EventSet res = causes;
-    EventSet res;
-    for (auto ancestor : causes.events_) {
-      EventSet h1;
-
-      // if event ancestor is already in history set -> we do not need to get it's history
-
-      if (not res.contains(ancestor))
-        h1 = ancestor->getHistory();
-      h1.insert(ancestor);
-      res = res.makeUnion(res, h1);
-    }
-    return res;
-  }
-}
+//namespace event {
 
 bool UnfoldingEvent::inHistory(UnfoldingEvent* otherEvent)
 {
@@ -62,16 +13,9 @@ bool UnfoldingEvent::inHistory(UnfoldingEvent* otherEvent)
 /*Check whether 2 events a Test and a Send/Receive concern the same communication,
  * Here the events are supposed that they are not causality related
  * */
-
 bool UnfoldingEvent::concernSameComm(UnfoldingEvent* event, UnfoldingEvent* otherEvent)
 {
   UnfoldingEvent *testEvt, *SdRcEvt, *testedEvt;
-
-  // std::cout <<" \n hien thi evet trong ham concern :";
-  // event->print();
-  // otherEvent->print();
-  // std::cout <<" \n ham concern 1: \n";
-
   if (event->transition.mailbox_id != otherEvent->transition.mailbox_id)
     return false;
 
@@ -84,7 +28,6 @@ bool UnfoldingEvent::concernSameComm(UnfoldingEvent* event, UnfoldingEvent* othe
   }
 
   // 2 sends or 2 receives can not concern the same communication
-
   int comId = testEvt->transition.commId;
 
   EventSet testEvtH = testEvt->getHistory();
@@ -150,7 +93,6 @@ bool UnfoldingEvent::concernSameComm(UnfoldingEvent* event, UnfoldingEvent* othe
  *
  * In the paper, this.isConflict(other) is written "this # other"
  */
-
 bool UnfoldingEvent::isConflict(UnfoldingEvent* event, UnfoldingEvent* otherEvent)
 {
 
@@ -227,9 +169,6 @@ bool UnfoldingEvent::isImmediateConflict(UnfoldingEvent* evt1, UnfoldingEvent* e
   // First compare the existing configurations
 
   // romove all common events
-
-  EventSet hist11 = hist1, hist21 = hist2;
-
   for (auto e1 : hist2.events_)
     if (evt1->isConflict(evt1, e1))
       return false;
@@ -244,7 +183,6 @@ bool UnfoldingEvent::isImmediateConflict(UnfoldingEvent* evt1, UnfoldingEvent* e
 
 bool UnfoldingEvent::isImmediateConflict1(UnfoldingEvent* evt1, UnfoldingEvent* evt2)
 {
-
   // event e should not conflict with itself
   if (*evt1 == *evt2)
     return false;
@@ -311,6 +249,7 @@ bool UnfoldingEvent::conflictWithConfig(UnfoldingEvent* event, Configuration con
 {
   if (config.size() == 0)
     return false;
+
   // we don't really need to check the whole config. The maximal event should be enough.
   for (auto evt : config.maxEvent.events_)
     if (event->isConflict(event, evt))
@@ -349,3 +288,5 @@ bool UnfoldingEvent::operator==(const UnfoldingEvent& other) const
 
   return true;
 }
+
+//}

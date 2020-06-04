@@ -1,5 +1,7 @@
 #include "configuration.h"
 
+//namespace event {
+
 void Configuration::updateMaxEvent(UnfoldingEvent* e)
 {
   this->lastEvent = e;
@@ -41,3 +43,5 @@ UnfoldingEvent* Configuration ::findTestedComm(UnfoldingEvent* testEvt)
       return it;
   return nullptr;
 }
+
+//}

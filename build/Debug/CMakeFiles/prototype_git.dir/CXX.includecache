@@ -6,6 +6,20 @@
 
 #IncludeRegexTransform: 
 
+/home/ehsan/projects/prototype_git/src/EventSet/eventset.cpp
+eventset.h
+/home/ehsan/projects/prototype_git/src/EventSet/eventset.h
+
+/home/ehsan/projects/prototype_git/src/EventSet/eventset.h
+iostream
+-
+set
+-
+algorithm
+-
+../UnfoldingEvent/unfoldingevent.h
+/home/ehsan/projects/prototype_git/src/UnfoldingEvent/unfoldingevent.h
+
 /home/ehsan/projects/prototype_git/src/Simulation.cpp
 UnfoldingChecker.hpp
 /home/ehsan/projects/prototype_git/src/UnfoldingChecker.hpp
@@ -55,12 +69,28 @@ transition/transition.h
 /home/ehsan/projects/prototype_git/src/transition/transition.h
 state/state.h
 /home/ehsan/projects/prototype_git/src/state/state.h
+configuration/configuration.h
+/home/ehsan/projects/prototype_git/src/configuration/configuration.h
+UnfoldingEvent/unfoldingevent.h
+/home/ehsan/projects/prototype_git/src/UnfoldingEvent/unfoldingevent.h
+EventSet/eventset.h
+/home/ehsan/projects/prototype_git/src/EventSet/eventset.h
 
-/home/ehsan/projects/prototype_git/src/UnfoldingEvent.cpp
-UnfoldingChecker.hpp
-/home/ehsan/projects/prototype_git/src/UnfoldingChecker.hpp
-unistd.h
--
+/home/ehsan/projects/prototype_git/src/UnfoldingEvent/unfoldingevent.cpp
+unfoldingevent.h
+/home/ehsan/projects/prototype_git/src/UnfoldingEvent/unfoldingevent.h
+../EventSet/eventset.h
+/home/ehsan/projects/prototype_git/src/EventSet/eventset.h
+
+/home/ehsan/projects/prototype_git/src/UnfoldingEvent/unfoldingevent.h
+../transition/transition.h
+/home/ehsan/projects/prototype_git/src/transition/transition.h
+../state/state.h
+/home/ehsan/projects/prototype_git/src/state/state.h
+../EventSet/eventset.h
+/home/ehsan/projects/prototype_git/src/EventSet/eventset.h
+../configuration/configuration.h
+/home/ehsan/projects/prototype_git/src/configuration/configuration.h
 
 /home/ehsan/projects/prototype_git/src/actor/actor.cpp
 actor.h
@@ -75,6 +105,16 @@ vector
 -
 ../transition/transition.h
 /home/ehsan/projects/prototype_git/src/transition/transition.h
+
+/home/ehsan/projects/prototype_git/src/configuration/configuration.cpp
+configuration.h
+/home/ehsan/projects/prototype_git/src/configuration/configuration.h
+
+/home/ehsan/projects/prototype_git/src/configuration/configuration.h
+../EventSet/eventset.h
+/home/ehsan/projects/prototype_git/src/EventSet/eventset.h
+../UnfoldingEvent/unfoldingevent.h
+/home/ehsan/projects/prototype_git/src/UnfoldingEvent/unfoldingevent.h
 
 /home/ehsan/projects/prototype_git/src/mailbox/mailbox.cpp
 mailbox.h

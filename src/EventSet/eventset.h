@@ -8,6 +8,8 @@
 
 using namespace std;
 
+//namespace event {
+
 class EventSet
 {
 public:
@@ -31,10 +33,12 @@ public:
 
     void insert(UnfoldingEvent*);
     void erase(UnfoldingEvent*);
-    bool operator==(const EventSet& other) const { return this->events_ == other.events_; }
+    inline bool operator==(const EventSet& other) const { return this->events_ == other.events_; }
 
     EventSet minus(UnfoldingEvent* evt);
     EventSet plus(UnfoldingEvent*);
 };
+
+//}
 
 #endif // EVENTSET_H

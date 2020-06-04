@@ -4,20 +4,24 @@
 #include "../transition/transition.h"
 #include "../state/state.h"
 #include "../EventSet/eventset.h"
+#include "../configuration/configuration.h"
+
+//class EventSet;
+
+//namespace event {
 
 class UnfoldingEvent
 {
 public:
-    int id = -1;
+    UnfoldingEvent(State* s) : appState(*s) {}
+    UnfoldingEvent(unsigned int nb_events, Transition t, EventSet causes) : this->id(nb_events), this->causes(causes), this->transition(t) {}
+
+    int id {-1};
     State appState;
     Transition transition; // The last transition made to reach that state
     EventSet causes;       // used to store directed ancestors of event e
     EventSet conflictEvts; // used for Test and Send/Receive events, storing conflicts events with me (concern the same
                            // communication)
-
-    UnfoldingEvent(State* s) : appState(*s) {}
-
-    UnfoldingEvent(unsigned int nb_events, Transition t, EventSet causes);
 
     EventSet getHistory() const;
 
@@ -35,5 +39,7 @@ public:
     bool operator==(const UnfoldingEvent& other) const;
     void print();
 };
+
+//}
 
 #endif // UNFOLDINGEVENT_H
