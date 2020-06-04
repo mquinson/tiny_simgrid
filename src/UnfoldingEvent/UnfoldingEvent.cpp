@@ -1,7 +1,46 @@
-#include "unfoldingevent.h"
-#include "../EventSet/eventset.h"
+#include "UnfoldingEvent.h"
+#include "../EventSet/EventSet.h"
+#include "../configuration/configuration.h"
 
 //namespace event {
+
+void UnfoldingEvent::print()
+{
+  std::cout << "e" << this->id << " =  < t" << this->transition.id << "-p" << this->transition.actor_id << "(";
+  if (this->transition.type.length() > 1)
+    std::cout << this->transition.type << ")"
+              << ","
+              << "(";
+  if (this->causes->empty())
+    std::cout << "-) >";
+  else {
+    for (auto evt : this->causes->events_)
+      std::cout << "e" << evt->id << ",";
+    std::cout << " ) >";
+  }
+}
+
+// Recursively compute the history of a given event by adding the causes of all ancestors
+EventSet UnfoldingEvent::getHistory() const
+{
+  if (causes->empty()) // No direct ancestor => empty history
+    return *causes;
+  else {
+    // EventSet res = causes;
+    EventSet res;
+    for (auto ancestor : causes->events_) {
+      EventSet h1;
+
+      // if event ancestor is already in history set -> we do not need to get it's history
+
+      if (not res.contains(ancestor))
+        h1 = ancestor->getHistory();
+      h1.insert(ancestor);
+      res = res.makeUnion(res, h1);
+    }
+    return res;
+  }
+}
 
 bool UnfoldingEvent::inHistory(UnfoldingEvent* otherEvent)
 {
@@ -245,13 +284,16 @@ bool UnfoldingEvent::isImmediateConflict1(UnfoldingEvent* evt1, UnfoldingEvent* 
 
 // checking conflict relation between one event and one configuration or one history, it used when computing enC
 // there is a better way by checking the event with maximal events in the configuration, (change type of enC )
-bool UnfoldingEvent::conflictWithConfig(UnfoldingEvent* event, Configuration config)
+//EHSAN bool UnfoldingEvent::conflictWithConfig(UnfoldingEvent* event, Configuration config)
+bool UnfoldingEvent::conflictWithConfig(UnfoldingEvent* event, Configuration* config)
 {
-  if (config.size() == 0)
+//EHSAN  if (config.size() == 0)
+    if (config->size() == 0)
     return false;
 
   // we don't really need to check the whole config. The maximal event should be enough.
-  for (auto evt : config.maxEvent.events_)
+//EHSAN  for (auto evt : config.maxEvent.events_)
+    for (auto evt : config->maxEvent.events_)
     if (event->isConflict(event, evt))
       return true;
   return false;
@@ -272,12 +314,15 @@ bool UnfoldingEvent::operator==(const UnfoldingEvent& other) const
 
   if ((this->transition.id != other.transition.id) or (this->transition.actor_id != other.transition.actor_id))
     return false;
-  if (this->causes.size() != other.causes.size())
+//EHSAN  if (this->causes.size() != other.causes.size())
+  if (this->causes->size() != other.causes->size())
     return false;
 
-  for (auto it : this->causes.events_) {
+//ehsan  for (auto it : this->causes.events_) {
+    for (auto it : this->causes->events_) {
     bool chk1 = false;
-    for (auto it1 : other.causes.events_)
+//ehsan    for (auto it1 : other.causes.events_)
+    for (auto it1 : other.causes->events_)
       if (*it == *it1) {
         chk1 = true;
         break;

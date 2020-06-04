@@ -1,4 +1,4 @@
-#include "eventset.h"
+#include "EventSet.h"
 
 //namespace event {
 
@@ -49,8 +49,9 @@ bool EventSet::depends(EventSet s2)
 
 bool EventSet::isConfig()
 {
-  if ((this->size() == 1) && (this->begin()->causes.empty()))
-    return true;
+// EHSAN  if ((this->size() == 1) && (this->begin()->causes.empty()))
+    if ((this->size() == 1) && (this->begin()->causes->empty()))
+        return true;
 
   // checking conflict relation between one event and all other events in the set
   for (auto e1 : events_) {

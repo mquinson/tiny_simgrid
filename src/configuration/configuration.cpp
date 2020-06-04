@@ -6,8 +6,9 @@ void Configuration::updateMaxEvent(UnfoldingEvent* e)
 {
   this->lastEvent = e;
   // update the maximal events for current Conf removing causes from maxEvent and adding e to the maxEvent
-  for (auto evt : e->causes.events_) {
-    maxEvent.erase(evt); // setMaxEvents.erase(evt->id);
+//ehsan  for (auto evt : e->causes.events_) {
+    for (auto evt : e->causes->events_) {
+        maxEvent.erase(evt); // setMaxEvents.erase(evt->id);
   }
   maxEvent.insert(e);
   /* update the maximal events for the actor=>

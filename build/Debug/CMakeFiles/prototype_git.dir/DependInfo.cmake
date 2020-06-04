@@ -4,15 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ehsan/projects/prototype_git/src/EventSet/eventset.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.o"
-  "/home/ehsan/projects/prototype_git/src/Simulation.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/Simulation.cpp.o"
-  "/home/ehsan/projects/prototype_git/src/UnfoldingChecker.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o"
-  "/home/ehsan/projects/prototype_git/src/UnfoldingEvent/unfoldingevent.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.o"
+  "/home/ehsan/projects/prototype_git/src/EventSet/EventSet.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.o"
+  "/home/ehsan/projects/prototype_git/src/UnfoldingChecker/UnfoldingChecker.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.o"
+  "/home/ehsan/projects/prototype_git/src/UnfoldingEvent/UnfoldingEvent.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.o"
   "/home/ehsan/projects/prototype_git/src/actor/actor.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o"
   "/home/ehsan/projects/prototype_git/src/configuration/configuration.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/configuration/configuration.cpp.o"
   "/home/ehsan/projects/prototype_git/src/mailbox/mailbox.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.o"
+  "/home/ehsan/projects/prototype_git/src/main.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/main.cpp.o"
   "/home/ehsan/projects/prototype_git/src/state/state.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/state/state.cpp.o"
-  "/home/ehsan/projects/prototype_git/src/test.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/test.cpp.o"
   "/home/ehsan/projects/prototype_git/src/transition/transition.cpp" "/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

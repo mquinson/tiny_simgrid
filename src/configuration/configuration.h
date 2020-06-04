@@ -1,8 +1,8 @@
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
 
-#include "../EventSet/eventset.h"
-#include "../UnfoldingEvent/unfoldingevent.h"
+#include "../EventSet/EventSet.h"
+#include "../UnfoldingEvent/UnfoldingEvent.h"
 
 //namespace event {
 

@@ -57,81 +57,33 @@ include CMakeFiles/prototype_git.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/prototype_git.dir/flags.make
 
-CMakeFiles/prototype_git.dir/src/test.cpp.o: CMakeFiles/prototype_git.dir/flags.make
-CMakeFiles/prototype_git.dir/src/test.cpp.o: ../../src/test.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/prototype_git.dir/src/test.cpp.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/test.cpp.o -c /home/ehsan/projects/prototype_git/src/test.cpp
+CMakeFiles/prototype_git.dir/src/main.cpp.o: CMakeFiles/prototype_git.dir/flags.make
+CMakeFiles/prototype_git.dir/src/main.cpp.o: ../../src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/prototype_git.dir/src/main.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/main.cpp.o -c /home/ehsan/projects/prototype_git/src/main.cpp
 
-CMakeFiles/prototype_git.dir/src/test.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/prototype_git.dir/src/test.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ehsan/projects/prototype_git/src/test.cpp > CMakeFiles/prototype_git.dir/src/test.cpp.i
+CMakeFiles/prototype_git.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/prototype_git.dir/src/main.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ehsan/projects/prototype_git/src/main.cpp > CMakeFiles/prototype_git.dir/src/main.cpp.i
 
-CMakeFiles/prototype_git.dir/src/test.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/prototype_git.dir/src/test.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ehsan/projects/prototype_git/src/test.cpp -o CMakeFiles/prototype_git.dir/src/test.cpp.s
+CMakeFiles/prototype_git.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/prototype_git.dir/src/main.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ehsan/projects/prototype_git/src/main.cpp -o CMakeFiles/prototype_git.dir/src/main.cpp.s
 
-CMakeFiles/prototype_git.dir/src/test.cpp.o.requires:
+CMakeFiles/prototype_git.dir/src/main.cpp.o.requires:
 
-.PHONY : CMakeFiles/prototype_git.dir/src/test.cpp.o.requires
+.PHONY : CMakeFiles/prototype_git.dir/src/main.cpp.o.requires
 
-CMakeFiles/prototype_git.dir/src/test.cpp.o.provides: CMakeFiles/prototype_git.dir/src/test.cpp.o.requires
-	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/test.cpp.o.provides.build
-.PHONY : CMakeFiles/prototype_git.dir/src/test.cpp.o.provides
+CMakeFiles/prototype_git.dir/src/main.cpp.o.provides: CMakeFiles/prototype_git.dir/src/main.cpp.o.requires
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/main.cpp.o.provides.build
+.PHONY : CMakeFiles/prototype_git.dir/src/main.cpp.o.provides
 
-CMakeFiles/prototype_git.dir/src/test.cpp.o.provides.build: CMakeFiles/prototype_git.dir/src/test.cpp.o
-
-
-CMakeFiles/prototype_git.dir/src/Simulation.cpp.o: CMakeFiles/prototype_git.dir/flags.make
-CMakeFiles/prototype_git.dir/src/Simulation.cpp.o: ../../src/Simulation.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/prototype_git.dir/src/Simulation.cpp.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/Simulation.cpp.o -c /home/ehsan/projects/prototype_git/src/Simulation.cpp
-
-CMakeFiles/prototype_git.dir/src/Simulation.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/prototype_git.dir/src/Simulation.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ehsan/projects/prototype_git/src/Simulation.cpp > CMakeFiles/prototype_git.dir/src/Simulation.cpp.i
-
-CMakeFiles/prototype_git.dir/src/Simulation.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/prototype_git.dir/src/Simulation.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ehsan/projects/prototype_git/src/Simulation.cpp -o CMakeFiles/prototype_git.dir/src/Simulation.cpp.s
-
-CMakeFiles/prototype_git.dir/src/Simulation.cpp.o.requires:
-
-.PHONY : CMakeFiles/prototype_git.dir/src/Simulation.cpp.o.requires
-
-CMakeFiles/prototype_git.dir/src/Simulation.cpp.o.provides: CMakeFiles/prototype_git.dir/src/Simulation.cpp.o.requires
-	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/Simulation.cpp.o.provides.build
-.PHONY : CMakeFiles/prototype_git.dir/src/Simulation.cpp.o.provides
-
-CMakeFiles/prototype_git.dir/src/Simulation.cpp.o.provides.build: CMakeFiles/prototype_git.dir/src/Simulation.cpp.o
-
-
-CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o: CMakeFiles/prototype_git.dir/flags.make
-CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o: ../../src/UnfoldingChecker.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o -c /home/ehsan/projects/prototype_git/src/UnfoldingChecker.cpp
-
-CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ehsan/projects/prototype_git/src/UnfoldingChecker.cpp > CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.i
-
-CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ehsan/projects/prototype_git/src/UnfoldingChecker.cpp -o CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.s
-
-CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o.requires:
-
-.PHONY : CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o.requires
-
-CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o.provides: CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o.requires
-	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o.provides.build
-.PHONY : CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o.provides
-
-CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o.provides.build: CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o
+CMakeFiles/prototype_git.dir/src/main.cpp.o.provides.build: CMakeFiles/prototype_git.dir/src/main.cpp.o
 
 
 CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o: CMakeFiles/prototype_git.dir/flags.make
 CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o: ../../src/actor/actor.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o"
 	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o -c /home/ehsan/projects/prototype_git/src/actor/actor.cpp
 
 CMakeFiles/prototype_git.dir/src/actor/actor.cpp.i: cmake_force
@@ -155,7 +107,7 @@ CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o.provides.build: CMakeFiles/pr
 
 CMakeFiles/prototype_git.dir/src/state/state.cpp.o: CMakeFiles/prototype_git.dir/flags.make
 CMakeFiles/prototype_git.dir/src/state/state.cpp.o: ../../src/state/state.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/prototype_git.dir/src/state/state.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/prototype_git.dir/src/state/state.cpp.o"
 	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/state/state.cpp.o -c /home/ehsan/projects/prototype_git/src/state/state.cpp
 
 CMakeFiles/prototype_git.dir/src/state/state.cpp.i: cmake_force
@@ -179,7 +131,7 @@ CMakeFiles/prototype_git.dir/src/state/state.cpp.o.provides.build: CMakeFiles/pr
 
 CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o: CMakeFiles/prototype_git.dir/flags.make
 CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o: ../../src/transition/transition.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o"
 	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o -c /home/ehsan/projects/prototype_git/src/transition/transition.cpp
 
 CMakeFiles/prototype_git.dir/src/transition/transition.cpp.i: cmake_force
@@ -203,7 +155,7 @@ CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o.provides.build: CMa
 
 CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.o: CMakeFiles/prototype_git.dir/flags.make
 CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.o: ../../src/mailbox/mailbox.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.o"
 	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.o -c /home/ehsan/projects/prototype_git/src/mailbox/mailbox.cpp
 
 CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.i: cmake_force
@@ -225,57 +177,57 @@ CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.o.provides: CMakeFiles/prot
 CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.o.provides.build: CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.o
 
 
-CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.o: CMakeFiles/prototype_git.dir/flags.make
-CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.o: ../../src/EventSet/eventset.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.o -c /home/ehsan/projects/prototype_git/src/EventSet/eventset.cpp
+CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.o: CMakeFiles/prototype_git.dir/flags.make
+CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.o: ../../src/EventSet/EventSet.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.o -c /home/ehsan/projects/prototype_git/src/EventSet/EventSet.cpp
 
-CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ehsan/projects/prototype_git/src/EventSet/eventset.cpp > CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.i
+CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ehsan/projects/prototype_git/src/EventSet/EventSet.cpp > CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.i
 
-CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ehsan/projects/prototype_git/src/EventSet/eventset.cpp -o CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.s
+CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ehsan/projects/prototype_git/src/EventSet/EventSet.cpp -o CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.s
 
-CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.o.requires:
+CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.o.requires:
 
-.PHONY : CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.o.requires
+.PHONY : CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.o.requires
 
-CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.o.provides: CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.o.requires
-	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.o.provides.build
-.PHONY : CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.o.provides
+CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.o.provides: CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.o.requires
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.o.provides.build
+.PHONY : CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.o.provides
 
-CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.o.provides.build: CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.o
+CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.o.provides.build: CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.o
 
 
-CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.o: CMakeFiles/prototype_git.dir/flags.make
-CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.o: ../../src/UnfoldingEvent/unfoldingevent.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.o -c /home/ehsan/projects/prototype_git/src/UnfoldingEvent/unfoldingevent.cpp
+CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.o: CMakeFiles/prototype_git.dir/flags.make
+CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.o: ../../src/UnfoldingEvent/UnfoldingEvent.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.o -c /home/ehsan/projects/prototype_git/src/UnfoldingEvent/UnfoldingEvent.cpp
 
-CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ehsan/projects/prototype_git/src/UnfoldingEvent/unfoldingevent.cpp > CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.i
+CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ehsan/projects/prototype_git/src/UnfoldingEvent/UnfoldingEvent.cpp > CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.i
 
-CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ehsan/projects/prototype_git/src/UnfoldingEvent/unfoldingevent.cpp -o CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.s
+CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ehsan/projects/prototype_git/src/UnfoldingEvent/UnfoldingEvent.cpp -o CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.s
 
-CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.o.requires:
+CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.o.requires:
 
-.PHONY : CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.o.requires
+.PHONY : CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.o.requires
 
-CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.o.provides: CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.o.requires
-	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.o.provides.build
-.PHONY : CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.o.provides
+CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.o.provides: CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.o.requires
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.o.provides.build
+.PHONY : CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.o.provides
 
-CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.o.provides.build: CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.o
+CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.o.provides.build: CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.o
 
 
 CMakeFiles/prototype_git.dir/src/configuration/configuration.cpp.o: CMakeFiles/prototype_git.dir/flags.make
 CMakeFiles/prototype_git.dir/src/configuration/configuration.cpp.o: ../../src/configuration/configuration.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/prototype_git.dir/src/configuration/configuration.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/prototype_git.dir/src/configuration/configuration.cpp.o"
 	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/configuration/configuration.cpp.o -c /home/ehsan/projects/prototype_git/src/configuration/configuration.cpp
 
 CMakeFiles/prototype_git.dir/src/configuration/configuration.cpp.i: cmake_force
@@ -297,35 +249,57 @@ CMakeFiles/prototype_git.dir/src/configuration/configuration.cpp.o.provides: CMa
 CMakeFiles/prototype_git.dir/src/configuration/configuration.cpp.o.provides.build: CMakeFiles/prototype_git.dir/src/configuration/configuration.cpp.o
 
 
+CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.o: CMakeFiles/prototype_git.dir/flags.make
+CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.o: ../../src/UnfoldingChecker/UnfoldingChecker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.o -c /home/ehsan/projects/prototype_git/src/UnfoldingChecker/UnfoldingChecker.cpp
+
+CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ehsan/projects/prototype_git/src/UnfoldingChecker/UnfoldingChecker.cpp > CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.i
+
+CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ehsan/projects/prototype_git/src/UnfoldingChecker/UnfoldingChecker.cpp -o CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.s
+
+CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.o.requires:
+
+.PHONY : CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.o.requires
+
+CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.o.provides: CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.o.requires
+	$(MAKE) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.o.provides.build
+.PHONY : CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.o.provides
+
+CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.o.provides.build: CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.o
+
+
 # Object files for target prototype_git
 prototype_git_OBJECTS = \
-"CMakeFiles/prototype_git.dir/src/test.cpp.o" \
-"CMakeFiles/prototype_git.dir/src/Simulation.cpp.o" \
-"CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o" \
+"CMakeFiles/prototype_git.dir/src/main.cpp.o" \
 "CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o" \
 "CMakeFiles/prototype_git.dir/src/state/state.cpp.o" \
 "CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o" \
 "CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.o" \
-"CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.o" \
-"CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.o" \
-"CMakeFiles/prototype_git.dir/src/configuration/configuration.cpp.o"
+"CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.o" \
+"CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.o" \
+"CMakeFiles/prototype_git.dir/src/configuration/configuration.cpp.o" \
+"CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.o"
 
 # External object files for target prototype_git
 prototype_git_EXTERNAL_OBJECTS =
 
-prototype_git: CMakeFiles/prototype_git.dir/src/test.cpp.o
-prototype_git: CMakeFiles/prototype_git.dir/src/Simulation.cpp.o
-prototype_git: CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o
+prototype_git: CMakeFiles/prototype_git.dir/src/main.cpp.o
 prototype_git: CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o
 prototype_git: CMakeFiles/prototype_git.dir/src/state/state.cpp.o
 prototype_git: CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o
 prototype_git: CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.o
-prototype_git: CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.o
-prototype_git: CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.o
+prototype_git: CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.o
+prototype_git: CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.o
 prototype_git: CMakeFiles/prototype_git.dir/src/configuration/configuration.cpp.o
+prototype_git: CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.o
 prototype_git: CMakeFiles/prototype_git.dir/build.make
 prototype_git: CMakeFiles/prototype_git.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable prototype_git"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ehsan/projects/prototype_git/build/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable prototype_git"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/prototype_git.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -333,16 +307,15 @@ CMakeFiles/prototype_git.dir/build: prototype_git
 
 .PHONY : CMakeFiles/prototype_git.dir/build
 
-CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/test.cpp.o.requires
-CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/Simulation.cpp.o.requires
-CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o.requires
+CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/main.cpp.o.requires
 CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/actor/actor.cpp.o.requires
 CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/state/state.cpp.o.requires
 CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/transition/transition.cpp.o.requires
 CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/mailbox/mailbox.cpp.o.requires
-CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/EventSet/eventset.cpp.o.requires
-CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/UnfoldingEvent/unfoldingevent.cpp.o.requires
+CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/EventSet/EventSet.cpp.o.requires
+CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/UnfoldingEvent/UnfoldingEvent.cpp.o.requires
 CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/configuration/configuration.cpp.o.requires
+CMakeFiles/prototype_git.dir/requires: CMakeFiles/prototype_git.dir/src/UnfoldingChecker/UnfoldingChecker.cpp.o.requires
 
 .PHONY : CMakeFiles/prototype_git.dir/requires
 

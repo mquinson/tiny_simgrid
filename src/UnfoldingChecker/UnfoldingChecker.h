@@ -9,12 +9,11 @@
 #include <utility>
 #include <vector>
 
-#include "actor/actor.h"
-#include "transition/transition.h"
-#include "state/state.h"
-#include "configuration/configuration.h"
-#include "UnfoldingEvent/unfoldingevent.h"
-#include "EventSet/eventset.h"
+#include "../transition/transition.h"
+#include "../state/state.h"
+#include "../configuration/configuration.h"
+#include "../UnfoldingEvent/UnfoldingEvent.h"
+#include "../EventSet/EventSet.h"
 
 using namespace std;
 

@@ -4,7 +4,7 @@
 #include <iostream>
 #include <set>
 #include <algorithm>
-#include "../UnfoldingEvent/unfoldingevent.h"
+#include "../UnfoldingEvent/UnfoldingEvent.h"
 
 using namespace std;
 

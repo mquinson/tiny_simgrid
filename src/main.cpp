@@ -1,13 +1,10 @@
-
-#include "UnfoldingChecker.hpp"
-
-#include <iostream>
-#include <list>
-#include <math.h>
-#include <queue>
-#include <set>
-#include <string>
-#include <unistd.h>
+#include "UnfoldingChecker/UnfoldingChecker.h"
+#include "state/state.h"
+#include "transition/transition.h"
+#include "configuration/configuration.h"
+#include "EventSet/EventSet.h"
+#include "UnfoldingEvent/UnfoldingEvent.h"
+#include "actor/actor.h"
 
 using namespace std;
 
@@ -51,7 +48,6 @@ bool test_reduction(std::set<Actor> actors, std::set<Mailbox> mailboxes, std::ve
 
 int main(int argc, char** argv)
 {
-
   clock_t begin = clock();
   nb_events     = 0;
   UnfoldingChecker UC;
@@ -143,7 +139,6 @@ int main(int argc, char** argv)
               // Transition(read_write, access_variable)
       test_reduction({Actor(0, {Transition(2, 0), Transition(3, 0)}), Actor(1, {Transition(2, 0), Transition(3, 0)})},
                      {/* no mailbox */}, {2}, 2);
-
     } break;
 
     case 9: { // mutex example - 1 trace
