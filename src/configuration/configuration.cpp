@@ -1,12 +1,9 @@
 #include "configuration.h"
 
-//namespace event {
-
 void Configuration::updateMaxEvent(UnfoldingEvent* e)
 {
   this->lastEvent = e;
   // update the maximal events for current Conf removing causes from maxEvent and adding e to the maxEvent
-//ehsan  for (auto evt : e->causes.events_) {
     for (auto evt : e->causes->events_) {
         maxEvent.erase(evt); // setMaxEvents.erase(evt->id);
   }
@@ -44,5 +41,3 @@ UnfoldingEvent* Configuration ::findTestedComm(UnfoldingEvent* testEvt)
       return it;
   return nullptr;
 }
-
-//}

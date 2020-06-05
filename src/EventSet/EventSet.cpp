@@ -1,7 +1,5 @@
 #include "EventSet.h"
 
-//namespace event {
-
 bool EventSet::contains(UnfoldingEvent* e)
 {
   for (auto evt : this->events_)
@@ -49,7 +47,6 @@ bool EventSet::depends(EventSet s2)
 
 bool EventSet::isConfig()
 {
-// EHSAN  if ((this->size() == 1) && (this->begin()->causes.empty()))
     if ((this->size() == 1) && (this->begin()->causes->empty()))
         return true;
 
@@ -141,4 +138,3 @@ bool EventSet::isEmptyIntersection(EventSet evtS1, EventSet evtS2)
   return true;
 }
 
-//}

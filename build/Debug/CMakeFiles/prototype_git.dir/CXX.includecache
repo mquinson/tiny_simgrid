@@ -79,6 +79,10 @@ UnfoldingEvent.h
 /home/ehsan/projects/prototype_git/src/configuration/configuration.h
 
 /home/ehsan/projects/prototype_git/src/UnfoldingEvent/UnfoldingEvent.h
+iostream
+-
+memory
+-
 ../transition/transition.h
 /home/ehsan/projects/prototype_git/src/transition/transition.h
 ../state/state.h

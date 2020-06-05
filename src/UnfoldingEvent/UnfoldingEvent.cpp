@@ -2,7 +2,14 @@
 #include "../EventSet/EventSet.h"
 #include "../configuration/configuration.h"
 
-//namespace event {
+template<typename T, typename... Args>
+std::unique_ptr<T> make_unique( Args&&... args ) {
+    return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+}
+
+UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, Transition t, EventSet* causes) : id(nb_events), transition(t) {
+    this->causes = make_unique<EventSet>(*causes);
+}
 
 void UnfoldingEvent::print()
 {
@@ -284,15 +291,12 @@ bool UnfoldingEvent::isImmediateConflict1(UnfoldingEvent* evt1, UnfoldingEvent* 
 
 // checking conflict relation between one event and one configuration or one history, it used when computing enC
 // there is a better way by checking the event with maximal events in the configuration, (change type of enC )
-//EHSAN bool UnfoldingEvent::conflictWithConfig(UnfoldingEvent* event, Configuration config)
 bool UnfoldingEvent::conflictWithConfig(UnfoldingEvent* event, Configuration* config)
 {
-//EHSAN  if (config.size() == 0)
     if (config->size() == 0)
     return false;
 
   // we don't really need to check the whole config. The maximal event should be enough.
-//EHSAN  for (auto evt : config.maxEvent.events_)
     for (auto evt : config->maxEvent.events_)
     if (event->isConflict(event, evt))
       return true;
@@ -314,14 +318,11 @@ bool UnfoldingEvent::operator==(const UnfoldingEvent& other) const
 
   if ((this->transition.id != other.transition.id) or (this->transition.actor_id != other.transition.actor_id))
     return false;
-//EHSAN  if (this->causes.size() != other.causes.size())
   if (this->causes->size() != other.causes->size())
     return false;
 
-//ehsan  for (auto it : this->causes.events_) {
     for (auto it : this->causes->events_) {
     bool chk1 = false;
-//ehsan    for (auto it1 : other.causes.events_)
     for (auto it1 : other.causes->events_)
       if (*it == *it1) {
         chk1 = true;
