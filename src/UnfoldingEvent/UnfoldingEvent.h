@@ -5,22 +5,22 @@
 #include <memory>
 #include "../transition/transition.h"
 #include "../state/state.h"
-//#include "../EventSet/EventSet.h"
-//#include "../configuration/configuration.h"
 
 class EventSet;
 class Configuration;
 
-class UnfoldingEvent
-{
+class UnfoldingEvent {
 public:
     UnfoldingEvent(State* s) : appState(*s) {}
-    UnfoldingEvent(unsigned int nb_events, Transition t, EventSet* causes);// : id(nb_events), transition(t) { this->causes = make_unique<EventSet>(*causes); }
+    UnfoldingEvent(unsigned int nb_events, Transition t, EventSet causes);
 
     int id {-1};
     State appState;
     Transition transition; // The last transition made to reach that state
+
     std::unique_ptr<EventSet> causes; // used to store directed ancestors of event e
+    std::unique_ptr<EventSet> conflictEvts; // used for Test and Send/Receive events, storing conflicts events with me (concern the same
+                                            // communication)
 
     EventSet getHistory() const;
 

@@ -1,11 +1,3 @@
-#include <algorithm>
-#include <iostream>
-#include <math.h>
-#include <string>
-#include <unistd.h>
-#include <utility>
-#include <vector>
-
 #include "UnfoldingChecker.h"
 
 unsigned int nb_events = 0;
@@ -398,7 +390,7 @@ void Configuration::createEvts(Configuration C, EventSet& result, Transition t, 
 
       if (send_receiveCheck) {
         nb_events++;
-        UnfoldingEvent* e = new UnfoldingEvent(nb_events, t, &cause1);
+        UnfoldingEvent* e = new UnfoldingEvent(nb_events, t, cause1);
         result.insert(e);
       }
     }
@@ -479,7 +471,7 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
     nb_events++;
 
     /* in this case only one event is created, since all MaxEvts are in the history of lastEvt*/
-    UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, &causalityEvts);
+    UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, causalityEvts);
     exC.insert(e);
 
   }
@@ -587,7 +579,7 @@ EventSet createWaitEvt(UnfoldingEvent* evt, Configuration C, Transition trans)
             ancestors.insert(evt2);
           }
           nb_events++;
-          UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, &ancestors);
+          UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestors);
           evtS.insert(e);
         }
       }
@@ -627,7 +619,7 @@ EventSet createWaitEvt(UnfoldingEvent* evt, Configuration C, Transition trans)
             ancestors.insert(evt2);
           }
           nb_events++;
-          UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, &ancestors);
+          UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestors);
           evtS.insert(e);
         }
       }
@@ -686,7 +678,7 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
 
     ancestors.insert(C.lastEvent);
     nb_events++;
-    newEvt1 = new UnfoldingEvent(nb_events, trans, &ancestors);
+    newEvt1 = new UnfoldingEvent(nb_events, trans, ancestors);
 
     evtS.insert(newEvt1);
 
@@ -715,7 +707,7 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
 
             ancestors.insert(evt2);
             nb_events++;
-            newEvt2 = new UnfoldingEvent(nb_events, trans, &ancestors);
+            newEvt2 = new UnfoldingEvent(nb_events, trans, ancestors);
 
             evtS.insert(newEvt2);
           }
@@ -746,7 +738,7 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
 
             ancestors.insert(evt2);
             nb_events++;
-            newEvt2 = new UnfoldingEvent(nb_events, trans, &ancestors);
+            newEvt2 = new UnfoldingEvent(nb_events, trans, ancestors);
             evtS.insert(newEvt2);
           }
         }
@@ -770,7 +762,7 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
         if (not lastEvtHist.contains(maxEvt))
           ancestors.insert(maxEvt);
         nb_events++;
-        newEvt2 = new UnfoldingEvent(nb_events, trans, &ancestors);
+        newEvt2 = new UnfoldingEvent(nb_events, trans, ancestors);
         evtS.insert(newEvt2);
       }
     } else if (comType == "Ireceive") {
@@ -787,7 +779,7 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
         if (not lastEvtHist.contains(maxEvt))
           ancestors.insert(maxEvt);
         nb_events++;
-        newEvt2 = new UnfoldingEvent(nb_events, trans, &ancestors);
+        newEvt2 = new UnfoldingEvent(nb_events, trans, ancestors);
         evtS.insert(newEvt2);
       }
     }
@@ -839,7 +831,7 @@ EventSet createIsendEvts(Transition trans, Configuration C)
   // if last event is preEvt(trans) always create a new event.
   if (C.lastEvent->transition.actor_id == trans.actor_id) {
     nb_events++;
-    UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, &ancestorSet);
+    UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorSet);
     exC.insert(e);
   }
   // else if last event is Isend try to create a new event .
@@ -847,12 +839,12 @@ EventSet createIsendEvts(Transition trans, Configuration C)
 
     if (enableChk) {
       nb_events++;
-      UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, &ancestorSet);
+      UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorSet);
       exC.insert(e);
     } else {
       ancestorSet.insert(immPreEvt);
       nb_events++;
-      UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, &ancestorSet);
+      UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorSet);
       exC.insert(e);
     }
   }
@@ -879,7 +871,7 @@ EventSet createIsendEvts(Transition trans, Configuration C)
 
             if (checkSdRcCreation(trans, ancestorSet1, C)) {
               nb_events++;
-              UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, &ancestorSet1);
+              UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorSet1);
               exC.insert(e);
             }
           }
@@ -894,7 +886,7 @@ EventSet createIsendEvts(Transition trans, Configuration C)
       ansestors.insert(immPreEvt);
     if (checkSdRcCreation(trans, ansestors, C)) {
       nb_events++;
-      UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, &ansestors);
+      UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ansestors);
       exC.insert(e);
     }
 
@@ -912,7 +904,7 @@ EventSet createIsendEvts(Transition trans, Configuration C)
 
           if (checkSdRcCreation(trans, ansestors1, C)) {
             nb_events++;
-            UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, &ansestors1);
+            UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ansestors1);
             exC.insert(e);
           }
         }
@@ -940,7 +932,7 @@ EventSet createIsendEvts(Transition trans, Configuration C)
 
               if (checkSdRcCreation(trans, ancestorsSet, C)) {
                 nb_events++;
-                UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, &ancestorsSet);
+                UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorsSet);
                 exC.insert(e);
               }
             }
@@ -990,19 +982,19 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
   // if last event is preEvt(trans) always create a new event.
   if (C.lastEvent->transition.actor_id == trans.actor_id) {
     nb_events++;
-    UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, &ancestorSet);
+    UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorSet);
     exC.insert(e);
   }
   // else if last event is Ireceive try to create a new event .
   else if (C.lastEvent->transition.type == "Ireceive") {
     if (enableChk) {
       nb_events++;
-      UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, &ancestorSet);
+      UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorSet);
       exC.insert(e);
     } else {
       ancestorSet.insert(immPreEvt);
       nb_events++;
-      UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, &ancestorSet);
+      UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorSet);
       exC.insert(e);
     }
   }
@@ -1030,7 +1022,7 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
 
             if (checkSdRcCreation(trans, ancestorSet1, C)) {
               nb_events++;
-              UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, &ancestorSet1);
+              UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorSet1);
               exC.insert(e);
             }
           }
@@ -1045,7 +1037,7 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
       ansestors.insert(immPreEvt);
     if (checkSdRcCreation(trans, ansestors, C)) {
       nb_events++;
-      UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, &ansestors);
+      UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ansestors);
       exC.insert(e);
     }
 
@@ -1063,7 +1055,7 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
 
           if (checkSdRcCreation(trans, ansestors1, C)) {
             nb_events++;
-            UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, &ansestors1);
+            UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ansestors1);
             exC.insert(e);
           }
         }
@@ -1090,7 +1082,7 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
 
               if (checkSdRcCreation(trans, ancestorsSet, C)) {
                 nb_events++;
-                UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, &ancestorsSet);
+                UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorsSet);
 
                 exC.insert(e);
               }
@@ -1174,7 +1166,7 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
 
   if (checkSdRcCreation(trans, causalityEvts, C) and chk) {
     nb_events++;
-    UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, &causalityEvts);
+    UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, causalityEvts);
     exC.insert(e);
   }
 
@@ -1234,7 +1226,7 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
   if (C.empty()) {
     for (auto p : actors) {
       nb_events++;
-      UnfoldingEvent* newEvent = new UnfoldingEvent(nb_events, p.trans[0], &causes);
+      UnfoldingEvent* newEvent = new UnfoldingEvent(nb_events, p.trans[0], causes);
       if (not U.contains(newEvent)) {
         U.insert(newEvent);
         enC.insert(newEvent);
@@ -1378,7 +1370,7 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
         EventSet ancestors;
         ancestors.insert(C.lastEvent);
         nb_events++;
-        UnfoldingEvent* newEvent = new UnfoldingEvent(nb_events, trans, &ancestors);
+        UnfoldingEvent* newEvent = new UnfoldingEvent(nb_events, trans, ancestors);
         if (not U.contains(newEvent)) {
           U.insert(newEvent);
           exC.insert(newEvent);

@@ -21,20 +21,6 @@ algorithm
 /home/ehsan/projects/prototype_git/src/UnfoldingEvent/UnfoldingEvent.h
 
 /home/ehsan/projects/prototype_git/src/UnfoldingChecker/UnfoldingChecker.cpp
-algorithm
--
-iostream
--
-math.h
--
-string
--
-unistd.h
--
-utility
--
-vector
--
 UnfoldingChecker.h
 /home/ehsan/projects/prototype_git/src/UnfoldingChecker/UnfoldingChecker.h
 
@@ -58,6 +44,8 @@ string
 utility
 -
 vector
+-
+math.h
 -
 ../transition/transition.h
 /home/ehsan/projects/prototype_git/src/transition/transition.h

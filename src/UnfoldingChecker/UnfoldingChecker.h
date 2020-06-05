@@ -8,6 +8,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <math.h>
 
 #include "../transition/transition.h"
 #include "../state/state.h"

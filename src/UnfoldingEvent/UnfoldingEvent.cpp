@@ -7,8 +7,8 @@ std::unique_ptr<T> make_unique( Args&&... args ) {
     return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
 }
 
-UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, Transition t, EventSet* causes) : id(nb_events), transition(t) {
-    this->causes = make_unique<EventSet>(*causes);
+UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, Transition t, EventSet causes) : id(nb_events), transition(t) {
+    this->causes = make_unique<EventSet>(causes);
 }
 
 void UnfoldingEvent::print()
