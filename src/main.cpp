@@ -1,10 +1,11 @@
-#include "UnfoldingChecker/UnfoldingChecker.h"
-#include "state/state.h"
-#include "transition/transition.h"
-#include "configuration/configuration.h"
-#include "EventSet/EventSet.h"
-#include "UnfoldingEvent/UnfoldingEvent.h"
-#include "actor/actor.h"
+#include "unfolding/UnfoldingChecker.h"
+#include "unfolding/state.h"
+#include "unfolding/transition.h"
+#include "unfolding/configuration.h"
+#include "unfolding/EventSet.h"
+#include "unfolding/UnfoldingEvent.h"
+#include "app/actor.h"
+#include "app/mailbox.h"
 
 using namespace std;
 

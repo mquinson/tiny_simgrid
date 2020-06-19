@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="prototype_git"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/eazimi/projects/prototype_clone"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/home/eazimi/projects/prototype_clone"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/home/eazimi/projects/prototype_clone"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/home/eazimi/projects/prototype_clone"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/home/eazimi/projects/prototype_clone"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/eazimi/projects/prototype_clone"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/eazimi/projects/prototype_clone"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="prototype_git">
+				<Option output="/home/eazimi/projects/prototype_clone/prototype_git" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/eazimi/projects/prototype_clone"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/10/../../../../include/c++/10"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/10/../../../../include/c++/10/x86_64-redhat-linux"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/10/../../../../include/c++/10/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/10/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 prototype_git"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="prototype_git/fast">
+				<Option output="/home/eazimi/projects/prototype_clone/prototype_git" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/eazimi/projects/prototype_clone"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/10/../../../../include/c++/10"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/10/../../../../include/c++/10/x86_64-redhat-linux"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/10/../../../../include/c++/10/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/10/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 prototype_git/fast"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/eazimi/projects/prototype_clone/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/eazimi/projects/prototype_clone/src/app/actor.cpp">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/prototype_clone/src/app/actor.h">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/prototype_clone/src/app/mailbox.cpp">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/prototype_clone/src/app/mailbox.h">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/prototype_clone/src/main.cpp">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/prototype_clone/src/unfolding/EventSet.cpp">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/prototype_clone/src/unfolding/EventSet.h">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/prototype_clone/src/unfolding/UnfoldingChecker.cpp">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/prototype_clone/src/unfolding/UnfoldingChecker.h">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/prototype_clone/src/unfolding/UnfoldingEvent.cpp">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/prototype_clone/src/unfolding/UnfoldingEvent.h">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/prototype_clone/src/unfolding/configuration.cpp">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/prototype_clone/src/unfolding/configuration.h">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/prototype_clone/src/unfolding/state.cpp">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/prototype_clone/src/unfolding/state.h">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/prototype_clone/src/unfolding/transition.cpp">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/prototype_clone/src/unfolding/transition.h">
+			<Option target="prototype_git"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/prototype_clone/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
