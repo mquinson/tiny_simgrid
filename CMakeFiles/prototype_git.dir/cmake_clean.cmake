@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/prototype_git.dir/src/api/modelchecker.cpp.o"
   "CMakeFiles/prototype_git.dir/src/app/actor.cpp.o"
   "CMakeFiles/prototype_git.dir/src/app/mailbox.cpp.o"
   "CMakeFiles/prototype_git.dir/src/main.cpp.o"

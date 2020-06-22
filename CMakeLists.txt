@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-set(PROJECT prototype_git)
+set(PROJECT tiny_simgrid)
 project(${PROJECT} LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -12,6 +12,9 @@ set(APP ${SRC}/app)
 set(API ${SRC}/api)
 
 add_executable(${PROJECT} ${SRC}/main.cpp
+        ${API}/forward.hpp
+        ${API}/modelchecker.h
+        ${API}/modelchecker.cpp
         ${APP}/actor.h
         ${APP}/actor.cpp
         ${APP}/mailbox.h
@@ -30,4 +33,4 @@ add_executable(${PROJECT} ${SRC}/main.cpp
         ${UNFOLDING}/UnfoldingChecker.cpp
 )
 
-install(TARGETS ${PROJECTS} DESTINATION build)
+#install(TARGETS ${PROJECTS} DESTINATION build)

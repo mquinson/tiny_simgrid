@@ -6,6 +6,20 @@
 
 #IncludeRegexTransform: 
 
+/home/eazimi/projects/prototype_clone/src/api/forward.hpp
+memory
+-
+../unfolding/UnfoldingChecker.h
+/home/eazimi/projects/prototype_clone/src/unfolding/UnfoldingChecker.h
+
+/home/eazimi/projects/prototype_clone/src/api/modelchecker.cpp
+modelchecker.h
+/home/eazimi/projects/prototype_clone/src/api/modelchecker.h
+
+/home/eazimi/projects/prototype_clone/src/api/modelchecker.h
+forward.hpp
+/home/eazimi/projects/prototype_clone/src/api/forward.hpp
+
 /home/eazimi/projects/prototype_clone/src/app/actor.h
 iostream
 -
@@ -34,13 +48,41 @@ algorithm
 UnfoldingEvent.h
 /home/eazimi/projects/prototype_clone/src/unfolding/UnfoldingEvent.h
 
-/home/eazimi/projects/prototype_clone/src/unfolding/UnfoldingEvent.cpp
+/home/eazimi/projects/prototype_clone/src/unfolding/UnfoldingChecker.h
+algorithm
+-
+array
+-
+iostream
+-
+list
+-
+memory
+-
+queue
+-
+set
+-
+string
+-
+utility
+-
+vector
+-
+math.h
+-
+transition.h
+/home/eazimi/projects/prototype_clone/src/unfolding/transition.h
+state.h
+/home/eazimi/projects/prototype_clone/src/unfolding/state.h
+configuration.h
+/home/eazimi/projects/prototype_clone/src/unfolding/configuration.h
 UnfoldingEvent.h
 /home/eazimi/projects/prototype_clone/src/unfolding/UnfoldingEvent.h
 EventSet.h
 /home/eazimi/projects/prototype_clone/src/unfolding/EventSet.h
-configuration.h
-/home/eazimi/projects/prototype_clone/src/unfolding/configuration.h
+../app/actor.h
+/home/eazimi/projects/prototype_clone/src/app/actor.h
 
 /home/eazimi/projects/prototype_clone/src/unfolding/UnfoldingEvent.h
 iostream

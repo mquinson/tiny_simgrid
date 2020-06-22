@@ -44,5 +44,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/prototype_git.dir/DependInfo.cmake"
+  "CMakeFiles/tiny_simgrid.dir/DependInfo.cmake"
   )

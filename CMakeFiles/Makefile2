@@ -73,7 +73,7 @@ CMAKE_BINARY_DIR = /home/eazimi/projects/prototype_clone
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/prototype_git.dir/all
+all: CMakeFiles/tiny_simgrid.dir/all
 
 .PHONY : all
 
@@ -83,36 +83,36 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/prototype_git.dir/clean
+clean: CMakeFiles/tiny_simgrid.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/prototype_git.dir
+# Target rules for target CMakeFiles/tiny_simgrid.dir
 
 # All Build rule for target.
-CMakeFiles/prototype_git.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10 "Built target prototype_git"
-.PHONY : CMakeFiles/prototype_git.dir/all
+CMakeFiles/tiny_simgrid.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Built target tiny_simgrid"
+.PHONY : CMakeFiles/tiny_simgrid.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/prototype_git.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/eazimi/projects/prototype_clone/CMakeFiles 10
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/prototype_git.dir/all
+CMakeFiles/tiny_simgrid.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/eazimi/projects/prototype_clone/CMakeFiles 11
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/tiny_simgrid.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/eazimi/projects/prototype_clone/CMakeFiles 0
-.PHONY : CMakeFiles/prototype_git.dir/rule
+.PHONY : CMakeFiles/tiny_simgrid.dir/rule
 
 # Convenience name for target.
-prototype_git: CMakeFiles/prototype_git.dir/rule
+tiny_simgrid: CMakeFiles/tiny_simgrid.dir/rule
 
-.PHONY : prototype_git
+.PHONY : tiny_simgrid
 
 # clean rule for target.
-CMakeFiles/prototype_git.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/prototype_git.dir/build.make CMakeFiles/prototype_git.dir/clean
-.PHONY : CMakeFiles/prototype_git.dir/clean
+CMakeFiles/tiny_simgrid.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/clean
+.PHONY : CMakeFiles/tiny_simgrid.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

@@ -90,9 +90,22 @@ CMakeFiles/prototype_git.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/prototype_git.dir/src/main.cpp.s"
 	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/prototype_clone/src/main.cpp -o CMakeFiles/prototype_git.dir/src/main.cpp.s
 
+CMakeFiles/prototype_git.dir/src/api/modelchecker.cpp.o: CMakeFiles/prototype_git.dir/flags.make
+CMakeFiles/prototype_git.dir/src/api/modelchecker.cpp.o: src/api/modelchecker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/prototype_git.dir/src/api/modelchecker.cpp.o"
+	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/api/modelchecker.cpp.o -c /home/eazimi/projects/prototype_clone/src/api/modelchecker.cpp
+
+CMakeFiles/prototype_git.dir/src/api/modelchecker.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/prototype_git.dir/src/api/modelchecker.cpp.i"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/prototype_clone/src/api/modelchecker.cpp > CMakeFiles/prototype_git.dir/src/api/modelchecker.cpp.i
+
+CMakeFiles/prototype_git.dir/src/api/modelchecker.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/prototype_git.dir/src/api/modelchecker.cpp.s"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/prototype_clone/src/api/modelchecker.cpp -o CMakeFiles/prototype_git.dir/src/api/modelchecker.cpp.s
+
 CMakeFiles/prototype_git.dir/src/app/actor.cpp.o: CMakeFiles/prototype_git.dir/flags.make
 CMakeFiles/prototype_git.dir/src/app/actor.cpp.o: src/app/actor.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/prototype_git.dir/src/app/actor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/prototype_git.dir/src/app/actor.cpp.o"
 	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/app/actor.cpp.o -c /home/eazimi/projects/prototype_clone/src/app/actor.cpp
 
 CMakeFiles/prototype_git.dir/src/app/actor.cpp.i: cmake_force
@@ -105,7 +118,7 @@ CMakeFiles/prototype_git.dir/src/app/actor.cpp.s: cmake_force
 
 CMakeFiles/prototype_git.dir/src/app/mailbox.cpp.o: CMakeFiles/prototype_git.dir/flags.make
 CMakeFiles/prototype_git.dir/src/app/mailbox.cpp.o: src/app/mailbox.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/prototype_git.dir/src/app/mailbox.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/prototype_git.dir/src/app/mailbox.cpp.o"
 	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/app/mailbox.cpp.o -c /home/eazimi/projects/prototype_clone/src/app/mailbox.cpp
 
 CMakeFiles/prototype_git.dir/src/app/mailbox.cpp.i: cmake_force
@@ -118,7 +131,7 @@ CMakeFiles/prototype_git.dir/src/app/mailbox.cpp.s: cmake_force
 
 CMakeFiles/prototype_git.dir/src/unfolding/state.cpp.o: CMakeFiles/prototype_git.dir/flags.make
 CMakeFiles/prototype_git.dir/src/unfolding/state.cpp.o: src/unfolding/state.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/prototype_git.dir/src/unfolding/state.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/prototype_git.dir/src/unfolding/state.cpp.o"
 	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/unfolding/state.cpp.o -c /home/eazimi/projects/prototype_clone/src/unfolding/state.cpp
 
 CMakeFiles/prototype_git.dir/src/unfolding/state.cpp.i: cmake_force
@@ -131,7 +144,7 @@ CMakeFiles/prototype_git.dir/src/unfolding/state.cpp.s: cmake_force
 
 CMakeFiles/prototype_git.dir/src/unfolding/transition.cpp.o: CMakeFiles/prototype_git.dir/flags.make
 CMakeFiles/prototype_git.dir/src/unfolding/transition.cpp.o: src/unfolding/transition.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/prototype_git.dir/src/unfolding/transition.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/prototype_git.dir/src/unfolding/transition.cpp.o"
 	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/unfolding/transition.cpp.o -c /home/eazimi/projects/prototype_clone/src/unfolding/transition.cpp
 
 CMakeFiles/prototype_git.dir/src/unfolding/transition.cpp.i: cmake_force
@@ -144,7 +157,7 @@ CMakeFiles/prototype_git.dir/src/unfolding/transition.cpp.s: cmake_force
 
 CMakeFiles/prototype_git.dir/src/unfolding/EventSet.cpp.o: CMakeFiles/prototype_git.dir/flags.make
 CMakeFiles/prototype_git.dir/src/unfolding/EventSet.cpp.o: src/unfolding/EventSet.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/prototype_git.dir/src/unfolding/EventSet.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/prototype_git.dir/src/unfolding/EventSet.cpp.o"
 	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/unfolding/EventSet.cpp.o -c /home/eazimi/projects/prototype_clone/src/unfolding/EventSet.cpp
 
 CMakeFiles/prototype_git.dir/src/unfolding/EventSet.cpp.i: cmake_force
@@ -157,7 +170,7 @@ CMakeFiles/prototype_git.dir/src/unfolding/EventSet.cpp.s: cmake_force
 
 CMakeFiles/prototype_git.dir/src/unfolding/UnfoldingEvent.cpp.o: CMakeFiles/prototype_git.dir/flags.make
 CMakeFiles/prototype_git.dir/src/unfolding/UnfoldingEvent.cpp.o: src/unfolding/UnfoldingEvent.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/prototype_git.dir/src/unfolding/UnfoldingEvent.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/prototype_git.dir/src/unfolding/UnfoldingEvent.cpp.o"
 	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/unfolding/UnfoldingEvent.cpp.o -c /home/eazimi/projects/prototype_clone/src/unfolding/UnfoldingEvent.cpp
 
 CMakeFiles/prototype_git.dir/src/unfolding/UnfoldingEvent.cpp.i: cmake_force
@@ -170,7 +183,7 @@ CMakeFiles/prototype_git.dir/src/unfolding/UnfoldingEvent.cpp.s: cmake_force
 
 CMakeFiles/prototype_git.dir/src/unfolding/configuration.cpp.o: CMakeFiles/prototype_git.dir/flags.make
 CMakeFiles/prototype_git.dir/src/unfolding/configuration.cpp.o: src/unfolding/configuration.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/prototype_git.dir/src/unfolding/configuration.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/prototype_git.dir/src/unfolding/configuration.cpp.o"
 	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/unfolding/configuration.cpp.o -c /home/eazimi/projects/prototype_clone/src/unfolding/configuration.cpp
 
 CMakeFiles/prototype_git.dir/src/unfolding/configuration.cpp.i: cmake_force
@@ -183,7 +196,7 @@ CMakeFiles/prototype_git.dir/src/unfolding/configuration.cpp.s: cmake_force
 
 CMakeFiles/prototype_git.dir/src/unfolding/UnfoldingChecker.cpp.o: CMakeFiles/prototype_git.dir/flags.make
 CMakeFiles/prototype_git.dir/src/unfolding/UnfoldingChecker.cpp.o: src/unfolding/UnfoldingChecker.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/prototype_git.dir/src/unfolding/UnfoldingChecker.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/prototype_git.dir/src/unfolding/UnfoldingChecker.cpp.o"
 	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prototype_git.dir/src/unfolding/UnfoldingChecker.cpp.o -c /home/eazimi/projects/prototype_clone/src/unfolding/UnfoldingChecker.cpp
 
 CMakeFiles/prototype_git.dir/src/unfolding/UnfoldingChecker.cpp.i: cmake_force
@@ -197,6 +210,7 @@ CMakeFiles/prototype_git.dir/src/unfolding/UnfoldingChecker.cpp.s: cmake_force
 # Object files for target prototype_git
 prototype_git_OBJECTS = \
 "CMakeFiles/prototype_git.dir/src/main.cpp.o" \
+"CMakeFiles/prototype_git.dir/src/api/modelchecker.cpp.o" \
 "CMakeFiles/prototype_git.dir/src/app/actor.cpp.o" \
 "CMakeFiles/prototype_git.dir/src/app/mailbox.cpp.o" \
 "CMakeFiles/prototype_git.dir/src/unfolding/state.cpp.o" \
@@ -210,6 +224,7 @@ prototype_git_OBJECTS = \
 prototype_git_EXTERNAL_OBJECTS =
 
 prototype_git: CMakeFiles/prototype_git.dir/src/main.cpp.o
+prototype_git: CMakeFiles/prototype_git.dir/src/api/modelchecker.cpp.o
 prototype_git: CMakeFiles/prototype_git.dir/src/app/actor.cpp.o
 prototype_git: CMakeFiles/prototype_git.dir/src/app/mailbox.cpp.o
 prototype_git: CMakeFiles/prototype_git.dir/src/unfolding/state.cpp.o
@@ -220,7 +235,7 @@ prototype_git: CMakeFiles/prototype_git.dir/src/unfolding/configuration.cpp.o
 prototype_git: CMakeFiles/prototype_git.dir/src/unfolding/UnfoldingChecker.cpp.o
 prototype_git: CMakeFiles/prototype_git.dir/build.make
 prototype_git: CMakeFiles/prototype_git.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable prototype_git"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/eazimi/projects/prototype_clone/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable prototype_git"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/prototype_git.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
