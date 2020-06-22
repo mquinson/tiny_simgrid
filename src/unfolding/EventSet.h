@@ -8,6 +8,8 @@
 
 using namespace std;
 
+namespace mc {
+
 class EventSet
 {
 public:
@@ -36,5 +38,7 @@ public:
     EventSet minus(UnfoldingEvent* evt);
     EventSet plus(UnfoldingEvent*);
 };
+
+} // namespace mc
 
 #endif // EVENTSET_H

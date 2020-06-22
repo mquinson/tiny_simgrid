@@ -4,6 +4,8 @@
 #include "EventSet.h"
 #include "UnfoldingEvent.h"
 
+namespace mc {
+
 class Configuration : public EventSet {
 public:
     EventSet maxEvent;         // Events recently added to events_
@@ -18,5 +20,7 @@ public:
 
     UnfoldingEvent* findTestedComm(UnfoldingEvent* testEvt); // find comm tested by action testTrans
 };
+
+} // namespace mc
 
 #endif // CONFIGURATION_H

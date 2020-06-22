@@ -1,7 +1,10 @@
 #include "UnfoldingChecker.h"
 
+namespace mc {
+
 unsigned int nb_events = 0;
 unsigned int nb_traces = 0;
+
 EventSet U, G, gD;
 
 void intTobinary(int n, int p[])
@@ -1540,7 +1543,6 @@ void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistor
 
 void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D)
 {
-
   EventSet unionSet, res, res1;
   unionSet = unionSet.makeUnion(C, D);
 
@@ -1589,31 +1591,4 @@ void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D)
   }
 }
 
-/*
-
-void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D) {
-
-        EventSet unionSet, res, res1, U1 ;
-        unionSet = unionSet.makeUnion(C, D);
-
-        // building Qcdu
-        for (auto e1 : U.events_)
-                for (auto e2 : unionSet.events_)
-                                if (e1->isConflict(e1,e2)) res.insert(e1);
-
-
-res = res.makeUnion(res, unionSet);
-        U1 = U;
-for (auto it: U1.events_)
-
-
-        if (not res.contains(it))
-        {	U.erase(it);
-
-                //G.insert(e);
-        }
-
-
-
-}
-*/
+} // namespace mc

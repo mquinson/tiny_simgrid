@@ -1,5 +1,7 @@
 #include "actor.h"
 
+namespace app {
+
 Actor::Actor(int id, std::vector<Transition> trans) : id(id), nb_trans(trans.size())
 {
   for (unsigned int i = 0; i < this->nb_trans; i++) {
@@ -17,3 +19,5 @@ Actor::Actor(int id, unsigned int nb_trans, std::array<Transition, 30>& trans) :
     this->trans[i].actor_id = id;
   }
 }
+
+} // namespace app

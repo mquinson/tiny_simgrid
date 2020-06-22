@@ -19,9 +19,7 @@
 
 using namespace std;
 
-extern unsigned int nb_events;
-extern unsigned int nb_traces;
-extern EventSet U, G, gD;
+namespace mc {
 
 class UnfoldingChecker {
   unsigned long expandedStatesCount_ = 0;
@@ -52,3 +50,10 @@ public:
 
   int error_count() { return error_; }
 };
+
+extern unsigned int nb_events;
+extern unsigned int nb_traces;
+extern EventSet U, G, gD;
+
+} // namespace mc
+

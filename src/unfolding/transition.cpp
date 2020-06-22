@@ -1,5 +1,7 @@
 #include "transition.h"
 
+namespace mc {
+
 bool Transition::operator<(const Transition& other) const
 {
   return ((this->id < other.id) || (this->actor_id < other.actor_id));
@@ -44,3 +46,5 @@ bool Transition::isDependent(Transition other)
 
   return false;
 }
+
+} // namespace mc

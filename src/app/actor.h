@@ -7,6 +7,9 @@
 #include "../unfolding/transition.h"
 
 using namespace std;
+using namespace mc;
+
+namespace app {
 
 class Actor
 {
@@ -20,5 +23,7 @@ public:
     std::vector<Transition> trans;
     bool operator <(const Actor& other) const { return (this->id < other.id); }
 };
+
+} // namespace app
 
 #endif // ACTOR_H

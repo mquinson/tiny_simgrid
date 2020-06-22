@@ -7,6 +7,9 @@
 #include "../app/mailbox.h"
 
 using namespace std;
+using namespace app;
+
+namespace mc {
 
 class State
 {
@@ -25,4 +28,7 @@ public:
     void print();
 };
 
+} // namespace mc
+
 #endif // STATE_H
+

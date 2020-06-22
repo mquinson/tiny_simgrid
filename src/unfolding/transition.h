@@ -5,6 +5,8 @@
 
 using namespace std;
 
+namespace mc {
+
 class Transition
 {
 public:
@@ -29,5 +31,7 @@ public:
     bool operator==(const Transition& other) const;
 
 };
+
+} // namespace mc
 
 #endif // TRANSITION_H

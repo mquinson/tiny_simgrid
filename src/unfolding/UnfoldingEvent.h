@@ -6,6 +6,8 @@
 #include "transition.h"
 #include "state.h"
 
+namespace mc {
+
 class EventSet;
 class Configuration;
 
@@ -38,5 +40,7 @@ public:
     bool operator==(const UnfoldingEvent& other) const;
     void print();
 };
+
+} // namespace mc
 
 #endif // UNFOLDINGEVENT_H

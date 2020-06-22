@@ -52,9 +52,9 @@ int main(int argc, char** argv)
   clock_t begin = clock();
   nb_events     = 0;
   UnfoldingChecker UC;
-  EventSet A, D;
-  EventSet prev_exC;
-  Configuration C;
+  mc::EventSet A, D;
+  mc::EventSet prev_exC;
+  mc::Configuration C;
   State* initState;
   std::set<Actor> actor_set;
   std::set<Mailbox> mailboxes;
@@ -298,7 +298,7 @@ int main(int argc, char** argv)
 
       initState         = new State(3, actor_set, {Mailbox(1)});
       UnfoldingEvent* e = new UnfoldingEvent(initState);
-      UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+      UC.explore(C, {mc::EventSet()}, D, A, e, prev_exC, actor_set);
 
       std::cout << "\n explore full state space :\n";
 
@@ -318,7 +318,7 @@ int main(int argc, char** argv)
       initState = new State(3, actor_set, {Mailbox(1)});
 
       UnfoldingEvent* e = new UnfoldingEvent(initState);
-      UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+      UC.explore(C, {mc::EventSet()}, D, A, e, prev_exC, actor_set);
 
       std::cout << "\n explore full state space :\n";
 
@@ -339,7 +339,7 @@ int main(int argc, char** argv)
       initState = new State(4, actor_set, {Mailbox(1)});
 
       UnfoldingEvent* e = new UnfoldingEvent(initState);
-      UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+      UC.explore(C, {mc::EventSet()}, D, A, e, prev_exC, actor_set);
 
       std::cout << "\n explore full state space :\n";
 
@@ -363,7 +363,7 @@ int main(int argc, char** argv)
       initState = new State(5, actor_set, {Mailbox(1)});
 
       UnfoldingEvent* e = new UnfoldingEvent(initState);
-      UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+      UC.explore(C, {mc::EventSet()}, D, A, e, prev_exC, actor_set);
 
       std::cout << "\n explore full state space :\n";
 
@@ -383,7 +383,7 @@ int main(int argc, char** argv)
       initState = new State(4, actor_set, {Mailbox(1)});
 
       UnfoldingEvent* e = new UnfoldingEvent(initState);
-      UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+      UC.explore(C, {mc::EventSet()}, D, A, e, prev_exC, actor_set);
 
       std::cout << "\n explore full state space :\n";
 
@@ -403,7 +403,7 @@ int main(int argc, char** argv)
 
       initState         = new State(4, actor_set, {Mailbox(1)});
       UnfoldingEvent* e = new UnfoldingEvent(initState);
-      UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+      UC.explore(C, {mc::EventSet()}, D, A, e, prev_exC, actor_set);
 
       std::cout << "\n explore full state space :\n";
 
@@ -431,7 +431,7 @@ int main(int argc, char** argv)
       initState = new State(4, actor_set, {Mailbox(1), Mailbox(2), Mailbox(3), Mailbox(4)});
 
       UnfoldingEvent* e = new UnfoldingEvent(initState);
-      UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+      UC.explore(C, {mc::EventSet()}, D, A, e, prev_exC, actor_set);
 
       std::cout << "\n explore full state space :\n";
 
@@ -458,7 +458,7 @@ int main(int argc, char** argv)
       initState = new State(3, actor_set, {Mailbox(1), Mailbox(2), Mailbox(3)});
 
       UnfoldingEvent* e = new UnfoldingEvent(initState);
-      UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+      UC.explore(C, {mc::EventSet()}, D, A, e, prev_exC, actor_set);
 
       std::cout << "\n explore full state space :\n";
 
@@ -489,7 +489,7 @@ int main(int argc, char** argv)
 
       initState         = new State(5, actor_set, {Mailbox(1), Mailbox(2), Mailbox(3), Mailbox(4), Mailbox(5)});
       UnfoldingEvent* e = new UnfoldingEvent(initState);
-      UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+      UC.explore(C, {mc::EventSet()}, D, A, e, prev_exC, actor_set);
 
       std::cout << "\n explore full state space :\n";
       State initState1(5, actor_set, {Mailbox(1), Mailbox(2), Mailbox(3), Mailbox(4), Mailbox(5)});
@@ -544,7 +544,7 @@ else if (rank == 2)
       initState = new State(3, actor_set, {Mailbox(0), Mailbox(1), Mailbox(2)});
 
       UnfoldingEvent* e = new UnfoldingEvent(initState);
-      UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+      UC.explore(C, {mc::EventSet()}, D, A, e, prev_exC, actor_set);
 
       std::cout << "\n explore full state space :\n";
 
@@ -593,7 +593,7 @@ else if (rank == 2)
       std::cout << "\n UDPOR state space :\n";
 
       UnfoldingEvent* e = new UnfoldingEvent(initState);
-      UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+      UC.explore(C, {mc::EventSet()}, D, A, e, prev_exC, actor_set);
 
       std::cout << "\n explore full state space :\n";
       State initState1(2, actor_set, {Mailbox(0), Mailbox(1)});
@@ -652,7 +652,7 @@ else if (rank == 2)
       initState = new State(3, actor_set, {Mailbox(0), Mailbox(1), Mailbox(2)});
 
       UnfoldingEvent* e = new UnfoldingEvent(initState);
-      UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+      UC.explore(C, {mc::EventSet()}, D, A, e, prev_exC, actor_set);
 
       std::cout << "\n explore full state space :\n";
 
@@ -701,7 +701,7 @@ else if (rank == 2)
       std::cout << "\n UDPOR state space :\n";
 
       UnfoldingEvent* e = new UnfoldingEvent(initState);
-      UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+      UC.explore(C, {mc::EventSet()}, D, A, e, prev_exC, actor_set);
 
       std::cout << "\n explore full state space :\n";
 
@@ -758,7 +758,7 @@ else if (rank == 2)
       initState = new State(3, actor_set, {Mailbox(0), Mailbox(1), Mailbox(2)});
 
       UnfoldingEvent* e = new UnfoldingEvent(initState);
-      UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+      UC.explore(C, {mc::EventSet()}, D, A, e, prev_exC, actor_set);
 
       std::cout << "\n explore full state space :\n";
 

@@ -1,5 +1,7 @@
 #include "EventSet.h"
 
+namespace mc {
+
 bool EventSet::contains(UnfoldingEvent* e)
 {
   for (auto evt : this->events_)
@@ -138,3 +140,4 @@ bool EventSet::isEmptyIntersection(EventSet evtS1, EventSet evtS2)
   return true;
 }
 
+} // namespace mc

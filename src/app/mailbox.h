@@ -6,6 +6,9 @@
 #include "../unfolding/transition.h"
 
 using namespace std;
+using namespace mc;
+
+namespace app {
 
 struct Communication {
     int actorId {-1};
@@ -29,5 +32,7 @@ public:
     bool checkComm(Transition t);
     bool operator<(const Mailbox& other) const { return (this->id < other.id); }
 };
+
+} // namespace app
 
 #endif // MAILBOX_H

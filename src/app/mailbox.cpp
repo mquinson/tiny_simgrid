@@ -1,5 +1,7 @@
 #include "mailbox.h"
 
+namespace app {
+
 void Mailbox::update(Transition t)
 {
   Communication comm;
@@ -46,3 +48,5 @@ bool Mailbox::checkComm(Transition t)
 
   return false;
 }
+
+} // namespace app

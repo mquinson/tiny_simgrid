@@ -2,6 +2,8 @@
 #include "EventSet.h"
 #include "configuration.h"
 
+namespace mc {
+
 template<typename T, typename... Args>
 std::unique_ptr<T> make_unique( Args&&... args ) {
     return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
@@ -335,4 +337,4 @@ bool UnfoldingEvent::operator==(const UnfoldingEvent& other) const
     return true;
 }
 
-//}
+} // namespace mc

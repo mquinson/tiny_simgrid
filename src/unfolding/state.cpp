@@ -1,5 +1,7 @@
 #include "state.h"
 
+namespace mc {
+
 /* this function execute a transition from a given state, returning a next state*/
 State State::execute(Transition t)
 {
@@ -72,3 +74,5 @@ void State::print()
         std::cout << "t" << j << "-p" << p.id << " is executed";
   std::cout << ")";
 }
+
+} // namespace mc
