@@ -13,12 +13,14 @@ set(API ${SRC}/api)
 
 add_executable(${PROJECT} ${SRC}/main.cpp
         ${API}/forward.hpp
-        ${API}/modelchecker.h
-        ${API}/modelchecker.cpp
+        ${API}/ModelChecker.h
+        ${API}/ModelChecker.cpp
         ${APP}/actor.h
         ${APP}/actor.cpp
         ${APP}/mailbox.h
         ${APP}/mailbox.cpp
+        ${UNFOLDING}/Checker.h
+        ${UNFOLDING}/Checker.cpp
         ${UNFOLDING}/state.h
         ${UNFOLDING}/state.cpp
         ${UNFOLDING}/transition.h

@@ -7,6 +7,10 @@ unsigned int nb_traces = 0;
 
 EventSet U, G, gD;
 
+void UnfoldingChecker::run() {
+
+}
+
 void intTobinary(int n, int p[])
 {
   int i = 0;
@@ -1429,7 +1433,6 @@ void UnfoldingChecker::explore(State* state)
 void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistory, EventSet D, EventSet A,
                                UnfoldingEvent* currentEvt, EventSet prev_exC, std::set<Actor> actors)
 {
-
   UnfoldingEvent* e;
   EventSet enC, exC = prev_exC; // exC.erase(currentEvt);
 

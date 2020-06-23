@@ -1,4 +1,4 @@
-#include "modelchecker.h"
+#include "ModelChecker.h"
 
 namespace mc {
 

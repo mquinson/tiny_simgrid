@@ -143,32 +143,32 @@ tiny_simgrid/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/build
 .PHONY : tiny_simgrid/fast
 
-src/api/modelchecker.o: src/api/modelchecker.cpp.o
+src/api/ModelChecker.o: src/api/ModelChecker.cpp.o
 
-.PHONY : src/api/modelchecker.o
+.PHONY : src/api/ModelChecker.o
 
 # target to build an object file
-src/api/modelchecker.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/modelchecker.cpp.o
-.PHONY : src/api/modelchecker.cpp.o
+src/api/ModelChecker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.o
+.PHONY : src/api/ModelChecker.cpp.o
 
-src/api/modelchecker.i: src/api/modelchecker.cpp.i
+src/api/ModelChecker.i: src/api/ModelChecker.cpp.i
 
-.PHONY : src/api/modelchecker.i
+.PHONY : src/api/ModelChecker.i
 
 # target to preprocess a source file
-src/api/modelchecker.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/modelchecker.cpp.i
-.PHONY : src/api/modelchecker.cpp.i
+src/api/ModelChecker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.i
+.PHONY : src/api/ModelChecker.cpp.i
 
-src/api/modelchecker.s: src/api/modelchecker.cpp.s
+src/api/ModelChecker.s: src/api/ModelChecker.cpp.s
 
-.PHONY : src/api/modelchecker.s
+.PHONY : src/api/ModelChecker.s
 
 # target to generate assembly for a file
-src/api/modelchecker.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/modelchecker.cpp.s
-.PHONY : src/api/modelchecker.cpp.s
+src/api/ModelChecker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.s
+.PHONY : src/api/ModelChecker.cpp.s
 
 src/app/actor.o: src/app/actor.cpp.o
 
@@ -250,6 +250,33 @@ src/main.s: src/main.cpp.s
 src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
+
+src/unfolding/Checker.o: src/unfolding/Checker.cpp.o
+
+.PHONY : src/unfolding/Checker.o
+
+# target to build an object file
+src/unfolding/Checker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/Checker.cpp.o
+.PHONY : src/unfolding/Checker.cpp.o
+
+src/unfolding/Checker.i: src/unfolding/Checker.cpp.i
+
+.PHONY : src/unfolding/Checker.i
+
+# target to preprocess a source file
+src/unfolding/Checker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/Checker.cpp.i
+.PHONY : src/unfolding/Checker.cpp.i
+
+src/unfolding/Checker.s: src/unfolding/Checker.cpp.s
+
+.PHONY : src/unfolding/Checker.s
+
+# target to generate assembly for a file
+src/unfolding/Checker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/Checker.cpp.s
+.PHONY : src/unfolding/Checker.cpp.s
 
 src/unfolding/EventSet.o: src/unfolding/EventSet.cpp.o
 
@@ -422,9 +449,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... tiny_simgrid"
-	@echo "... src/api/modelchecker.o"
-	@echo "... src/api/modelchecker.i"
-	@echo "... src/api/modelchecker.s"
+	@echo "... src/api/ModelChecker.o"
+	@echo "... src/api/ModelChecker.i"
+	@echo "... src/api/ModelChecker.s"
 	@echo "... src/app/actor.o"
 	@echo "... src/app/actor.i"
 	@echo "... src/app/actor.s"
@@ -434,6 +461,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/unfolding/Checker.o"
+	@echo "... src/unfolding/Checker.i"
+	@echo "... src/unfolding/Checker.s"
 	@echo "... src/unfolding/EventSet.o"
 	@echo "... src/unfolding/EventSet.i"
 	@echo "... src/unfolding/EventSet.s"

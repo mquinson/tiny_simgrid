@@ -1,8 +1,9 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/tiny_simgrid.dir/src/api/modelchecker.cpp.o"
+  "CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.o"
   "CMakeFiles/tiny_simgrid.dir/src/app/actor.cpp.o"
   "CMakeFiles/tiny_simgrid.dir/src/app/mailbox.cpp.o"
   "CMakeFiles/tiny_simgrid.dir/src/main.cpp.o"
+  "CMakeFiles/tiny_simgrid.dir/src/unfolding/Checker.cpp.o"
   "CMakeFiles/tiny_simgrid.dir/src/unfolding/EventSet.cpp.o"
   "CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingChecker.cpp.o"
   "CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingEvent.cpp.o"

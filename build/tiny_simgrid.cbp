@@ -80,13 +80,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/ModelChecker.cpp">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/ModelChecker.h">
+			<Option target="tiny_simgrid"/>
+		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/forward.hpp">
-			<Option target="tiny_simgrid"/>
-		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/modelchecker.cpp">
-			<Option target="tiny_simgrid"/>
-		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/modelchecker.h">
 			<Option target="tiny_simgrid"/>
 		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/actor.cpp">
@@ -102,6 +102,12 @@
 			<Option target="tiny_simgrid"/>
 		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/main.cpp">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/Checker.cpp">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/Checker.h">
 			<Option target="tiny_simgrid"/>
 		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/EventSet.cpp">
