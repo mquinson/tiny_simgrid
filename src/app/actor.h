@@ -7,14 +7,14 @@
 #include "../unfolding/transition.h"
 
 using namespace std;
-using namespace mc;
+using namespace tiny_simgrid::mc;
 
+namespace tiny_simgrid {
 namespace app {
 
 class Actor
 {
 public:
-    Actor();
     Actor(int id, unsigned int nb_trans, std::array<Transition, 30>& trans);
     Actor(int id, std::vector<Transition> trans);
 
@@ -25,5 +25,6 @@ public:
 };
 
 } // namespace app
+} // namespace tiny_simgrid
 
 #endif // ACTOR_H

@@ -4,6 +4,7 @@
 #include "EventSet.h"
 #include "UnfoldingEvent.h"
 
+namespace tiny_simgrid {
 namespace mc {
 
 class Configuration : public EventSet {
@@ -22,5 +23,6 @@ public:
 };
 
 } // namespace mc
+} // namespace tiny_simgrid
 
 #endif // CONFIGURATION_H

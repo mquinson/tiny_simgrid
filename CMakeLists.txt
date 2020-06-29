@@ -12,27 +12,33 @@ set(APP ${SRC}/app)
 set(API ${SRC}/api)
 
 add_executable(${PROJECT} ${SRC}/main.cpp
-        ${API}/forward.hpp
-        ${API}/ModelChecker.h
-        ${API}/ModelChecker.cpp
-        ${APP}/actor.h
-        ${APP}/actor.cpp
-        ${APP}/mailbox.h
-        ${APP}/mailbox.cpp
-        ${UNFOLDING}/Checker.h
-        ${UNFOLDING}/Checker.cpp
-        ${UNFOLDING}/state.h
-        ${UNFOLDING}/state.cpp
-        ${UNFOLDING}/transition.h
-        ${UNFOLDING}/transition.cpp
-        ${UNFOLDING}/EventSet.h
-        ${UNFOLDING}/EventSet.cpp
-        ${UNFOLDING}/UnfoldingEvent.h
-        ${UNFOLDING}/UnfoldingEvent.cpp
-        ${UNFOLDING}/configuration.h
-        ${UNFOLDING}/configuration.cpp
-        ${UNFOLDING}/UnfoldingChecker.h
-        ${UNFOLDING}/UnfoldingChecker.cpp
-)
+    ${API}/ModelChecker.h
+    ${API}/ModelChecker.cpp
+    ${API}/RemoteSimulation.hpp
+#    ${API}/Session.h
+#    ${API}/Session.cpp
+    ${APP}/app_include.hpp
+    ${APP}/AppSide.h
+    ${APP}/AppSide.cpp
+    ${APP}/main_include.hpp
+    ${APP}/actor.h
+    ${APP}/actor.cpp
+    ${APP}/mailbox.h
+    ${APP}/mailbox.cpp
+    ${UNFOLDING}/Checker.h
+    ${UNFOLDING}/Checker.cpp
+    ${UNFOLDING}/state.h
+    ${UNFOLDING}/state.cpp
+    ${UNFOLDING}/transition.h
+    ${UNFOLDING}/transition.cpp
+    ${UNFOLDING}/EventSet.h
+    ${UNFOLDING}/EventSet.cpp
+    ${UNFOLDING}/UnfoldingEvent.h
+    ${UNFOLDING}/UnfoldingEvent.cpp
+    ${UNFOLDING}/configuration.h
+    ${UNFOLDING}/configuration.cpp
+    ${UNFOLDING}/UnfoldingChecker.h
+    ${UNFOLDING}/UnfoldingChecker.cpp
+    )
 
 #install(TARGETS ${PROJECTS} DESTINATION build)

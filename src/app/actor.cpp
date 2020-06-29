@@ -1,5 +1,6 @@
 #include "actor.h"
 
+namespace tiny_simgrid {
 namespace app {
 
 Actor::Actor(int id, std::vector<Transition> trans) : id(id), nb_trans(trans.size())
@@ -21,3 +22,4 @@ Actor::Actor(int id, unsigned int nb_trans, std::array<Transition, 30>& trans) :
 }
 
 } // namespace app
+} // namespace tiny_simgrid

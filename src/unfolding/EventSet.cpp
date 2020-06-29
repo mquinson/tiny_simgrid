@@ -1,5 +1,6 @@
 #include "EventSet.h"
 
+namespace tiny_simgrid {
 namespace mc {
 
 bool EventSet::contains(UnfoldingEvent* e)
@@ -141,3 +142,4 @@ bool EventSet::isEmptyIntersection(EventSet evtS1, EventSet evtS2)
 }
 
 } // namespace mc
+} // namespace tiny_simgrid

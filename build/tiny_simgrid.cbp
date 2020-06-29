@@ -86,7 +86,13 @@
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/ModelChecker.h">
 			<Option target="tiny_simgrid"/>
 		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/forward.hpp">
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/RemoteSimulation.hpp">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/AppSide.cpp">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/AppSide.h">
 			<Option target="tiny_simgrid"/>
 		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/actor.cpp">
@@ -95,10 +101,16 @@
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/actor.h">
 			<Option target="tiny_simgrid"/>
 		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/app_include.hpp">
+			<Option target="tiny_simgrid"/>
+		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/mailbox.cpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/mailbox.h">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/main_include.hpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/main.cpp">

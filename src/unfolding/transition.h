@@ -5,12 +5,13 @@
 
 using namespace std;
 
+namespace tiny_simgrid {
 namespace mc {
 
 class Transition
 {
 public:
-    Transition() {}
+    Transition() = default;
     Transition(int read_write, int access_var) : read_write(read_write), access_var(access_var) {}
     Transition(int mbId, int commId, string type) : mailbox_id(mbId), commId(commId), type(type) {}
 
@@ -33,5 +34,6 @@ public:
 };
 
 } // namespace mc
+} // namespace tiny_simgrid
 
 #endif // TRANSITION_H

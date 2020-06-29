@@ -6,6 +6,7 @@
 #include "transition.h"
 #include "state.h"
 
+namespace tiny_simgrid {
 namespace mc {
 
 class EventSet;
@@ -42,5 +43,6 @@ public:
 };
 
 } // namespace mc
+} // namespace tiny_simgrid
 
 #endif // UNFOLDINGEVENT_H

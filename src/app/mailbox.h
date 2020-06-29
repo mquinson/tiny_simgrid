@@ -6,8 +6,9 @@
 #include "../unfolding/transition.h"
 
 using namespace std;
-using namespace mc;
+using namespace tiny_simgrid::mc;
 
+namespace tiny_simgrid {
 namespace app {
 
 struct Communication {
@@ -19,8 +20,8 @@ struct Communication {
 class Mailbox
 {
 public:
-    Mailbox() = default;
-    Mailbox(int i) : id(i) {}
+    // Mailbox() = default;
+    explicit Mailbox(int i) : id(i) {}
 
     int id {0};
     unsigned int nbSend {0};
@@ -34,5 +35,6 @@ public:
 };
 
 } // namespace app
+} // namespace tiny_simgrid
 
 #endif // MAILBOX_H

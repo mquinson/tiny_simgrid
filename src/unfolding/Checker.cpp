@@ -1,6 +1,9 @@
 #include "Checker.h"
 
-Checker::Checker()
-{
+namespace tiny_simgrid {
+namespace mc {
 
-}
+
+
+} // namespace mc
+} // namespace tiny_simgrid

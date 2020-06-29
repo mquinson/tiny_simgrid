@@ -1,5 +1,6 @@
 #include "mailbox.h"
 
+namespace tiny_simgrid {
 namespace app {
 
 void Mailbox::update(Transition t)
@@ -50,3 +51,4 @@ bool Mailbox::checkComm(Transition t)
 }
 
 } // namespace app
+} // namespace tiny_simgrid

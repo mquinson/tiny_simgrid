@@ -1,44 +1,36 @@
 #ifndef MODELCHECKER_H
 #define MODELCHECKER_H
 
-#include "forward.hpp"
+//#include "forward.h"
 
-namespace mc {
+#include <memory>
+#include <list>
+#include "../unfolding/Checker.h"
+#include "RemoteSimulation.hpp"
+//#include "../api/Session.h"
+
+namespace tiny_simgrid {
+namespace api {
 
 class ModelChecker
 {
 public:
+    explicit ModelChecker(std::unique_ptr<RemoteSimulation> remote_simulation) : remote_simulation_(std::move(remote_simulation)) {}
     ModelChecker(ModelChecker const&) = delete;
     ModelChecker& operator=(ModelChecker const&) = delete;
-    explicit ModelChecker();
+    ~ModelChecker() = default;
 
-    void setChecker(Checker* checker) { checker_ = std::unique_ptr<Checker>(checker); }
-    // void Session::execute(Transition const& transition);
-
-    int get_error_count() { return checker_->get_error_count(); };
+    RemoteSimulation& get_remote_simulation() { return *remote_simulation_; }
+    inline int get_error_count() const { return checker_->get_error_count(); };
 
 private:
     std::unique_ptr<Checker> checker_;
-
+    std::unique_ptr<RemoteSimulation> remote_simulation_;
+//    void create_checker(tiny_simgrid::api::Session* s);
 };
 
-//smx_simcall_t MC_state_choose_request(simgrid::mc::State* state)
-//{
-//  for (auto& actor : mc_model_checker->get_remote_simulation().actors()) {
-//    /* Only consider the actors that were marked as interleaving by the checker algorithm */
-//    if (not state->actor_states_[actor.copy.get_buffer()->get_pid()].is_todo())
-//      continue;
-
-//    smx_simcall_t res = MC_state_choose_request_for_process(state, actor.copy.get_buffer());
-//    if (res)
-//      return res;
-//  }
-//  return nullptr;
-//}
-
-//static inline smx_simcall_t MC_state_choose_request_for_process(simgrid::mc::State* state, smx_actor_t actor)
-
-
 } // namespace api
+} // namespace tiny_simgrid
 
 #endif // MODELCHECKER_H
+

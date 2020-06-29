@@ -170,6 +170,33 @@ src/api/ModelChecker.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.s
 .PHONY : src/api/ModelChecker.cpp.s
 
+src/app/AppSide.o: src/app/AppSide.cpp.o
+
+.PHONY : src/app/AppSide.o
+
+# target to build an object file
+src/app/AppSide.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.o
+.PHONY : src/app/AppSide.cpp.o
+
+src/app/AppSide.i: src/app/AppSide.cpp.i
+
+.PHONY : src/app/AppSide.i
+
+# target to preprocess a source file
+src/app/AppSide.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.i
+.PHONY : src/app/AppSide.cpp.i
+
+src/app/AppSide.s: src/app/AppSide.cpp.s
+
+.PHONY : src/app/AppSide.s
+
+# target to generate assembly for a file
+src/app/AppSide.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.s
+.PHONY : src/app/AppSide.cpp.s
+
 src/app/actor.o: src/app/actor.cpp.o
 
 .PHONY : src/app/actor.o
@@ -452,6 +479,9 @@ help:
 	@echo "... src/api/ModelChecker.o"
 	@echo "... src/api/ModelChecker.i"
 	@echo "... src/api/ModelChecker.s"
+	@echo "... src/app/AppSide.o"
+	@echo "... src/app/AppSide.i"
+	@echo "... src/app/AppSide.s"
 	@echo "... src/app/actor.o"
 	@echo "... src/app/actor.i"
 	@echo "... src/app/actor.s"

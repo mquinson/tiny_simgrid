@@ -1,15 +1,12 @@
 #include "UnfoldingChecker.h"
 
+namespace tiny_simgrid {
 namespace mc {
 
 unsigned int nb_events = 0;
 unsigned int nb_traces = 0;
 
 EventSet U, G, gD;
-
-void UnfoldingChecker::run() {
-
-}
 
 void intTobinary(int n, int p[])
 {
@@ -96,6 +93,14 @@ void ksubset(unsigned long sizeD, std::list<UnfoldingEvent*> EvtList, std::list<
   }
   //	std::cout << " \n finish ksubset \n";
 }
+
+void UnfoldingChecker::run() {
+
+
+
+
+}
+
 
 EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C)
 {
@@ -1595,3 +1600,4 @@ void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D)
 }
 
 } // namespace mc
+} // namespace tiny_simgrid

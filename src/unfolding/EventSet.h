@@ -8,6 +8,7 @@
 
 using namespace std;
 
+namespace tiny_simgrid {
 namespace mc {
 
 class EventSet
@@ -40,5 +41,6 @@ public:
 };
 
 } // namespace mc
+} // namespace tiny_simgrid
 
 #endif // EVENTSET_H

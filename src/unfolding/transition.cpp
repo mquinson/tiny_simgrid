@@ -1,5 +1,6 @@
 #include "transition.h"
 
+namespace tiny_simgrid {
 namespace mc {
 
 bool Transition::operator<(const Transition& other) const
@@ -48,3 +49,4 @@ bool Transition::isDependent(Transition other)
 }
 
 } // namespace mc
+} // namespace tiny_simgrid

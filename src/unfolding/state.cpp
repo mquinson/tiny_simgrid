@@ -1,5 +1,6 @@
 #include "state.h"
 
+namespace tiny_simgrid {
 namespace mc {
 
 /* this function execute a transition from a given state, returning a next state*/
@@ -76,3 +77,4 @@ void State::print()
 }
 
 } // namespace mc
+} // namespace tiny_simgrid

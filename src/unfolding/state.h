@@ -7,8 +7,9 @@
 #include "../app/mailbox.h"
 
 using namespace std;
-using namespace app;
+using namespace tiny_simgrid::app;
 
+namespace tiny_simgrid {
 namespace mc {
 
 class State
@@ -29,6 +30,7 @@ public:
 };
 
 } // namespace mc
+} // namespace tiny_simgrid
 
 #endif // STATE_H
 

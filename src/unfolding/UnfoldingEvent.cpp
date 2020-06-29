@@ -2,6 +2,7 @@
 #include "EventSet.h"
 #include "configuration.h"
 
+namespace tiny_simgrid {
 namespace mc {
 
 template<typename T, typename... Args>
@@ -338,3 +339,4 @@ bool UnfoldingEvent::operator==(const UnfoldingEvent& other) const
 }
 
 } // namespace mc
+} // namespace tiny_simgrid

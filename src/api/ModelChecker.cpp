@@ -1,11 +1,11 @@
 #include "ModelChecker.h"
 
-namespace mc {
+namespace tiny_simgrid {
+namespace api {
 
-ModelChecker::ModelChecker()
-{
+//void ModelChecker::create_checker(tiny_simgrid::api::Session* s) {
 
-
-}
+//}
 
 } // namespace api
+} // namespace tiny_simgrid

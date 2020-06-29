@@ -1,5 +1,6 @@
 #include "configuration.h"
 
+namespace tiny_simgrid {
 namespace mc {
 
 void Configuration::updateMaxEvent(UnfoldingEvent* e)
@@ -45,3 +46,4 @@ UnfoldingEvent* Configuration ::findTestedComm(UnfoldingEvent* testEvt)
 }
 
 } // namespace mc
+} // namespace tiny_simgrid
