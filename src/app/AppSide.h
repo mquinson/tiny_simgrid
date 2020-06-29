@@ -23,6 +23,8 @@ public:
     };
 
     AppSide() = default;
+    AppSide(AppSide const&) = default;
+    AppSide& operator=(AppSide const&) = default;
     ~AppSide() = default;
 
     Transition* create_transition(TransitionActivity activity, int access_variable) const;
@@ -51,15 +53,6 @@ public:
         for(auto i : vec_mb_id)
             mailbox_list_.push_back(std::move(Mailbox(i)));
     }
-
-//    template<typename... Args>
-//    void AppSide::add_to_mailbox_list(const Args&... mailbox_ids) {
-//        std::vector<int> mailbox_ids_ = { mailbox_ids... };
-//        mailbox_list_.clear();
-//        for(auto i : mailbox_ids_) {
-//            mailbox_list_.push_back(std::move(new Mailbox(i)));
-//        }
-//    }
 
     inline std::vector<Actor> get_actor_list() const { return actors_list_; }
     inline std::vector<Mailbox> get_mailbox_list() const { return mailbox_list_; }

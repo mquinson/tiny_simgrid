@@ -22,11 +22,11 @@ public:
 
     RemoteSimulation& get_remote_simulation() { return *remote_simulation_; }
     inline int get_error_count() const { return checker_->get_error_count(); };
+    inline void set_checker(std::unique_ptr<Checker> mc) { checker_ = std::move(mc); }
 
 private:
     std::unique_ptr<Checker> checker_;
     std::unique_ptr<RemoteSimulation> remote_simulation_;
-//    void create_checker(tiny_simgrid::api::Session* s);
 };
 
 } // namespace api

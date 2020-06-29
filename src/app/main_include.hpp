@@ -8,7 +8,7 @@
 #include "actor.h"
 #include "mailbox.h"
 #include "AppSide.h"
-//#include "../api/Session.h"
+#include "../api/Session.h"
 #include "../unfolding/state.h"
 #include "../unfolding/UnfoldingEvent.h"
 #include "../unfolding/UnfoldingChecker.h"
@@ -52,9 +52,8 @@ void exhautiveExplore(std::list<State> stateStack, std::list<Transition> transLi
 
 void make_test(const std::unique_ptr<AppSide>& app, const std::vector<unsigned int>& config, const int& event_count)
 {
-//    using Session = tiny_simgrid::api::Session;
-//    auto session_ = std::unique_ptr<Session>(new Session(*app));
-//    auto session_ = std::unique_ptr<Session>();
+    using Session = tiny_simgrid::api::Session;
+    auto session_ = std::unique_ptr<Session>(new Session(*app));
 
     auto a=20;
 

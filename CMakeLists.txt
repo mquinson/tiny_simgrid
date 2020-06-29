@@ -15,8 +15,8 @@ add_executable(${PROJECT} ${SRC}/main.cpp
     ${API}/ModelChecker.h
     ${API}/ModelChecker.cpp
     ${API}/RemoteSimulation.hpp
-#    ${API}/Session.h
-#    ${API}/Session.cpp
+    ${API}/Session.h
+    ${API}/Session.cpp
     ${APP}/app_include.hpp
     ${APP}/AppSide.h
     ${APP}/AppSide.cpp

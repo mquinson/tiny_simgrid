@@ -89,6 +89,12 @@
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/RemoteSimulation.hpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/Session.cpp">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/Session.h">
+			<Option target="tiny_simgrid"/>
+		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/AppSide.cpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>

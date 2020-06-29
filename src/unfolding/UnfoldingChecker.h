@@ -17,7 +17,8 @@
 #include "EventSet.h"
 #include "../app/actor.h"
 #include "Checker.h"
-//#include "../api/Session.h"
+
+class Session;
 
 using namespace std;
 
@@ -33,8 +34,10 @@ class UnfoldingChecker : public Checker {
     unsigned int expected_events_ = 0;
 
 public:    
-    explicit UnfoldingChecker(/*tiny_simgrid::api::Session* s, */std::vector<unsigned int> confs, unsigned int expected_events)
-        : /*Checker(s),*/ confs_expected_(confs), confs_check_(true), expected_events_(expected_events) {}
+    UnfoldingChecker() = default;
+    UnfoldingChecker(Session& s) : Checker(s) {};
+    UnfoldingChecker(std::vector<unsigned int> confs, unsigned int expected_events)
+        : confs_expected_(confs), confs_check_(true), expected_events_(expected_events) {}
 
     void explore(State* state); // Start the exploration
 
@@ -53,9 +56,6 @@ public:
 
     int get_error_count() override { return error_; }
     void run() override;
-//    unsigned long nb_actors, std::set<Actor> actors, std::set<Mailbox> mailboxes
-
-//    void run(int number_of_actors, );
 };
 
 extern unsigned int nb_events;
