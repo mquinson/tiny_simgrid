@@ -36,8 +36,8 @@ class UnfoldingChecker : public Checker {
 public:    
     UnfoldingChecker() = default;
     UnfoldingChecker(Session& s) : Checker(s) {};
-    UnfoldingChecker(std::vector<unsigned int> confs, unsigned int expected_events)
-        : confs_expected_(confs), confs_check_(true), expected_events_(expected_events) {}
+//    UnfoldingChecker(std::vector<unsigned int> confs, unsigned int expected_events)
+//        : confs_expected_(confs), confs_check_(true), expected_events_(expected_events) {}
 
     void explore(State* state); // Start the exploration
 
@@ -56,6 +56,11 @@ public:
 
     int get_error_count() override { return error_; }
     void run() override;
+    void set_checker_parameters(const std::vector<unsigned int>& config, unsigned int expected_events) {
+        confs_expected_ = std::move(config);
+        expected_events_ = expected_events;
+        confs_check_ = true;
+    }
 };
 
 extern unsigned int nb_events;

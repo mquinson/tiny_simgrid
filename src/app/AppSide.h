@@ -13,7 +13,7 @@ public:
         write,
         mutex_lock,
         mutex_unlock
-    } ;
+    };
 
     enum TransitionType {
         Isend = 0,

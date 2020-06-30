@@ -97,10 +97,7 @@ void ksubset(unsigned long sizeD, std::list<UnfoldingEvent*> EvtList, std::list<
 void UnfoldingChecker::run() {
 
 
-
-
 }
-
 
 EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C)
 {

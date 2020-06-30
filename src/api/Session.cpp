@@ -12,6 +12,7 @@ Session::Session(const AppSide& app)
     create_checker(*this);
 }
 
+//const std::vector<unsigned int>& config, int expected_events
 void Session::create_checker(const Session& s) {
     model_checker_->set_checker(std::unique_ptr<Checker>(new UnfoldingChecker()));
 }

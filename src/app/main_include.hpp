@@ -50,7 +50,7 @@ void exhautiveExplore(std::list<State> stateStack, std::list<Transition> transLi
     }
 }
 
-void make_test(const std::unique_ptr<AppSide>& app, const std::vector<unsigned int>& config, const int& event_count)
+void make_test(const std::unique_ptr<AppSide>& app, const std::vector<unsigned int>& config, int expected_events)
 {
     using Session = tiny_simgrid::api::Session;
     auto session_ = std::unique_ptr<Session>(new Session(*app));
