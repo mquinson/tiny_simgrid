@@ -54,6 +54,7 @@ void make_test(const std::unique_ptr<AppSide>& app, const std::vector<unsigned i
 {
     using Session = tiny_simgrid::api::Session;
     auto session_ = std::unique_ptr<Session>(new Session(*app));
+    session_->run();
 
     auto a=20;
 

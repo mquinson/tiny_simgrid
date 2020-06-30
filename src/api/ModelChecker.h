@@ -23,6 +23,7 @@ public:
     RemoteSimulation& get_remote_simulation() { return *remote_simulation_; }
     inline int get_error_count() const { return checker_->get_error_count(); };
     inline void set_checker(std::unique_ptr<Checker> mc) { checker_ = std::move(mc); }
+    inline Checker* get_ckecker() const { return checker_.get(); };
 
 private:
     std::unique_ptr<Checker> checker_;

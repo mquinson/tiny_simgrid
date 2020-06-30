@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/eazimi/projects/tiny_simgrid/src/api/ModelChecker.cpp
-ModelChecker.h
-/home/eazimi/projects/tiny_simgrid/src/api/ModelChecker.h
-
 /home/eazimi/projects/tiny_simgrid/src/api/ModelChecker.h
 memory
 -
@@ -39,10 +35,6 @@ RemoteSimulation.hpp
 /home/eazimi/projects/tiny_simgrid/src/api/RemoteSimulation.hpp
 ModelChecker.h
 /home/eazimi/projects/tiny_simgrid/src/api/ModelChecker.h
-
-/home/eazimi/projects/tiny_simgrid/src/app/AppSide.cpp
-AppSide.h
-/home/eazimi/projects/tiny_simgrid/src/app/AppSide.h
 
 /home/eazimi/projects/tiny_simgrid/src/app/AppSide.h
 app_include.hpp
@@ -139,10 +131,6 @@ algorithm
 -
 UnfoldingEvent.h
 /home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingEvent.h
-
-/home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingChecker.cpp
-UnfoldingChecker.h
-/home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingChecker.h
 
 /home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingChecker.h
 algorithm

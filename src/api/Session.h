@@ -15,7 +15,7 @@ public:
     ~Session() = default;
     Session(Session const&) = delete;
     Session& operator=(Session const&) = delete;
-
+    inline void run() const { model_checker_->get_ckecker()->run(); };
     inline int get_error_count() const { return model_checker_->get_error_count(); };
 
 private:
