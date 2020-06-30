@@ -170,6 +170,33 @@ src/api/ModelChecker.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.s
 .PHONY : src/api/ModelChecker.cpp.s
 
+src/api/RemoteSimulation.o: src/api/RemoteSimulation.cpp.o
+
+.PHONY : src/api/RemoteSimulation.o
+
+# target to build an object file
+src/api/RemoteSimulation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.o
+.PHONY : src/api/RemoteSimulation.cpp.o
+
+src/api/RemoteSimulation.i: src/api/RemoteSimulation.cpp.i
+
+.PHONY : src/api/RemoteSimulation.i
+
+# target to preprocess a source file
+src/api/RemoteSimulation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.i
+.PHONY : src/api/RemoteSimulation.cpp.i
+
+src/api/RemoteSimulation.s: src/api/RemoteSimulation.cpp.s
+
+.PHONY : src/api/RemoteSimulation.s
+
+# target to generate assembly for a file
+src/api/RemoteSimulation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.s
+.PHONY : src/api/RemoteSimulation.cpp.s
+
 src/api/Session.o: src/api/Session.cpp.o
 
 .PHONY : src/api/Session.o
@@ -506,6 +533,9 @@ help:
 	@echo "... src/api/ModelChecker.o"
 	@echo "... src/api/ModelChecker.i"
 	@echo "... src/api/ModelChecker.s"
+	@echo "... src/api/RemoteSimulation.o"
+	@echo "... src/api/RemoteSimulation.i"
+	@echo "... src/api/RemoteSimulation.s"
 	@echo "... src/api/Session.o"
 	@echo "... src/api/Session.i"
 	@echo "... src/api/Session.s"

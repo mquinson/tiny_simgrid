@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/home/eazimi/projects/tiny_simgrid/src/api/CheckerSide.hpp
+memory
+-
+Session.h
+/home/eazimi/projects/tiny_simgrid/src/api/Session.h
+../unfolding/UnfoldingChecker.h
+/home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingChecker.h
+
 /home/eazimi/projects/tiny_simgrid/src/api/ModelChecker.h
 memory
 -
@@ -21,12 +29,6 @@ RemoteSimulation.hpp
 /home/eazimi/projects/tiny_simgrid/src/app/actor.h
 ../app/AppSide.h
 /home/eazimi/projects/tiny_simgrid/src/app/AppSide.h
-
-/home/eazimi/projects/tiny_simgrid/src/api/Session.cpp
-Session.h
-/home/eazimi/projects/tiny_simgrid/src/api/Session.h
-../unfolding/UnfoldingChecker.h
-/home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingChecker.h
 
 /home/eazimi/projects/tiny_simgrid/src/api/Session.h
 memory
@@ -91,8 +93,8 @@ mailbox.h
 /home/eazimi/projects/tiny_simgrid/src/app/mailbox.h
 AppSide.h
 /home/eazimi/projects/tiny_simgrid/src/app/AppSide.h
-../api/Session.h
-/home/eazimi/projects/tiny_simgrid/src/api/Session.h
+../api/CheckerSide.hpp
+/home/eazimi/projects/tiny_simgrid/src/api/CheckerSide.hpp
 ../unfolding/state.h
 /home/eazimi/projects/tiny_simgrid/src/unfolding/state.h
 ../unfolding/UnfoldingEvent.h
@@ -111,12 +113,6 @@ AppSide.h
 /home/eazimi/projects/tiny_simgrid/src/main.cpp
 app/main_include.hpp
 /home/eazimi/projects/tiny_simgrid/src/app/main_include.hpp
-
-/home/eazimi/projects/tiny_simgrid/src/unfolding/Checker.cpp
-Checker.h
-/home/eazimi/projects/tiny_simgrid/src/unfolding/Checker.h
-../api/Session.h
-/home/eazimi/projects/tiny_simgrid/src/api/Session.h
 
 /home/eazimi/projects/tiny_simgrid/src/unfolding/Checker.h
 memory

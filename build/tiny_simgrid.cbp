@@ -80,10 +80,16 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/CheckerSide.hpp">
+			<Option target="tiny_simgrid"/>
+		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/ModelChecker.cpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/ModelChecker.h">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/RemoteSimulation.cpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/RemoteSimulation.hpp">

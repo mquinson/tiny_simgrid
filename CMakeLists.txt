@@ -12,9 +12,11 @@ set(APP ${SRC}/app)
 set(API ${SRC}/api)
 
 add_executable(${PROJECT} ${SRC}/main.cpp
+    ${API}/CheckerSide.hpp
     ${API}/ModelChecker.h
     ${API}/ModelChecker.cpp
     ${API}/RemoteSimulation.hpp
+    ${API}/RemoteSimulation.cpp
     ${API}/Session.h
     ${API}/Session.cpp
     ${APP}/app_include.hpp

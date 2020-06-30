@@ -18,8 +18,6 @@
 #include "../app/actor.h"
 #include "Checker.h"
 
-class Session;
-
 using namespace std;
 
 namespace tiny_simgrid {
@@ -34,8 +32,8 @@ class UnfoldingChecker : public Checker {
     unsigned int expected_events_ = 0;
 
 public:    
-    UnfoldingChecker() = default;
-    UnfoldingChecker(Session& s) : Checker(s) {};
+//    UnfoldingChecker() = default;
+    explicit UnfoldingChecker(Session& s) : Checker(s) {};
 //    UnfoldingChecker(std::vector<unsigned int> confs, unsigned int expected_events)
 //        : confs_expected_(confs), confs_check_(true), expected_events_(expected_events) {}
 

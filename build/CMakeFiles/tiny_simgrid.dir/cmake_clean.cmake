@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.o"
+  "CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.o"
   "CMakeFiles/tiny_simgrid.dir/src/api/Session.cpp.o"
   "CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.o"
   "CMakeFiles/tiny_simgrid.dir/src/app/actor.cpp.o"

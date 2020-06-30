@@ -6,6 +6,7 @@
 #include <cstring>
 
 #include "actor.h"
+//#include "mailbox.h"
 #include "../unfolding/Checker.h"
 #include "../unfolding/state.h"
 #include "../unfolding/configuration.h"

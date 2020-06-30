@@ -2,8 +2,10 @@
 #define CHECKER_H
 
 #include <memory>
+//#include "../api/Session.h"
 
 class Session;
+//using Session = tiny_simgrid::api::Session;
 
 namespace tiny_simgrid {
 namespace mc {
@@ -11,8 +13,8 @@ namespace mc {
 class Checker
 {
 public:
-    Checker() = default;
-    Checker(Session& s);
+//    Checker() = default;
+    explicit Checker(Session& s);
     ~Checker() = default;
     virtual void run() = 0;
     virtual int get_error_count() = 0;

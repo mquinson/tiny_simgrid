@@ -8,7 +8,7 @@
 #include "actor.h"
 #include "mailbox.h"
 #include "AppSide.h"
-#include "../api/Session.h"
+#include "../api/CheckerSide.hpp"
 #include "../unfolding/state.h"
 #include "../unfolding/UnfoldingEvent.h"
 #include "../unfolding/UnfoldingChecker.h"
@@ -50,11 +50,14 @@ void exhautiveExplore(std::list<State> stateStack, std::list<Transition> transLi
     }
 }
 
-void make_test(const std::unique_ptr<AppSide>& app, const std::vector<unsigned int>& config, int expected_events)
+void make_test(const std::unique_ptr<AppSide>& app, const std::vector<unsigned int>& configs, int expected_events)
 {
-    using Session = tiny_simgrid::api::Session;
-    auto session_ = std::unique_ptr<Session>(new Session(*app));
-    session_->run();
+    using CheckerSide = tiny_simgrid::api::CheckerSide;
+    auto checker_side = std::unique_ptr<CheckerSide>(new CheckerSide());
+    checker_side->initialize(*app, configs, expected_events);
+//    using Session = tiny_simgrid::api::Session;
+//    auto session_ = std::unique_ptr<Session>(new Session(*app));
+//    session_->run();
 
     auto a=20;
 
