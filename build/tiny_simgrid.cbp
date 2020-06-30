@@ -80,6 +80,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/CheckerSide.cpp">
+			<Option target="tiny_simgrid"/>
+		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/CheckerSide.hpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
@@ -95,12 +98,6 @@
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/RemoteSimulation.hpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/Session.cpp">
-			<Option target="tiny_simgrid"/>
-		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/Session.h">
-			<Option target="tiny_simgrid"/>
-		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/AppSide.cpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
@@ -113,25 +110,16 @@
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/actor.h">
 			<Option target="tiny_simgrid"/>
 		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/app_include.hpp">
-			<Option target="tiny_simgrid"/>
-		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/mailbox.cpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/mailbox.h">
 			<Option target="tiny_simgrid"/>
 		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/main_include.hpp">
-			<Option target="tiny_simgrid"/>
-		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/main.cpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/Checker.cpp">
-			<Option target="tiny_simgrid"/>
-		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/Checker.h">
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/Checker.hpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/EventSet.cpp">

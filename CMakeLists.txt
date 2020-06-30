@@ -13,22 +13,22 @@ set(API ${SRC}/api)
 
 add_executable(${PROJECT} ${SRC}/main.cpp
     ${API}/CheckerSide.hpp
+    ${API}/CheckerSide.cpp
     ${API}/ModelChecker.h
     ${API}/ModelChecker.cpp
     ${API}/RemoteSimulation.hpp
     ${API}/RemoteSimulation.cpp
-    ${API}/Session.h
-    ${API}/Session.cpp
-    ${APP}/app_include.hpp
+
+#    ${APP}/app_include.hpp
     ${APP}/AppSide.h
     ${APP}/AppSide.cpp
-    ${APP}/main_include.hpp
+#    ${APP}/main_include.hpp
     ${APP}/actor.h
     ${APP}/actor.cpp
     ${APP}/mailbox.h
     ${APP}/mailbox.cpp
-    ${UNFOLDING}/Checker.h
-    ${UNFOLDING}/Checker.cpp
+
+    ${UNFOLDING}/Checker.hpp
     ${UNFOLDING}/state.h
     ${UNFOLDING}/state.cpp
     ${UNFOLDING}/transition.h
@@ -42,5 +42,3 @@ add_executable(${PROJECT} ${SRC}/main.cpp
     ${UNFOLDING}/UnfoldingChecker.h
     ${UNFOLDING}/UnfoldingChecker.cpp
     )
-
-#install(TARGETS ${PROJECTS} DESTINATION build)

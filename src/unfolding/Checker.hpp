@@ -1,29 +1,16 @@
 #ifndef CHECKER_H
 #define CHECKER_H
 
-#include <memory>
-//#include "../api/Session.h"
-
-class Session;
-//using Session = tiny_simgrid::api::Session;
-
 namespace tiny_simgrid {
 namespace mc {
 
 class Checker
 {
 public:
-//    Checker() = default;
-    explicit Checker(Session& s);
+    Checker() = default;
     ~Checker() = default;
     virtual void run() = 0;
     virtual int get_error_count() = 0;
-
-protected:
-    Session& get_session() { return *session_; }
-
-private:
-    Session* session_;
 };
 
 } // namespace mc

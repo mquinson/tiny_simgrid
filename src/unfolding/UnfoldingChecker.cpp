@@ -1,6 +1,4 @@
 #include "UnfoldingChecker.h"
-//#include "../api/Session.h"
-
 
 namespace tiny_simgrid {
 namespace mc {
@@ -95,8 +93,6 @@ void ksubset(unsigned long sizeD, std::list<UnfoldingEvent*> EvtList, std::list<
   }
   //	std::cout << " \n finish ksubset \n";
 }
-
-//UnfoldingChecker::UnfoldingChecker(Session& s) : Checker(s) {}
 
 void UnfoldingChecker::run() {
 

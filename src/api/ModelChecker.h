@@ -1,13 +1,10 @@
 #ifndef MODELCHECKER_H
 #define MODELCHECKER_H
 
-//#include "forward.h"
-
 #include <memory>
 #include <list>
-#include "../unfolding/Checker.h"
+#include "../unfolding/Checker.hpp"
 #include "RemoteSimulation.hpp"
-//#include "../api/Session.h"
 
 namespace tiny_simgrid {
 namespace api {

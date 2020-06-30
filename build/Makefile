@@ -143,6 +143,33 @@ tiny_simgrid/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/build
 .PHONY : tiny_simgrid/fast
 
+src/api/CheckerSide.o: src/api/CheckerSide.cpp.o
+
+.PHONY : src/api/CheckerSide.o
+
+# target to build an object file
+src/api/CheckerSide.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/CheckerSide.cpp.o
+.PHONY : src/api/CheckerSide.cpp.o
+
+src/api/CheckerSide.i: src/api/CheckerSide.cpp.i
+
+.PHONY : src/api/CheckerSide.i
+
+# target to preprocess a source file
+src/api/CheckerSide.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/CheckerSide.cpp.i
+.PHONY : src/api/CheckerSide.cpp.i
+
+src/api/CheckerSide.s: src/api/CheckerSide.cpp.s
+
+.PHONY : src/api/CheckerSide.s
+
+# target to generate assembly for a file
+src/api/CheckerSide.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/CheckerSide.cpp.s
+.PHONY : src/api/CheckerSide.cpp.s
+
 src/api/ModelChecker.o: src/api/ModelChecker.cpp.o
 
 .PHONY : src/api/ModelChecker.o
@@ -196,33 +223,6 @@ src/api/RemoteSimulation.s: src/api/RemoteSimulation.cpp.s
 src/api/RemoteSimulation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.s
 .PHONY : src/api/RemoteSimulation.cpp.s
-
-src/api/Session.o: src/api/Session.cpp.o
-
-.PHONY : src/api/Session.o
-
-# target to build an object file
-src/api/Session.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/Session.cpp.o
-.PHONY : src/api/Session.cpp.o
-
-src/api/Session.i: src/api/Session.cpp.i
-
-.PHONY : src/api/Session.i
-
-# target to preprocess a source file
-src/api/Session.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/Session.cpp.i
-.PHONY : src/api/Session.cpp.i
-
-src/api/Session.s: src/api/Session.cpp.s
-
-.PHONY : src/api/Session.s
-
-# target to generate assembly for a file
-src/api/Session.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/Session.cpp.s
-.PHONY : src/api/Session.cpp.s
 
 src/app/AppSide.o: src/app/AppSide.cpp.o
 
@@ -331,33 +331,6 @@ src/main.s: src/main.cpp.s
 src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
-
-src/unfolding/Checker.o: src/unfolding/Checker.cpp.o
-
-.PHONY : src/unfolding/Checker.o
-
-# target to build an object file
-src/unfolding/Checker.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/Checker.cpp.o
-.PHONY : src/unfolding/Checker.cpp.o
-
-src/unfolding/Checker.i: src/unfolding/Checker.cpp.i
-
-.PHONY : src/unfolding/Checker.i
-
-# target to preprocess a source file
-src/unfolding/Checker.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/Checker.cpp.i
-.PHONY : src/unfolding/Checker.cpp.i
-
-src/unfolding/Checker.s: src/unfolding/Checker.cpp.s
-
-.PHONY : src/unfolding/Checker.s
-
-# target to generate assembly for a file
-src/unfolding/Checker.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/Checker.cpp.s
-.PHONY : src/unfolding/Checker.cpp.s
 
 src/unfolding/EventSet.o: src/unfolding/EventSet.cpp.o
 
@@ -530,15 +503,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... tiny_simgrid"
+	@echo "... src/api/CheckerSide.o"
+	@echo "... src/api/CheckerSide.i"
+	@echo "... src/api/CheckerSide.s"
 	@echo "... src/api/ModelChecker.o"
 	@echo "... src/api/ModelChecker.i"
 	@echo "... src/api/ModelChecker.s"
 	@echo "... src/api/RemoteSimulation.o"
 	@echo "... src/api/RemoteSimulation.i"
 	@echo "... src/api/RemoteSimulation.s"
-	@echo "... src/api/Session.o"
-	@echo "... src/api/Session.i"
-	@echo "... src/api/Session.s"
 	@echo "... src/app/AppSide.o"
 	@echo "... src/app/AppSide.i"
 	@echo "... src/app/AppSide.s"
@@ -551,9 +524,6 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/unfolding/Checker.o"
-	@echo "... src/unfolding/Checker.i"
-	@echo "... src/unfolding/Checker.s"
 	@echo "... src/unfolding/EventSet.o"
 	@echo "... src/unfolding/EventSet.i"
 	@echo "... src/unfolding/EventSet.s"

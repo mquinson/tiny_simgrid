@@ -6,11 +6,17 @@
 
 #IncludeRegexTransform: 
 
+/home/eazimi/projects/tiny_simgrid/src/api/CheckerSide.cpp
+CheckerSide.hpp
+/home/eazimi/projects/tiny_simgrid/src/api/CheckerSide.hpp
+
 /home/eazimi/projects/tiny_simgrid/src/api/CheckerSide.hpp
 memory
 -
-Session.h
-/home/eazimi/projects/tiny_simgrid/src/api/Session.h
+vector
+-
+ModelChecker.h
+/home/eazimi/projects/tiny_simgrid/src/api/ModelChecker.h
 ../unfolding/UnfoldingChecker.h
 /home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingChecker.h
 
@@ -19,28 +25,34 @@ memory
 -
 list
 -
-../unfolding/Checker.h
-/home/eazimi/projects/tiny_simgrid/src/unfolding/Checker.h
+../unfolding/Checker.hpp
+/home/eazimi/projects/tiny_simgrid/src/unfolding/Checker.hpp
 RemoteSimulation.hpp
 /home/eazimi/projects/tiny_simgrid/src/api/RemoteSimulation.hpp
 
 /home/eazimi/projects/tiny_simgrid/src/api/RemoteSimulation.hpp
+memory
+-
+vector
+-
 ../app/actor.h
 /home/eazimi/projects/tiny_simgrid/src/app/actor.h
+../app/mailbox.h
+/home/eazimi/projects/tiny_simgrid/src/app/mailbox.h
 ../app/AppSide.h
 /home/eazimi/projects/tiny_simgrid/src/app/AppSide.h
 
-/home/eazimi/projects/tiny_simgrid/src/api/Session.h
+/home/eazimi/projects/tiny_simgrid/src/app/AppSide.h
 memory
 -
-RemoteSimulation.hpp
-/home/eazimi/projects/tiny_simgrid/src/api/RemoteSimulation.hpp
-ModelChecker.h
-/home/eazimi/projects/tiny_simgrid/src/api/ModelChecker.h
-
-/home/eazimi/projects/tiny_simgrid/src/app/AppSide.h
-app_include.hpp
-/home/eazimi/projects/tiny_simgrid/src/app/app_include.hpp
+list
+-
+cstring
+-
+actor.h
+/home/eazimi/projects/tiny_simgrid/src/app/actor.h
+mailbox.h
+/home/eazimi/projects/tiny_simgrid/src/app/mailbox.h
 
 /home/eazimi/projects/tiny_simgrid/src/app/actor.h
 iostream
@@ -52,26 +64,6 @@ vector
 ../unfolding/transition.h
 /home/eazimi/projects/tiny_simgrid/src/unfolding/transition.h
 
-/home/eazimi/projects/tiny_simgrid/src/app/app_include.hpp
-memory
--
-list
--
-cstring
--
-actor.h
-/home/eazimi/projects/tiny_simgrid/src/app/actor.h
-../unfolding/Checker.h
-/home/eazimi/projects/tiny_simgrid/src/unfolding/Checker.h
-../unfolding/state.h
-/home/eazimi/projects/tiny_simgrid/src/unfolding/state.h
-../unfolding/configuration.h
-/home/eazimi/projects/tiny_simgrid/src/unfolding/configuration.h
-../unfolding/EventSet.h
-/home/eazimi/projects/tiny_simgrid/src/unfolding/EventSet.h
-../unfolding/UnfoldingEvent.h
-/home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingEvent.h
-
 /home/eazimi/projects/tiny_simgrid/src/app/mailbox.h
 iostream
 -
@@ -80,43 +72,7 @@ array
 ../unfolding/transition.h
 /home/eazimi/projects/tiny_simgrid/src/unfolding/transition.h
 
-/home/eazimi/projects/tiny_simgrid/src/app/main_include.hpp
-list
--
-memory
--
-cstring
--
-actor.h
-/home/eazimi/projects/tiny_simgrid/src/app/actor.h
-mailbox.h
-/home/eazimi/projects/tiny_simgrid/src/app/mailbox.h
-AppSide.h
-/home/eazimi/projects/tiny_simgrid/src/app/AppSide.h
-../api/CheckerSide.hpp
-/home/eazimi/projects/tiny_simgrid/src/api/CheckerSide.hpp
-../unfolding/state.h
-/home/eazimi/projects/tiny_simgrid/src/unfolding/state.h
-../unfolding/UnfoldingEvent.h
-/home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingEvent.h
-../unfolding/UnfoldingChecker.h
-/home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingChecker.h
-../unfolding/transition.h
-/home/eazimi/projects/tiny_simgrid/src/unfolding/transition.h
-../unfolding/configuration.h
-/home/eazimi/projects/tiny_simgrid/src/unfolding/configuration.h
-../unfolding/EventSet.h
-/home/eazimi/projects/tiny_simgrid/src/unfolding/EventSet.h
-../unfolding/Checker.h
-/home/eazimi/projects/tiny_simgrid/src/unfolding/Checker.h
-
-/home/eazimi/projects/tiny_simgrid/src/main.cpp
-app/main_include.hpp
-/home/eazimi/projects/tiny_simgrid/src/app/main_include.hpp
-
-/home/eazimi/projects/tiny_simgrid/src/unfolding/Checker.h
-memory
--
+/home/eazimi/projects/tiny_simgrid/src/unfolding/Checker.hpp
 
 /home/eazimi/projects/tiny_simgrid/src/unfolding/EventSet.h
 iostream
@@ -163,8 +119,8 @@ EventSet.h
 /home/eazimi/projects/tiny_simgrid/src/unfolding/EventSet.h
 ../app/actor.h
 /home/eazimi/projects/tiny_simgrid/src/app/actor.h
-Checker.h
-/home/eazimi/projects/tiny_simgrid/src/unfolding/Checker.h
+Checker.hpp
+/home/eazimi/projects/tiny_simgrid/src/unfolding/Checker.hpp
 
 /home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingEvent.h
 iostream

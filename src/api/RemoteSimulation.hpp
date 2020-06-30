@@ -1,11 +1,13 @@
 #ifndef REMOTESIMULATION_H
 #define REMOTESIMULATION_H
 
+#include <memory>
+#include <vector>
 #include "../app/actor.h"
+#include "../app/mailbox.h"
 #include "../app/AppSide.h"
-//#include "../app/"
 
-//using namespace std;
+using namespace tiny_simgrid::app;
 
 namespace tiny_simgrid {
 namespace api {
@@ -13,17 +15,16 @@ namespace api {
 class RemoteSimulation
 {
 public:
-    explicit RemoteSimulation(std::unique_ptr<tiny_simgrid::app::AppSide> remote) : remote_(std::move(remote)) {}
-
+    explicit RemoteSimulation(AppSide* app_side);
     RemoteSimulation(RemoteSimulation const&) = delete;
     RemoteSimulation& operator=(RemoteSimulation const&) = delete;
     ~RemoteSimulation() = default;
 
-    inline std::vector<Actor> read_acotr_list() const { return remote_->get_actor_list(); }
-    inline std::vector<Mailbox> read_mailbox_list() const { return remote_->get_mailbox_list(); }
+    std::vector<Actor> read_acotr_list();
+    std::vector<Mailbox> read_mailbox_list();
 
 private:
-    std::unique_ptr<AppSide> remote_;
+    std::unique_ptr<AppSide> app_side_;
 };
 
 } // namespace mc

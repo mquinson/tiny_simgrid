@@ -1,7 +1,12 @@
 #ifndef APPSIDE_HPP
 #define APPSIDE_HPP
 
-#include "app_include.hpp"
+#include <memory>
+#include <list>
+#include <cstring>
+#include "actor.h"
+#include "mailbox.h"
+
 
 namespace tiny_simgrid {
 namespace app {

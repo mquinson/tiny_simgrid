@@ -1,3 +1,6 @@
+#ifndef UNFOLDINGCHECKER_H
+#define UNFOLDINGCHECKER_H
+
 #include <algorithm>
 #include <array>
 #include <iostream>
@@ -16,7 +19,7 @@
 #include "UnfoldingEvent.h"
 #include "EventSet.h"
 #include "../app/actor.h"
-#include "Checker.h"
+#include "Checker.hpp"
 
 using namespace std;
 
@@ -32,8 +35,11 @@ class UnfoldingChecker : public Checker {
     unsigned int expected_events_ = 0;
 
 public:    
-//    UnfoldingChecker() = default;
-    explicit UnfoldingChecker(Session& s) : Checker(s) {};
+    UnfoldingChecker() = default;
+    ~UnfoldingChecker() = default;
+    UnfoldingChecker(const UnfoldingChecker&) = delete;
+    UnfoldingChecker& operator=(const UnfoldingChecker&) = delete;
+
 //    UnfoldingChecker(std::vector<unsigned int> confs, unsigned int expected_events)
 //        : confs_expected_(confs), confs_check_(true), expected_events_(expected_events) {}
 
@@ -54,7 +60,7 @@ public:
 
     int get_error_count() override { return error_; }
     void run() override;
-    void set_checker_parameters(const std::vector<unsigned int>& config, unsigned int expected_events) {
+    void set_uc_params(const std::vector<unsigned int>& config, unsigned int expected_events) {
         confs_expected_ = std::move(config);
         expected_events_ = expected_events;
         confs_check_ = true;
@@ -67,3 +73,5 @@ extern EventSet U, G, gD;
 
 } // namespace mc
 } // namespace tiny_simgrid
+
+#endif // UNFOLDINGCHECKER_H
