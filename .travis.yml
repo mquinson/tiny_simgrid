@@ -4,58 +4,23 @@ language: cpp
 compiler:
    - gcc
 #  - clang
-addons:
-#  apt:
-#    packages:
-#    - cmake
-#    - valgrind
-#    - gfortran
-#    - libboost-dev
-#    - libboost-all-dev
-#    - libdw-dev
-#    - libevent-dev
-#    - libunwind8-dev
-#    - pybind11-dev
-#  homebrew:
-#    packages:
-#    - python
-#  coverity_scan:
-#    project:
-#      name: "simgrid/simgrid"
-#      description: "Build submitted via Travis CI"
-#    notification_email: martin.quinson@ens-rennes.fr
-#    build_command_prepend: "cmake -Denable_documentation=OFF -Denable_coverage=ON -Denable_java=OFF -Denable_model-checking=OFF -Denable_lua=OFF -Denable_compile_optimizations=ON -Denable_smpi=ON -Denable_smpi_MPICH3_testsuite=OFF -Denable_compile_warnings=OFF ."
-#    build_command:   "make VERBOSE=1"
-#    branch_pattern: coverity
 
 jobs:
   include:
     - os: linux
       script:
       - sudo apt-get update -qq
-      - sudo apt-get install cmake # valgrind gfortran libboost-dev libboost-all-dev libdw-dev libevent-dev libunwind8-dev pybind11-dev
+      - sudo apt-get install cmake
       - (cmake  . || (echo XXX CMakeOutput.log; cat /home/travis/build/simgrid/simgrid/CMakeFiles/CMakeOutput.log; echo XXX CMakeError.log;cat /home/travis/build/simgrid/simgrid/CMakeFiles/CMakeError.log; exit 1))
-      - make -j$(nproc) VERBOSE=1 all && make -j$(nproc) tests && ctest -j$(nproc) --output-on-failure
-    - os: windows
-      script:
-      - mv "C:/Program Files/Git/usr/bin/sh.exe" "sh-ignored.exe"
-      - df -h
-      - du -hs /tmp || true
-      - export CC=gcc
-      - export CXX=g++
-      - export PATH='C:\Python38':'C:\local\boost_1_58_0':$PATH
-      - cmake -G "MinGW Makefiles" .
-      - df -h
-      - du -hs /tmp || true
-      - mingw32-make.exe VERBOSE=1 java-all && ctest --output-on-failure -R java
-      - df -h
-      - du -hc /tmp || true
-    - os: osx
-      osx_image: xcode11.4
-      script:
-      - export LIBRARY_PATH=/usr/local/lib/gcc/9
-      - cmake .
-      - make -j2 VERBOSE=1 all && make -j2 tests && ctest -j2 --output-on-failure
+      - make -j$(nproc) VERBOSE=1 all 
+      - ./tiny_simgrid 1
+      - for i in `seq 1 10` ; do ./tiny_simgrid $i ; done
+#    - os: osx
+#      osx_image: xcode11.4
+#      script:
+#      - export LIBRARY_PATH=/usr/local/lib/gcc/9
+#      - cmake .
+#      - make -j2 VERBOSE=1 all
 notifications:
   recipients:
     - martin.quinson@ens-rennes.fr
