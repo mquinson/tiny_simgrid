@@ -143,167 +143,329 @@ tiny_simgrid/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/build
 .PHONY : tiny_simgrid/fast
 
-src/api/CheckerSide.o: src/api/CheckerSide.cpp.o
+src/Api/CheckerSide.o: src/Api/CheckerSide.cpp.o
 
-.PHONY : src/api/CheckerSide.o
-
-# target to build an object file
-src/api/CheckerSide.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/CheckerSide.cpp.o
-.PHONY : src/api/CheckerSide.cpp.o
-
-src/api/CheckerSide.i: src/api/CheckerSide.cpp.i
-
-.PHONY : src/api/CheckerSide.i
-
-# target to preprocess a source file
-src/api/CheckerSide.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/CheckerSide.cpp.i
-.PHONY : src/api/CheckerSide.cpp.i
-
-src/api/CheckerSide.s: src/api/CheckerSide.cpp.s
-
-.PHONY : src/api/CheckerSide.s
-
-# target to generate assembly for a file
-src/api/CheckerSide.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/CheckerSide.cpp.s
-.PHONY : src/api/CheckerSide.cpp.s
-
-src/api/ModelChecker.o: src/api/ModelChecker.cpp.o
-
-.PHONY : src/api/ModelChecker.o
+.PHONY : src/Api/CheckerSide.o
 
 # target to build an object file
-src/api/ModelChecker.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.o
-.PHONY : src/api/ModelChecker.cpp.o
+src/Api/CheckerSide.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Api/CheckerSide.cpp.o
+.PHONY : src/Api/CheckerSide.cpp.o
 
-src/api/ModelChecker.i: src/api/ModelChecker.cpp.i
+src/Api/CheckerSide.i: src/Api/CheckerSide.cpp.i
 
-.PHONY : src/api/ModelChecker.i
+.PHONY : src/Api/CheckerSide.i
 
 # target to preprocess a source file
-src/api/ModelChecker.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.i
-.PHONY : src/api/ModelChecker.cpp.i
+src/Api/CheckerSide.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Api/CheckerSide.cpp.i
+.PHONY : src/Api/CheckerSide.cpp.i
 
-src/api/ModelChecker.s: src/api/ModelChecker.cpp.s
+src/Api/CheckerSide.s: src/Api/CheckerSide.cpp.s
 
-.PHONY : src/api/ModelChecker.s
+.PHONY : src/Api/CheckerSide.s
 
 # target to generate assembly for a file
-src/api/ModelChecker.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.s
-.PHONY : src/api/ModelChecker.cpp.s
+src/Api/CheckerSide.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Api/CheckerSide.cpp.s
+.PHONY : src/Api/CheckerSide.cpp.s
 
-src/api/RemoteSimulation.o: src/api/RemoteSimulation.cpp.o
+src/Api/ModelChecker.o: src/Api/ModelChecker.cpp.o
 
-.PHONY : src/api/RemoteSimulation.o
+.PHONY : src/Api/ModelChecker.o
 
 # target to build an object file
-src/api/RemoteSimulation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.o
-.PHONY : src/api/RemoteSimulation.cpp.o
+src/Api/ModelChecker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Api/ModelChecker.cpp.o
+.PHONY : src/Api/ModelChecker.cpp.o
 
-src/api/RemoteSimulation.i: src/api/RemoteSimulation.cpp.i
+src/Api/ModelChecker.i: src/Api/ModelChecker.cpp.i
 
-.PHONY : src/api/RemoteSimulation.i
+.PHONY : src/Api/ModelChecker.i
 
 # target to preprocess a source file
-src/api/RemoteSimulation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.i
-.PHONY : src/api/RemoteSimulation.cpp.i
+src/Api/ModelChecker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Api/ModelChecker.cpp.i
+.PHONY : src/Api/ModelChecker.cpp.i
 
-src/api/RemoteSimulation.s: src/api/RemoteSimulation.cpp.s
+src/Api/ModelChecker.s: src/Api/ModelChecker.cpp.s
 
-.PHONY : src/api/RemoteSimulation.s
+.PHONY : src/Api/ModelChecker.s
 
 # target to generate assembly for a file
-src/api/RemoteSimulation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.s
-.PHONY : src/api/RemoteSimulation.cpp.s
+src/Api/ModelChecker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Api/ModelChecker.cpp.s
+.PHONY : src/Api/ModelChecker.cpp.s
 
-src/app/AppSide.o: src/app/AppSide.cpp.o
+src/Api/RemoteSimulation.o: src/Api/RemoteSimulation.cpp.o
 
-.PHONY : src/app/AppSide.o
+.PHONY : src/Api/RemoteSimulation.o
 
 # target to build an object file
-src/app/AppSide.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.o
-.PHONY : src/app/AppSide.cpp.o
+src/Api/RemoteSimulation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Api/RemoteSimulation.cpp.o
+.PHONY : src/Api/RemoteSimulation.cpp.o
 
-src/app/AppSide.i: src/app/AppSide.cpp.i
+src/Api/RemoteSimulation.i: src/Api/RemoteSimulation.cpp.i
 
-.PHONY : src/app/AppSide.i
+.PHONY : src/Api/RemoteSimulation.i
 
 # target to preprocess a source file
-src/app/AppSide.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.i
-.PHONY : src/app/AppSide.cpp.i
+src/Api/RemoteSimulation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Api/RemoteSimulation.cpp.i
+.PHONY : src/Api/RemoteSimulation.cpp.i
 
-src/app/AppSide.s: src/app/AppSide.cpp.s
+src/Api/RemoteSimulation.s: src/Api/RemoteSimulation.cpp.s
 
-.PHONY : src/app/AppSide.s
+.PHONY : src/Api/RemoteSimulation.s
 
 # target to generate assembly for a file
-src/app/AppSide.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.s
-.PHONY : src/app/AppSide.cpp.s
+src/Api/RemoteSimulation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Api/RemoteSimulation.cpp.s
+.PHONY : src/Api/RemoteSimulation.cpp.s
 
-src/app/actor.o: src/app/actor.cpp.o
+src/App/Actor.o: src/App/Actor.cpp.o
 
-.PHONY : src/app/actor.o
+.PHONY : src/App/Actor.o
 
 # target to build an object file
-src/app/actor.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/app/actor.cpp.o
-.PHONY : src/app/actor.cpp.o
+src/App/Actor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/App/Actor.cpp.o
+.PHONY : src/App/Actor.cpp.o
 
-src/app/actor.i: src/app/actor.cpp.i
+src/App/Actor.i: src/App/Actor.cpp.i
 
-.PHONY : src/app/actor.i
+.PHONY : src/App/Actor.i
 
 # target to preprocess a source file
-src/app/actor.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/app/actor.cpp.i
-.PHONY : src/app/actor.cpp.i
+src/App/Actor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/App/Actor.cpp.i
+.PHONY : src/App/Actor.cpp.i
 
-src/app/actor.s: src/app/actor.cpp.s
+src/App/Actor.s: src/App/Actor.cpp.s
 
-.PHONY : src/app/actor.s
+.PHONY : src/App/Actor.s
 
 # target to generate assembly for a file
-src/app/actor.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/app/actor.cpp.s
-.PHONY : src/app/actor.cpp.s
+src/App/Actor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/App/Actor.cpp.s
+.PHONY : src/App/Actor.cpp.s
 
-src/app/mailbox.o: src/app/mailbox.cpp.o
+src/App/AppSide.o: src/App/AppSide.cpp.o
 
-.PHONY : src/app/mailbox.o
+.PHONY : src/App/AppSide.o
 
 # target to build an object file
-src/app/mailbox.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/app/mailbox.cpp.o
-.PHONY : src/app/mailbox.cpp.o
+src/App/AppSide.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/App/AppSide.cpp.o
+.PHONY : src/App/AppSide.cpp.o
 
-src/app/mailbox.i: src/app/mailbox.cpp.i
+src/App/AppSide.i: src/App/AppSide.cpp.i
 
-.PHONY : src/app/mailbox.i
+.PHONY : src/App/AppSide.i
 
 # target to preprocess a source file
-src/app/mailbox.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/app/mailbox.cpp.i
-.PHONY : src/app/mailbox.cpp.i
+src/App/AppSide.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/App/AppSide.cpp.i
+.PHONY : src/App/AppSide.cpp.i
 
-src/app/mailbox.s: src/app/mailbox.cpp.s
+src/App/AppSide.s: src/App/AppSide.cpp.s
 
-.PHONY : src/app/mailbox.s
+.PHONY : src/App/AppSide.s
 
 # target to generate assembly for a file
-src/app/mailbox.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/app/mailbox.cpp.s
-.PHONY : src/app/mailbox.cpp.s
+src/App/AppSide.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/App/AppSide.cpp.s
+.PHONY : src/App/AppSide.cpp.s
+
+src/App/Mailbox.o: src/App/Mailbox.cpp.o
+
+.PHONY : src/App/Mailbox.o
+
+# target to build an object file
+src/App/Mailbox.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/App/Mailbox.cpp.o
+.PHONY : src/App/Mailbox.cpp.o
+
+src/App/Mailbox.i: src/App/Mailbox.cpp.i
+
+.PHONY : src/App/Mailbox.i
+
+# target to preprocess a source file
+src/App/Mailbox.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/App/Mailbox.cpp.i
+.PHONY : src/App/Mailbox.cpp.i
+
+src/App/Mailbox.s: src/App/Mailbox.cpp.s
+
+.PHONY : src/App/Mailbox.s
+
+# target to generate assembly for a file
+src/App/Mailbox.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/App/Mailbox.cpp.s
+.PHONY : src/App/Mailbox.cpp.s
+
+src/Unfolding/Configuration.o: src/Unfolding/Configuration.cpp.o
+
+.PHONY : src/Unfolding/Configuration.o
+
+# target to build an object file
+src/Unfolding/Configuration.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Unfolding/Configuration.cpp.o
+.PHONY : src/Unfolding/Configuration.cpp.o
+
+src/Unfolding/Configuration.i: src/Unfolding/Configuration.cpp.i
+
+.PHONY : src/Unfolding/Configuration.i
+
+# target to preprocess a source file
+src/Unfolding/Configuration.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Unfolding/Configuration.cpp.i
+.PHONY : src/Unfolding/Configuration.cpp.i
+
+src/Unfolding/Configuration.s: src/Unfolding/Configuration.cpp.s
+
+.PHONY : src/Unfolding/Configuration.s
+
+# target to generate assembly for a file
+src/Unfolding/Configuration.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Unfolding/Configuration.cpp.s
+.PHONY : src/Unfolding/Configuration.cpp.s
+
+src/Unfolding/EventSet.o: src/Unfolding/EventSet.cpp.o
+
+.PHONY : src/Unfolding/EventSet.o
+
+# target to build an object file
+src/Unfolding/EventSet.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Unfolding/EventSet.cpp.o
+.PHONY : src/Unfolding/EventSet.cpp.o
+
+src/Unfolding/EventSet.i: src/Unfolding/EventSet.cpp.i
+
+.PHONY : src/Unfolding/EventSet.i
+
+# target to preprocess a source file
+src/Unfolding/EventSet.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Unfolding/EventSet.cpp.i
+.PHONY : src/Unfolding/EventSet.cpp.i
+
+src/Unfolding/EventSet.s: src/Unfolding/EventSet.cpp.s
+
+.PHONY : src/Unfolding/EventSet.s
+
+# target to generate assembly for a file
+src/Unfolding/EventSet.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Unfolding/EventSet.cpp.s
+.PHONY : src/Unfolding/EventSet.cpp.s
+
+src/Unfolding/State.o: src/Unfolding/State.cpp.o
+
+.PHONY : src/Unfolding/State.o
+
+# target to build an object file
+src/Unfolding/State.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Unfolding/State.cpp.o
+.PHONY : src/Unfolding/State.cpp.o
+
+src/Unfolding/State.i: src/Unfolding/State.cpp.i
+
+.PHONY : src/Unfolding/State.i
+
+# target to preprocess a source file
+src/Unfolding/State.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Unfolding/State.cpp.i
+.PHONY : src/Unfolding/State.cpp.i
+
+src/Unfolding/State.s: src/Unfolding/State.cpp.s
+
+.PHONY : src/Unfolding/State.s
+
+# target to generate assembly for a file
+src/Unfolding/State.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Unfolding/State.cpp.s
+.PHONY : src/Unfolding/State.cpp.s
+
+src/Unfolding/Transition.o: src/Unfolding/Transition.cpp.o
+
+.PHONY : src/Unfolding/Transition.o
+
+# target to build an object file
+src/Unfolding/Transition.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Unfolding/Transition.cpp.o
+.PHONY : src/Unfolding/Transition.cpp.o
+
+src/Unfolding/Transition.i: src/Unfolding/Transition.cpp.i
+
+.PHONY : src/Unfolding/Transition.i
+
+# target to preprocess a source file
+src/Unfolding/Transition.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Unfolding/Transition.cpp.i
+.PHONY : src/Unfolding/Transition.cpp.i
+
+src/Unfolding/Transition.s: src/Unfolding/Transition.cpp.s
+
+.PHONY : src/Unfolding/Transition.s
+
+# target to generate assembly for a file
+src/Unfolding/Transition.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Unfolding/Transition.cpp.s
+.PHONY : src/Unfolding/Transition.cpp.s
+
+src/Unfolding/UnfoldingChecker.o: src/Unfolding/UnfoldingChecker.cpp.o
+
+.PHONY : src/Unfolding/UnfoldingChecker.o
+
+# target to build an object file
+src/Unfolding/UnfoldingChecker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingChecker.cpp.o
+.PHONY : src/Unfolding/UnfoldingChecker.cpp.o
+
+src/Unfolding/UnfoldingChecker.i: src/Unfolding/UnfoldingChecker.cpp.i
+
+.PHONY : src/Unfolding/UnfoldingChecker.i
+
+# target to preprocess a source file
+src/Unfolding/UnfoldingChecker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingChecker.cpp.i
+.PHONY : src/Unfolding/UnfoldingChecker.cpp.i
+
+src/Unfolding/UnfoldingChecker.s: src/Unfolding/UnfoldingChecker.cpp.s
+
+.PHONY : src/Unfolding/UnfoldingChecker.s
+
+# target to generate assembly for a file
+src/Unfolding/UnfoldingChecker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingChecker.cpp.s
+.PHONY : src/Unfolding/UnfoldingChecker.cpp.s
+
+src/Unfolding/UnfoldingEvent.o: src/Unfolding/UnfoldingEvent.cpp.o
+
+.PHONY : src/Unfolding/UnfoldingEvent.o
+
+# target to build an object file
+src/Unfolding/UnfoldingEvent.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingEvent.cpp.o
+.PHONY : src/Unfolding/UnfoldingEvent.cpp.o
+
+src/Unfolding/UnfoldingEvent.i: src/Unfolding/UnfoldingEvent.cpp.i
+
+.PHONY : src/Unfolding/UnfoldingEvent.i
+
+# target to preprocess a source file
+src/Unfolding/UnfoldingEvent.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingEvent.cpp.i
+.PHONY : src/Unfolding/UnfoldingEvent.cpp.i
+
+src/Unfolding/UnfoldingEvent.s: src/Unfolding/UnfoldingEvent.cpp.s
+
+.PHONY : src/Unfolding/UnfoldingEvent.s
+
+# target to generate assembly for a file
+src/Unfolding/UnfoldingEvent.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingEvent.cpp.s
+.PHONY : src/Unfolding/UnfoldingEvent.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -332,168 +494,6 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/unfolding/EventSet.o: src/unfolding/EventSet.cpp.o
-
-.PHONY : src/unfolding/EventSet.o
-
-# target to build an object file
-src/unfolding/EventSet.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/EventSet.cpp.o
-.PHONY : src/unfolding/EventSet.cpp.o
-
-src/unfolding/EventSet.i: src/unfolding/EventSet.cpp.i
-
-.PHONY : src/unfolding/EventSet.i
-
-# target to preprocess a source file
-src/unfolding/EventSet.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/EventSet.cpp.i
-.PHONY : src/unfolding/EventSet.cpp.i
-
-src/unfolding/EventSet.s: src/unfolding/EventSet.cpp.s
-
-.PHONY : src/unfolding/EventSet.s
-
-# target to generate assembly for a file
-src/unfolding/EventSet.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/EventSet.cpp.s
-.PHONY : src/unfolding/EventSet.cpp.s
-
-src/unfolding/UnfoldingChecker.o: src/unfolding/UnfoldingChecker.cpp.o
-
-.PHONY : src/unfolding/UnfoldingChecker.o
-
-# target to build an object file
-src/unfolding/UnfoldingChecker.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingChecker.cpp.o
-.PHONY : src/unfolding/UnfoldingChecker.cpp.o
-
-src/unfolding/UnfoldingChecker.i: src/unfolding/UnfoldingChecker.cpp.i
-
-.PHONY : src/unfolding/UnfoldingChecker.i
-
-# target to preprocess a source file
-src/unfolding/UnfoldingChecker.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingChecker.cpp.i
-.PHONY : src/unfolding/UnfoldingChecker.cpp.i
-
-src/unfolding/UnfoldingChecker.s: src/unfolding/UnfoldingChecker.cpp.s
-
-.PHONY : src/unfolding/UnfoldingChecker.s
-
-# target to generate assembly for a file
-src/unfolding/UnfoldingChecker.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingChecker.cpp.s
-.PHONY : src/unfolding/UnfoldingChecker.cpp.s
-
-src/unfolding/UnfoldingEvent.o: src/unfolding/UnfoldingEvent.cpp.o
-
-.PHONY : src/unfolding/UnfoldingEvent.o
-
-# target to build an object file
-src/unfolding/UnfoldingEvent.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingEvent.cpp.o
-.PHONY : src/unfolding/UnfoldingEvent.cpp.o
-
-src/unfolding/UnfoldingEvent.i: src/unfolding/UnfoldingEvent.cpp.i
-
-.PHONY : src/unfolding/UnfoldingEvent.i
-
-# target to preprocess a source file
-src/unfolding/UnfoldingEvent.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingEvent.cpp.i
-.PHONY : src/unfolding/UnfoldingEvent.cpp.i
-
-src/unfolding/UnfoldingEvent.s: src/unfolding/UnfoldingEvent.cpp.s
-
-.PHONY : src/unfolding/UnfoldingEvent.s
-
-# target to generate assembly for a file
-src/unfolding/UnfoldingEvent.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingEvent.cpp.s
-.PHONY : src/unfolding/UnfoldingEvent.cpp.s
-
-src/unfolding/configuration.o: src/unfolding/configuration.cpp.o
-
-.PHONY : src/unfolding/configuration.o
-
-# target to build an object file
-src/unfolding/configuration.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/configuration.cpp.o
-.PHONY : src/unfolding/configuration.cpp.o
-
-src/unfolding/configuration.i: src/unfolding/configuration.cpp.i
-
-.PHONY : src/unfolding/configuration.i
-
-# target to preprocess a source file
-src/unfolding/configuration.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/configuration.cpp.i
-.PHONY : src/unfolding/configuration.cpp.i
-
-src/unfolding/configuration.s: src/unfolding/configuration.cpp.s
-
-.PHONY : src/unfolding/configuration.s
-
-# target to generate assembly for a file
-src/unfolding/configuration.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/configuration.cpp.s
-.PHONY : src/unfolding/configuration.cpp.s
-
-src/unfolding/state.o: src/unfolding/state.cpp.o
-
-.PHONY : src/unfolding/state.o
-
-# target to build an object file
-src/unfolding/state.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/state.cpp.o
-.PHONY : src/unfolding/state.cpp.o
-
-src/unfolding/state.i: src/unfolding/state.cpp.i
-
-.PHONY : src/unfolding/state.i
-
-# target to preprocess a source file
-src/unfolding/state.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/state.cpp.i
-.PHONY : src/unfolding/state.cpp.i
-
-src/unfolding/state.s: src/unfolding/state.cpp.s
-
-.PHONY : src/unfolding/state.s
-
-# target to generate assembly for a file
-src/unfolding/state.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/state.cpp.s
-.PHONY : src/unfolding/state.cpp.s
-
-src/unfolding/transition.o: src/unfolding/transition.cpp.o
-
-.PHONY : src/unfolding/transition.o
-
-# target to build an object file
-src/unfolding/transition.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/transition.cpp.o
-.PHONY : src/unfolding/transition.cpp.o
-
-src/unfolding/transition.i: src/unfolding/transition.cpp.i
-
-.PHONY : src/unfolding/transition.i
-
-# target to preprocess a source file
-src/unfolding/transition.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/transition.cpp.i
-.PHONY : src/unfolding/transition.cpp.i
-
-src/unfolding/transition.s: src/unfolding/transition.cpp.s
-
-.PHONY : src/unfolding/transition.s
-
-# target to generate assembly for a file
-src/unfolding/transition.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tiny_simgrid.dir/build.make CMakeFiles/tiny_simgrid.dir/src/unfolding/transition.cpp.s
-.PHONY : src/unfolding/transition.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -503,45 +503,45 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... tiny_simgrid"
-	@echo "... src/api/CheckerSide.o"
-	@echo "... src/api/CheckerSide.i"
-	@echo "... src/api/CheckerSide.s"
-	@echo "... src/api/ModelChecker.o"
-	@echo "... src/api/ModelChecker.i"
-	@echo "... src/api/ModelChecker.s"
-	@echo "... src/api/RemoteSimulation.o"
-	@echo "... src/api/RemoteSimulation.i"
-	@echo "... src/api/RemoteSimulation.s"
-	@echo "... src/app/AppSide.o"
-	@echo "... src/app/AppSide.i"
-	@echo "... src/app/AppSide.s"
-	@echo "... src/app/actor.o"
-	@echo "... src/app/actor.i"
-	@echo "... src/app/actor.s"
-	@echo "... src/app/mailbox.o"
-	@echo "... src/app/mailbox.i"
-	@echo "... src/app/mailbox.s"
+	@echo "... src/Api/CheckerSide.o"
+	@echo "... src/Api/CheckerSide.i"
+	@echo "... src/Api/CheckerSide.s"
+	@echo "... src/Api/ModelChecker.o"
+	@echo "... src/Api/ModelChecker.i"
+	@echo "... src/Api/ModelChecker.s"
+	@echo "... src/Api/RemoteSimulation.o"
+	@echo "... src/Api/RemoteSimulation.i"
+	@echo "... src/Api/RemoteSimulation.s"
+	@echo "... src/App/Actor.o"
+	@echo "... src/App/Actor.i"
+	@echo "... src/App/Actor.s"
+	@echo "... src/App/AppSide.o"
+	@echo "... src/App/AppSide.i"
+	@echo "... src/App/AppSide.s"
+	@echo "... src/App/Mailbox.o"
+	@echo "... src/App/Mailbox.i"
+	@echo "... src/App/Mailbox.s"
+	@echo "... src/Unfolding/Configuration.o"
+	@echo "... src/Unfolding/Configuration.i"
+	@echo "... src/Unfolding/Configuration.s"
+	@echo "... src/Unfolding/EventSet.o"
+	@echo "... src/Unfolding/EventSet.i"
+	@echo "... src/Unfolding/EventSet.s"
+	@echo "... src/Unfolding/State.o"
+	@echo "... src/Unfolding/State.i"
+	@echo "... src/Unfolding/State.s"
+	@echo "... src/Unfolding/Transition.o"
+	@echo "... src/Unfolding/Transition.i"
+	@echo "... src/Unfolding/Transition.s"
+	@echo "... src/Unfolding/UnfoldingChecker.o"
+	@echo "... src/Unfolding/UnfoldingChecker.i"
+	@echo "... src/Unfolding/UnfoldingChecker.s"
+	@echo "... src/Unfolding/UnfoldingEvent.o"
+	@echo "... src/Unfolding/UnfoldingEvent.i"
+	@echo "... src/Unfolding/UnfoldingEvent.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/unfolding/EventSet.o"
-	@echo "... src/unfolding/EventSet.i"
-	@echo "... src/unfolding/EventSet.s"
-	@echo "... src/unfolding/UnfoldingChecker.o"
-	@echo "... src/unfolding/UnfoldingChecker.i"
-	@echo "... src/unfolding/UnfoldingChecker.s"
-	@echo "... src/unfolding/UnfoldingEvent.o"
-	@echo "... src/unfolding/UnfoldingEvent.i"
-	@echo "... src/unfolding/UnfoldingEvent.s"
-	@echo "... src/unfolding/configuration.o"
-	@echo "... src/unfolding/configuration.i"
-	@echo "... src/unfolding/configuration.s"
-	@echo "... src/unfolding/state.o"
-	@echo "... src/unfolding/state.i"
-	@echo "... src/unfolding/state.s"
-	@echo "... src/unfolding/transition.o"
-	@echo "... src/unfolding/transition.i"
-	@echo "... src/unfolding/transition.s"
 .PHONY : help
 
 

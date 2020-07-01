@@ -4,7 +4,7 @@
 #include <iostream>
 #include <array>
 #include <vector>
-#include "../unfolding/transition.h"
+#include "../Unfolding/Transition.h"
 
 using namespace std;
 using namespace tiny_simgrid::mc;

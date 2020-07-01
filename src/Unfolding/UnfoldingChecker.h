@@ -13,12 +13,12 @@
 #include <vector>
 #include <math.h>
 
-#include "transition.h"
-#include "state.h"
-#include "configuration.h"
+#include "Transition.h"
+#include "State.h"
+#include "Configuration.h"
 #include "UnfoldingEvent.h"
 #include "EventSet.h"
-#include "../app/actor.h"
+#include "../App/Actor.h"
 #include "Checker.hpp"
 
 using namespace std;
@@ -42,8 +42,6 @@ public:
     UnfoldingChecker(const UnfoldingChecker&) = delete;
     UnfoldingChecker& operator=(const UnfoldingChecker&) = delete;
 
-//    void explore(State* state); // Start the exploration
-
     // Recursive function
     void explore(Configuration C, std::list<EventSet> maxEvtHistory, EventSet D, EventSet A, UnfoldingEvent* currentEvt,
                  EventSet prev_enC, std::set<Actor> proc);
@@ -57,8 +55,8 @@ public:
     EventSet filter(Configuration C, EventSet U);
 
     int get_error_count() override { return error_; }
-    void run() override;
     void set_uc_params(const std::vector<Actor>& actors, const std::vector<Mailbox>& mbs, const std::vector<unsigned int>& config, unsigned int expected_events);
+    void run() override;
 };
 
 extern unsigned int nb_events;

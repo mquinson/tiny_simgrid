@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 #include "ModelChecker.h"
-#include "../unfolding/UnfoldingChecker.h"
+#include "../Unfolding/UnfoldingChecker.h"
 
 namespace tiny_simgrid {
 namespace api {

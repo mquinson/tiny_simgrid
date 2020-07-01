@@ -4,8 +4,8 @@
 #include <memory>
 #include <list>
 #include <cstring>
-#include "actor.h"
-#include "mailbox.h"
+#include "Actor.h"
+#include "Mailbox.h"
 
 
 namespace tiny_simgrid {
@@ -55,8 +55,10 @@ public:
         std::vector<int> vec_mb_id;
         unpack_params(vec_mb_id, std::forward<Ts>(ts)...);
         mailbox_list_.clear();
-        for(auto i : vec_mb_id)
-            mailbox_list_.push_back(std::move(Mailbox(i)));
+        for(auto i : vec_mb_id) {
+            auto mb = Mailbox(i);
+            mailbox_list_.push_back(std::move(mb));
+        }
     }
 
     inline std::vector<Actor> get_actor_list() const { return actors_list_; }

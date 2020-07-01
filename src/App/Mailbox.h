@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <array>
-#include "../unfolding/transition.h"
+#include "../Unfolding/Transition.h"
 
 using namespace std;
 using namespace tiny_simgrid::mc;
@@ -20,7 +20,6 @@ struct Communication {
 class Mailbox
 {
 public:
-    // Mailbox() = default;
     explicit Mailbox(int i) : id(i) {}
 
     int id {0};

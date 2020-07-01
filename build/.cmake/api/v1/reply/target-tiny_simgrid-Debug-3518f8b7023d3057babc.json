@@ -44,19 +44,19 @@
 			"language" : "CXX",
 			"sourceIndexes" : 
 			[
-				0,
-				2,
-				4,
-				6,
-				8,
-				10,
-				12,
-				15,
-				17,
-				19,
-				21,
-				23,
-				25
+				1,
+				3,
+				5,
+				7,
+				9,
+				11,
+				13,
+				16,
+				18,
+				20,
+				22,
+				24,
+				26
 			]
 		}
 	],
@@ -86,7 +86,7 @@
 	"sourceGroups" : 
 	[
 		{
-			"name" : "Source Files",
+			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
 				0,
@@ -96,6 +96,7 @@
 				8,
 				10,
 				12,
+				14,
 				15,
 				17,
 				19,
@@ -105,7 +106,7 @@
 			]
 		},
 		{
-			"name" : "Header Files",
+			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
 				1,
@@ -115,12 +116,12 @@
 				9,
 				11,
 				13,
-				14,
 				16,
 				18,
 				20,
 				22,
-				24
+				24,
+				26
 			]
 		}
 	],
@@ -128,146 +129,151 @@
 	[
 		{
 			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/main.cpp",
+			"path" : "src/include.hpp",
 			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "src/api/CheckerSide.hpp",
-			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/api/CheckerSide.cpp",
-			"sourceGroupIndex" : 0
+			"path" : "src/main.cpp",
+			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "src/api/ModelChecker.h",
-			"sourceGroupIndex" : 1
+			"path" : "src/Api/CheckerSide.hpp",
+			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/api/ModelChecker.cpp",
-			"sourceGroupIndex" : 0
+			"path" : "src/Api/CheckerSide.cpp",
+			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "src/api/RemoteSimulation.hpp",
-			"sourceGroupIndex" : 1
+			"path" : "src/Api/ModelChecker.h",
+			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/api/RemoteSimulation.cpp",
-			"sourceGroupIndex" : 0
+			"path" : "src/Api/ModelChecker.cpp",
+			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "src/app/AppSide.h",
-			"sourceGroupIndex" : 1
+			"path" : "src/Api/RemoteSimulation.hpp",
+			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/app/AppSide.cpp",
-			"sourceGroupIndex" : 0
+			"path" : "src/Api/RemoteSimulation.cpp",
+			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "src/app/actor.h",
-			"sourceGroupIndex" : 1
+			"path" : "src/App/AppSide.h",
+			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/app/actor.cpp",
-			"sourceGroupIndex" : 0
+			"path" : "src/App/AppSide.cpp",
+			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "src/app/mailbox.h",
-			"sourceGroupIndex" : 1
+			"path" : "src/App/Actor.h",
+			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/app/mailbox.cpp",
+			"path" : "src/App/Actor.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/App/Mailbox.h",
 			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "src/unfolding/Checker.hpp",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "src/unfolding/state.h",
-			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/unfolding/state.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "src/unfolding/transition.h",
+			"path" : "src/App/Mailbox.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/unfolding/transition.cpp",
+			"path" : "src/Unfolding/Checker.hpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "src/unfolding/EventSet.h",
+			"path" : "src/Unfolding/EventSet.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/Unfolding/EventSet.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/unfolding/EventSet.cpp",
+			"path" : "src/Unfolding/UnfoldingChecker.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "src/unfolding/UnfoldingEvent.h",
+			"compileGroupIndex" : 0,
+			"path" : "src/Unfolding/UnfoldingChecker.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/unfolding/UnfoldingEvent.cpp",
+			"path" : "src/Unfolding/UnfoldingEvent.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "src/unfolding/configuration.h",
+			"compileGroupIndex" : 0,
+			"path" : "src/Unfolding/UnfoldingEvent.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/unfolding/configuration.cpp",
+			"path" : "src/Unfolding/Configuration.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "src/unfolding/UnfoldingChecker.h",
+			"compileGroupIndex" : 0,
+			"path" : "src/Unfolding/Configuration.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/unfolding/UnfoldingChecker.cpp",
+			"path" : "src/Unfolding/State.h",
 			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/Unfolding/State.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/Unfolding/Transition.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/Unfolding/Transition.cpp",
+			"sourceGroupIndex" : 1
 		}
 	],
 	"type" : "EXECUTABLE"

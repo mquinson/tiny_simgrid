@@ -1,4 +1,4 @@
-#include "configuration.h"
+#include "Configuration.h"
 
 namespace tiny_simgrid {
 namespace mc {

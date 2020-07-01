@@ -1,4 +1,4 @@
-#include "transition.h"
+#include "Transition.h"
 
 namespace tiny_simgrid {
 namespace mc {

@@ -1,6 +1,6 @@
 #include "UnfoldingEvent.h"
 #include "EventSet.h"
-#include "configuration.h"
+#include "Configuration.h"
 
 namespace tiny_simgrid {
 namespace mc {

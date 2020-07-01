@@ -1,4 +1,4 @@
-#include "mailbox.h"
+#include "Mailbox.h"
 
 namespace tiny_simgrid {
 namespace app {

@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <set>
-#include "../app/actor.h"
-#include "../app/mailbox.h"
+#include "../App/Actor.h"
+#include "../App/Mailbox.h"
 
 using namespace std;
 using namespace tiny_simgrid::app;

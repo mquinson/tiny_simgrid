@@ -1,4 +1,4 @@
-#include "state.h"
+#include "State.h"
 
 namespace tiny_simgrid {
 namespace mc {

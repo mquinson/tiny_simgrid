@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <list>
-#include "../unfolding/Checker.hpp"
+#include "../Unfolding/Checker.hpp"
 #include "RemoteSimulation.hpp"
 
 namespace tiny_simgrid {

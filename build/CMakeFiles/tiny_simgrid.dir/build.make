@@ -90,194 +90,194 @@ CMakeFiles/tiny_simgrid.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/main.cpp.s"
 	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/main.cpp -o CMakeFiles/tiny_simgrid.dir/src/main.cpp.s
 
-CMakeFiles/tiny_simgrid.dir/src/api/CheckerSide.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
-CMakeFiles/tiny_simgrid.dir/src/api/CheckerSide.cpp.o: ../src/api/CheckerSide.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/api/CheckerSide.cpp.o"
-	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/api/CheckerSide.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/api/CheckerSide.cpp
+CMakeFiles/tiny_simgrid.dir/src/Api/CheckerSide.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
+CMakeFiles/tiny_simgrid.dir/src/Api/CheckerSide.cpp.o: ../src/Api/CheckerSide.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/Api/CheckerSide.cpp.o"
+	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/Api/CheckerSide.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/Api/CheckerSide.cpp
 
-CMakeFiles/tiny_simgrid.dir/src/api/CheckerSide.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/api/CheckerSide.cpp.i"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/api/CheckerSide.cpp > CMakeFiles/tiny_simgrid.dir/src/api/CheckerSide.cpp.i
+CMakeFiles/tiny_simgrid.dir/src/Api/CheckerSide.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/Api/CheckerSide.cpp.i"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/Api/CheckerSide.cpp > CMakeFiles/tiny_simgrid.dir/src/Api/CheckerSide.cpp.i
 
-CMakeFiles/tiny_simgrid.dir/src/api/CheckerSide.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/api/CheckerSide.cpp.s"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/api/CheckerSide.cpp -o CMakeFiles/tiny_simgrid.dir/src/api/CheckerSide.cpp.s
+CMakeFiles/tiny_simgrid.dir/src/Api/CheckerSide.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/Api/CheckerSide.cpp.s"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/Api/CheckerSide.cpp -o CMakeFiles/tiny_simgrid.dir/src/Api/CheckerSide.cpp.s
 
-CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
-CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.o: ../src/api/ModelChecker.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.o"
-	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/api/ModelChecker.cpp
+CMakeFiles/tiny_simgrid.dir/src/Api/ModelChecker.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
+CMakeFiles/tiny_simgrid.dir/src/Api/ModelChecker.cpp.o: ../src/Api/ModelChecker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/Api/ModelChecker.cpp.o"
+	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/Api/ModelChecker.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/Api/ModelChecker.cpp
 
-CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.i"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/api/ModelChecker.cpp > CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.i
+CMakeFiles/tiny_simgrid.dir/src/Api/ModelChecker.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/Api/ModelChecker.cpp.i"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/Api/ModelChecker.cpp > CMakeFiles/tiny_simgrid.dir/src/Api/ModelChecker.cpp.i
 
-CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.s"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/api/ModelChecker.cpp -o CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.s
+CMakeFiles/tiny_simgrid.dir/src/Api/ModelChecker.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/Api/ModelChecker.cpp.s"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/Api/ModelChecker.cpp -o CMakeFiles/tiny_simgrid.dir/src/Api/ModelChecker.cpp.s
 
-CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
-CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.o: ../src/api/RemoteSimulation.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.o"
-	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/api/RemoteSimulation.cpp
+CMakeFiles/tiny_simgrid.dir/src/Api/RemoteSimulation.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
+CMakeFiles/tiny_simgrid.dir/src/Api/RemoteSimulation.cpp.o: ../src/Api/RemoteSimulation.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/Api/RemoteSimulation.cpp.o"
+	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/Api/RemoteSimulation.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/Api/RemoteSimulation.cpp
 
-CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.i"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/api/RemoteSimulation.cpp > CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.i
+CMakeFiles/tiny_simgrid.dir/src/Api/RemoteSimulation.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/Api/RemoteSimulation.cpp.i"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/Api/RemoteSimulation.cpp > CMakeFiles/tiny_simgrid.dir/src/Api/RemoteSimulation.cpp.i
 
-CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.s"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/api/RemoteSimulation.cpp -o CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.s
+CMakeFiles/tiny_simgrid.dir/src/Api/RemoteSimulation.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/Api/RemoteSimulation.cpp.s"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/Api/RemoteSimulation.cpp -o CMakeFiles/tiny_simgrid.dir/src/Api/RemoteSimulation.cpp.s
 
-CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
-CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.o: ../src/app/AppSide.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.o"
-	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/app/AppSide.cpp
+CMakeFiles/tiny_simgrid.dir/src/App/AppSide.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
+CMakeFiles/tiny_simgrid.dir/src/App/AppSide.cpp.o: ../src/App/AppSide.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/App/AppSide.cpp.o"
+	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/App/AppSide.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/App/AppSide.cpp
 
-CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.i"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/app/AppSide.cpp > CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.i
+CMakeFiles/tiny_simgrid.dir/src/App/AppSide.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/App/AppSide.cpp.i"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/App/AppSide.cpp > CMakeFiles/tiny_simgrid.dir/src/App/AppSide.cpp.i
 
-CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.s"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/app/AppSide.cpp -o CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.s
+CMakeFiles/tiny_simgrid.dir/src/App/AppSide.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/App/AppSide.cpp.s"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/App/AppSide.cpp -o CMakeFiles/tiny_simgrid.dir/src/App/AppSide.cpp.s
 
-CMakeFiles/tiny_simgrid.dir/src/app/actor.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
-CMakeFiles/tiny_simgrid.dir/src/app/actor.cpp.o: ../src/app/actor.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/app/actor.cpp.o"
-	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/app/actor.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/app/actor.cpp
+CMakeFiles/tiny_simgrid.dir/src/App/Actor.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
+CMakeFiles/tiny_simgrid.dir/src/App/Actor.cpp.o: ../src/App/Actor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/App/Actor.cpp.o"
+	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/App/Actor.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/App/Actor.cpp
 
-CMakeFiles/tiny_simgrid.dir/src/app/actor.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/app/actor.cpp.i"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/app/actor.cpp > CMakeFiles/tiny_simgrid.dir/src/app/actor.cpp.i
+CMakeFiles/tiny_simgrid.dir/src/App/Actor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/App/Actor.cpp.i"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/App/Actor.cpp > CMakeFiles/tiny_simgrid.dir/src/App/Actor.cpp.i
 
-CMakeFiles/tiny_simgrid.dir/src/app/actor.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/app/actor.cpp.s"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/app/actor.cpp -o CMakeFiles/tiny_simgrid.dir/src/app/actor.cpp.s
+CMakeFiles/tiny_simgrid.dir/src/App/Actor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/App/Actor.cpp.s"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/App/Actor.cpp -o CMakeFiles/tiny_simgrid.dir/src/App/Actor.cpp.s
 
-CMakeFiles/tiny_simgrid.dir/src/app/mailbox.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
-CMakeFiles/tiny_simgrid.dir/src/app/mailbox.cpp.o: ../src/app/mailbox.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/app/mailbox.cpp.o"
-	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/app/mailbox.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/app/mailbox.cpp
+CMakeFiles/tiny_simgrid.dir/src/App/Mailbox.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
+CMakeFiles/tiny_simgrid.dir/src/App/Mailbox.cpp.o: ../src/App/Mailbox.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/App/Mailbox.cpp.o"
+	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/App/Mailbox.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/App/Mailbox.cpp
 
-CMakeFiles/tiny_simgrid.dir/src/app/mailbox.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/app/mailbox.cpp.i"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/app/mailbox.cpp > CMakeFiles/tiny_simgrid.dir/src/app/mailbox.cpp.i
+CMakeFiles/tiny_simgrid.dir/src/App/Mailbox.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/App/Mailbox.cpp.i"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/App/Mailbox.cpp > CMakeFiles/tiny_simgrid.dir/src/App/Mailbox.cpp.i
 
-CMakeFiles/tiny_simgrid.dir/src/app/mailbox.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/app/mailbox.cpp.s"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/app/mailbox.cpp -o CMakeFiles/tiny_simgrid.dir/src/app/mailbox.cpp.s
+CMakeFiles/tiny_simgrid.dir/src/App/Mailbox.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/App/Mailbox.cpp.s"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/App/Mailbox.cpp -o CMakeFiles/tiny_simgrid.dir/src/App/Mailbox.cpp.s
 
-CMakeFiles/tiny_simgrid.dir/src/unfolding/state.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
-CMakeFiles/tiny_simgrid.dir/src/unfolding/state.cpp.o: ../src/unfolding/state.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/unfolding/state.cpp.o"
-	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/unfolding/state.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/unfolding/state.cpp
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/EventSet.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/EventSet.cpp.o: ../src/Unfolding/EventSet.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/Unfolding/EventSet.cpp.o"
+	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/Unfolding/EventSet.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/Unfolding/EventSet.cpp
 
-CMakeFiles/tiny_simgrid.dir/src/unfolding/state.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/unfolding/state.cpp.i"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/unfolding/state.cpp > CMakeFiles/tiny_simgrid.dir/src/unfolding/state.cpp.i
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/EventSet.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/Unfolding/EventSet.cpp.i"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/Unfolding/EventSet.cpp > CMakeFiles/tiny_simgrid.dir/src/Unfolding/EventSet.cpp.i
 
-CMakeFiles/tiny_simgrid.dir/src/unfolding/state.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/unfolding/state.cpp.s"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/unfolding/state.cpp -o CMakeFiles/tiny_simgrid.dir/src/unfolding/state.cpp.s
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/EventSet.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/Unfolding/EventSet.cpp.s"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/Unfolding/EventSet.cpp -o CMakeFiles/tiny_simgrid.dir/src/Unfolding/EventSet.cpp.s
 
-CMakeFiles/tiny_simgrid.dir/src/unfolding/transition.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
-CMakeFiles/tiny_simgrid.dir/src/unfolding/transition.cpp.o: ../src/unfolding/transition.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/unfolding/transition.cpp.o"
-	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/unfolding/transition.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/unfolding/transition.cpp
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingChecker.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingChecker.cpp.o: ../src/Unfolding/UnfoldingChecker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingChecker.cpp.o"
+	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingChecker.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/Unfolding/UnfoldingChecker.cpp
 
-CMakeFiles/tiny_simgrid.dir/src/unfolding/transition.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/unfolding/transition.cpp.i"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/unfolding/transition.cpp > CMakeFiles/tiny_simgrid.dir/src/unfolding/transition.cpp.i
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingChecker.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingChecker.cpp.i"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/Unfolding/UnfoldingChecker.cpp > CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingChecker.cpp.i
 
-CMakeFiles/tiny_simgrid.dir/src/unfolding/transition.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/unfolding/transition.cpp.s"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/unfolding/transition.cpp -o CMakeFiles/tiny_simgrid.dir/src/unfolding/transition.cpp.s
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingChecker.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingChecker.cpp.s"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/Unfolding/UnfoldingChecker.cpp -o CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingChecker.cpp.s
 
-CMakeFiles/tiny_simgrid.dir/src/unfolding/EventSet.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
-CMakeFiles/tiny_simgrid.dir/src/unfolding/EventSet.cpp.o: ../src/unfolding/EventSet.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/unfolding/EventSet.cpp.o"
-	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/unfolding/EventSet.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/unfolding/EventSet.cpp
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingEvent.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingEvent.cpp.o: ../src/Unfolding/UnfoldingEvent.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingEvent.cpp.o"
+	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingEvent.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/Unfolding/UnfoldingEvent.cpp
 
-CMakeFiles/tiny_simgrid.dir/src/unfolding/EventSet.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/unfolding/EventSet.cpp.i"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/unfolding/EventSet.cpp > CMakeFiles/tiny_simgrid.dir/src/unfolding/EventSet.cpp.i
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingEvent.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingEvent.cpp.i"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/Unfolding/UnfoldingEvent.cpp > CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingEvent.cpp.i
 
-CMakeFiles/tiny_simgrid.dir/src/unfolding/EventSet.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/unfolding/EventSet.cpp.s"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/unfolding/EventSet.cpp -o CMakeFiles/tiny_simgrid.dir/src/unfolding/EventSet.cpp.s
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingEvent.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingEvent.cpp.s"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/Unfolding/UnfoldingEvent.cpp -o CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingEvent.cpp.s
 
-CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingEvent.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
-CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingEvent.cpp.o: ../src/unfolding/UnfoldingEvent.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingEvent.cpp.o"
-	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingEvent.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingEvent.cpp
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/Configuration.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/Configuration.cpp.o: ../src/Unfolding/Configuration.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/Unfolding/Configuration.cpp.o"
+	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/Unfolding/Configuration.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/Unfolding/Configuration.cpp
 
-CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingEvent.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingEvent.cpp.i"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingEvent.cpp > CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingEvent.cpp.i
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/Configuration.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/Unfolding/Configuration.cpp.i"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/Unfolding/Configuration.cpp > CMakeFiles/tiny_simgrid.dir/src/Unfolding/Configuration.cpp.i
 
-CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingEvent.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingEvent.cpp.s"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingEvent.cpp -o CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingEvent.cpp.s
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/Configuration.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/Unfolding/Configuration.cpp.s"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/Unfolding/Configuration.cpp -o CMakeFiles/tiny_simgrid.dir/src/Unfolding/Configuration.cpp.s
 
-CMakeFiles/tiny_simgrid.dir/src/unfolding/configuration.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
-CMakeFiles/tiny_simgrid.dir/src/unfolding/configuration.cpp.o: ../src/unfolding/configuration.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/unfolding/configuration.cpp.o"
-	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/unfolding/configuration.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/unfolding/configuration.cpp
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/State.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/State.cpp.o: ../src/Unfolding/State.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/Unfolding/State.cpp.o"
+	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/Unfolding/State.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/Unfolding/State.cpp
 
-CMakeFiles/tiny_simgrid.dir/src/unfolding/configuration.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/unfolding/configuration.cpp.i"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/unfolding/configuration.cpp > CMakeFiles/tiny_simgrid.dir/src/unfolding/configuration.cpp.i
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/State.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/Unfolding/State.cpp.i"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/Unfolding/State.cpp > CMakeFiles/tiny_simgrid.dir/src/Unfolding/State.cpp.i
 
-CMakeFiles/tiny_simgrid.dir/src/unfolding/configuration.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/unfolding/configuration.cpp.s"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/unfolding/configuration.cpp -o CMakeFiles/tiny_simgrid.dir/src/unfolding/configuration.cpp.s
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/State.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/Unfolding/State.cpp.s"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/Unfolding/State.cpp -o CMakeFiles/tiny_simgrid.dir/src/Unfolding/State.cpp.s
 
-CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingChecker.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
-CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingChecker.cpp.o: ../src/unfolding/UnfoldingChecker.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingChecker.cpp.o"
-	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingChecker.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingChecker.cpp
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/Transition.cpp.o: CMakeFiles/tiny_simgrid.dir/flags.make
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/Transition.cpp.o: ../src/Unfolding/Transition.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/tiny_simgrid.dir/src/Unfolding/Transition.cpp.o"
+	/usr/lib64/ccache/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiny_simgrid.dir/src/Unfolding/Transition.cpp.o -c /home/eazimi/projects/tiny_simgrid/src/Unfolding/Transition.cpp
 
-CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingChecker.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingChecker.cpp.i"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingChecker.cpp > CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingChecker.cpp.i
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/Transition.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiny_simgrid.dir/src/Unfolding/Transition.cpp.i"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eazimi/projects/tiny_simgrid/src/Unfolding/Transition.cpp > CMakeFiles/tiny_simgrid.dir/src/Unfolding/Transition.cpp.i
 
-CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingChecker.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingChecker.cpp.s"
-	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingChecker.cpp -o CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingChecker.cpp.s
+CMakeFiles/tiny_simgrid.dir/src/Unfolding/Transition.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiny_simgrid.dir/src/Unfolding/Transition.cpp.s"
+	/usr/lib64/ccache/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eazimi/projects/tiny_simgrid/src/Unfolding/Transition.cpp -o CMakeFiles/tiny_simgrid.dir/src/Unfolding/Transition.cpp.s
 
 # Object files for target tiny_simgrid
 tiny_simgrid_OBJECTS = \
 "CMakeFiles/tiny_simgrid.dir/src/main.cpp.o" \
-"CMakeFiles/tiny_simgrid.dir/src/api/CheckerSide.cpp.o" \
-"CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.o" \
-"CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.o" \
-"CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.o" \
-"CMakeFiles/tiny_simgrid.dir/src/app/actor.cpp.o" \
-"CMakeFiles/tiny_simgrid.dir/src/app/mailbox.cpp.o" \
-"CMakeFiles/tiny_simgrid.dir/src/unfolding/state.cpp.o" \
-"CMakeFiles/tiny_simgrid.dir/src/unfolding/transition.cpp.o" \
-"CMakeFiles/tiny_simgrid.dir/src/unfolding/EventSet.cpp.o" \
-"CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingEvent.cpp.o" \
-"CMakeFiles/tiny_simgrid.dir/src/unfolding/configuration.cpp.o" \
-"CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingChecker.cpp.o"
+"CMakeFiles/tiny_simgrid.dir/src/Api/CheckerSide.cpp.o" \
+"CMakeFiles/tiny_simgrid.dir/src/Api/ModelChecker.cpp.o" \
+"CMakeFiles/tiny_simgrid.dir/src/Api/RemoteSimulation.cpp.o" \
+"CMakeFiles/tiny_simgrid.dir/src/App/AppSide.cpp.o" \
+"CMakeFiles/tiny_simgrid.dir/src/App/Actor.cpp.o" \
+"CMakeFiles/tiny_simgrid.dir/src/App/Mailbox.cpp.o" \
+"CMakeFiles/tiny_simgrid.dir/src/Unfolding/EventSet.cpp.o" \
+"CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingChecker.cpp.o" \
+"CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingEvent.cpp.o" \
+"CMakeFiles/tiny_simgrid.dir/src/Unfolding/Configuration.cpp.o" \
+"CMakeFiles/tiny_simgrid.dir/src/Unfolding/State.cpp.o" \
+"CMakeFiles/tiny_simgrid.dir/src/Unfolding/Transition.cpp.o"
 
 # External object files for target tiny_simgrid
 tiny_simgrid_EXTERNAL_OBJECTS =
 
 tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/main.cpp.o
-tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/api/CheckerSide.cpp.o
-tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/api/ModelChecker.cpp.o
-tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/api/RemoteSimulation.cpp.o
-tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/app/AppSide.cpp.o
-tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/app/actor.cpp.o
-tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/app/mailbox.cpp.o
-tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/unfolding/state.cpp.o
-tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/unfolding/transition.cpp.o
-tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/unfolding/EventSet.cpp.o
-tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingEvent.cpp.o
-tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/unfolding/configuration.cpp.o
-tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/unfolding/UnfoldingChecker.cpp.o
+tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/Api/CheckerSide.cpp.o
+tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/Api/ModelChecker.cpp.o
+tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/Api/RemoteSimulation.cpp.o
+tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/App/AppSide.cpp.o
+tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/App/Actor.cpp.o
+tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/App/Mailbox.cpp.o
+tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/Unfolding/EventSet.cpp.o
+tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingChecker.cpp.o
+tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/Unfolding/UnfoldingEvent.cpp.o
+tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/Unfolding/Configuration.cpp.o
+tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/Unfolding/State.cpp.o
+tiny_simgrid: CMakeFiles/tiny_simgrid.dir/src/Unfolding/Transition.cpp.o
 tiny_simgrid: CMakeFiles/tiny_simgrid.dir/build.make
 tiny_simgrid: CMakeFiles/tiny_simgrid.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/eazimi/projects/tiny_simgrid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable tiny_simgrid"

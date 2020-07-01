@@ -3,9 +3,9 @@
 
 #include <memory>
 #include <vector>
-#include "../app/actor.h"
-#include "../app/mailbox.h"
-#include "../app/AppSide.h"
+#include "../App/Actor.h"
+#include "../App/Mailbox.h"
+#include "../App/AppSide.h"
 
 using namespace tiny_simgrid::app;
 

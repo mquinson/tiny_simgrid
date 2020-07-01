@@ -7,11 +7,16 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(SRC src)
-set(UNFOLDING ${SRC}/unfolding)
-set(APP ${SRC}/app)
-set(API ${SRC}/api)
+set(UNFOLDING ${SRC}/Unfolding)
+set(APP ${SRC}/App)
+set(API ${SRC}/Api)
 
-add_executable(${PROJECT} ${SRC}/main.cpp
+add_executable(${PROJECT}
+    # ROOT
+    ${SRC}/include.hpp
+    ${SRC}/main.cpp
+
+    # API
     ${API}/CheckerSide.hpp
     ${API}/CheckerSide.cpp
     ${API}/ModelChecker.h
@@ -19,26 +24,26 @@ add_executable(${PROJECT} ${SRC}/main.cpp
     ${API}/RemoteSimulation.hpp
     ${API}/RemoteSimulation.cpp
 
-#    ${APP}/app_include.hpp
+    # APP
     ${APP}/AppSide.h
     ${APP}/AppSide.cpp
-#    ${APP}/main_include.hpp
-    ${APP}/actor.h
-    ${APP}/actor.cpp
-    ${APP}/mailbox.h
-    ${APP}/mailbox.cpp
+    ${APP}/Actor.h
+    ${APP}/Actor.cpp
+    ${APP}/Mailbox.h
+    ${APP}/Mailbox.cpp
 
+    # UNFOLDING
     ${UNFOLDING}/Checker.hpp
-    ${UNFOLDING}/state.h
-    ${UNFOLDING}/state.cpp
-    ${UNFOLDING}/transition.h
-    ${UNFOLDING}/transition.cpp
     ${UNFOLDING}/EventSet.h
     ${UNFOLDING}/EventSet.cpp
-    ${UNFOLDING}/UnfoldingEvent.h
-    ${UNFOLDING}/UnfoldingEvent.cpp
-    ${UNFOLDING}/configuration.h
-    ${UNFOLDING}/configuration.cpp
     ${UNFOLDING}/UnfoldingChecker.h
     ${UNFOLDING}/UnfoldingChecker.cpp
-    )
+    ${UNFOLDING}/UnfoldingEvent.h
+    ${UNFOLDING}/UnfoldingEvent.cpp
+    ${UNFOLDING}/Configuration.h
+    ${UNFOLDING}/Configuration.cpp
+    ${UNFOLDING}/State.h
+    ${UNFOLDING}/State.cpp
+    ${UNFOLDING}/Transition.h
+    ${UNFOLDING}/Transition.cpp
+)

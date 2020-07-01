@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <memory>
-#include "transition.h"
-#include "state.h"
+#include "Transition.h"
+#include "State.h"
 
 namespace tiny_simgrid {
 namespace mc {

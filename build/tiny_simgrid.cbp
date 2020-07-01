@@ -80,82 +80,85 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/CheckerSide.cpp">
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Api/CheckerSide.cpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/CheckerSide.hpp">
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Api/CheckerSide.hpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/ModelChecker.cpp">
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Api/ModelChecker.cpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/ModelChecker.h">
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Api/ModelChecker.h">
 			<Option target="tiny_simgrid"/>
 		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/RemoteSimulation.cpp">
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Api/RemoteSimulation.cpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/api/RemoteSimulation.hpp">
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Api/RemoteSimulation.hpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/AppSide.cpp">
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/App/Actor.cpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/AppSide.h">
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/App/Actor.h">
 			<Option target="tiny_simgrid"/>
 		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/actor.cpp">
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/App/AppSide.cpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/actor.h">
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/App/AppSide.h">
 			<Option target="tiny_simgrid"/>
 		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/mailbox.cpp">
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/App/Mailbox.cpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/app/mailbox.h">
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/App/Mailbox.h">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Unfolding/Checker.hpp">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Unfolding/Configuration.cpp">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Unfolding/Configuration.h">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Unfolding/EventSet.cpp">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Unfolding/EventSet.h">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Unfolding/State.cpp">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Unfolding/State.h">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Unfolding/Transition.cpp">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Unfolding/Transition.h">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Unfolding/UnfoldingChecker.cpp">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Unfolding/UnfoldingChecker.h">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Unfolding/UnfoldingEvent.cpp">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/Unfolding/UnfoldingEvent.h">
+			<Option target="tiny_simgrid"/>
+		</Unit>
+		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/include.hpp">
 			<Option target="tiny_simgrid"/>
 		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/main.cpp">
-			<Option target="tiny_simgrid"/>
-		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/Checker.hpp">
-			<Option target="tiny_simgrid"/>
-		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/EventSet.cpp">
-			<Option target="tiny_simgrid"/>
-		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/EventSet.h">
-			<Option target="tiny_simgrid"/>
-		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingChecker.cpp">
-			<Option target="tiny_simgrid"/>
-		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingChecker.h">
-			<Option target="tiny_simgrid"/>
-		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingEvent.cpp">
-			<Option target="tiny_simgrid"/>
-		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/UnfoldingEvent.h">
-			<Option target="tiny_simgrid"/>
-		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/configuration.cpp">
-			<Option target="tiny_simgrid"/>
-		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/configuration.h">
-			<Option target="tiny_simgrid"/>
-		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/state.cpp">
-			<Option target="tiny_simgrid"/>
-		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/state.h">
-			<Option target="tiny_simgrid"/>
-		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/transition.cpp">
-			<Option target="tiny_simgrid"/>
-		</Unit>
-		<Unit filename="/home/eazimi/projects/tiny_simgrid/src/unfolding/transition.h">
 			<Option target="tiny_simgrid"/>
 		</Unit>
 		<Unit filename="/home/eazimi/projects/tiny_simgrid/CMakeLists.txt">

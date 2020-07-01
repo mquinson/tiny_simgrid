@@ -1,70 +1,16 @@
-#include <list>
-#include <memory>
-#include <cstring>
-#include <iostream>
-
-#include "app/actor.h"
-#include "app/AppSide.h"
-#include "api/CheckerSide.hpp"
-
-static int nbInt = 0;
-
-////enum class ListType {
-////    transition = 0,
-////    actor,
-////    mailbox
-////};
-
-////void exhautiveExplore(std::list<State> stateStack, std::list<Transition> transList)
-////{
-////    State s                        = stateStack.back();
-////    std::set<Transition> trans_set = s.getEnabledTransition();
-////    if (trans_set.empty()) {
-////        nbInt++;
-////        std::cout << " \n Interleaving  " << nbInt << ":  ";
-////        for (auto t : transList)
-////            std::cout << "(t_" << t.id << ",p_" << t.actor_id << "-" << t.type << " )   ";
-
-////        stateStack.pop_back();
-////    } else {
-////        for (auto t : trans_set) {
-////            std::list<Transition> transList1 = transList;
-////            transList1.push_back(t);
-
-////            State s1 = s.execute(t);
-////            stateStack.push_back(s1);
-////            exhautiveExplore(stateStack, transList1);
-////        }
-////    }
-////}
-
-void make_test(const std::unique_ptr<tiny_simgrid::app::AppSide>& app, const std::vector<unsigned int>& configs, int expected_events)
-{
-    using CheckerSide = tiny_simgrid::api::CheckerSide;
-    auto checker_side = new CheckerSide();
-    checker_side->set_mc_params(app.get(), configs, expected_events);
-    auto error_count = checker_side->run();
-    if(error_count > 0) {
-        std::cerr << "\n\nSOMETHING WENT WRONG. Error count: " << error_count << "\n";
-        exit(EXIT_FAILURE);
-    }
-}
-
-//using AppSide = tiny_simgrid::app::AppSide;
+#include "include.hpp"
 
 int main(int argc, char** argv)
 {
     auto example = 1;
-    //    std::cout << " enter example:";
-    //    if (argc == 2)
-    //        example = std::atoi(argv[1]);
-    //    else
-    //        std::cin >> example;
+    std::cout << "Enter an example number: ";
+    if (argc == 2)
+        example = std::atoi(argv[1]);
+    else
+        std::cin >> example;
 
-
-    using TransitionActivity = tiny_simgrid::app::AppSide::TransitionActivity;
-    using AppSide = tiny_simgrid::app::AppSide;
     std::unique_ptr<AppSide> app = std::unique_ptr<AppSide>(new AppSide());
+    auto begin = clock();
 
     switch (example) {
     case 1: { // the first example (in the paper)
@@ -615,12 +561,13 @@ int main(int argc, char** argv)
         //        stateStack.push_back(initState1); }
         //        break;
     }
-        //    clock_t end         = clock();
-        //    double elapsed_secs = double(end - begin) / (60 * CLOCKS_PER_SEC);
 
-        //    std::cout << " Time in second= " << double(end - begin) / (CLOCKS_PER_SEC) << "  \n";
-        //    std::cout << " Time in minutes= " << elapsed_secs << "  \n";
+    auto end = clock();
+    double elapsed_secs = double(end-begin)/(60*CLOCKS_PER_SEC);
 
-        std::cout << " \n main() finished ";
-        return 0;
-    }
+    std::cout << " Time in second= " << double(end - begin) / (CLOCKS_PER_SEC) << "  \n";
+    std::cout << " Time in minutes= " << elapsed_secs << "  \n";
+
+    std::cout << " \n main() finished ";
+    return 0;
+}

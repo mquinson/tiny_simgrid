@@ -1,4 +1,4 @@
-#include "actor.h"
+#include "Actor.h"
 
 namespace tiny_simgrid {
 namespace app {
