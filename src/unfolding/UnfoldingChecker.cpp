@@ -94,9 +94,34 @@ void ksubset(unsigned long sizeD, std::list<UnfoldingEvent*> EvtList, std::list<
   //	std::cout << " \n finish ksubset \n";
 }
 
+void UnfoldingChecker::set_uc_params(const std::vector<Actor>& actors, const std::vector<Mailbox>& mbs, const std::vector<unsigned int>& config, unsigned int expected_events) {
+    actors_.clear();
+    mbs_.clear();
+
+    std::for_each(std::begin(actors), std::end(actors), [&](const Actor& v) { actors_.insert(v); });
+    std::for_each(std::begin(mbs), std::end(mbs), [&](const Mailbox& v) { mbs_.insert(v); });
+
+    confs_expected_ = std::move(config);
+    expected_events_ = expected_events;
+    confs_check_ = true;
+}
+
 void UnfoldingChecker::run() {
+    EventSet A, D;
+    Configuration C;
+    EventSet prev_exC;
 
-
+    auto state = new State(actors_.size(), actors_, mbs_);
+    explore(C, {EventSet()}, D, A, new UnfoldingEvent(state), prev_exC, state->actors_);
+    std::cout.flush();
+    if (nb_traces != confs_expected_.size()) {
+      std::cerr << "ERROR: " << confs_expected_.size() << " traces expected, but " << nb_traces << " observed.\n";
+      error_++;
+    }
+    if (nb_events != expected_events_) {
+      std::cerr << "ERROR: " << expected_events_ << " unique events expected, but " << nb_events << " observed.\n";
+      error_++;
+    }
 }
 
 EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C)
@@ -1414,23 +1439,23 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
   }
 }
 
-void UnfoldingChecker::explore(State* state)
-{
-  EventSet A, D;
-  Configuration C;
-  EventSet prev_exC;
+//void UnfoldingChecker::explore(State* state)
+//{
+//  EventSet A, D;
+//  Configuration C;
+//  EventSet prev_exC;
 
-  explore(C, {EventSet()}, D, A, new UnfoldingEvent(state), prev_exC, state->actors_);
-  std::cout.flush();
-  if (nb_traces != confs_expected_.size()) {
-    std::cerr << "ERROR: " << confs_expected_.size() << " traces expected, but " << nb_traces << " observed.\n";
-    error_++;
-  }
-  if (nb_events != expected_events_) {
-    std::cerr << "ERROR: " << expected_events_ << " unique events expected, but " << nb_events << " observed.\n";
-    error_++;
-  }
-}
+//  explore(C, {EventSet()}, D, A, new UnfoldingEvent(state), prev_exC, state->actors_);
+//  std::cout.flush();
+//  if (nb_traces != confs_expected_.size()) {
+//    std::cerr << "ERROR: " << confs_expected_.size() << " traces expected, but " << nb_traces << " observed.\n";
+//    error_++;
+//  }
+//  if (nb_events != expected_events_) {
+//    std::cerr << "ERROR: " << expected_events_ << " unique events expected, but " << nb_events << " observed.\n";
+//    error_++;
+//  }
+//}
 
 void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistory, EventSet D, EventSet A,
                                UnfoldingEvent* currentEvt, EventSet prev_exC, std::set<Actor> actors)

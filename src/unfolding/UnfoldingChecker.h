@@ -30,20 +30,19 @@ class UnfoldingChecker : public Checker {
     unsigned long expandedStatesCount_ = 0;
     // int Mode = 1; // Mode = 1 is a mutexed model
     std::vector<unsigned int> confs_expected_;
+    std::set<Actor> actors_;
+    std::set<Mailbox> mbs_;
     bool confs_check_             = false;
     int error_                    = 0;
     unsigned int expected_events_ = 0;
 
 public:    
-    UnfoldingChecker() = default;
+    explicit UnfoldingChecker() = default;
     ~UnfoldingChecker() = default;
     UnfoldingChecker(const UnfoldingChecker&) = delete;
     UnfoldingChecker& operator=(const UnfoldingChecker&) = delete;
 
-//    UnfoldingChecker(std::vector<unsigned int> confs, unsigned int expected_events)
-//        : confs_expected_(confs), confs_check_(true), expected_events_(expected_events) {}
-
-    void explore(State* state); // Start the exploration
+//    void explore(State* state); // Start the exploration
 
     // Recursive function
     void explore(Configuration C, std::list<EventSet> maxEvtHistory, EventSet D, EventSet A, UnfoldingEvent* currentEvt,
@@ -57,14 +56,9 @@ public:
     void genEventFromCandidate(EventSet& result, Transition t, UnfoldingEvent* preEvt, EventSet U1, EventSet Uc);
     EventSet filter(Configuration C, EventSet U);
 
-
     int get_error_count() override { return error_; }
     void run() override;
-    void set_uc_params(const std::vector<unsigned int>& config, unsigned int expected_events) {
-        confs_expected_ = std::move(config);
-        expected_events_ = expected_events;
-        confs_check_ = true;
-    }
+    void set_uc_params(const std::vector<Actor>& actors, const std::vector<Mailbox>& mbs, const std::vector<unsigned int>& config, unsigned int expected_events);
 };
 
 extern unsigned int nb_events;

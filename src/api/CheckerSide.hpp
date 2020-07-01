@@ -16,7 +16,7 @@ public:
     CheckerSide(const CheckerSide&) = delete;
     CheckerSide& operator=(const CheckerSide&) = delete;
 
-    void run() const;
+    short run() const;
     int get_error_count() const;
     void set_mc_params(AppSide* app, std::vector<unsigned int> configs, unsigned int expected_events);
 

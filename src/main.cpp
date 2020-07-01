@@ -43,31 +43,12 @@ void make_test(const std::unique_ptr<tiny_simgrid::app::AppSide>& app, const std
     using CheckerSide = tiny_simgrid::api::CheckerSide;
     auto checker_side = new CheckerSide();
     checker_side->set_mc_params(app.get(), configs, expected_events);
-
-//    checker_side->initialize(*app, configs, expected_events);
-//    using Session = tiny_simgrid::api::Session;
-//    auto session_ = std::unique_ptr<Session>(new Session(*app));
-//    session_->run();
-
-    auto a=20;
-
-//    std::unique_ptr<ModelChecker> model_ckecker_ = std::unique_ptr<ModelChecker>(new ModelChecker());
-//    model_ckecker_->setChecker(new UnfoldingChecker(confs, evt_count));
-
-
-
-////    UC.explore(new State(actors.size(), actors, mailboxes));
-
-//    auto error_count = model_ckecker_->get_error_count();
-//    if (error_count > 0) {
-//        std::cerr << "\n\nSOMETHING WENT WRONG. Error count: " << error_count << "\n";
-//        exit(EXIT_FAILURE);
-//    } else {
-//        return true;
-//    }
+    auto error_count = checker_side->run();
+    if(error_count > 0) {
+        std::cerr << "\n\nSOMETHING WENT WRONG. Error count: " << error_count << "\n";
+        exit(EXIT_FAILURE);
+    }
 }
-
-
 
 //using AppSide = tiny_simgrid::app::AppSide;
 

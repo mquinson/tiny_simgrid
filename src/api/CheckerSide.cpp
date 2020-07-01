@@ -14,13 +14,16 @@ void CheckerSide::set_mc_params (AppSide* app, std::vector<unsigned int> configs
 void CheckerSide::create_checker(std::vector<unsigned int> configs, unsigned int expected_events) {
     using UnfoldingChecker = tiny_simgrid::mc::UnfoldingChecker;
     auto unfolding = new UnfoldingChecker();
-    unfolding->set_uc_params(configs, expected_events);
-
+    auto actors = model_checker_->get_remote_simulation().read_acotr_list();
+    auto mbs = model_checker_->get_remote_simulation().read_mailbox_list();
+    unfolding->set_uc_params(actors, mbs, configs, expected_events);
     model_checker_->set_checker(std::unique_ptr<Checker>(unfolding));
 }
 
-void CheckerSide::run() const {
+short CheckerSide::run() const {
     model_checker_->get_ckecker()->run();
+    auto error_count = model_checker_->get_ckecker()->get_error_count();
+    return error_count;
 }
 
 int CheckerSide::get_error_count() const {
