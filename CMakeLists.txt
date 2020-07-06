@@ -36,6 +36,8 @@ add_executable(${PROJECT}
     ${UNFOLDING}/Checker.hpp
     ${UNFOLDING}/EventSet.h
     ${UNFOLDING}/EventSet.cpp
+    ${UNFOLDING}/EventSetNew.h
+    ${UNFOLDING}/EventSetNew.cpp
     ${UNFOLDING}/UnfoldingChecker.h
     ${UNFOLDING}/UnfoldingChecker.cpp
     ${UNFOLDING}/UnfoldingEvent.h
