@@ -1,7 +1,0 @@
-/home/eazimi/projects/prototype_clone/CMakeFiles/install/strip.dir
-/home/eazimi/projects/prototype_clone/CMakeFiles/install/local.dir
-/home/eazimi/projects/prototype_clone/CMakeFiles/install.dir
-/home/eazimi/projects/prototype_clone/CMakeFiles/list_install_components.dir
-/home/eazimi/projects/prototype_clone/CMakeFiles/rebuild_cache.dir
-/home/eazimi/projects/prototype_clone/CMakeFiles/edit_cache.dir
-/home/eazimi/projects/prototype_clone/CMakeFiles/tiny_simgrid.dir

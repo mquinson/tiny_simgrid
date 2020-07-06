@@ -1,0 +1,13 @@
+CMakeLists.txt.user
+CMakeFiles/
+build/
+.cmake/
+*~
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+tiny_simgrid
+.vscode/
+CTestTestfile.cmake
+DartConfiguration.tcl
+Testing/

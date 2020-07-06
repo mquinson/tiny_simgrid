@@ -1,3 +1,0 @@
-/home/eazimi/projects/tiny_simgrid/build/CMakeFiles/rebuild_cache.dir
-/home/eazimi/projects/tiny_simgrid/build/CMakeFiles/edit_cache.dir
-/home/eazimi/projects/tiny_simgrid/build/CMakeFiles/tiny_simgrid.dir
