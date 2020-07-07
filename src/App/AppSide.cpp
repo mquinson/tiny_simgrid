@@ -4,7 +4,7 @@ namespace tiny_simgrid {
 namespace  app {
 
 const char* ListTypeName[] = {"transition", "actor", "mailbox"};
-const char* TransitionTypeName[] = {"Isend", "Ireceive", "test", "wait"};
+const char* TransitionTypeName[] = {"Isend", "Ireceive", "Test", "Wait"};
 
 Transition* AppSide::create_transition(int mailbox_id, int communication_id, TransitionType type) const {
     return new Transition(mailbox_id, communication_id, TransitionTypeName[static_cast<int>(type)]);

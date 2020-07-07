@@ -220,7 +220,7 @@ void TEST_10() {
 
 void TEST_11() {
     // the first simix model -> 2 traces
-               // Transition (maiboxid, commid, type)
+    // Transition (maiboxid, commid, type)
     auto tr_0 = app->create_transition(1, 1, TransitionType::Isend); // p0
     auto tr_1 = app->create_transition(1, 1, TransitionType::wait); // p0
     auto tr_2 = app->create_transition(1, 1, TransitionType::Isend); // p1
