@@ -1,1 +1,0 @@
-/usr/bin/g++  -g   CMakeFiles/prototype_git.dir/src/test.cpp.o CMakeFiles/prototype_git.dir/src/Simulation.cpp.o CMakeFiles/prototype_git.dir/src/UnfoldingChecker.cpp.o CMakeFiles/prototype_git.dir/src/UnfoldingEvent.cpp.o  -o prototype_git 

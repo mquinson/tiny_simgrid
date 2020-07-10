@@ -1,16 +1,6 @@
-
-#include "UnfoldingChecker.hpp"
-
-#include <iostream>
-#include <list>
-#include <math.h>
-#include <queue>
-#include <set>
-#include <string>
-
-#include <unistd.h>
-
-using namespace std;
+#include "App/Actor.h"
+#include "App/Transition.h"
+#include "Unfolding/UnfoldingChecker.h"
 
 static int nbInt = 0;
 void exhautiveExplore(std::list<State> stateStack, std::list<Transition> transList)
