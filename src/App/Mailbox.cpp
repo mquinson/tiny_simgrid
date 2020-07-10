@@ -1,10 +1,6 @@
 #include "Mailbox.h"
 
-//struct Communication {
-//    int actorId   = -1;
-//    int commId    = -1;
-//    std::string status = "pending";
-//};
+namespace app {
 
 bool Mailbox::operator<(const Mailbox& other) const
 {
@@ -58,3 +54,5 @@ bool Mailbox::checkComm(Transition t)
 
     return false;
 }
+
+} // namespace app

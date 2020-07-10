@@ -5,6 +5,8 @@
 #include <vector>
 #include "Transition.h"
 
+namespace app {
+
 class Actor
 {
 public:
@@ -17,5 +19,7 @@ public:
     Actor(int id, std::vector<Transition> trans);
     bool operator<(const Actor& other) const;
 };
+
+} // namespace app
 
 #endif // ACTOR_H

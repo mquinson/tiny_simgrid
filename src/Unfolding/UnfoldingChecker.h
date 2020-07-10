@@ -4,6 +4,8 @@
 #include "list"
 #include "Global.hpp"
 
+namespace uc {
+
 extern unsigned int nb_events;
 extern unsigned int nb_traces;
 extern EventSet U, G, gD;
@@ -38,5 +40,7 @@ public:
 
     int error_count() { return error_; }
 };
+
+} // namespace uc
 
 #endif // UNFOLDINGCHECKER_H

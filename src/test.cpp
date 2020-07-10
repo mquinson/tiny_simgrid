@@ -2,6 +2,9 @@
 #include "App/Transition.h"
 #include "Unfolding/UnfoldingChecker.h"
 
+using namespace uc;
+using namespace app;
+
 static int nbInt = 0;
 void exhautiveExplore(std::list<State> stateStack, std::list<Transition> transList)
 {

@@ -5,6 +5,10 @@
 #include "../App/Actor.h"
 #include "../App/Mailbox.h"
 
+using namespace app;
+
+namespace uc {
+
 class State {
 public:
     unsigned long nb_actors_ = 0;
@@ -20,5 +24,7 @@ public:
 
     void print();
 };
+
+} // namespace uc
 
 #endif // STATE_H

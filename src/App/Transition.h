@@ -5,6 +5,8 @@
 
 using namespace std;
 
+namespace app {
+
 class Transition {
 public:
     int actor_id    = 0;
@@ -28,5 +30,7 @@ public:
     Transition(int read_write, int access_var);
     Transition(int mbId, int commId, string type);
 };
+
+} // namespace app
 
 #endif // TRANSITION_H

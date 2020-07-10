@@ -1,5 +1,7 @@
 #include "Actor.h"
 
+namespace app {
+
 Actor::Actor(int id, std::vector<Transition> trans)
 {
     this->id       = id;
@@ -28,3 +30,5 @@ bool Actor::operator<(const Actor& other) const
 {
     return (this->id < other.id);
 }
+
+} // namespace app

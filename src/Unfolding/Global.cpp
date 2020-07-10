@@ -1,5 +1,7 @@
 #include "Global.hpp"
 
+namespace uc {
+
 UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, Transition t, EventSet causes)
 {
 
@@ -557,3 +559,4 @@ bool EventSet::isEmptyIntersection(EventSet evtS1, EventSet evtS2)
     return true;
 }
 
+} // namespace uc

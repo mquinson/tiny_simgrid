@@ -1,3 +1,15 @@
 *.o
 *~
 proto
+.cmake/
+CMakeCache.txt
+CMakeFiles/
+CMakeLists.txt.user.72c9fe8
+CTestTestfile.cmake
+DartConfiguration.tcl
+Makefile
+cmake_install.cmake
+qtcsettings.cmake
+tiny_simgrid
+tiny_simgrid.cbp
+CMakeLists.txt.user

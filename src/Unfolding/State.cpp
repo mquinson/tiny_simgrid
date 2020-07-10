@@ -1,6 +1,8 @@
 #include "State.h"
 #include <iostream>
 
+namespace uc {
+
 State::State(unsigned long nb_actor, std::set<Actor> actors, std::set<Mailbox> mailboxes)
 {
     this->nb_actors_ = nb_actor;
@@ -88,3 +90,5 @@ void State::print()
                 std::cout << "t" << j << "-p" << p.id << " is executed";
     std::cout << ")";
 }
+
+} // namespace uc

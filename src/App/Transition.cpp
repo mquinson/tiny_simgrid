@@ -1,5 +1,7 @@
 #include "Transition.h"
 
+namespace app {
+
 Transition::Transition(int read_write, int access_var)
 {
     this->read_write = read_write;
@@ -58,3 +60,5 @@ bool Transition::isDependent(Transition other)
 
     return false;
 }
+
+} // namespace app

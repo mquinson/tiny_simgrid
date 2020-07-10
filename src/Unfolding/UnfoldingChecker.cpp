@@ -1,6 +1,8 @@
 #include "UnfoldingChecker.h"
 #include <math.h>
 
+namespace uc {
+
 unsigned int nb_events = 0;
 unsigned int nb_traces = 0;
 EventSet U, G, gD;
@@ -1590,3 +1592,5 @@ void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D)
         }
     }
 }
+
+} // namespace uc

@@ -7,6 +7,8 @@
 #include "../App/Transition.h"
 #include "State.h"
 
+namespace uc {
+
 class UnfoldingEvent;
 
 class EventSet {
@@ -80,5 +82,7 @@ public:
     bool operator==(const UnfoldingEvent& other) const;
     void print();
 };
+
+} // namespace uc
 
 #endif // GLOBAL_HPP

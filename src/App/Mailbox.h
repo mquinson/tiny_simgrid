@@ -6,7 +6,7 @@
 
 using namespace std;
 
-//struct Communication;
+namespace app {
 
 struct Communication {
     int actorId   = -1;
@@ -29,5 +29,7 @@ public:
     Mailbox(int i) : id(i) {}
     Mailbox() = default;
 };
+
+} // namespace app
 
 #endif // MAILBOX_H
