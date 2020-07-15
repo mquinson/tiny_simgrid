@@ -45,7 +45,9 @@ public:
     template<typename... Ts>
     void add_to_mailbox_list(Ts... ts);
 
+    std::vector<Transition> get_transition_list() const;
     inline std::vector<Actor> get_actor_list() const { return actors_list_; }
+    inline int get_actor_count() const { return actors_list_.size(); }
     inline std::vector<Mailbox> get_mailbox_list() const { return mailbox_list_; }
 
 private:

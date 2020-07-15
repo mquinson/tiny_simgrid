@@ -12,6 +12,14 @@ Transition* AppSide::create_transition(int mailbox_id, int communication_id, Tra
     return new Transition(mailbox_id, communication_id, TransitionTypeName[static_cast<int>(type)]);
 }
 
+std::vector<Transition> AppSide::get_transition_list() const {
+    std::vector<Transition> transition_list;
+    for(auto it:actors_list_) {
+        transition_list.push_back(it.trans[0]);
+    }
+    return transition_list;
+}
+
 Transition* AppSide::create_transition(TransitionActivity activity, int access_variable) const {
     return new Transition(static_cast<int>(activity), access_variable);
 }
