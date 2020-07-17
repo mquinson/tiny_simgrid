@@ -13,3 +13,4 @@ qtcsettings.cmake
 tiny_simgrid
 tiny_simgrid.cbp
 CMakeLists.txt.user
+.clang-format
