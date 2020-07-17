@@ -1243,13 +1243,13 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
         }
 
     } else {
-
+        // TODO: TR
         // get all enabled transitions at current appState
         std::set<Transition> enabledTransitions;
         enabledTransitions = C.lastEvent->appState.getEnabledTransition();
 
         // try to create new events from a enabled transition and every maximal_Evt history in maxEvtHistory of C
-
+        // TODO: TR
         for (auto trans : enabledTransitions) {
             // if trans is not a wait action, and is dependent with the transition of last event
             if (trans.isDependent(C.lastEvent->transition) and trans.type != "Wait" and trans.type != "Test" and
