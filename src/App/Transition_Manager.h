@@ -20,7 +20,7 @@ typedef struct s_state {
     };
 } s_state_t;
 
-typedef std::unique_ptr<s_state_t> state_t;
+typedef std::shared_ptr<s_state_t> state_t;
 
 enum class TransitionActivity {
     read = 0,
@@ -48,9 +48,11 @@ public:
     static Transition* create_transition(TransitionActivity activity, int access_variable);
     static Transition* create_transition(int mailbox_id, int communication_id, TransitionType type);
     void keep_transition(int eid, int n_actors, std::vector<Actor> actors, std::vector<Mailbox> mailboxes);
-
+    std::vector<int> get_enabled_transition(int eid) const;
 private:
     std::map<int, state_t> states_;
+    std::vector<int> get_actors_transitions(std::vector<Actor>& actors, std::vector<Mailbox>& mbs) const;
+
 };
 
 } // namespace app

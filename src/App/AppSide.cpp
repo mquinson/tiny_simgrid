@@ -50,9 +50,9 @@ int AppSide::get_transition_comm_id(int tid) const
     return -1;
 }
 
-int* AppSide::get_enabled_transition() const
+std::vector<int> AppSide::get_enabled_transition(int eid) const
 {
-    return nullptr;
+    return tr_manager_->get_enabled_transition(eid);
 }
 
 string AppSide::get_transition_type(int tid) const

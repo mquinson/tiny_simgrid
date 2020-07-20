@@ -35,7 +35,7 @@ public:
     void keep_transition(int eid, int n_actors, std::vector<Actor> actors, std::vector<Mailbox> mailboxes);
     bool is_transition_dependent(int tid0, int tid1) const;
     void execute_transition(int tid);
-    int* get_enabled_transition() const;
+    std::vector<int> get_enabled_transition(int eid) const;
     std::string get_transition_type(int tid) const;
     int get_transition_actor_id(int tid) const;
     int get_transition_mailbox_id(int tid) const;
