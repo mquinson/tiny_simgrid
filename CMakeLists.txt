@@ -18,6 +18,8 @@ add_executable(${PROJECT} ${SRC_DIR}/test.cpp
     ${SRC_DIR}/App/Mailbox.h
     ${SRC_DIR}/App/Transition.cpp
     ${SRC_DIR}/App/Transition.h
+    ${SRC_DIR}/App/Transition_Manager.cpp
+    ${SRC_DIR}/App/Transition_Manager.h
 
     #Unfolding
     ${SRC_DIR}/Unfolding/Global.cpp

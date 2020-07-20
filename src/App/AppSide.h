@@ -3,38 +3,22 @@
 
 #include <iostream>
 #include <vector>
+#include "Transition_Manager.h"
 
 using namespace std;
 
 namespace app {
 
-class Transition;
 class Actor;
 class Mailbox;
 
 class AppSide {
 public:
-    enum class TransitionActivity {
-        read = 0,
-        write,
-        mutex_lock,
-        mutex_unlock
-    };
-
-    enum TransitionType {
-        Isend = 0,
-        Ireceive,
-        test,
-        wait
-    };
-
-    AppSide() = default;
-    AppSide(AppSide const&) = default;
-    AppSide& operator=(AppSide const&) = default;
+    AppSide();
+    AppSide(const AppSide&) = delete;
+    AppSide& operator=(AppSide const&) = delete;
+    AppSide(AppSide&&) = default;
     ~AppSide() = default;
-
-    Transition* create_transition(TransitionActivity activity, int access_variable) const;
-    Transition* create_transition(int mailbox_id, int communication_id, TransitionType type) const;
 
     template<typename... Ts>
     Actor* create_actor(int actor_id, Ts&&... ts);
@@ -42,9 +26,13 @@ public:
 //    template<typename... Ts>
 //    void add_to_actor_list(Ts&&... ts);
 
+    Transition* create_transition(TransitionActivity activity, int access_variable);
+    Transition* create_transition(int mailbox_id, int communication_id, TransitionType type);
+
     template<typename... Ts>
     void add_to_mailbox_list(Ts... ts);
 
+    void keep_transition(int eid, int n_actors, std::vector<Actor> actors, std::vector<Mailbox> mailboxes);
     bool is_transition_dependent(int tid0, int tid1) const;
     void execute_transition(int tid);
     int* get_enabled_transition() const;
@@ -64,6 +52,7 @@ private:
 //    std::vector<Actor> actors_ready_;
 //    std::vector<Actor> actors_ran_;
     std::vector<Mailbox> mailbox_list_;
+    std::unique_ptr<Transition_Manager> tr_manager_;
 
     template<typename T, typename... Rest>
     void unpack_params(std::vector<T>& vec, T&& t, Rest&&... rest) const;

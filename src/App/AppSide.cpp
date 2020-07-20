@@ -1,16 +1,28 @@
 #include "AppSide.h"
 #include <algorithm>
-#include "Transition.h"
 #include "Actor.h"
 #include "Mailbox.h"
 
 namespace app {
 
-const char* ListTypeName[] = {"transition", "actor", "mailbox"};
-const char* TransitionTypeName[] = {"Isend", "Ireceive", "Test", "Wait"};
+AppSide::AppSide()
+{
+    tr_manager_ = std::unique_ptr<Transition_Manager>(new Transition_Manager());
+}
 
-Transition* AppSide::create_transition(int mailbox_id, int communication_id, TransitionType type) const {
-    return new Transition(mailbox_id, communication_id, TransitionTypeName[static_cast<int>(type)]);
+Transition *AppSide::create_transition(TransitionActivity activity, int access_variable)
+{
+    return Transition_Manager::create_transition(activity, access_variable);
+}
+
+Transition *AppSide::create_transition(int mailbox_id, int communication_id, TransitionType type)
+{
+    return Transition_Manager::create_transition(mailbox_id, communication_id, type);
+}
+
+void AppSide::keep_transition(int eid, int n_actors, std::vector<Actor> actors, std::vector<Mailbox> mailboxes)
+{
+    tr_manager_->keep_transition(eid, n_actors, actors, mailboxes);
 }
 
 bool AppSide::is_transition_dependent(int tid0, int tid1) const
@@ -108,10 +120,6 @@ string AppSide::get_transition_type(int tid) const
 //    }
 //    return transition_list;
 //}
-
-Transition* AppSide::create_transition(TransitionActivity activity, int access_variable) const {
-    return new Transition(static_cast<int>(activity), access_variable);
-}
 
 template<typename... Ts>
 Actor* AppSide::create_actor(int actor_id, Ts&&... ts) {
