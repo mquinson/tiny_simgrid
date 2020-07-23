@@ -17,7 +17,7 @@ jobs:
           name: Install dependencies and build project
           command: |
             cmake .
-            ./build-wrapper-linux-x86/build-wrapper-linux-x86-64 --out-dir /tmp make VERBOSE
+            ./build-wrapper-linux-x86/build-wrapper-linux-x86-64 --out-dir /tmp make VERBOSE=1
             ctest
       - sonarcloud/scan
 
