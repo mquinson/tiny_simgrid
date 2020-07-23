@@ -7,11 +7,18 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install dependencies and build project
-          command: cmake . && make && ctest
+          name: sonarcloud needs some extra love
+          command: |
+            apt update && apt install -y curl
+            wget https://sonarcloud.io/static/cpp/build-wrapper-linux-x86.zip
+            unzip build-wrapper-linux-x86.zip
+            cp build-wrapper-linux-x86/libinterceptor-x86_64.so build-wrapper-linux-x86/libinterceptor-haswell.so
       - run:
-          name: sonarcloud needs an extra package
-          command: apt update && apt install -y curl 
+          name: Install dependencies and build project
+          command: |
+            cmake .
+            ./build-wrapper-linux-x86/build-wrapper-linux-x86-64 --out-dir /tmp make VERBOSE
+            ctest
       - sonarcloud/scan
 
 orbs:
