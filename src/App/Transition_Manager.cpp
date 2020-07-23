@@ -5,9 +5,9 @@
 
 namespace app {
 
-Transition* Transition_Manager::create_transition(int mailbox_id, int communication_id, TransitionType type)
+Transition* Transition_Manager::create_transition(int mailbox_id, int communication_id, short type)
 {
-    return new Transition(mailbox_id, communication_id, TransitionTypeName[static_cast<int>(type)]);
+    return new Transition(mailbox_id, communication_id, TransitionTypeName[type]);
 }
 
 void Transition_Manager::checkpoint(int eid, int n_actors, std::vector<Actor> actors, std::vector<Mailbox> mailboxes)
@@ -52,8 +52,8 @@ std::vector<int> Transition_Manager::get_actors_transitions(std::vector<Actor> &
     return tr_ids;
 }
 
-Transition* Transition_Manager::create_transition(TransitionActivity activity, int access_variable) {
-    return new Transition(static_cast<int>(activity), access_variable);
+Transition* Transition_Manager::create_transition(short activity, int access_variable) {
+    return new Transition(activity, access_variable);
 }
 
 } // namespace app

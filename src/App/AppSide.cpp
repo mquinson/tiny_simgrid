@@ -12,12 +12,12 @@ AppSide::AppSide()
     tr_manager_ = std::unique_ptr<Transition_Manager>(new Transition_Manager());
 }
 
-Transition *AppSide::create_transition(TransitionActivity activity, int access_variable)
+Transition *AppSide::create_transition(short activity, int access_variable)
 {
     return Transition_Manager::create_transition(activity, access_variable);
 }
 
-Transition *AppSide::create_transition(int mailbox_id, int communication_id, TransitionType type)
+Transition *AppSide::create_transition(int mailbox_id, int communication_id, short type)
 {
     return Transition_Manager::create_transition(mailbox_id, communication_id, type);
 }
@@ -155,9 +155,9 @@ void AppSide::add_to_mailbox_list(Ts... ts) {
 }
 
 template<typename... Ts>
-Actor* AppSide::create_actor(int actor_id, Ts&&... ts)
-{
-    return Actor_Manager::create_actor(actor_id, std::forward<Ts>(ts)...);
+Actor* AppSide::create_actor(int actor_id, Ts&&... ts) {
+//    return Actor_Manager::create_actor(actor_id, std::forward<Ts>(ts)...);
+    return ac_manager_->create_actor(actor_id, std::forward<Ts>(ts)...);
 }
 
 template<typename... Ts>

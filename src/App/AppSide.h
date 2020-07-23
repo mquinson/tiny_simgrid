@@ -26,12 +26,18 @@ public:
     template<typename... Ts>
     Actor* create_actor(int actor_id, Ts&&... ts);
 
+
+    Actor* create_actor1(int actor_id, Transition&& tr0, Transition&& tr1) {
+        return ac_manager_->create_actor1(actor_id, std::move(tr0), std::move(tr1));
+    }
+
+
     template<typename... Ts>
     void add_to_actors(Ts&&... ts);
 
     /* TRANSITION */
-    Transition* create_transition(TransitionActivity activity, int access_variable);
-    Transition* create_transition(int mailbox_id, int communication_id, TransitionType type);
+    Transition* create_transition(short activity, int access_variable);
+    Transition* create_transition(int mailbox_id, int communication_id, short type);
     void checkpoint(int eid, int n_actors, const std::set<Actor> &actors, const std::set<Mailbox> &mailboxes);
     bool is_transition_dependent(int tid0, int tid1) const;
     void execute_transition(int tid);
@@ -45,8 +51,6 @@ public:
     template<typename... Ts>
     void add_to_mailbox_list(Ts... ts);
     inline std::vector<Mailbox> get_mailbox_list() const { return mailbox_list_; }
-
-
 
 private:
     std::vector<Mailbox> mailbox_list_;

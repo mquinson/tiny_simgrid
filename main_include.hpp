@@ -1,4 +1,0 @@
-#ifndef MAIN_INCLUDE_HPP
-#define MAIN_INCLUDE_HPP
-
-#endif // MAIN_INCLUDE_HPP

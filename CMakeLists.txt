@@ -8,7 +8,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(SRC_DIR src)
 
-add_executable(${PROJECT} ${SRC_DIR}/test.cpp 
+add_executable(${PROJECT}
+    ${SRC_DIR}/test.cpp
+    ${SRC_DIR}/main_include.hpp
+
     # APP
     ${SRC_DIR}/App/Actor.cpp
     ${SRC_DIR}/App/Actor.h
