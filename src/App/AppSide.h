@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <set>
 #include "Transition_Manager.h"
 
 using namespace std;
@@ -32,7 +33,7 @@ public:
     template<typename... Ts>
     void add_to_mailbox_list(Ts... ts);
 
-    void keep_transition(int eid, int n_actors, std::vector<Actor> actors, std::vector<Mailbox> mailboxes);
+    void keep_transition(int eid, int n_actors, const std::set<Actor> &actors, const std::set<Mailbox> &mailboxes);
     bool is_transition_dependent(int tid0, int tid1) const;
     void execute_transition(int tid);
     std::vector<int> get_enabled_transition(int eid) const;

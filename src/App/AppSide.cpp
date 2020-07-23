@@ -1,5 +1,6 @@
 #include "AppSide.h"
-#include <algorithm>
+//#include <algorithm>
+#include <array>
 #include "Actor.h"
 #include "Mailbox.h"
 
@@ -20,9 +21,29 @@ Transition *AppSide::create_transition(int mailbox_id, int communication_id, Tra
     return Transition_Manager::create_transition(mailbox_id, communication_id, type);
 }
 
-void AppSide::keep_transition(int eid, int n_actors, std::vector<Actor> actors, std::vector<Mailbox> mailboxes)
+void AppSide::keep_transition(int eid, int n_actors, const std::set<Actor> &actors, const std::set<Mailbox> &mailboxes)
 {
-    tr_manager_->keep_transition(eid, n_actors, actors, mailboxes);
+    typedef struct s {
+        int id;
+        int id1;
+        std::unique_ptr<std::vector<int>> idd;
+    } s_t;
+
+    s_t id[20];
+    for(auto p : actors) {
+        s_t s;
+        s.id = p.id;
+        s.id1 = p.nb_trans;
+        std::vector<int> *abc = new std::vector<int>();
+        for(int i=0; i<(int)p.trans.size(); i++) {
+            abc->push_back(p.trans[i].id);
+        }
+        s.idd = std::unique_ptr<std::vector<int>>(abc);
+//        id.insert(id.end(), std::move(s));
+        s_t sec = std::move(s);
+    }
+
+//    tr_manager_->keep_transition(eid, n_actors, actors, mailboxes);
 }
 
 bool AppSide::is_transition_dependent(int tid0, int tid1) const

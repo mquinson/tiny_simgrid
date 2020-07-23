@@ -3,6 +3,7 @@
 
 #include "list"
 #include "Global.hpp"
+#include "../App/AppSide.h"
 
 namespace uc {
 
@@ -17,6 +18,7 @@ class UnfoldingChecker {
     bool confs_check_             = false;
     int error_                    = 0;
     unsigned int expected_events_ = 0;
+    std::unique_ptr<AppSide> app_side_ = std::unique_ptr<AppSide>(new AppSide());;
 
 public:
     UnfoldingChecker() = default;
