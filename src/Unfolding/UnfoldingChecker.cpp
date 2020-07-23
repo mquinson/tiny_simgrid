@@ -1507,7 +1507,7 @@ void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistor
 
     e->appState = nextState;
 
-    app_side_->keep_transition(e->id, nextState.nb_actors_, nextState.actors_, nextState.mailboxes_);
+    app_side_->checkpoint(e->id, nextState.nb_actors_, nextState.actors_, nextState.mailboxes_);
 
     // UnfoldingEvent* newEvent = e + e.transition;
     Configuration C1 = C;

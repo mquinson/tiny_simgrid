@@ -12,8 +12,11 @@ add_executable(${PROJECT} ${SRC_DIR}/test.cpp
     # APP
     ${SRC_DIR}/App/Actor.cpp
     ${SRC_DIR}/App/Actor.h
+    ${SRC_DIR}/App/Actor_Manager.cpp
+    ${SRC_DIR}/App/Actor_Manager.h
     ${SRC_DIR}/App/AppSide.cpp
     ${SRC_DIR}/App/AppSide.h
+    ${SRC_DIR}/App/Config.hpp
     ${SRC_DIR}/App/Mailbox.cpp
     ${SRC_DIR}/App/Mailbox.h
     ${SRC_DIR}/App/Transition.cpp

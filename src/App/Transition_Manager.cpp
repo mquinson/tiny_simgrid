@@ -1,14 +1,7 @@
 #include "Transition_Manager.h"
 #include "Actor.h"
 #include "Mailbox.h"
-
-const char* ListTypeName[] = {"transition", "actor", "mailbox"};
-
-const std::string ISEND = "Isend";
-const std::string IRECEIVE = "Ireceive";
-const std::string TEST = "Test";
-const std::string WAIT = "Wait";
-const std::string TransitionTypeName[] = { ISEND, IRECEIVE, TEST, WAIT };
+#include "Config.hpp"
 
 namespace app {
 
@@ -17,7 +10,7 @@ Transition* Transition_Manager::create_transition(int mailbox_id, int communicat
     return new Transition(mailbox_id, communication_id, TransitionTypeName[static_cast<int>(type)]);
 }
 
-void Transition_Manager::keep_transition(int eid, int n_actors, std::vector<Actor> actors, std::vector<Mailbox> mailboxes)
+void Transition_Manager::checkpoint(int eid, int n_actors, std::vector<Actor> actors, std::vector<Mailbox> mailboxes)
 {
     state_t state = std::make_shared<s_state_t>(s_state_t(n_actors, actors, mailboxes));
     auto node = std::pair<int, state_t>(eid, std::move(state));
@@ -38,24 +31,24 @@ std::vector<int> Transition_Manager::get_enabled_transition(int eid) const
 std::vector<int> Transition_Manager::get_actors_transitions(std::vector<Actor> &actors, std::vector<Mailbox> &mbs) const
 {
     std::vector<int> tr_ids;
-    for(auto p : actors) {
-        for (auto j=0; j<(int)p.nb_trans; j++) {
-            if (not p.trans[j].executed) {
-                bool check = true;
-                if (p.trans[j].type == WAIT) {
-                    for (auto mb : mbs) {
-                        if (p.trans[j].mailbox_id == mb.id and (not mb.checkComm(p.trans[j]))) {
-                            check = false;
-                            break;
-                        }
-                    }
-                }
-                if (check)
-                    tr_ids.push_back(p.trans[j].id);
-                break;
-            }
-        }
-    }
+//    for(auto p : actors) {
+//        for (auto j=0; j<(int)p.nb_trans; j++) {
+//            if (not p.trans[j].executed) {
+//                bool check = true;
+//                if (p.trans[j].type == WAIT) {
+//                    for (auto mb : mbs) {
+//                        if (p.trans[j].mailbox_id == mb.id and (not mb.checkComm(p.trans[j]))) {
+//                            check = false;
+//                            break;
+//                        }
+//                    }
+//                }
+//                if (check)
+//                    tr_ids.push_back(p.trans[j].id);
+//                break;
+//            }
+//        }
+//    }
     return tr_ids;
 }
 

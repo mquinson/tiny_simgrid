@@ -8,6 +8,7 @@ namespace app {
 
 AppSide::AppSide()
 {
+    ac_manager_ = std::unique_ptr<Actor_Manager>(new Actor_Manager());
     tr_manager_ = std::unique_ptr<Transition_Manager>(new Transition_Manager());
 }
 
@@ -21,27 +22,27 @@ Transition *AppSide::create_transition(int mailbox_id, int communication_id, Tra
     return Transition_Manager::create_transition(mailbox_id, communication_id, type);
 }
 
-void AppSide::keep_transition(int eid, int n_actors, const std::set<Actor> &actors, const std::set<Mailbox> &mailboxes)
+void AppSide::checkpoint(int eid, int n_actors, const std::set<Actor> &actors, const std::set<Mailbox> &mailboxes)
 {
-    typedef struct s {
-        int id;
-        int id1;
-        std::unique_ptr<std::vector<int>> idd;
-    } s_t;
+//    typedef struct s {
+//        int id;
+//        int id1;
+//        std::unique_ptr<std::vector<int>> idd;
+//    } s_t;
 
-    s_t id[20];
-    for(auto p : actors) {
-        s_t s;
-        s.id = p.id;
-        s.id1 = p.nb_trans;
-        std::vector<int> *abc = new std::vector<int>();
-        for(int i=0; i<(int)p.trans.size(); i++) {
-            abc->push_back(p.trans[i].id);
-        }
-        s.idd = std::unique_ptr<std::vector<int>>(abc);
-//        id.insert(id.end(), std::move(s));
-        s_t sec = std::move(s);
-    }
+//    s_t id[20];
+//    for(auto p : actors) {
+//        s_t s;
+//        s.id = p.id;
+//        s.id1 = p.nb_trans;
+//        std::vector<int> *abc = new std::vector<int>();
+//        for(int i=0; i<(int)p.trans.size(); i++) {
+//            abc->push_back(p.trans[i].id);
+//        }
+//        s.idd = std::unique_ptr<std::vector<int>>(abc);
+////        id.insert(id.end(), std::move(s));
+//        s_t sec = std::move(s);
+//    }
 
 //    tr_manager_->keep_transition(eid, n_actors, actors, mailboxes);
 }
@@ -143,21 +144,6 @@ string AppSide::get_transition_type(int tid) const
 //}
 
 template<typename... Ts>
-Actor* AppSide::create_actor(int actor_id, Ts&&... ts) {
-    std::vector<Transition> vec_tr;
-    unpack_params(vec_tr, std::forward<Ts>(ts)...);
-    return (new Actor(actor_id, vec_tr));
-}
-
-//template<typename... Ts>
-//void AppSide::add_to_actor_list(Ts&&... ts) {
-//    std::vector<Actor> vec_ac;
-//    unpack_params(vec_ac, std::forward<Ts>(ts)...);
-//    actors_ready_.clear();
-//    actors_ready_ = std::move(vec_ac);
-//}
-
-template<typename... Ts>
 void AppSide::add_to_mailbox_list(Ts... ts) {
     std::vector<int> vec_mb_id;
     unpack_params(vec_mb_id, std::forward<Ts>(ts)...);
@@ -168,15 +154,16 @@ void AppSide::add_to_mailbox_list(Ts... ts) {
     }
 }
 
-template<typename T, typename... Rest>
-void AppSide::unpack_params(std::vector<T>& vec, T&& t, Rest&&... rest) const {
-    vec.push_back(std::forward<T>(t));
-    unpack_params(vec, std::forward<Rest>(rest)...);
+template<typename... Ts>
+Actor* AppSide::create_actor(int actor_id, Ts&&... ts)
+{
+    return Actor_Manager::create_actor(actor_id, std::forward<Ts>(ts)...);
 }
 
-template<typename T>
-void AppSide::unpack_params(std::vector<T>& vec, T&& t) const {
-    vec.push_back(std::forward<T>(t));
+template<typename... Ts>
+void AppSide::add_to_actors(Ts&&... ts)
+{
+    ac_manager_->add_to_actors(std::forward<Ts>(ts)...);
 }
 
 

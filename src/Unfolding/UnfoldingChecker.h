@@ -22,10 +22,7 @@ class UnfoldingChecker {
 
 public:
     UnfoldingChecker() = default;
-    UnfoldingChecker(std::vector<unsigned int> confs, unsigned int expected_events)
-        : confs_expected_(confs), confs_check_(true), expected_events_(expected_events)
-    {
-    }
+    UnfoldingChecker(std::vector<unsigned int> confs, unsigned int expected_events) : confs_expected_(confs), confs_check_(true), expected_events_(expected_events) {}
 
     void explore(State* state); // Start the exploration
     // Recursive function
