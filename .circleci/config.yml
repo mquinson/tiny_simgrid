@@ -11,7 +11,7 @@ jobs:
           command: cmake . && make && ctest
       - run:
           name: sonarcloud needs an extra package
-          command: apt update && apt install -y curl && mkdir -p /root/project/bw-outputs
+          command: apt update && apt install -y curl 
       - sonarcloud/scan
 
 orbs:
