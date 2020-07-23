@@ -1,0 +1,24 @@
+version: 2.1
+ 
+jobs:
+  build:
+    docker:
+      - image: simgrid/build-deps
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies and build project
+          command: cmake . && make && ctest
+      - run:
+          name: sonarcloud needs an extra package
+          command: apt update && apt install -y curl && mkdir -p /root/project/bw-outputs
+      - sonarcloud/scan
+
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.1
+
+workflows:
+  main:
+    jobs:
+      - build:
+          context: SonarCloud
