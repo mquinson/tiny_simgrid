@@ -20,6 +20,8 @@ void TEST_15() {
     // the first simix model -> 6 traces
     // Transition (maiboxid, commid, type)
 
+    app_side->initialize();
+
     // p0
     auto tr0_0 = app_side->create_transition(1, 1, static_cast<short>(TrType::ISend));
     auto tr0_1 = app_side->create_transition(1, 1, static_cast<short>(TrType::Wait));

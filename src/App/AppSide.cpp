@@ -2,7 +2,7 @@
 
 namespace app {
 
-AppSide::AppSide()
+void AppSide::initialize()
 {
     ac_manager_ = std::unique_ptr<Actor_Manager>(new Actor_Manager());
     tr_manager_ = std::unique_ptr<Transition_Manager>(new Transition_Manager());

@@ -14,11 +14,12 @@ namespace app {
 
 class AppSide {
 public:
-    AppSide();
+    AppSide() = default;
     AppSide(const AppSide&) = delete;
     AppSide& operator=(AppSide const&) = delete;
     AppSide(AppSide&&) = default;
     ~AppSide() = default;
+    void initialize();
 
     /* ACTOR */    
     template<typename... Ts>
