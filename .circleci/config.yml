@@ -18,23 +18,23 @@ jobs:
           command: |
             cmake .
             ./build-wrapper-linux-x86/build-wrapper-linux-x86-64 --out-dir /tmp make VERBOSE=1
-	    ./tiny_simgrid 1
-	    ./tiny_simgrid 2
-	    ./tiny_simgrid 3
-	    ./tiny_simgrid 4
-	    ./tiny_simgrid 5
-	    ./tiny_simgrid 6
-	    ./tiny_simgrid 7
-	    ./tiny_simgrid 8
-	    ./tiny_simgrid 9
-	    ./tiny_simgrid 10
-	    ./tiny_simgrid 11
-	    ./tiny_simgrid 12
-	    ./tiny_simgrid 13
-	    ./tiny_simgrid 14
-	    ./tiny_simgrid 15
-	    ./tiny_simgrid 16
-	    ./tiny_simgrid 17
+            ./tiny_simgrid 1
+            ./tiny_simgrid 2
+            ./tiny_simgrid 3
+            ./tiny_simgrid 4
+            ./tiny_simgrid 5
+            ./tiny_simgrid 6
+            ./tiny_simgrid 7
+            ./tiny_simgrid 8
+            ./tiny_simgrid 9
+            ./tiny_simgrid 10
+            ./tiny_simgrid 11
+            ./tiny_simgrid 12
+            ./tiny_simgrid 13
+            ./tiny_simgrid 14
+            ./tiny_simgrid 15
+            ./tiny_simgrid 16
+            ./tiny_simgrid 17
             ctest || true
       - sonarcloud/scan
 
