@@ -40,6 +40,6 @@ install(TARGETS ${PROJECTS} DESTINATION bin)
 
 INCLUDE(CTest)
 ENABLE_TESTING()
-foreach(tnum 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 19 20 21 22 23 24 25 26 27 28 29)
+foreach(tnum 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17)
   add_test(test-${tnum} ./tiny_simgrid ${tnum})
 endforeach()
