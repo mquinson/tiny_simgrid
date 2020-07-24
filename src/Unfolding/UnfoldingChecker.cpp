@@ -199,41 +199,6 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C)
     return J;
 }
 
-/*check whether a mutex wait is enabled ?*/
-bool isMwaitEnabled(Configuration C, EventSet causalityEvt, Transition trans)
-{
-
-    UnfoldingEvent* e;
-    // bool chk = false;
-    int nbLock = 0, nbUnlock = 0;
-
-    for (auto evt : C.events_)
-        if (trans.actor_id == evt->transition.actor_id and trans.lockId == evt->transition.lockId) {
-            e = evt;
-            break;
-        }
-
-    EventSet His = e->getHistory();
-
-    for (auto evt : His.events_)
-        if (evt->transition.type == "lock")
-            nbLock++;
-
-    EventSet unlockSet;
-
-    // get all unlock and put them into unlockSet
-
-    for (auto evt : causalityEvt.events_) {
-        nbUnlock++; // wait is only depent with unlock -> all evts in causalityEvt are unlock -> increase nbUnlock
-        EventSet H = evt->getHistory();
-        for (auto evt1 : H.events_)
-            if (evt1->transition.type == "Unlock")
-                unlockSet.insert(evt1);
-    }
-
-    return (nbLock < unlockSet.size() - 1) ? true : false;
-}
-
 bool checkSdRcCreation(Transition trans, EventSet ancestors, Configuration C)
 {
 
