@@ -363,7 +363,7 @@ void Configuration::createEvts(Configuration C, EventSet& result, Transition t, 
 // gives a event in actorMaxEvent has the id = a given id
 UnfoldingEvent* Configuration::findActorMaxEvt(int id)
 {
-    UnfoldingEvent* immPreEvt;
+    UnfoldingEvent* immPreEvt = nullptr;
     for (auto evt : this->actorMaxEvent.events_)
         if (evt->transition.actor_id == id)
             immPreEvt = evt;
@@ -378,7 +378,7 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
     bool chk = false;
     EventSet causalityEvts;
     EventSet exC, ancestorSet, H;
-    UnfoldingEvent* immPreEvt;
+    UnfoldingEvent* immPreEvt = nullptr;
 
     // add causality evts to causalityEvts set, firstly add last event to causalityEvts
     causalityEvts.insert(C.lastEvent);
@@ -1048,7 +1048,7 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
 EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<EventSet> maxEvtHistory)
 {
     EventSet exC, EvtSet, causalityEvts, ancestorSet, H;
-    UnfoldingEvent *testedEvt, *immPreEvt;
+    UnfoldingEvent *testedEvt = nullptr, *immPreEvt = nullptr;
     bool chk = false;
 
     /* if trans is not dependent with the last transition -> return
@@ -1376,7 +1376,7 @@ void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistor
                                UnfoldingEvent* currentEvt, EventSet prev_exC, std::set<Actor> actors)
 {
 
-    UnfoldingEvent* e;
+    UnfoldingEvent* e = nullptr;
     EventSet enC, exC = prev_exC; // exC.erase(currentEvt);
 
     exC.erase(currentEvt);
