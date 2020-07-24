@@ -31,7 +31,6 @@ public:
 
     void extend(std::set<Actor> proc, Configuration C, std::list<EventSet> maxEvtHistory, EventSet& ExC, EventSet& enC);
     void remove(UnfoldingEvent* e, Configuration C, EventSet D);
-    EventSet computeAlt(EventSet D, Configuration C);
     EventSet KpartialAlt(EventSet D, Configuration C);
 
     void genEventFromCandidate(EventSet& result, Transition t, UnfoldingEvent* preEvt, EventSet U1, EventSet Uc);

@@ -150,14 +150,8 @@ bool UnfoldingEvent::concernSameComm(UnfoldingEvent* event, UnfoldingEvent* othe
 
 bool UnfoldingEvent::isConflict(UnfoldingEvent* event, UnfoldingEvent* otherEvent)
 {
-
-    // event e should not conflict with itself
-
-    // if(event->conflictEvts.contains(otherEvent) or otherEvent->conflictEvts.contains(event) ) return true;
-
     if (*event == *otherEvent)
         return false;
-    //	std::cout<<"\n trong ham cflict";
 
     EventSet h1, h2;
     h1 = event->getHistory();
@@ -174,11 +168,7 @@ bool UnfoldingEvent::isConflict(UnfoldingEvent* event, UnfoldingEvent* otherEven
     //  if 2 event they have the same causes, just check their last transition
     if (event->causes == otherEvent->causes)
         return event->transition.isDependent(otherEvent->transition);
-
-    // if not, then check dependent relation on their full histories
-
     else {
-
         h1.insert(event);
         h2.insert(otherEvent);
         EventSet his = h1;
@@ -191,9 +181,6 @@ bool UnfoldingEvent::isConflict(UnfoldingEvent* event, UnfoldingEvent* otherEven
 
         return h1.depends(h2);
     }
-    //	std::cout<<"\n trong ham cflict6";
-
-    return false;
 }
 
 /** @brief Checks if current event is in immediate conflict with the provided one

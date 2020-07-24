@@ -22,7 +22,7 @@ public:
 
     std::array<Communication, 20> sendList;
     std::array<Communication, 20> receiveList;
-    void update(Transition t);
+    void update(const Transition& t);
     bool checkComm(Transition t);
     bool operator<(const Mailbox& other) const;
 

@@ -199,61 +199,6 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C)
     return J;
 }
 
-EventSet UnfoldingChecker::computeAlt(EventSet D, Configuration C)
-{
-
-    /* U1 is a subset of U, we cheking that C1 \union U1 is configuration ?
-   and for all e \in D, exist e' \in  (C1 \union U1): e' immediate  conflict with e
-   */
-
-    /*instead of using U we use Uc = U \ C -> in expore we replace J \ C by J*/
-
-    EventSet Uc = U;
-
-    int nbsubset = pow(2, Uc.size());
-
-    for (auto i = 1; i < nbsubset; i++) {
-
-        int B[Uc.size()];
-        EventSet U1;
-        int k = 0;
-
-        for (unsigned int i = 0; i < Uc.size(); i++)
-            B[i] = 0;
-
-        intTobinary(i, B);
-
-        for (auto it : Uc.events_) {
-            if (B[k] == 1)
-                U1.insert(it);
-            k++;
-        }
-
-        EventSet C1 = C.makeUnion(C, U1);
-
-        if (C1.isConfig()) {
-            size_t count = 0;
-            for (auto evt : D.events_)
-                for (auto evt1 : C1.events_)
-
-                {
-
-                    if (evt->isImmediateConflict1(evt, evt1) and U.contains(evt1)) {
-                        count++;
-                        break;
-                    }
-                }
-
-            if (count == D.size()) {
-                return U1;
-            }
-        }
-    }
-
-    EventSet evtS;
-    return evtS;
-}
-
 /*check whether a mutex wait is enabled ?*/
 bool isMwaitEnabled(Configuration C, EventSet causalityEvt, Transition trans)
 {

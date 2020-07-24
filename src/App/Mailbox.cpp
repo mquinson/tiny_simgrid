@@ -7,7 +7,7 @@ bool Mailbox::operator<(const Mailbox& other) const
     return (this->id < other.id);
 }
 
-void Mailbox::update(Transition t)
+void Mailbox::update(const Transition& t)
 {
     Communication comm;
 
