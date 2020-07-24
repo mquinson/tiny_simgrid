@@ -6,13 +6,11 @@
 #include <set>
 #include "Actor_Manager.h"
 #include "Transition_Manager.h"
+#include "Mailbox.h"
 
 using namespace std;
 
 namespace app {
-
-class Actor;
-class Mailbox;
 
 class AppSide {
 public:
@@ -22,18 +20,16 @@ public:
     AppSide(AppSide&&) = default;
     ~AppSide() = default;
 
-    /* ACTOR */
+    /* ACTOR */    
     template<typename... Ts>
-    Actor* create_actor(int actor_id, Ts&&... ts);
+    Actor* create_actor(int actor_id, Ts&&... ts) {
+        return Actor_Manager::create_actor(actor_id, std::forward<Ts>(ts)...);
+    };
 
-
-    Actor* create_actor1(int actor_id, Transition&& tr0, Transition&& tr1) {
-        return ac_manager_->create_actor1(actor_id, std::move(tr0), std::move(tr1));
+    template<typename... Ts>
+    void add_to_actors(Ts&&... ts) {
+        ac_manager_->add_to_actors(std::forward<Ts>(ts)...);
     }
-
-
-    template<typename... Ts>
-    void add_to_actors(Ts&&... ts);
 
     /* TRANSITION */
     Transition* create_transition(short activity, int access_variable);
@@ -48,12 +44,12 @@ public:
     int get_transition_comm_id(int tid) const;
 
     /* MAILBOX */
-    template<typename... Ts>
-    void add_to_mailbox_list(Ts... ts);
-    inline std::vector<Mailbox> get_mailbox_list() const { return mailbox_list_; }
+//    template<typename... Ts>
+//    void add_to_mailbox_list(Ts... ts);
+//    inline std::vector<Mailbox> get_mailbox_list() const { return mailbox_list_; }
 
 private:
-    std::vector<Mailbox> mailbox_list_;
+//    std::vector<Mailbox> mailbox_list_;
     std::unique_ptr<Actor_Manager> ac_manager_;
     std::unique_ptr<Transition_Manager> tr_manager_;
 };

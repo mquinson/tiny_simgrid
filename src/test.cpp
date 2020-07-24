@@ -4,7 +4,6 @@
 #include "main_include.hpp"
 
 using namespace uc;
-using namespace app;
 
 static int nbInt = 0;
 void exhautiveExplore(std::list<State> stateStack, std::list<Transition> transList)
@@ -215,6 +214,7 @@ int main(int argc, char** argv)
 
     case 15: { // the first simix model -> 6 traces
                // Transition (maiboxid, commid, type)
+      TEST_15();
       test_reduction({Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}),
                       Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}),
 

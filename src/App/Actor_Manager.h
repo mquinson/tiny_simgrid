@@ -3,26 +3,29 @@
 
 #include <vector>
 #include "Actor.h"
+#include "Config.hpp"
 
 namespace app {
 
 class Actor_Manager
 {
 public:
-    Actor_Manager();
+    Actor_Manager() = default;
 
     template<typename... Ts>
-    /*static */Actor* create_actor(int actor_id, Ts&&... ts);
-
-    Actor* create_actor1(int actor_id, Transition&& tr0, Transition&& tr1) {
-        std::vector<Transition> ac;
-        ac.push_back(tr0);
-        ac.push_back(tr1);
-        return new Actor(actor_id, ac);
+    static Actor* create_actor(int actor_id, Ts&&... ts) {
+        std::vector<Transition> vec_tr;
+        unpack_params(vec_tr, std::forward<Ts>(ts)...);
+        return (new Actor(actor_id, vec_tr));
     }
 
     template<typename... Ts>
-    void add_to_actors(Ts&&... ts);
+    void add_to_actors(Ts&&... ts) {
+        std::vector<Actor> vec_ac;
+        unpack_params(vec_ac, std::forward<Ts>(ts)...);
+        actors_.clear();
+        actors_ = std::move(vec_ac);
+    }
 
 private:
     std::vector<Actor> actors_;

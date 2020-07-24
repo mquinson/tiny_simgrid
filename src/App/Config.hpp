@@ -19,16 +19,16 @@ enum class TransitionType {
     wait
 };
 
-//template<typename T, typename... Rest>
-//void unpack_params(std::vector<T>& vec, T&& t, Rest&&... rest) {
-//    vec.push_back(std::forward<T>(t));
-//    unpack_params(vec, std::forward<Rest>(rest)...);
-//}
+template<typename T, typename... Rest>
+void unpack_params(std::vector<T>& vec, T&& t, Rest&&... rest) {
+    vec.push_back(t);
+    unpack_params(vec, std::forward<Rest>(rest)...);
+}
 
-//template<typename T>
-//void unpack_params(std::vector<T>& vec, T&& t) {
-//    vec.push_back(std::forward<T>(t));
-//}
+template<typename T>
+void unpack_params(std::vector<T>& vec, T&& t) {
+    vec.push_back(t);
+}
 
 } // namespace app
 
