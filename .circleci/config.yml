@@ -35,6 +35,17 @@ jobs:
             ./tiny_simgrid 15
             ./tiny_simgrid 16
             ./tiny_simgrid 17
+            ./tiny_simgrid 19
+            ./tiny_simgrid 20
+            ./tiny_simgrid 21
+            ./tiny_simgrid 22
+            ./tiny_simgrid 23
+            ./tiny_simgrid 24
+            ./tiny_simgrid 25
+            ./tiny_simgrid 26
+            ./tiny_simgrid 27
+            ./tiny_simgrid 28
+            ./tiny_simgrid 29
             ctest || true
       - sonarcloud/scan
 
