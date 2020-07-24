@@ -214,7 +214,7 @@ int main(int argc, char** argv)
 
     case 15: { // the first simix model -> 6 traces
                // Transition (maiboxid, commid, type)
-      TEST_15();
+//      TEST_15();
       test_reduction({Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}),
                       Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}),
 
