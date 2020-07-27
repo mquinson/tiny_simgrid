@@ -2,7 +2,6 @@
 #define MAIN_INCLUDE_HPP
 
 #include "App/AppSide.h"
-//#include "App/Actor.h"
 
 using namespace app;
 
