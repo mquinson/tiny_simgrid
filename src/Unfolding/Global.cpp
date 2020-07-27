@@ -192,40 +192,6 @@ bool UnfoldingEvent::isConflict(UnfoldingEvent* event, UnfoldingEvent* otherEven
  *
  * In the paper, e1.isImmediate(e2) will be written "e1 #ⁱ e2"
  */
-
-bool UnfoldingEvent::isImmediateConflict(UnfoldingEvent* evt1, UnfoldingEvent* evt2)
-{
-
-    // event e should not conflict with itself
-    if (*evt1 == *evt2)
-        return false;
-
-    // The first condition is easy to check
-    if (!evt1->isConflict(evt1, evt2))
-        return false;
-
-    // Now, check the second condition
-    EventSet hist1 = evt1->getHistory();
-    EventSet hist2 = evt2->getHistory();
-
-    // First compare the existing configurations
-
-    // romove all common events
-
-    EventSet hist11 = hist1, hist21 = hist2;
-
-    for (auto e1 : hist2.events_)
-        if (evt1->isConflict(evt1, e1))
-            return false;
-
-    // Compare the first config to the second new event
-    for (auto e1 : hist1.events_)
-        if (evt2->isConflict(evt2, e1))
-            return false;
-    // Every tests passed
-    return true;
-}
-
 bool UnfoldingEvent::isImmediateConflict1(UnfoldingEvent* evt1, UnfoldingEvent* evt2)
 {
 
@@ -303,13 +269,13 @@ bool UnfoldingEvent::conflictWithConfig(UnfoldingEvent* event, Configuration con
 }
 
 // this operator is used for ordering in a set (need a key)
-bool UnfoldingEvent::operator<(const UnfoldingEvent& other) const
-{
-    if ((this->transition.actor_id < other.transition.actor_id) || (this->transition.id < other.transition.id) or
-            (!(this->causes == other.causes)))
-        return true;
-    return false;
-}
+//bool UnfoldingEvent::operator<(const UnfoldingEvent& other)
+//{
+//    if ((this->transition.actor_id < other.transition.actor_id) || (this->transition.id < other.transition.id) or
+//            (!(this->causes == other.causes)))
+//        return true;
+//    return false;
+//}
 
 /** @brief check semantic equality (same transition, same causes) */
 bool UnfoldingEvent::operator==(const UnfoldingEvent& other) const
@@ -510,6 +476,7 @@ bool EventSet::operator==(const EventSet& other) const
 
     return this->events_ == other.events_;
 }
+
 void EventSet::insert(UnfoldingEvent* e)
 {
     if (!this->contains(e))

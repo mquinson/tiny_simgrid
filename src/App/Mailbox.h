@@ -4,8 +4,6 @@
 #include <array>
 #include "Transition.h"
 
-using namespace std;
-
 namespace app {
 
 struct Communication {
@@ -26,7 +24,7 @@ public:
     bool checkComm(Transition t);
     bool operator<(const Mailbox& other) const;
 
-    Mailbox(int i) : id(i) {}
+    explicit Mailbox(int i) : id(i) {}
     Mailbox() = default;
 };
 

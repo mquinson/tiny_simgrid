@@ -455,7 +455,7 @@ EventSet createWaitEvt(UnfoldingEvent* evt, Configuration C, Transition trans)
     int nbSdRc     = 0;
     EventSet hist  = evt->getHistory();
     int mbId       = evt->transition.mailbox_id;
-    string comType = evt->transition.type;
+    std::string comType = evt->transition.type;
 
     if (comType == "Isend") {
         // if waited communication is  send, count the number of send request before the communication
@@ -550,7 +550,7 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
     EventSet lastEvtHist = C.lastEvent->getHistory();
 
     int mbId       = evt->transition.mailbox_id;
-    string comType = evt->transition.type;
+    std::string comType = evt->transition.type;
     UnfoldingEvent *newEvt1, *newEvt2;
     EventSet ancestors;
 
@@ -1224,8 +1224,8 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                 /* we only call function createWaitEvt if the last action is send/ or receive
           or dependent with the wait (transition in the same actor) */
 
-                string comType  = C.lastEvent->transition.type;
-                string comType1 = evt->transition.type;
+                std::string comType  = C.lastEvent->transition.type;
+                std::string comType1 = evt->transition.type;
 
                 if (C.lastEvent->transition.actor_id == trans.actor_id || (comType == "Isend" && comType1 == "Ireceive") or
                         (comType == "Ireceive" && comType1 == "Isend")) {
@@ -1259,8 +1259,8 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                 /* we only call function createTestEvt if the last action is send or receive
            or dependent with the test (transition in the same actor) */
 
-                string comType  = C.lastEvent->transition.type;
-                string comType1 = event->transition.type;
+                std::string comType  = C.lastEvent->transition.type;
+                std::string comType1 = event->transition.type;
 
                 if (C.lastEvent->transition.actor_id == trans.actor_id || (comType == "Isend" && comType1 == "Ireceive") or
                         (comType == "Ireceive" && comType1 == "Isend"))

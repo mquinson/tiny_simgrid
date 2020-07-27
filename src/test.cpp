@@ -59,7 +59,7 @@ int main(int argc, char** argv)
   std::list<Transition> transList;
 
   // keep history of maximal event when exploring C
-  std::list<set<int>> maxEventHis;
+  std::list<std::set<int>> maxEventHis;
 
   int example = 1;
   std::cout << " enter example:";

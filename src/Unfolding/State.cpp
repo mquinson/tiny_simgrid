@@ -40,6 +40,8 @@ State State::execute(Transition t)
                 break;
             }
 
+//    std::set<Actor> test_ac = actors1;
+
     return State(this->nb_actors_, actors1, mail_box);
 }
 

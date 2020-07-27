@@ -8,7 +8,7 @@ Transition::Transition(int read_write, int access_var)
     this->access_var = access_var;
 }
 
-Transition::Transition(int mbId, int commId, string type)
+Transition::Transition(int mbId, int commId, std::string type)
 {
     this->mailbox_id = mbId;
     this->commId     = commId;
@@ -20,11 +20,12 @@ bool Transition::operator<(const Transition& other) const
 
     return ((this->id < other.id) || (this->actor_id < other.actor_id));
 }
-bool Transition::operator==(const Transition& other) const
-{
 
-    return ((this->id == other.id) && (this->actor_id == other.actor_id));
-}
+//bool Transition::operator==(const Transition& other)
+//{
+
+//    return ((this->id == other.id) && (this->actor_id == other.actor_id));
+//}
 
 bool Transition::isDependent(Transition other)
 {

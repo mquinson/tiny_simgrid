@@ -76,11 +76,10 @@ public:
     // check otherEvent is in my history ?
     bool inHistory(UnfoldingEvent* otherEvent);
 
-    bool isImmediateConflict(UnfoldingEvent* evt, UnfoldingEvent* otherEvt);
     bool isImmediateConflict1(UnfoldingEvent* evt, UnfoldingEvent* otherEvt);
 
     bool conflictWithConfig(UnfoldingEvent* event, Configuration config);
-    bool operator<(const UnfoldingEvent& other) const;
+//    bool operator<(const UnfoldingEvent& other);
     bool operator==(const UnfoldingEvent& other) const;
     void print();
 };
