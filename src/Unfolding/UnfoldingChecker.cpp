@@ -1214,7 +1214,7 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
             else if (trans.type == "Wait") {
 
                 // check which kind of communication (send/receive) waited by the wait?
-                UnfoldingEvent* evt;
+                UnfoldingEvent* evt = nullptr;
                 for (auto evt1 : C.events_)
                     if (evt1->transition.actor_id == trans.actor_id and evt1->transition.commId == trans.commId) {
                         evt = evt1;
@@ -1410,7 +1410,9 @@ void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistor
     }
 
     std::cout << " exploring --------------------> :";
+
     e->print();
+
     std::cout << "\n";
 
     State nextState = currentEvt->appState.execute(e->transition);

@@ -62,7 +62,7 @@ bool UnfoldingEvent::inHistory(UnfoldingEvent* otherEvent)
 
 bool UnfoldingEvent::concernSameComm(UnfoldingEvent* event, UnfoldingEvent* otherEvent)
 {
-    UnfoldingEvent *testEvt, *SdRcEvt, *testedEvt;
+    UnfoldingEvent *testEvt = nullptr, *SdRcEvt = nullptr, *testedEvt = nullptr;
 
     // std::cout <<" \n hien thi evet trong ham concern :";
     // event->print();
