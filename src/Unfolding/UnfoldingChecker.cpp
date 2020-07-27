@@ -1249,7 +1249,7 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
 
                 // check which kind of communication (send/receive) tested by the test?
 
-                UnfoldingEvent* event;
+                UnfoldingEvent* event = nullptr;
                 for (auto evt1 : C.events_)
                     if (evt1->transition.actor_id == trans.actor_id and evt1->transition.commId == trans.commId) {
                         event = evt1;
@@ -1407,6 +1407,11 @@ void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistor
                 e = evt;
                 break;
             }
+    }
+
+    if(e == nullptr) {
+        std::cerr << "\n\nSOMETHING WENT WRONG. Event is null." << "\n";
+        exit(EXIT_FAILURE);
     }
 
     std::cout << " exploring --------------------> :";
