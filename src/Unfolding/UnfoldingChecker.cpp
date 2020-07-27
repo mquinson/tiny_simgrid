@@ -21,7 +21,7 @@ EventSet UnfoldingChecker::filter(Configuration C, EventSet U)
 {
     EventSet evtS;
     for (auto evt : U.events_)
-        if (not evt->conflictWithConfig(evt, C))
+        if (!evt->conflictWithConfig(evt, C))
             evtS.insert(evt);
 
     return evtS;
@@ -140,7 +140,7 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C)
 
                 bool chk = false;
 
-                if (not history.isEmptyIntersection(history, D)) {
+                if (!history.isEmptyIntersection(history, D)) {
 
                     chk = true;
                     // if (evt->id == 29)std::cout <<"\n va chk =" << chk <<" \n";
@@ -205,7 +205,7 @@ bool checkSdRcCreation(Transition trans, EventSet ancestors, Configuration C)
     int nbTest = 0, nbSend = 0, nbReceive = 0;
     UnfoldingEvent* testEvt;
     for (auto evt : ancestors.events_)
-        if (evt->transition.type == "Test" and evt->transition.actor_id != trans.actor_id) {
+        if (evt->transition.type == "Test" && evt->transition.actor_id != trans.actor_id) {
             nbTest++;
             testEvt = evt;
         }
@@ -220,7 +220,7 @@ bool checkSdRcCreation(Transition trans, EventSet ancestors, Configuration C)
 
     //  two sends or receives can not be in the communiation -> not depend
 
-    if (testedEvt->transition.type == trans.type or testedEvt->transition.mailbox_id != trans.mailbox_id)
+    if (testedEvt->transition.type == trans.type || testedEvt->transition.mailbox_id != trans.mailbox_id)
         return false;
 
     EventSet testedEvtHist = testedEvt->getHistory();
@@ -233,15 +233,15 @@ bool checkSdRcCreation(Transition trans, EventSet ancestors, Configuration C)
 
     if (testedEvt->transition.type == "Isend") {
         for (auto evt : testedEvtHist.events_)
-            if (evt->transition.type == "Isend" and evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
+            if (evt->transition.type == "Isend" && evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
                 nbSend++;
 
         int nbReceive1 = 0;
         for (auto evt : ancestorsHist.events_)
-            if (evt->transition.type == "Ireceive" and evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
+            if (evt->transition.type == "Ireceive" && evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
                 nbReceive1++;
         for (auto it : ancestors.events_)
-            if (it->transition.type == "Ireceive" and it->transition.mailbox_id == testedEvt->transition.mailbox_id)
+            if (it->transition.type == "Ireceive" && it->transition.mailbox_id == testedEvt->transition.mailbox_id)
                 nbReceive1++;
 
         if (nbSend != nbReceive1)
@@ -251,16 +251,16 @@ bool checkSdRcCreation(Transition trans, EventSet ancestors, Configuration C)
     if (testedEvt->transition.type == "Ireceive") {
 
         for (auto evt : testedEvtHist.events_)
-            if (evt->transition.type == "Ireceive" and evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
+            if (evt->transition.type == "Ireceive" && evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
                 nbReceive++;
 
         int nbSend1 = 0;
         for (auto evt : ancestorsHist.events_)
-            if (evt->transition.type == "Isend" and evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
+            if (evt->transition.type == "Isend" && evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
                 nbSend1++;
 
         for (auto it : ancestors.events_)
-            if (it->transition.type == "Isend" and it->transition.mailbox_id == testedEvt->transition.mailbox_id)
+            if (it->transition.type == "Isend" && it->transition.mailbox_id == testedEvt->transition.mailbox_id)
                 nbSend1++;
 
         if (nbReceive != nbSend1)
@@ -282,7 +282,7 @@ void Configuration::createEvts(Configuration C, EventSet& result, Transition t, 
         bool chk1 = false;
         // if immediate precede event is not in the causuality_events, ensure that it is in the history of one event in
         // cause
-        if (not chk)
+        if (!chk)
             for (auto evt : cause.events_)
                 if (evt->getHistory().contains(immPreEvt)) {
                     chk1 = true;
@@ -291,13 +291,13 @@ void Configuration::createEvts(Configuration C, EventSet& result, Transition t, 
         /* create a new evt with directed ancestors are cause1,
      * if all conditions are passed (trans is enabled, any ancestors are not in the history of other ancestors)
      */
-        if (chk or chk1) {
+        if (chk || chk1) {
             bool send_receiveCheck = true;
             EventSet cause1;
             cause1 = cause1.makeUnion(cause, causuality_events);
             // check condition for send/receive action or check enabled for MutexWait action
 
-            if (t.type == "Isend" or t.type == "Ireceive") {
+            if (t.type == "Isend" || t.type == "Ireceive") {
                 send_receiveCheck = checkSdRcCreation(t, cause1, C);
             }
 
@@ -368,18 +368,18 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
 
         // else find it in actorMaxEvent to add it into causalityEvts
         immPreEvt = C.findActorMaxEvt(trans.actor_id);
-        if (not chk)
+        if (!chk)
             if (C.lastEvent->getHistory().contains(immPreEvt))
                 chk = true;
     }
 
     for (auto evt : C.maxEvent.events_)
-        if (trans.isDependent(evt->transition) and (not causalityEvts.contains(evt)))
+        if (trans.isDependent(evt->transition) && (!causalityEvts.contains(evt)))
             ancestorSet.insert(evt);
 
     /*1. Create events from current (last) maximal event of C */
     // 1.1 if only last evt and immidiate precede event are dependent with trans -> only one evt is created
-    if (causalityEvts.size() <= 2 and ancestorSet.size() == 0) {
+    if (causalityEvts.size() <= 2 && ancestorSet.size() == 0) {
 
         nb_events++;
 
@@ -425,12 +425,12 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
             // put ids of events that are not in the history of evts in causalityEvts into a set intS1
 
             // if history candidate is not empty then try create new evts from its subset
-            if (not evtSet.empty()) {
+            if (!evtSet.empty()) {
 
                 // retrieve  evts in congig from intS1 (intS1 store id of evts in C whose transitions are dependent with trans)
                 EventSet evtSet1;
                 for (auto evt : evtSet.events_)
-                    if ((not H.contains(evt)) and evt->transition.isDependent(trans))
+                    if ((!H.contains(evt)) && evt->transition.isDependent(trans))
                         evtSet1.insert(evt);
 
                 EventSet exC1;
@@ -461,12 +461,12 @@ EventSet createWaitEvt(UnfoldingEvent* evt, Configuration C, Transition trans)
         // if waited communication is  send, count the number of send request before the communication
 
         for (auto evt1 : hist.events_)
-            if (evt1->transition.type == "Isend" and evt1->transition.mailbox_id == mbId)
+            if (evt1->transition.type == "Isend" && evt1->transition.mailbox_id == mbId)
                 nbSdRc++;
 
         // try to march the communication with all possible receice request
         for (auto evt2 : C.events_)
-            if (evt2->transition.type == "Ireceive" and evt2->transition.mailbox_id == mbId) {
+            if (evt2->transition.type == "Ireceive" && evt2->transition.mailbox_id == mbId) {
                 // after find ount a receive request
                 EventSet hist1 = evt2->getHistory();
                 int nbRc       = 0;
@@ -474,7 +474,7 @@ EventSet createWaitEvt(UnfoldingEvent* evt, Configuration C, Transition trans)
                 // count the number of receice requests before the receive that we found above
 
                 for (auto evt3 : hist1.events_)
-                    if (evt3->transition.type == "Ireceive" and evt3->transition.mailbox_id == mbId)
+                    if (evt3->transition.type == "Ireceive" && evt3->transition.mailbox_id == mbId)
                         nbRc++;
                 if (nbSdRc == nbRc) {
 
@@ -502,12 +502,12 @@ EventSet createWaitEvt(UnfoldingEvent* evt, Configuration C, Transition trans)
         // if waited communication is send, count the number of send request before the communication
 
         for (auto evt1 : hist.events_)
-            if (evt1->transition.type == "Ireceive" and evt1->transition.mailbox_id == mbId)
+            if (evt1->transition.type == "Ireceive" && evt1->transition.mailbox_id == mbId)
                 nbSdRc++;
 
         // try to march the communication with all possible receice request
         for (auto evt2 : C.events_)
-            if (evt2->transition.type == "Isend" and evt2->transition.mailbox_id == mbId) {
+            if (evt2->transition.type == "Isend" && evt2->transition.mailbox_id == mbId) {
                 // after find out a receive request
                 EventSet hist1 = evt2->getHistory();
                 int nbRc       = 0;
@@ -515,7 +515,7 @@ EventSet createWaitEvt(UnfoldingEvent* evt, Configuration C, Transition trans)
                 // count the number of receice requests before the receive that we found above
 
                 for (auto evt3 : hist1.events_)
-                    if (evt3->transition.type == "Isend" and evt3->transition.mailbox_id == mbId)
+                    if (evt3->transition.type == "Isend" && evt3->transition.mailbox_id == mbId)
                         nbRc++;
                 if (nbSdRc == nbRc) {
                     // if the number send = number receive, we can march the send communication  with the rececive
@@ -576,11 +576,11 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
     // count the number of isend/ireceive befere evt
     if (comType == "Isend") {
         for (auto evt1 : hist.events_)
-            if (evt1->transition.type == "Isend" and evt1->transition.mailbox_id == mbId)
+            if (evt1->transition.type == "Isend" && evt1->transition.mailbox_id == mbId)
                 numberSend++;
     } else if (comType == "Ireceive") {
         for (auto evt1 : hist.events_)
-            if (evt1->transition.type == "Ireceive" and evt1->transition.mailbox_id == mbId)
+            if (evt1->transition.type == "Ireceive" && evt1->transition.mailbox_id == mbId)
                 numberReceive++;
     }
 
@@ -603,8 +603,8 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
 
             // try to march the communication with all possible receice request
             for (auto evt2 : C.events_)
-                if (evt2->transition.type == "Ireceive" and evt2->transition.mailbox_id == mbId and
-                        (not lastEvtHist.contains(evt2))) {
+                if (evt2->transition.type == "Ireceive" && evt2->transition.mailbox_id == mbId and
+                        (!lastEvtHist.contains(evt2))) {
                     // after find out a receive request
 
                     EventSet hist2 = evt2->getHistory();
@@ -613,7 +613,7 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
                     // count the number of receice requests before the receive that we found above
 
                     for (auto evt3 : hist2.events_)
-                        if (evt3->transition.type == "Ireceive" and evt3->transition.mailbox_id == mbId)
+                        if (evt3->transition.type == "Ireceive" && evt3->transition.mailbox_id == mbId)
                             nbReceive++;
                     if (numberSend == nbReceive) {
                         /* if the number send = number receive, we can march the send communication with the rececive
@@ -633,8 +633,8 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
 
             // try to march the communication with all possible receice request
             for (auto evt2 : C.events_)
-                if (evt2->transition.type == "Isend" and evt2->transition.mailbox_id == mbId and
-                        (not lastEvtHist.contains(evt2))) {
+                if (evt2->transition.type == "Isend" && evt2->transition.mailbox_id == mbId and
+                        (!lastEvtHist.contains(evt2))) {
                     // after find out a receive request
 
                     EventSet hist2 = evt2->getHistory();
@@ -643,7 +643,7 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
                     // count the number of receice requests heppen before the receive that we found above
 
                     for (auto evt3 : hist2.events_)
-                        if (evt3->transition.type == "Isend" and evt3->transition.mailbox_id == mbId)
+                        if (evt3->transition.type == "Isend" && evt3->transition.mailbox_id == mbId)
                             nbSend++;
                     if (numberReceive == nbSend) {
 
@@ -673,7 +673,7 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
 
                 UnfoldingEvent* maxEvt = C.findActorMaxEvt(evt->transition.actor_id);
                 ancestors.insert(C.lastEvent);
-                if (not lastEvtHist.contains(maxEvt))
+                if (!lastEvtHist.contains(maxEvt))
                     ancestors.insert(maxEvt);
                 nb_events++;
                 newEvt2 = new UnfoldingEvent(nb_events, trans, ancestors);
@@ -690,7 +690,7 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
                 UnfoldingEvent* maxEvt = C.findActorMaxEvt(evt->transition.actor_id);
 
                 ancestors.insert(C.lastEvent);
-                if (not lastEvtHist.contains(maxEvt))
+                if (!lastEvtHist.contains(maxEvt))
                     ancestors.insert(maxEvt);
                 nb_events++;
                 newEvt2 = new UnfoldingEvent(nb_events, trans, ancestors);
@@ -712,20 +712,20 @@ EventSet createIsendEvts(Transition trans, Configuration C)
 
     /* if trans is not dependent with the last transition -> return */
 
-    if (C.lastEvent->transition.type == "Test" and C.lastEvent->transition.actor_id != trans.actor_id) {
+    if (C.lastEvent->transition.type == "Test" && C.lastEvent->transition.actor_id != trans.actor_id) {
         // get the communication tested by Test
         testedEvt = C.findTestedComm(C.lastEvent);
 
         // two sends or two receives can not be in the same communication -> not denpendent
-        if (trans.type == testedEvt->transition.type or trans.mailbox_id != testedEvt->transition.mailbox_id)
+        if (trans.type == testedEvt->transition.type || trans.mailbox_id != testedEvt->transition.mailbox_id)
             return EvtSet;
     }
 
     // if trans.id ==0 => trans is always enabled do not need to check enable condition ?.
-    if (trans.id == 0 or C.lastEvent->transition.actor_id == trans.actor_id)
+    if (trans.id == 0 || C.lastEvent->transition.actor_id == trans.actor_id)
         enableChk = true;
     /* enableChk = true -> trans is ensured enabled or his pre evt is in the causalityEvts  */
-    else if (C.lastEvent->transition.actor_id != trans.actor_id and (not enableChk)) {
+    else if (C.lastEvent->transition.actor_id != trans.actor_id && (!enableChk)) {
         // else find it in actorMaxEvent and check where it is in the history of last Evt
         immPreEvt = C.findActorMaxEvt(trans.actor_id);
         if (C.lastEvent->getHistory().contains(immPreEvt))
@@ -766,7 +766,7 @@ EventSet createIsendEvts(Transition trans, Configuration C)
     // if last evt = preEvt(Isend) or last evt is a Isend, then try to combine with Test
     if (trans.isDependent(C.lastEvent->transition))
         for (auto it : C.events_)
-            if (it->transition.type == "Test" and it->transition.mailbox_id == trans.mailbox_id) {
+            if (it->transition.type == "Test" && it->transition.mailbox_id == trans.mailbox_id) {
                 UnfoldingEvent* testedEvt;
                 // retrive the communication tested by the the
                 testedEvt = C.findTestedComm(it);
@@ -774,13 +774,13 @@ EventSet createIsendEvts(Transition trans, Configuration C)
                 // tested action is Ireceive, create a new event if it can be marched with the Isend
                 // make sure no ancestor candidate event is in history of other ancestor candidate
 
-                if (testedEvt->transition.type == "Ireceive" and (not lastEvtHist.contains(it)))
-                    if (not immPreEvtHist.contains(it)) {
+                if (testedEvt->transition.type == "Ireceive" && (!lastEvtHist.contains(it)))
+                    if (!immPreEvtHist.contains(it)) {
                         EventSet ancestorSet1;
                         ancestorSet1.insert(C.lastEvent);
                         ancestorSet1.insert(it);
                         EventSet itHist = it->getHistory();
-                        if ((not itHist.contains(immPreEvt)) and (not enableChk))
+                        if ((!itHist.contains(immPreEvt)) && (!enableChk))
                             ancestorSet1.insert(immPreEvt);
 
                         if (checkSdRcCreation(trans, ancestorSet1, C)) {
@@ -792,11 +792,11 @@ EventSet createIsendEvts(Transition trans, Configuration C)
             }
 
     // else if last event is a Test
-    if (C.lastEvent->transition.actor_id == trans.actor_id or
-            (C.lastEvent->transition.actor_id != trans.actor_id and C.lastEvent->transition.type == "Test")) {
+    if (C.lastEvent->transition.actor_id == trans.actor_id ||
+            (C.lastEvent->transition.actor_id != trans.actor_id && C.lastEvent->transition.type == "Test")) {
         EventSet ansestors;
         ansestors.insert(C.lastEvent);
-        if (not enableChk)
+        if (!enableChk)
             ansestors.insert(immPreEvt);
         if (checkSdRcCreation(trans, ansestors, C)) {
             nb_events++;
@@ -805,15 +805,15 @@ EventSet createIsendEvts(Transition trans, Configuration C)
         }
 
         for (auto it : C.events_)
-            if (trans.isDependent(it->transition) and trans.actor_id != it->transition.actor_id) {
+            if (trans.isDependent(it->transition) && trans.actor_id != it->transition.actor_id) {
                 // make sure no ancestor candidate event is in history of other ancestor candidate
                 EventSet ansestors1;
                 ansestors1.insert(C.lastEvent);
 
-                if (not lastEvtHist.contains(it) and (not immPreEvtHist.contains(it))) {
+                if (!lastEvtHist.contains(it) && (!immPreEvtHist.contains(it))) {
                     ansestors1.insert(it);
                     EventSet itHist = it->getHistory();
-                    if ((not enableChk) and (not itHist.contains(immPreEvt)))
+                    if ((!enableChk) && (!itHist.contains(immPreEvt)))
                         ansestors1.insert(immPreEvt);
 
                     if (checkSdRcCreation(trans, ansestors1, C)) {
@@ -829,16 +829,16 @@ EventSet createIsendEvts(Transition trans, Configuration C)
 
     if (C.lastEvent->transition.actor_id == trans.actor_id)
         for (auto sEvt : C.events_)
-            if (sEvt->transition.type == "Isend" and sEvt->transition.mailbox_id == trans.mailbox_id and
-                    sEvt->transition.actor_id != trans.actor_id and (not lastEvtHist.contains(sEvt))) {
+            if (sEvt->transition.type == "Isend" && sEvt->transition.mailbox_id == trans.mailbox_id &&
+                    sEvt->transition.actor_id != trans.actor_id && (!lastEvtHist.contains(sEvt))) {
 
                 EventSet rEvtHist = sEvt->getHistory();
                 for (auto tEvt : C.events_)
-                    if (tEvt->transition.type == "Test" and tEvt->transition.actor_id != trans.actor_id and
+                    if (tEvt->transition.type == "Test" && tEvt->transition.actor_id != trans.actor_id &&
                             tEvt->transition.mailbox_id == trans.mailbox_id) {
                         UnfoldingEvent* testedEvent = C.findTestedComm(tEvt);
-                        if (testedEvent->transition.type == "Ireveive" and (not lastEvtHist.contains(tEvt)) and
-                                not(rEvtHist.contains(tEvt)) and (not tEvt->getHistory().contains(sEvt))) {
+                        if (testedEvent->transition.type == "Ireveive" && (!lastEvtHist.contains(tEvt)) &&
+                                !(rEvtHist.contains(tEvt)) && (!tEvt->getHistory().contains(sEvt))) {
                             EventSet ancestorsSet;
                             ancestorsSet.insert(C.lastEvent);
                             ancestorsSet.insert(sEvt);
@@ -865,20 +865,20 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
 
     /* if trans is not dependent with the last transition -> return */
 
-    if (C.lastEvent->transition.type == "Test" and C.lastEvent->transition.actor_id != trans.actor_id) {
+    if (C.lastEvent->transition.type == "Test" && C.lastEvent->transition.actor_id != trans.actor_id) {
         // get the communication tested by Test
         testedEvt = C.findTestedComm(C.lastEvent);
 
         // two sends or two receives can not be in the same communication -> not denpendent
-        if (trans.type == testedEvt->transition.type or trans.mailbox_id != testedEvt->transition.mailbox_id)
+        if (trans.type == testedEvt->transition.type || trans.mailbox_id != testedEvt->transition.mailbox_id)
             return EvtSet;
     }
 
     // if trans.id ==0 => trans is always enabled do not need to check enable condition ?.
-    if (trans.id == 0 or C.lastEvent->transition.actor_id == trans.actor_id)
+    if (trans.id == 0 || C.lastEvent->transition.actor_id == trans.actor_id)
         enableChk = true;
     /* enableChk = true -> trans is ensured enabled or his pre evt is in the causalityEvts  */
-    else if (C.lastEvent->transition.actor_id != trans.actor_id and (not enableChk)) {
+    else if (C.lastEvent->transition.actor_id != trans.actor_id && (!enableChk)) {
         // else find it in actorMaxEvent and check where it is in the history of last Evt
         immPreEvt = C.findActorMaxEvt(trans.actor_id);
         if (C.lastEvent->getHistory().contains(immPreEvt))
@@ -916,7 +916,7 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
     // if last evt = preEvt(Ireceive) or last evt is a Ireceive, then try to combine with Test
     if (trans.isDependent(C.lastEvent->transition))
         for (auto it : C.events_)
-            if (it->transition.type == "Test" and it->transition.mailbox_id == trans.mailbox_id) {
+            if (it->transition.type == "Test" && it->transition.mailbox_id == trans.mailbox_id) {
                 UnfoldingEvent* testedEvt;
                 // retrive the communication tested by the the
                 testedEvt = C.findTestedComm(it);
@@ -924,14 +924,14 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
                 // tested action is Ireceive, create a new event if it can be marched with the Isend
                 // make sure no ancestor candidate event is in history of other ancestor candidate
 
-                if (testedEvt->transition.type == "Isend" and (not lastEvtHist.contains(it)))
-                    if (not immPreEvtHist.contains(it)) {
+                if (testedEvt->transition.type == "Isend" && (!lastEvtHist.contains(it)))
+                    if (!immPreEvtHist.contains(it)) {
 
                         EventSet ancestorSet1;
                         ancestorSet1.insert(C.lastEvent);
                         ancestorSet1.insert(it);
                         EventSet itHist = it->getHistory();
-                        if ((not itHist.contains(immPreEvt)) and (not enableChk))
+                        if ((!itHist.contains(immPreEvt)) && (!enableChk))
                             ancestorSet1.insert(immPreEvt);
 
                         if (checkSdRcCreation(trans, ancestorSet1, C)) {
@@ -943,11 +943,11 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
             }
 
     // else if last event is a Test
-    if (C.lastEvent->transition.actor_id == trans.actor_id or
-            (C.lastEvent->transition.actor_id != trans.actor_id and C.lastEvent->transition.type == "Test")) {
+    if (C.lastEvent->transition.actor_id == trans.actor_id ||
+            (C.lastEvent->transition.actor_id != trans.actor_id && C.lastEvent->transition.type == "Test")) {
         EventSet ansestors;
         ansestors.insert(C.lastEvent);
-        if (not enableChk)
+        if (!enableChk)
             ansestors.insert(immPreEvt);
         if (checkSdRcCreation(trans, ansestors, C)) {
             nb_events++;
@@ -956,15 +956,15 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
         }
 
         for (auto it : C.events_)
-            if (trans.isDependent(it->transition) and trans.actor_id != it->transition.actor_id) {
+            if (trans.isDependent(it->transition) && trans.actor_id != it->transition.actor_id) {
                 // make sure no ancestor candidate event is in history of other ancestor candidate
                 EventSet ansestors1;
                 ansestors1.insert(C.lastEvent);
 
-                if (not lastEvtHist.contains(it) and (not immPreEvtHist.contains(it))) {
+                if (!lastEvtHist.contains(it) && (!immPreEvtHist.contains(it))) {
                     ansestors1.insert(it);
                     EventSet itHist = it->getHistory();
-                    if ((not enableChk) and (not itHist.contains(immPreEvt)))
+                    if ((!enableChk) && (!itHist.contains(immPreEvt)))
                         ansestors1.insert(immPreEvt);
 
                     if (checkSdRcCreation(trans, ansestors1, C)) {
@@ -980,15 +980,15 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
 
     if (C.lastEvent->transition.actor_id == trans.actor_id)
         for (auto rEvt : C.events_)
-            if (rEvt->transition.type == "Ireceive" and rEvt->transition.mailbox_id == trans.mailbox_id and
-                    rEvt->transition.actor_id != trans.actor_id and (not lastEvtHist.contains(rEvt))) {
+            if (rEvt->transition.type == "Ireceive" && rEvt->transition.mailbox_id == trans.mailbox_id &&
+                    rEvt->transition.actor_id != trans.actor_id && (!lastEvtHist.contains(rEvt))) {
                 EventSet rEvtHist = rEvt->getHistory();
                 for (auto tEvt : C.events_)
-                    if (tEvt->transition.type == "Test" and tEvt->transition.actor_id != trans.actor_id and
+                    if (tEvt->transition.type == "Test" && tEvt->transition.actor_id != trans.actor_id &&
                             tEvt->transition.mailbox_id == trans.mailbox_id) {
                         UnfoldingEvent* testedEvent = C.findTestedComm(tEvt);
-                        if (testedEvent->transition.type == "Isend" and (not lastEvtHist.contains(tEvt)) and
-                                not(rEvtHist.contains(tEvt)) and (not tEvt->getHistory().contains(rEvt))) {
+                        if (testedEvent->transition.type == "Isend" && (!lastEvtHist.contains(tEvt)) &&
+                                !(rEvtHist.contains(tEvt)) && (!tEvt->getHistory().contains(rEvt))) {
                             EventSet ancestorsSet;
                             ancestorsSet.insert(C.lastEvent);
                             ancestorsSet.insert(rEvt);
@@ -1019,19 +1019,19 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
     /* if trans is not dependent with the last transition -> return
    if the last transition is a test -> check whether they concern the same communication ?*/
 
-    if (C.lastEvent->transition.type == "Test" and C.lastEvent->transition.actor_id != trans.actor_id) {
+    if (C.lastEvent->transition.type == "Test" && C.lastEvent->transition.actor_id != trans.actor_id) {
 
         // get the communication tested by Test
         for (auto evt : C.events_)
-            if (evt->transition.actor_id == C.lastEvent->transition.actor_id and
-                    evt->transition.commId == C.lastEvent->transition.commId and evt->transition.type != "Test")
+            if (evt->transition.actor_id == C.lastEvent->transition.actor_id &&
+                    evt->transition.commId == C.lastEvent->transition.commId && evt->transition.type != "Test")
 
             {
                 testedEvt = evt;
                 break;
             }
         // two sends or two receives can not be in the same communication -> not denpendent
-        if (trans.type == testedEvt->transition.type or trans.mailbox_id != testedEvt->transition.mailbox_id)
+        if (trans.type == testedEvt->transition.type || trans.mailbox_id != testedEvt->transition.mailbox_id)
             return EvtSet;
     }
 
@@ -1044,12 +1044,12 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
    of lastEvt.
    */
 
-    if (trans.id == 0 or C.lastEvent->transition.actor_id == trans.actor_id)
+    if (trans.id == 0 || C.lastEvent->transition.actor_id == trans.actor_id)
         chk = true; // if trans.id ==0 => trans is always enabled do not need to check enable condition ?.
 
     /* chk = true -> trans is ensured enabled or his pre evt is in the causalityEvts  */
 
-    else if (C.lastEvent->transition.actor_id != trans.actor_id and (not chk)) {
+    else if (C.lastEvent->transition.actor_id != trans.actor_id && (!chk)) {
 
         // if immediate precede evt in maxEvent, add it to the causalityEvts
 
@@ -1062,7 +1062,7 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
 
         // else find it in actorMaxEvent and check where it is in the history of last Evt
 
-        if (not chk) {
+        if (!chk) {
 
             immPreEvt = C.findActorMaxEvt(trans.actor_id);
             if (C.lastEvent->getHistory().contains(immPreEvt))
@@ -1073,12 +1073,12 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
     // compute all events are dependent with the transition trans.
 
     for (auto evt : C.maxEvent.events_)
-        if ((trans.isDependent(evt->transition) or
-             (evt->transition.type == "Test" and evt->transition.mailbox_id == trans.mailbox_id)) and
-                (not causalityEvts.contains(evt)))
+        if ((trans.isDependent(evt->transition) ||
+             (evt->transition.type == "Test" && evt->transition.mailbox_id == trans.mailbox_id)) &&
+                (!causalityEvts.contains(evt)))
             ancestorSet.insert(evt);
 
-    if (checkSdRcCreation(trans, causalityEvts, C) and chk) {
+    if (checkSdRcCreation(trans, causalityEvts, C) && chk) {
         nb_events++;
         UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, causalityEvts);
         exC.insert(e);
@@ -1109,14 +1109,14 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
         EventSet evtS;
 
         // if intS1 is not empty then retrive thier events, create new events from all subsets
-        if (not evtSet.empty()) {
+        if (!evtSet.empty()) {
 
             // retrieve  evts from intS1 (intS1 store id of evts in C whose transitions are dependent with trans)
             EventSet evtSet1;
             for (auto evt : evtSet.events_)
-                if ((not H.contains(evt)) and
-                        (evt->transition.isDependent(trans) or
-                         (evt->transition.type == "Test" and trans.mailbox_id == evt->transition.mailbox_id)))
+                if ((!H.contains(evt)) &&
+                        (evt->transition.isDependent(trans) ||
+                         (evt->transition.type == "Test" && trans.mailbox_id == evt->transition.mailbox_id)))
 
                     evtSet1.insert(evt);
 
@@ -1141,7 +1141,7 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
         for (auto p : actors) {
             nb_events++;
             UnfoldingEvent* newEvent = new UnfoldingEvent(nb_events, p.trans[0], causes);
-            if (not U.contains(newEvent)) {
+            if (!U.contains(newEvent)) {
                 U.insert(newEvent);
                 enC.insert(newEvent);
                 exC.insert(newEvent);
@@ -1162,8 +1162,8 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
         // TODO: TR
         for (auto trans : enabledTransitions) {
             // if trans is not a wait action, and is dependent with the transition of last event
-            if (trans.isDependent(C.lastEvent->transition) and trans.type != "Wait" and trans.type != "Test" and
-                    trans.type != "Isend" and trans.type != "Ireceive" and trans.type != "localComp") {
+            if (trans.isDependent(C.lastEvent->transition) && trans.type != "Wait" and trans.type != "Test" &&
+                    trans.type != "Isend" && trans.type != "Ireceive" && trans.type != "localComp") {
 
                 EventSet exC1, causalityEvts;
 
@@ -1175,7 +1175,7 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                 }
 
                 for (auto newEvent : exC1.events_)
-                    if (not U.contains(newEvent)) {
+                    if (!U.contains(newEvent)) {
                         U.insert(newEvent);
                         exC.insert(newEvent);
                     } else
@@ -1186,11 +1186,11 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
             // ELSE IF THE TRANSITION IS A isend or i receive
 
             else if (trans.type == "Isend" and
-                     (trans.isDependent(C.lastEvent->transition) or
-                      (C.lastEvent->transition.type == "Test" and C.lastEvent->transition.mailbox_id == trans.mailbox_id))) {
+                     (trans.isDependent(C.lastEvent->transition) ||
+                      (C.lastEvent->transition.type == "Test" && C.lastEvent->transition.mailbox_id == trans.mailbox_id))) {
                 EventSet exC1 = createIsendEvts(trans, C);
                 for (auto newEvent : exC1.events_)
-                    if (not U.contains(newEvent)) {
+                    if (!U.contains(newEvent)) {
                         U.insert(newEvent);
                         exC.insert(newEvent);
                     } else
@@ -1198,12 +1198,12 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
 
             }
 
-            else if (trans.type == "Ireceive" and
-                     (trans.isDependent(C.lastEvent->transition) or
-                      (C.lastEvent->transition.type == "Test" and C.lastEvent->transition.mailbox_id == trans.mailbox_id))) {
+            else if (trans.type == "Ireceive" &&
+                     (trans.isDependent(C.lastEvent->transition) ||
+                      (C.lastEvent->transition.type == "Test" && C.lastEvent->transition.mailbox_id == trans.mailbox_id))) {
                 EventSet exC1 = createIreceiveEvts(trans, C);
                 for (auto newEvent : exC1.events_)
-                    if (not U.contains(newEvent)) {
+                    if (!U.contains(newEvent)) {
                         U.insert(newEvent);
                         exC.insert(newEvent);
                     } else
@@ -1216,7 +1216,7 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                 // check which kind of communication (send/receive) waited by the wait?
                 UnfoldingEvent* evt = nullptr;
                 for (auto evt1 : C.events_)
-                    if (evt1->transition.actor_id == trans.actor_id and evt1->transition.commId == trans.commId) {
+                    if (evt1->transition.actor_id == trans.actor_id && evt1->transition.commId == trans.commId) {
                         evt = evt1;
                         break;
                     }
@@ -1227,14 +1227,14 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                 string comType  = C.lastEvent->transition.type;
                 string comType1 = evt->transition.type;
 
-                if (C.lastEvent->transition.actor_id == trans.actor_id or (comType == "Isend" and comType1 == "Ireceive") or
-                        (comType == "Ireceive" and comType1 == "Isend")) {
+                if (C.lastEvent->transition.actor_id == trans.actor_id || (comType == "Isend" && comType1 == "Ireceive") or
+                        (comType == "Ireceive" && comType1 == "Isend")) {
                     EventSet newEvts = createWaitEvt(evt, C, trans);
 
                     // EventSet unionSet = U.makeUnion(U,gD1);
 
                     for (auto newEvent : newEvts.events_)
-                        if (not U.contains(newEvent)) {
+                        if (!U.contains(newEvent)) {
                             U.insert(newEvent);
                             exC.insert(newEvent);
                         } else
@@ -1251,7 +1251,7 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
 
                 UnfoldingEvent* event = nullptr;
                 for (auto evt1 : C.events_)
-                    if (evt1->transition.actor_id == trans.actor_id and evt1->transition.commId == trans.commId) {
+                    if (evt1->transition.actor_id == trans.actor_id && evt1->transition.commId == trans.commId) {
                         event = evt1;
                         break;
                     }
@@ -1262,14 +1262,14 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                 string comType  = C.lastEvent->transition.type;
                 string comType1 = event->transition.type;
 
-                if (C.lastEvent->transition.actor_id == trans.actor_id or (comType == "Isend" and comType1 == "Ireceive") or
-                        (comType == "Ireceive" and comType1 == "Isend"))
+                if (C.lastEvent->transition.actor_id == trans.actor_id || (comType == "Isend" && comType1 == "Ireceive") or
+                        (comType == "Ireceive" && comType1 == "Isend"))
 
                 {
                     EventSet newEvts = createTestEvt(exC, event, C, trans);
 
                     for (auto newEvent : newEvts.events_)
-                        if (not U.contains(newEvent)) {
+                        if (!U.contains(newEvent)) {
 
                             U.insert(newEvent);
                             exC.insert(newEvent);
@@ -1280,12 +1280,12 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
 
             }
 
-            else if (trans.type == "localComp" and C.lastEvent->transition.actor_id == trans.actor_id) {
+            else if (trans.type == "localComp" && C.lastEvent->transition.actor_id == trans.actor_id) {
                 EventSet ancestors;
                 ancestors.insert(C.lastEvent);
                 nb_events++;
                 UnfoldingEvent* newEvent = new UnfoldingEvent(nb_events, trans, ancestors);
-                if (not U.contains(newEvent)) {
+                if (!U.contains(newEvent)) {
                     U.insert(newEvent);
                     exC.insert(newEvent);
 
@@ -1299,16 +1299,6 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
        which is in C and is not in history of evt */
             bool chk          = true;
             EventSet evtHisty = evt->getHistory();
-
-            /*for (auto evt1 : C.events_)
-              if (not evtHisty.contains(evt1))
-                               {
-                                      if (evt1->transition.isDependent(evt->transition)) {chk = false; break;}
-                                      else if( (evt->transition.type =="Test" and (evt1->transition.type=="Isend" or
-         evt1->transition.type=="Ireceive")) or (evt1->transition.type =="Test" and (evt->transition.type=="Isend" or
-         evt->transition.type=="Ireceive"))) if (evt->concernSameComm(evt,evt1)) {chk = false; break;}
-              }*/
-
             for (auto it : C.events_)
                 if (it->isConflict(it, evt))
                     chk = false;
@@ -1358,7 +1348,7 @@ void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistor
     bool chk = true;
     if (enC.size() > 0)
         for (auto evt : enC.events_)
-            if (not D.contains(evt)) {
+            if (!D.contains(evt)) {
                 chk = false;
                 break;
             }
@@ -1452,7 +1442,7 @@ void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistor
     J = KpartialAlt(D1, C);
     // J = computeAlt(D2, C);
 
-    if (not J.empty()) {
+    if (!J.empty()) {
 
         J.subtruct(C);
         explore(C, maxEvtHistory, D1, J, currentEvt, prev_exC, actors);
@@ -1487,7 +1477,7 @@ void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D)
     res = res.makeUnion(res, unionSet);
     // move e from U to G if the condition is satisfied
 
-    if (not res.contains(e)) {
+    if (!res.contains(e)) {
         U.erase(e);
 
         // G.insert(e);
@@ -1504,7 +1494,7 @@ void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D)
             h.insert(evt);
 
             for (auto e2 : h.events_)
-                if (not res.contains(e2)) {
+                if (!res.contains(e2)) {
                     U.erase(e2);
                     //	G.insert(e2);
                 }

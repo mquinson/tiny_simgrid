@@ -33,19 +33,19 @@ bool Transition::isDependent(Transition other)
         return true;
 
     if (this->type == "Isend") {
-        if (other.type == "Isend" and (this->mailbox_id == other.mailbox_id))
+        if (other.type == "Isend" && (this->mailbox_id == other.mailbox_id))
             return true;
     }
 
     else if (this->type == "Ireceive") {
-        if (other.type == "Ireceive" and (this->mailbox_id == other.mailbox_id))
+        if (other.type == "Ireceive" && (this->mailbox_id == other.mailbox_id))
             return true;
     }
 
-    else if (this->type == "Lock" and other.type == "Lock" and this->mutexID == other.mutexID)
+    else if (this->type == "Lock" && other.type == "Lock" && this->mutexID == other.mutexID)
         return true;
     else if (this->type == "Unlock") {
-        if (other.type == "Mwait" or other.type == "Mtest")
+        if (other.type == "Mwait" || other.type == "Mtest")
             return true;
     }
 
@@ -54,7 +54,7 @@ bool Transition::isDependent(Transition other)
 
         // if at least one write transition  => dependent
         if (this->access_var == other.access_var)
-            if ((this->read_write == 1) or (other.read_write == 1))
+            if ((this->read_write == 1) || (other.read_write == 1))
                 return true;
     }
 

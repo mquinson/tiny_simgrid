@@ -5,22 +5,20 @@
 #include "../App/Actor.h"
 #include "../App/Mailbox.h"
 
-using namespace app;
-
 namespace uc {
 
 class State {
 public:
     unsigned long nb_actors_ = 0;
-    std::set<Actor> actors_;
-    std::set<Mailbox> mailboxes_;
+    std::set<app::Actor> actors_;
+    std::set<app::Mailbox> mailboxes_;
 
     State() = default;
-    State(unsigned long nb_actors_, std::set<Actor> actors_, std::set<Mailbox> mailboxes_);
-    State(std::set<Actor> actors, std::set<Mailbox> mailboxes) : State(actors.size(), actors, mailboxes) {}
+    State(unsigned long nb_actors_, std::set<app::Actor> actors_, std::set<app::Mailbox> mailboxes_);
+    State(std::set<app::Actor> actors, std::set<app::Mailbox> mailboxes) : State(actors.size(), actors, mailboxes) {}
 
-    std::set<Transition> getEnabledTransition();
-    State execute(Transition t);
+    std::set<app::Transition> getEnabledTransition();
+    State execute(app::Transition t);
 
     void print();
 };

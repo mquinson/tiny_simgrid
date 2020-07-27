@@ -1,6 +1,8 @@
 #include "State.h"
 #include <iostream>
 
+using namespace app;
+
 namespace uc {
 
 State::State(unsigned long nb_actor, std::set<Actor> actors, std::set<Mailbox> mailboxes)
@@ -29,7 +31,7 @@ State State::execute(Transition t)
         }
     /* if t is send or receive transition, then update the mailbox */
 
-    if (t.type == "Isend" or t.type == "Ireceive")
+    if (t.type == "Isend" || t.type == "Ireceive")
         for (auto mb : mailboxes_)
             if (mb.id == t.mailbox_id) {
                 mail_box.erase(mb);
@@ -48,20 +50,13 @@ std::set<Transition> State::getEnabledTransition()
 
     for (auto p : this->actors_)
         for (unsigned long j = 0; j < p.nb_trans; j++)
-            if (not p.trans[j].executed) {
-                // std::cout<< "hien thi not executed : \n";
-                // std::cout<< "actorid =" << p.id <<" type ="<< p.trans[j].type <<"   :\n";
-
-                // if transition is Wait, check it's communication is ready ?
+            if (!p.trans[j].executed) {
                 bool chk = true;
                 if (p.trans[j].type == "Wait") {
 
                     for (auto mb : this->mailboxes_)
-                        if (p.trans[j].mailbox_id == mb.id and (not mb.checkComm(p.trans[j])))
+                        if (p.trans[j].mailbox_id == mb.id && (!mb.checkComm(p.trans[j])))
                             chk = false;
-                    // else std::cout<<"\n" <<  p.trans[j].type <<" " << p.trans[j].id <<" of P" << p.id <<" not ready :\n" ;
-                    //	if(chk and p.trans[j].actor_id == 1) std::cout<<" \n thang wait  " << p.trans[j].id <<" cua "
-                    //<<p.trans[j].actor_id <<" co enabled \n";
                 }
 
                 if (chk)
@@ -69,14 +64,6 @@ std::set<Transition> State::getEnabledTransition()
 
                 break;
             }
-
-    /*
-          std::cout<<"\n enabled transitions : \n";
-           for(auto tr : trans_set)
-           std::cout<< "actorid =" << tr.actor_id<<" \n id="<< tr.id <<" mailbox="<<tr.mailbox_id<<" comm= " <<tr.commId
-           << " type ="<<tr.type <<"\n";
-           std::cout<<" \n het ---\n";
-  */
 
     return trans_set;
 }

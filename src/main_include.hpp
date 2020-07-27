@@ -7,7 +7,7 @@
 using namespace app;
 
 using AppSide = app::AppSide;
-std::unique_ptr<AppSide> app_side = std::unique_ptr<AppSide>(new AppSide());
+const std::unique_ptr<AppSide> app_side = std::unique_ptr<AppSide>(new AppSide());
 
 enum class TrType {
     ISend = 0,

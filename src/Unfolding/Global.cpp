@@ -40,7 +40,7 @@ EventSet UnfoldingEvent::getHistory() const
 
             // if event ancestor is already in history set -> we do not need to get it's history
 
-            if (not res.contains(ancestor))
+            if (!res.contains(ancestor))
                 h1 = ancestor->getHistory();
             h1.insert(ancestor);
             res = res.makeUnion(res, h1);
@@ -88,7 +88,7 @@ bool UnfoldingEvent::concernSameComm(UnfoldingEvent* event, UnfoldingEvent* othe
     EventSet SdRcEvtH = SdRcEvt->getHistory();
 
     for (auto it : testEvtH.events_)
-        if (it->transition.actor_id == testEvt->transition.actor_id and it->transition.commId == comId)
+        if (it->transition.actor_id == testEvt->transition.actor_id && it->transition.commId == comId)
             testedEvt = it;
 
     if (testedEvt->transition.type == SdRcEvt->transition.type)
@@ -105,12 +105,12 @@ bool UnfoldingEvent::concernSameComm(UnfoldingEvent* event, UnfoldingEvent* othe
 
         // count the number of Isend event before testedEvt
         for (auto it : testedEvtH.events_)
-            if (it->transition.mailbox_id == mbId and it->transition.type == "Isend")
+            if (it->transition.mailbox_id == mbId && it->transition.type == "Isend")
                 nbSend++;
 
         // count the number of Ireceive event before SdRcEvt
         for (auto it : SdRcEvtH.events_)
-            if (it->transition.mailbox_id == mbId and it->transition.type == "Ireceive")
+            if (it->transition.mailbox_id == mbId && it->transition.type == "Ireceive")
                 nbReceive++;
 
         if (nbSend == nbReceive)
@@ -126,12 +126,12 @@ bool UnfoldingEvent::concernSameComm(UnfoldingEvent* event, UnfoldingEvent* othe
 
         // count the number of Receive event before testedEvt
         for (auto it : testedEvtH.events_)
-            if (it->transition.mailbox_id == mbId and it->transition.type == "Ireceive")
+            if (it->transition.mailbox_id == mbId && it->transition.type == "Ireceive")
                 nbReceive++;
 
         // count the number of Isend event before SdRcEvt
         for (auto it : SdRcEvtH.events_)
-            if (it->transition.mailbox_id == mbId and it->transition.type == "Isend")
+            if (it->transition.mailbox_id == mbId && it->transition.type == "Isend")
                 nbSend++;
 
         // if (nbSend == nbReceive) std::cout<<"\n CONCERN the same COMM nbsend =" << nbSend <<" nb receive = "<< nbReceive
@@ -158,7 +158,7 @@ bool UnfoldingEvent::isConflict(UnfoldingEvent* event, UnfoldingEvent* otherEven
     h2 = otherEvent->getHistory();
 
     // checking causality relation, if they are in a causality relation return false
-    if (h1.contains(otherEvent) or h2.contains(event))
+    if (h1.contains(otherEvent) || h2.contains(event))
         return false;
 
     // check direct conflict
@@ -201,7 +201,7 @@ bool UnfoldingEvent::isImmediateConflict(UnfoldingEvent* evt1, UnfoldingEvent* e
         return false;
 
     // The first condition is easy to check
-    if (not evt1->isConflict(evt1, evt2))
+    if (!evt1->isConflict(evt1, evt2))
         return false;
 
     // Now, check the second condition
@@ -235,20 +235,20 @@ bool UnfoldingEvent::isImmediateConflict1(UnfoldingEvent* evt1, UnfoldingEvent* 
 
     bool chk1 = false, chk2 = false;
 
-    if (not evt1->transition.isDependent(evt2->transition)) {
+    if (!evt1->transition.isDependent(evt2->transition)) {
 
         chk1 = true;
         chk2 = true;
-        if (evt1->transition.type == "Test" and (evt2->transition.type == "Isend" or evt2->transition.type == "Ireceive")) {
-            if (not evt1->concernSameComm(evt1, evt2))
+        if (evt1->transition.type == "Test" && (evt2->transition.type == "Isend" || evt2->transition.type == "Ireceive")) {
+            if (!evt1->concernSameComm(evt1, evt2))
                 return false;
             else {
                 chk2 = false;
             }
         }
 
-        if (evt2->transition.type == "Test" and (evt1->transition.type == "Isend" or evt1->transition.type == "Ireceive")) {
-            if (not evt1->concernSameComm(evt1, evt2))
+        if (evt2->transition.type == "Test" && (evt1->transition.type == "Isend" || evt1->transition.type == "Ireceive")) {
+            if (!evt1->concernSameComm(evt1, evt2))
                 return false;
             else {
                 chk2 = false;
@@ -257,7 +257,7 @@ bool UnfoldingEvent::isImmediateConflict1(UnfoldingEvent* evt1, UnfoldingEvent* 
     }
     // 2 transitions are not depend and they are one is test other one is send/receive  -> return false
 
-    if (chk1 and chk2)
+    if (chk1 && chk2)
         return false;
 
     // Now, check the second condition
@@ -266,7 +266,7 @@ bool UnfoldingEvent::isImmediateConflict1(UnfoldingEvent* evt1, UnfoldingEvent* 
     EventSet hist11 = hist1, hist21 = hist2;
 
     // if causality ralated - > no immidiate conflict
-    if (hist1.contains(evt2) or hist2.contains(evt1))
+    if (hist1.contains(evt2) || hist2.contains(evt1))
         return false;
 
     for (auto e1 : hist1.events_)
@@ -280,7 +280,7 @@ bool UnfoldingEvent::isImmediateConflict1(UnfoldingEvent* evt1, UnfoldingEvent* 
     evtS1.insert(evt1);
     evtS2.insert(evt2);
 
-    if (hist11.depends(hist21) or evtS1.depends(hist21) or evtS2.depends(hist11)) {
+    if (hist11.depends(hist21) || evtS1.depends(hist21) || evtS2.depends(hist11)) {
         return false;
     }
 
@@ -305,8 +305,8 @@ bool UnfoldingEvent::conflictWithConfig(UnfoldingEvent* event, Configuration con
 // this operator is used for ordering in a set (need a key)
 bool UnfoldingEvent::operator<(const UnfoldingEvent& other) const
 {
-    if ((this->transition.actor_id < other.transition.actor_id) or (this->transition.id < other.transition.id) or
-            (not(this->causes == other.causes)))
+    if ((this->transition.actor_id < other.transition.actor_id) || (this->transition.id < other.transition.id) or
+            (!(this->causes == other.causes)))
         return true;
     return false;
 }
@@ -315,7 +315,7 @@ bool UnfoldingEvent::operator<(const UnfoldingEvent& other) const
 bool UnfoldingEvent::operator==(const UnfoldingEvent& other) const
 {
 
-    if ((this->transition.id != other.transition.id) or (this->transition.actor_id != other.transition.actor_id))
+    if ((this->transition.id != other.transition.id) || (this->transition.actor_id != other.transition.actor_id))
         return false;
     if (this->causes.size() != other.causes.size())
         return false;
@@ -327,7 +327,7 @@ bool UnfoldingEvent::operator==(const UnfoldingEvent& other) const
                 chk1 = true;
                 break;
             }
-        if (not chk1)
+        if (!chk1)
             return false;
     }
 
@@ -362,7 +362,7 @@ Configuration Configuration::plus(UnfoldingEvent* evt)
     res.events_       = this->events_;
     res.maxEvent      = this->maxEvent;
     res.actorMaxEvent = this->actorMaxEvent;
-    if (not res.contains(evt))
+    if (!res.contains(evt))
         res.events_.insert(evt);
     return res;
 }
@@ -394,7 +394,7 @@ UnfoldingEvent* EventSet::find(UnfoldingEvent* e)
 UnfoldingEvent* Configuration ::findTestedComm(UnfoldingEvent* testEvt)
 {
     for (auto it : this->events_)
-        if (it->transition.commId == testEvt->transition.commId and it->transition.type != "Test" and
+        if (it->transition.commId == testEvt->transition.commId && it->transition.type != "Test" &&
                 it->transition.actor_id == testEvt->transition.actor_id)
             return it;
     return nullptr;
@@ -404,17 +404,17 @@ UnfoldingEvent* Configuration ::findTestedComm(UnfoldingEvent* testEvt)
  * Here we suppose that 2 given event sets do not have common events */
 bool EventSet::depends(EventSet s2)
 {
-    if (this->events_.empty() or s2.events_.empty())
+    if (this->events_.empty() || s2.events_.empty())
         return false;
 
     for (auto e1 : this->events_)
         for (auto e2 : s2.events_)
             if (e1->transition.isDependent(e2->transition))
                 return true;
-            else if ((e1->transition.type == "Test" and
-                      (e2->transition.type == "Isend" or e2->transition.type == "Ireceive")) or
-                     (e2->transition.type == "Test" and
-                      (e1->transition.type == "Isend" or e1->transition.type == "Ireceive")))
+            else if ((e1->transition.type == "Test" &&
+                      (e2->transition.type == "Isend" || e2->transition.type == "Ireceive")) ||
+                     (e2->transition.type == "Test" &&
+                      (e1->transition.type == "Isend" || e1->transition.type == "Ireceive")))
                 if (e1->concernSameComm(e1, e2))
                     return true;
 
@@ -437,7 +437,7 @@ bool EventSet::isConfig()
         }
         // Every event of the history should be in the set
         for (auto ancestor : e1->getHistory().events_)
-            if (not(this->contains(ancestor)))
+            if (!(this->contains(ancestor)))
                 return false;
     }
 
@@ -480,7 +480,7 @@ EventSet EventSet::plus(UnfoldingEvent* evt)
 {
     EventSet res;
     res.events_ = this->events_;
-    if (not res.contains(evt))
+    if (!res.contains(evt))
         res.events_.insert(evt);
     return res;
 }
@@ -512,7 +512,7 @@ bool EventSet::operator==(const EventSet& other) const
 }
 void EventSet::insert(UnfoldingEvent* e)
 {
-    if (not this->contains(e))
+    if (!this->contains(e))
         events_.insert(e);
 }
 
@@ -536,7 +536,7 @@ bool EventSet::conflictWithEvt(UnfoldingEvent* e)
 bool EventSet::isEmptyIntersection(EventSet evtS1, EventSet evtS2)
 {
 
-    if (evtS1.size() == 0 or evtS2.size() == 0)
+    if (evtS1.size() == 0 || evtS2.size() == 0)
         return false;
 
     for (auto evt : evtS2.events_)

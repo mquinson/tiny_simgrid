@@ -31,24 +31,6 @@ std::vector<int> Transition_Manager::get_enabled_transition(int eid) const
 std::vector<int> Transition_Manager::get_actors_transitions(std::vector<Actor> &actors, std::vector<Mailbox> &mbs) const
 {
     std::vector<int> tr_ids;
-//    for(auto p : actors) {
-//        for (auto j=0; j<(int)p.nb_trans; j++) {
-//            if (not p.trans[j].executed) {
-//                bool check = true;
-//                if (p.trans[j].type == WAIT) {
-//                    for (auto mb : mbs) {
-//                        if (p.trans[j].mailbox_id == mb.id and (not mb.checkComm(p.trans[j]))) {
-//                            check = false;
-//                            break;
-//                        }
-//                    }
-//                }
-//                if (check)
-//                    tr_ids.push_back(p.trans[j].id);
-//                break;
-//            }
-//        }
-//    }
     return tr_ids;
 }
 

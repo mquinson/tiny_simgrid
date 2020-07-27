@@ -7,6 +7,8 @@
 #include "../App/Transition.h"
 #include "State.h"
 
+using namespace app;
+
 namespace uc {
 
 class UnfoldingEvent;
