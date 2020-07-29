@@ -19,14 +19,13 @@ public:
     int mutexID    = -1; // the mutex i touch
     int lockId     = -1; // used for Mtest and Mwait
 
-    bool isDependent(Transition other);
+    bool isDependent(const Transition& other) const;
     Transition() {}
 
     bool operator<(const Transition& other) const;
-//    bool operator==(const Transition& other);
 
     Transition(int read_write, int access_var);
-    Transition(int mbId, int commId, std::string type);
+    Transition(int mbId, int commId, const std::string &type);
 };
 
 } // namespace app
