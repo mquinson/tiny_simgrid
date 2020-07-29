@@ -26,6 +26,10 @@ public:
 
     Transition(int read_write, int access_var);
     Transition(int mbId, int commId, const std::string &type);
+    Transition(const Transition&) = default;
+    Transition& operator=(Transition const&) = default;
+    Transition(Transition&&) = default;
+    ~Transition() = default;
 };
 
 } // namespace app

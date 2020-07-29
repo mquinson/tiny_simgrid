@@ -20,9 +20,13 @@ class UnfoldingChecker {
     unsigned int expected_events_ = 0;
 //    std::unique_ptr<AppSide> app_side_ = std::unique_ptr<AppSide>(new AppSide());;
 
-public:
+public:    
     UnfoldingChecker() = default;
     UnfoldingChecker(std::vector<unsigned int> confs, unsigned int expected_events) : confs_expected_(confs), confs_check_(true), expected_events_(expected_events) {}
+    UnfoldingChecker(const UnfoldingChecker&) = default;
+    UnfoldingChecker& operator=(UnfoldingChecker const&) = default;
+    UnfoldingChecker(UnfoldingChecker&&) = default;
+    ~UnfoldingChecker() = default;
 
     void explore(State* state); // Start the exploration
     // Recursive function

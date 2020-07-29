@@ -2,7 +2,8 @@
 
 namespace uc {
 
-UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, Transition t, EventSet causes)
+//UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, const Transition &t, const EventSet &causes)
+UnfoldingEvent::UnfoldingEvent(unsigned int nb_events,  Transition t,  EventSet causes)
 {
 
     this->id         = nb_events;
@@ -10,7 +11,7 @@ UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, Transition t, EventSet ca
     this->transition = t;
 }
 
-void UnfoldingEvent::print()
+void UnfoldingEvent::print() const
 {
 
     std::cout << "e" << this->id << " =  < t" << this->transition.id << "-p" << this->transition.actor_id << "(";
@@ -33,7 +34,6 @@ EventSet UnfoldingEvent::getHistory() const
     if (causes.empty()) // No direct ancestor => empty history
         return causes;
     else {
-        // EventSet res = causes;
         EventSet res;
         for (auto ancestor : causes.events_) {
             EventSet h1;
@@ -43,7 +43,7 @@ EventSet UnfoldingEvent::getHistory() const
             if (!res.contains(ancestor))
                 h1 = ancestor->getHistory();
             h1.insert(ancestor);
-            res = res.makeUnion(res, h1);
+            res = uc::EventSet::makeUnion(res, h1);
         }
         return res;
     }

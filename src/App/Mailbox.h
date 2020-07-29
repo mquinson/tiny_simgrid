@@ -26,6 +26,11 @@ public:
 
     explicit Mailbox(int i) : id(i) {}
     Mailbox() = default;
+    Mailbox(const Mailbox&) = default;
+    Mailbox& operator=(Mailbox const&) = default;
+    Mailbox(Mailbox&&) = default;
+    ~Mailbox() = default;
+
 };
 
 } // namespace app

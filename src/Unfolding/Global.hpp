@@ -15,6 +15,12 @@ class UnfoldingEvent;
 
 class EventSet {
 public:
+    EventSet() = default;
+//    EventSet(const EventSet&) = default;
+//    EventSet& operator=(EventSet const&) = default;
+//    EventSet(EventSet&&) = default;
+//    ~EventSet() = default;
+
     bool contains(UnfoldingEvent* e);
     UnfoldingEvent* find(UnfoldingEvent* e);
     void subtruct(EventSet otherSet);
@@ -53,6 +59,12 @@ public:
     UnfoldingEvent* findActorMaxEvt(int actorId); // find maximal event of a Actor whose id = actorId
 
     UnfoldingEvent* findTestedComm(UnfoldingEvent* testEvt); // find comm tested by action testTrans
+
+    Configuration() = default;
+    Configuration(const Configuration&) = default;
+    Configuration& operator=(Configuration const&) = default;
+    Configuration(Configuration&&) = default;
+    ~Configuration() = default;
 };
 
 class UnfoldingEvent {
@@ -65,8 +77,12 @@ public:
     // communication)
 
     UnfoldingEvent(State* s) : appState(*s) {}
-
     UnfoldingEvent(unsigned int nb_events, Transition t, EventSet causes);
+//    UnfoldingEvent(unsigned int nb_events, const Transition &t, const EventSet &causes);
+    UnfoldingEvent(const UnfoldingEvent&) = default;
+    UnfoldingEvent& operator=(UnfoldingEvent const&) = default;
+    UnfoldingEvent(UnfoldingEvent&&) = default;
+    ~UnfoldingEvent() = default;
 
     EventSet getHistory() const;
 
@@ -81,7 +97,7 @@ public:
     bool conflictWithConfig(UnfoldingEvent* event, Configuration config);
 //    bool operator<(const UnfoldingEvent& other);
     bool operator==(const UnfoldingEvent& other) const;
-    void print();
+    void print() const;
 };
 
 } // namespace uc
