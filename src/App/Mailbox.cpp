@@ -13,7 +13,6 @@ void Mailbox::update(const Transition& t)
 
     comm.actorId = t.actor_id;
     comm.commId  = t.commId;
-    // comm.status="pending";
 
     if (t.type == "Isend") {
         for (unsigned long i = 0; i < this->nbReceive; i++)
@@ -41,7 +40,7 @@ void Mailbox::update(const Transition& t)
     }
 };
 
-bool Mailbox::checkComm(Transition t)
+bool Mailbox::checkComm(const Transition& t)
 {
 
     for (unsigned long i = 0; i < nbSend; i++)

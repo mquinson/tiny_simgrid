@@ -223,6 +223,7 @@ int main(int argc, char** argv)
 
                       Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")})},
                      {Mailbox(1)}, {9, 9, 9, 9, 9, 9}, 59);
+//                     {Mailbox(1)}, {9, 9, 9, 9, 9, 9}, 70);
 
       std::cout << "\n explore full state space :\n";
 
