@@ -298,6 +298,7 @@ int main(int argc, char** argv)
 
       initState         = new State(3, actor_set, {Mailbox(1)});
       UnfoldingEvent* e = new UnfoldingEvent(initState);
+
       UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
       std::cout << "\n explore full state space :\n";
@@ -318,6 +319,7 @@ int main(int argc, char** argv)
       initState = new State(3, actor_set, {Mailbox(1)});
 
       UnfoldingEvent* e = new UnfoldingEvent(initState);
+
       UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
       std::cout << "\n explore full state space :\n";
@@ -701,6 +703,7 @@ else if (rank == 2)
       std::cout << "\n UDPOR state space :\n";
 
       UnfoldingEvent* e = new UnfoldingEvent(initState);
+
       UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
       std::cout << "\n explore full state space :\n";
