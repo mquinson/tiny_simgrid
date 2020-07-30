@@ -20,7 +20,7 @@ public:
     Actor(Actor&&) = default;
     ~Actor() = default;
 
-    bool operator<(const Actor& other) const;
+    inline bool operator<(const Actor& other) const { return (this->id < other.id); }
 };
 
 } // namespace app
