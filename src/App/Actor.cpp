@@ -2,7 +2,7 @@
 
 namespace app {
 
-Actor::Actor(int id, std::vector<Transition> trans) : id(id), nb_trans(trans.size())
+Actor::Actor(int id, std::vector<Transition> trans) : id{id}, nb_trans{trans.size()}
 {
     for (unsigned int i = 0; i < this->nb_trans; i++) {
         this->trans.push_back(trans[i]);
@@ -11,7 +11,7 @@ Actor::Actor(int id, std::vector<Transition> trans) : id(id), nb_trans(trans.siz
     }
 }
 
-Actor::Actor(int id, unsigned int nb_trans, std::array<Transition, 30>& trans) : id(id), nb_trans(nb_trans)
+Actor::Actor(int id, unsigned int nb_trans, std::array<Transition, 30>& trans) : id{id}, nb_trans{nb_trans}
 {
     for (unsigned int i = 0; i < nb_trans; i++) {
         this->trans.push_back(trans[i]);

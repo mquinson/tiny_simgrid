@@ -58,17 +58,6 @@ void ksubset(unsigned long sizeD, std::list<UnfoldingEvent*> EvtList, std::list<
             EvtList1.push_back(it);
 
             if (n == sizeD - 1) {
-
-                // check there is no conflict between 2 events in the list
-                /*
-          int chk = true;
-         std::list<UnfoldingEvent*> EvtList2 = EvtList1;
-         for (auto it1 : EvtList1) for (auto it2 : EvtList2)
-         if (it1->isConflict(it2))
-         { chk = false; break;}
-         */
-
-                // if (chk )
                 if (EvtList1.size() == sizeD) {
                     for (auto evt : EvtList1)
                         J.insert(evt);
@@ -81,13 +70,15 @@ void ksubset(unsigned long sizeD, std::list<UnfoldingEvent*> EvtList, std::list<
             inter++;
         }
     }
-    //	std::cout << " \n finish ksubset \n";
 }
 
-EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C)
+EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C) const
 {
 
-    EventSet J, J1, emptySet, result;
+    EventSet J;
+    EventSet J1;
+    EventSet emptySet;
+    EventSet result;
     std::list<EventSet> kSet;
 
     /*for each evt in D, add all evt1 in U that is conflict with evt to a set(spike) */
@@ -104,7 +95,6 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C)
     std::list<EventSet> kSet1;
 
     if (kSet.size() < D.size()) {
-        //		std::cout << "there is no optimal solution (no alternative) 1";
         return emptySet;
     }
 
@@ -116,26 +106,15 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C)
 
             for (auto evt : it.events_) {
 
-                EventSet subC, sub_history, history = evt->getHistory();
+                EventSet subC;
+                EventSet sub_history;
+                EventSet history = evt->getHistory();
                 history.insert(evt);
-
-                /*			subC = C;
-                                sub_history = history;
-
-                                // remove all common events
-
-                                for(auto evt1: C.events_) if (history.contains(evt1)) {subC.erase(evt1);
-           sub_history.erase(evt1);}
-
-                        if ( (! history.isEmptyIntersection(history,D)) or  (subC.depends(sub_history)))*/
-
                 bool chk = false;
 
                 if (!history.isEmptyIntersection(history, D)) {
 
                     chk = true;
-                    // if (evt->id == 29)std::cout <<"\n va chk =" << chk <<" \n";
-
                 } else
                     for (auto it1 : C.events_)
                         if (it1->isConflict(it1, evt)) {
@@ -143,16 +122,12 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C)
                             break;
                         }
 
-                // if (evt->id == 29)std::cout<<" sau khi kt dk chk =" << chk << " \n";
-
-                if (chk) { // if (evt->id == 29)std::cout<<" se xoa thang 29 nhe chk =" << chk << " \n";
+                if (chk) {
                     evtS.erase(evt);
                 }
             }
 
             if (evtS.empty()) {
-
-                // std::cout << "there is no optimal solution (no alternative)";
                 return emptySet;
             }
 
@@ -180,12 +155,10 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C)
 
         for (auto evt : J1.events_) {
             EventSet history = evt->getHistory();
-              J = uc::EventSet::makeUnion(J, history);
+            J = uc::EventSet::makeUnion(J, history);
             J.insert(evt);
         }
     }
-
-    //	std::cout <<"\n ---->>> end kpartial \n";
 
     return J;
 }
@@ -1405,7 +1378,7 @@ void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistor
 
     e->appState = nextState;
 
-//    app_side_->checkpoint(e->id, nextState.nb_actors_, nextState.actors_, nextState.mailboxes_);
+    //    app_side_->checkpoint(e->id, nextState.nb_actors_, nextState.actors_, nextState.mailboxes_);
 
     // UnfoldingEvent* newEvent = e + e.transition;
     Configuration C1 = C;
