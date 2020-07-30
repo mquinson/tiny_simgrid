@@ -7,8 +7,6 @@
 #include "../App/Transition.h"
 #include "State.h"
 
-using namespace app;
-
 namespace uc {
 
 class UnfoldingEvent;
@@ -52,8 +50,8 @@ public:
     EventSet actorMaxEvent;    // maximal events of the actors in current configuration
     UnfoldingEvent* lastEvent; // The last added event
 
-    Configuration plus(UnfoldingEvent*);
-    void createEvts(Configuration C, EventSet& result, Transition t, EventSet causuality_events, EventSet cause,
+    Configuration plus_config(UnfoldingEvent*);
+    void createEvts(Configuration C, EventSet& result, app::Transition t, EventSet causuality_events, EventSet cause,
                     EventSet candidateHistory, bool chk, UnfoldingEvent* immPreEvt);
     void updateMaxEvent(UnfoldingEvent*);         // update maximal events of the configuration and actors
     UnfoldingEvent* findActorMaxEvt(int actorId); // find maximal event of a Actor whose id = actorId
@@ -71,13 +69,13 @@ class UnfoldingEvent {
 public:
     int id = -1;
     State appState;
-    Transition transition; // The last transition made to reach that state
+    app::Transition transition; // The last transition made to reach that state
     EventSet causes;       // used to store directed ancestors of event e
     EventSet conflictEvts; // used for Test and Send/Receive events, storing conflicts events with me (concern the same
     // communication)
 
-    UnfoldingEvent(State* s) : appState(*s) {}
-    UnfoldingEvent(unsigned int nb_events, Transition t, EventSet causes);
+    explicit UnfoldingEvent(State* s) : appState(*s) {}
+    UnfoldingEvent(unsigned int nb_events, app::Transition t, EventSet causes);
 //    UnfoldingEvent(unsigned int nb_events, const Transition &t, const EventSet &causes);
     UnfoldingEvent(const UnfoldingEvent&) = default;
     UnfoldingEvent& operator=(UnfoldingEvent const&) = default;

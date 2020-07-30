@@ -4,6 +4,7 @@
 //#include "main_include.hpp"
 
 using namespace uc;
+using namespace app;
 
 static int nbInt = 0;
 void exhautiveExplore(std::list<State> stateStack, std::list<Transition> transList)

@@ -7,6 +7,9 @@
 
 namespace uc {
 
+using Actor = app::Actor;
+using Transition = app::Transition;
+
 class UnfoldingChecker {
     unsigned long expandedStatesCount_ = 0;
     // int Mode = 1; // Mode = 1 is a mutexed model

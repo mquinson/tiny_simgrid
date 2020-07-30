@@ -3,7 +3,7 @@
 namespace uc {
 
 //UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, const Transition &t, const EventSet &causes)
-UnfoldingEvent::UnfoldingEvent(unsigned int nb_events,  Transition t,  EventSet causes)
+UnfoldingEvent::UnfoldingEvent(unsigned int nb_events,  app::Transition t,  EventSet causes)
 {
 
     this->id         = nb_events;
@@ -321,7 +321,7 @@ void Configuration::updateMaxEvent(UnfoldingEvent* e)
     actorMaxEvent.insert(e);
 }
 
-Configuration Configuration::plus(UnfoldingEvent* evt)
+Configuration Configuration::plus_config(UnfoldingEvent* evt)
 {
     Configuration res;
 
