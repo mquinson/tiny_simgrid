@@ -47,19 +47,13 @@ int main(int argc, char** argv)
 {
 
   clock_t begin = clock();
-  nb_events     = 0;
   UnfoldingChecker UC;
   EventSet A, D;
   EventSet prev_exC;
   Configuration C;
   State* initState;
   std::set<Actor> actor_set;
-  std::set<Mailbox> mailboxes;
   std::list<State> stateStack;
-  std::list<Transition> transList;
-
-  // keep history of maximal event when exploring C
-  std::list<std::set<int>> maxEventHis;
 
   int example = 1;
   std::cout << " enter example:";

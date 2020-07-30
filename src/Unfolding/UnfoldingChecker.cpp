@@ -3,34 +3,23 @@
 
 namespace uc {
 
-unsigned int nb_events = 0;
-unsigned int nb_traces = 0;
-EventSet U, G, gD;
+class g_var {
+public:
+    static unsigned int nb_events;
+    static unsigned int nb_traces;
+    static EventSet U, G, gD;
+};
 
-void intTobinary(int n, int p[])
-{
-    int i = 0;
-    while (n != 0) {
-        p[i] = n % 2;
-        i++;
-        n = n / 2;
-    }
-}
+unsigned int g_var::nb_events = 0;
+unsigned int g_var::nb_traces = 0;
+EventSet g_var::U;
+EventSet g_var::G;
+EventSet g_var::gD;
 
-EventSet UnfoldingChecker::filter(Configuration C, EventSet U)
-{
-    EventSet evtS;
-    for (auto evt : U.events_)
-        if (!evt->conflictWithConfig(evt, C))
-            evtS.insert(evt);
-
-    return evtS;
-}
 
 /* this function select one event in every EventSet in a list to form a set,
  *  if they are not conflict with each other -> return the set J
  */
-
 void ksubset(unsigned long sizeD, std::list<UnfoldingEvent*> EvtList, std::list<EventSet> list, unsigned int n,
              EventSet& J)
 {
@@ -103,7 +92,7 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C)
 
     for (auto evt : D.events_) {
         EventSet evtSet;
-        for (auto evt1 : U.events_)
+        for (auto evt1 : g_var::U.events_)
             if (evt->isConflict(evt, evt1))
                 evtSet.insert(evt1);
 
@@ -302,8 +291,8 @@ void Configuration::createEvts(Configuration C, EventSet& result, Transition t, 
             }
 
             if (send_receiveCheck) {
-                nb_events++;
-                UnfoldingEvent* e = new UnfoldingEvent(nb_events, t, cause1);
+                g_var::nb_events++;
+                UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, t, cause1);
                 result.insert(e);
             }
         }
@@ -381,10 +370,10 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
     // 1.1 if only last evt and immidiate precede event are dependent with trans -> only one evt is created
     if (causalityEvts.size() <= 2 && ancestorSet.size() == 0) {
 
-        nb_events++;
+        g_var::nb_events++;
 
         /* in this case only one event is created, since all MaxEvts are in the history of lastEvt*/
-        UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, causalityEvts);
+        UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, causalityEvts);
         exC.insert(e);
 
     }
@@ -491,8 +480,8 @@ EventSet createWaitEvt(UnfoldingEvent* evt, Configuration C, Transition trans)
                         ancestors.insert(maxEvt);
                         ancestors.insert(evt2);
                     }
-                    nb_events++;
-                    UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestors);
+                    g_var::nb_events++;
+                    UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
                     evtS.insert(e);
                 }
             }
@@ -531,8 +520,8 @@ EventSet createWaitEvt(UnfoldingEvent* evt, Configuration C, Transition trans)
                         ancestors.insert(maxEvt);
                         ancestors.insert(evt2);
                     }
-                    nb_events++;
-                    UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestors);
+                    g_var::nb_events++;
+                    UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
                     evtS.insert(e);
                 }
             }
@@ -591,8 +580,8 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
         EventSet maxEvtHist = C.lastEvent->getHistory();
 
         ancestors.insert(C.lastEvent);
-        nb_events++;
-        newEvt1 = new UnfoldingEvent(nb_events, trans, ancestors);
+        g_var::nb_events++;
+        newEvt1 = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
 
         evtS.insert(newEvt1);
 
@@ -620,8 +609,8 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
              * -> create an new event ( newEvt2 in the figure) */
 
                         ancestors.insert(evt2);
-                        nb_events++;
-                        newEvt2 = new UnfoldingEvent(nb_events, trans, ancestors);
+                        g_var::nb_events++;
+                        newEvt2 = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
 
                         evtS.insert(newEvt2);
                     }
@@ -651,8 +640,8 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
              * -> create an new event ( newEvt2 in the figure) */
 
                         ancestors.insert(evt2);
-                        nb_events++;
-                        newEvt2 = new UnfoldingEvent(nb_events, trans, ancestors);
+                        g_var::nb_events++;
+                        newEvt2 = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
                         evtS.insert(newEvt2);
                     }
                 }
@@ -675,8 +664,8 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
                 ancestors.insert(C.lastEvent);
                 if (!lastEvtHist.contains(maxEvt))
                     ancestors.insert(maxEvt);
-                nb_events++;
-                newEvt2 = new UnfoldingEvent(nb_events, trans, ancestors);
+                g_var::nb_events++;
+                newEvt2 = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
                 evtS.insert(newEvt2);
             }
         } else if (comType == "Ireceive") {
@@ -692,8 +681,8 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
                 ancestors.insert(C.lastEvent);
                 if (!lastEvtHist.contains(maxEvt))
                     ancestors.insert(maxEvt);
-                nb_events++;
-                newEvt2 = new UnfoldingEvent(nb_events, trans, ancestors);
+                g_var::nb_events++;
+                newEvt2 = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
                 evtS.insert(newEvt2);
             }
         }
@@ -744,21 +733,21 @@ EventSet createIsendEvts(Transition trans, Configuration C)
 
     // if last event is preEvt(trans) always create a new event.
     if (C.lastEvent->transition.actor_id == trans.actor_id) {
-        nb_events++;
-        UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorSet);
+        g_var::nb_events++;
+        UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorSet);
         exC.insert(e);
     }
     // else if last event is Isend try to create a new event .
     else if (C.lastEvent->transition.type == "Isend") {
 
         if (enableChk) {
-            nb_events++;
-            UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorSet);
+            g_var::nb_events++;
+            UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorSet);
             exC.insert(e);
         } else {
             ancestorSet.insert(immPreEvt);
-            nb_events++;
-            UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorSet);
+            g_var::nb_events++;
+            UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorSet);
             exC.insert(e);
         }
     }
@@ -784,8 +773,8 @@ EventSet createIsendEvts(Transition trans, Configuration C)
                             ancestorSet1.insert(immPreEvt);
 
                         if (checkSdRcCreation(trans, ancestorSet1, C)) {
-                            nb_events++;
-                            UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorSet1);
+                            g_var::nb_events++;
+                            UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorSet1);
                             exC.insert(e);
                         }
                     }
@@ -799,8 +788,8 @@ EventSet createIsendEvts(Transition trans, Configuration C)
         if (!enableChk)
             ansestors.insert(immPreEvt);
         if (checkSdRcCreation(trans, ansestors, C)) {
-            nb_events++;
-            UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ansestors);
+            g_var::nb_events++;
+            UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ansestors);
             exC.insert(e);
         }
 
@@ -817,8 +806,8 @@ EventSet createIsendEvts(Transition trans, Configuration C)
                         ansestors1.insert(immPreEvt);
 
                     if (checkSdRcCreation(trans, ansestors1, C)) {
-                        nb_events++;
-                        UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ansestors1);
+                        g_var::nb_events++;
+                        UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ansestors1);
                         exC.insert(e);
                     }
                 }
@@ -845,8 +834,8 @@ EventSet createIsendEvts(Transition trans, Configuration C)
                             ancestorsSet.insert(tEvt);
 
                             if (checkSdRcCreation(trans, ancestorsSet, C)) {
-                                nb_events++;
-                                UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorsSet);
+                                g_var::nb_events++;
+                                UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorsSet);
                                 exC.insert(e);
                             }
                         }
@@ -895,20 +884,20 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
 
     // if last event is preEvt(trans) always create a new event.
     if (C.lastEvent->transition.actor_id == trans.actor_id) {
-        nb_events++;
-        UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorSet);
+        g_var::nb_events++;
+        UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorSet);
         exC.insert(e);
     }
     // else if last event is Ireceive try to create a new event .
     else if (C.lastEvent->transition.type == "Ireceive") {
         if (enableChk) {
-            nb_events++;
-            UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorSet);
+            g_var::nb_events++;
+            UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorSet);
             exC.insert(e);
         } else {
             ancestorSet.insert(immPreEvt);
-            nb_events++;
-            UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorSet);
+            g_var::nb_events++;
+            UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorSet);
             exC.insert(e);
         }
     }
@@ -935,8 +924,8 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
                             ancestorSet1.insert(immPreEvt);
 
                         if (checkSdRcCreation(trans, ancestorSet1, C)) {
-                            nb_events++;
-                            UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorSet1);
+                            g_var::nb_events++;
+                            UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorSet1);
                             exC.insert(e);
                         }
                     }
@@ -950,8 +939,8 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
         if (!enableChk)
             ansestors.insert(immPreEvt);
         if (checkSdRcCreation(trans, ansestors, C)) {
-            nb_events++;
-            UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ansestors);
+            g_var::nb_events++;
+            UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ansestors);
             exC.insert(e);
         }
 
@@ -968,8 +957,8 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
                         ansestors1.insert(immPreEvt);
 
                     if (checkSdRcCreation(trans, ansestors1, C)) {
-                        nb_events++;
-                        UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ansestors1);
+                        g_var::nb_events++;
+                        UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ansestors1);
                         exC.insert(e);
                     }
                 }
@@ -995,8 +984,8 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
                             ancestorsSet.insert(tEvt);
 
                             if (checkSdRcCreation(trans, ancestorsSet, C)) {
-                                nb_events++;
-                                UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, ancestorsSet);
+                                g_var::nb_events++;
+                                UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorsSet);
 
                                 exC.insert(e);
                             }
@@ -1079,8 +1068,8 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
             ancestorSet.insert(evt);
 
     if (checkSdRcCreation(trans, causalityEvts, C) && chk) {
-        nb_events++;
-        UnfoldingEvent* e = new UnfoldingEvent(nb_events, trans, causalityEvts);
+        g_var::nb_events++;
+        UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, causalityEvts);
         exC.insert(e);
     }
 
@@ -1139,16 +1128,16 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
     EventSet causes;
     if (C.empty()) {
         for (auto p : actors) {
-            nb_events++;
-            UnfoldingEvent* newEvent = new UnfoldingEvent(nb_events, p.trans[0], causes);
-            if (!U.contains(newEvent)) {
-                U.insert(newEvent);
+            g_var::nb_events++;
+            UnfoldingEvent* newEvent = new UnfoldingEvent(g_var::nb_events, p.trans[0], causes);
+            if (!g_var::U.contains(newEvent)) {
+                g_var::U.insert(newEvent);
                 enC.insert(newEvent);
                 exC.insert(newEvent);
 
             } else {
-                enC.insert(U.find(newEvent));
-                exC.insert(U.find(newEvent));
+                enC.insert(g_var::U.find(newEvent));
+                exC.insert(g_var::U.find(newEvent));
             }
         }
 
@@ -1175,11 +1164,11 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                 }
 
                 for (auto newEvent : exC1.events_)
-                    if (!U.contains(newEvent)) {
-                        U.insert(newEvent);
+                    if (!g_var::U.contains(newEvent)) {
+                        g_var::U.insert(newEvent);
                         exC.insert(newEvent);
                     } else
-                        exC.insert(U.find(newEvent));
+                        exC.insert(g_var::U.find(newEvent));
 
             }
 
@@ -1190,11 +1179,11 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                       (C.lastEvent->transition.type == "Test" && C.lastEvent->transition.mailbox_id == trans.mailbox_id))) {
                 EventSet exC1 = createIsendEvts(trans, C);
                 for (auto newEvent : exC1.events_)
-                    if (!U.contains(newEvent)) {
-                        U.insert(newEvent);
+                    if (!g_var::U.contains(newEvent)) {
+                        g_var::U.insert(newEvent);
                         exC.insert(newEvent);
                     } else
-                        exC.insert(U.find(newEvent));
+                        exC.insert(g_var::U.find(newEvent));
 
             }
 
@@ -1203,11 +1192,11 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                       (C.lastEvent->transition.type == "Test" && C.lastEvent->transition.mailbox_id == trans.mailbox_id))) {
                 EventSet exC1 = createIreceiveEvts(trans, C);
                 for (auto newEvent : exC1.events_)
-                    if (!U.contains(newEvent)) {
-                        U.insert(newEvent);
+                    if (!g_var::U.contains(newEvent)) {
+                        g_var::U.insert(newEvent);
                         exC.insert(newEvent);
                     } else
-                        exC.insert(U.find(newEvent));
+                        exC.insert(g_var::U.find(newEvent));
 
             }
             // ELSE IF THE TRANSITION IS A WAIT ACTION
@@ -1234,11 +1223,11 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                     // EventSet unionSet = U.makeUnion(U,gD1);
 
                     for (auto newEvent : newEvts.events_)
-                        if (!U.contains(newEvent)) {
-                            U.insert(newEvent);
+                        if (!g_var::U.contains(newEvent)) {
+                            g_var::U.insert(newEvent);
                             exC.insert(newEvent);
                         } else
-                            exC.insert(U.find(newEvent));
+                            exC.insert(g_var::U.find(newEvent));
                 }
 
             }
@@ -1269,13 +1258,13 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                     EventSet newEvts = createTestEvt(exC, event, C, trans);
 
                     for (auto newEvent : newEvts.events_)
-                        if (!U.contains(newEvent)) {
+                        if (!g_var::U.contains(newEvent)) {
 
-                            U.insert(newEvent);
+                            g_var::U.insert(newEvent);
                             exC.insert(newEvent);
 
                         } else
-                            exC.insert(U.find(newEvent));
+                            exC.insert(g_var::U.find(newEvent));
                 }
 
             }
@@ -1283,14 +1272,14 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
             else if (trans.type == "localComp" && C.lastEvent->transition.actor_id == trans.actor_id) {
                 EventSet ancestors;
                 ancestors.insert(C.lastEvent);
-                nb_events++;
-                UnfoldingEvent* newEvent = new UnfoldingEvent(nb_events, trans, ancestors);
-                if (!U.contains(newEvent)) {
-                    U.insert(newEvent);
+                g_var::nb_events++;
+                UnfoldingEvent* newEvent = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
+                if (!g_var::U.contains(newEvent)) {
+                    g_var::U.insert(newEvent);
                     exC.insert(newEvent);
 
                 } else
-                    exC.insert(U.find(newEvent));
+                    exC.insert(g_var::U.find(newEvent));
             }
         }
 
@@ -1317,12 +1306,12 @@ void UnfoldingChecker::explore(State* state)
 
     explore(C, {EventSet()}, D, A, new UnfoldingEvent(state), prev_exC, state->actors_);
     std::cout.flush();
-    if (nb_traces != confs_expected_.size()) {
-        std::cerr << "ERROR: " << confs_expected_.size() << " traces expected, but " << nb_traces << " observed.\n";
+    if (g_var::nb_traces != confs_expected_.size()) {
+        std::cerr << "ERROR: " << confs_expected_.size() << " traces expected, but " << g_var::nb_traces << " observed.\n";
         error_++;
     }
-    if (nb_events != expected_events_) {
-        std::cerr << "ERROR: " << expected_events_ << " unique events expected, but " << nb_events << " observed.\n";
+    if (g_var::nb_events != expected_events_) {
+        std::cerr << "ERROR: " << expected_events_ << " unique events expected, but " << g_var::nb_events << " observed.\n";
         error_++;
     }
 }
@@ -1357,19 +1346,19 @@ void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistor
 
         if (C.size() > 0) {
 
-            nb_traces++;
+            g_var::nb_traces++;
             if (this->confs_check_) {
-                if (nb_traces > confs_expected_.size()) {
+                if (g_var::nb_traces > confs_expected_.size()) {
                     std::cerr << "ERROR: more trace than expected!!\n";
                     error_++;
-                } else if (confs_expected_[nb_traces - 1] != C.events_.size()) {
-                    std::cerr << "ERROR: trace " << nb_traces << " contains " << C.events_.size() << " events where "
-                              << confs_expected_[nb_traces - 1] << " were expected!!\n";
+                } else if (confs_expected_[g_var::nb_traces - 1] != C.events_.size()) {
+                    std::cerr << "ERROR: trace " << g_var::nb_traces << " contains " << C.events_.size() << " events where "
+                              << confs_expected_[g_var::nb_traces - 1] << " were expected!!\n";
                     error_++;
                 }
             }
 
-            std::cout << "\n Exploring executions: " << nb_traces << " : \n";
+            std::cout << "\n Exploring executions: " << g_var::nb_traces << " : \n";
             std::cout << "\n-----------------------------------------------------------"
                          "-------------------------------------------------------------------"
                          "-------------------\n";
@@ -1430,7 +1419,7 @@ void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistor
     explore(C1, maxEvtHistory1, D, A.minus(e), e, exC.minus(e), actors);
 
     EventSet J, U1;
-    EventSet Uc = U;
+    EventSet Uc = g_var::U;
 
     EventSet D1 = D;
     D1.insert(e);
@@ -1458,7 +1447,7 @@ void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D)
     unionSet = uc::EventSet::makeUnion(C, D);
 
     // building Qcdu
-    for (auto e1 : U.events_) {
+    for (auto e1 : g_var::U.events_) {
         for (auto e2 : unionSet.events_)
             // add e1 which is immediate conflict with one event in C u D to res
 
@@ -1478,13 +1467,13 @@ void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D)
     // move e from U to G if the condition is satisfied
 
     if (!res.contains(e)) {
-        U.erase(e);
+        g_var::U.erase(e);
 
         // G.insert(e);
     }
 
     // move history of ê from U to G
-    EventSet U1 = U;
+    EventSet U1 = g_var::U;
     for (auto evt : U1.events_)
 
     {
@@ -1495,7 +1484,7 @@ void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D)
 
             for (auto e2 : h.events_)
                 if (!res.contains(e2)) {
-                    U.erase(e2);
+                    g_var::U.erase(e2);
                     //	G.insert(e2);
                 }
         }
