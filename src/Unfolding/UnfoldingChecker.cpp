@@ -1104,7 +1104,7 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
 }
 
 void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list<EventSet> maxEvtHistory, EventSet& exC,
-                              EventSet& enC)
+                              EventSet& enC) const
 {
 
     // in the initial state each actor creates one event

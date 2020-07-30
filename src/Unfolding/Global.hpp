@@ -77,8 +77,7 @@ public:
     State appState;
     app::Transition transition; // The last transition made to reach that state
     EventSet causes;       // used to store directed ancestors of event e
-    EventSet conflictEvts; // used for Test and Send/Receive events, storing conflicts events with me (concern the same
-    // communication)
+    EventSet conflictEvts;
 
     explicit UnfoldingEvent(State* s) : appState(*s) {}
     UnfoldingEvent(unsigned int nb_events, app::Transition t, EventSet causes);

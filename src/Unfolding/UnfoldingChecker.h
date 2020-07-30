@@ -32,7 +32,7 @@ public:
     void explore(Configuration C, std::list<EventSet> maxEvtHistory, EventSet D, EventSet A, UnfoldingEvent* currentEvt,
                  EventSet prev_enC, std::set<Actor> proc);
 
-    void extend(std::set<Actor> proc, Configuration C, std::list<EventSet> maxEvtHistory, EventSet& ExC, EventSet& enC);
+    void extend(std::set<Actor> proc, Configuration C, std::list<EventSet> maxEvtHistory, EventSet& ExC, EventSet& enC) const;
     void remove(UnfoldingEvent* e, Configuration C, EventSet D);
     EventSet KpartialAlt(EventSet D, Configuration C) const;
 
