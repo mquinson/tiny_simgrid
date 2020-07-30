@@ -44,6 +44,12 @@ public:
     EventSet plus(UnfoldingEvent*);
 };
 
+typedef struct s_evset_in {
+    EventSet causuality_events;
+    EventSet cause;
+    EventSet ancestorSet;
+} s_evset_in_t;
+
 class Configuration : public EventSet {
 public:
     EventSet maxEvent;         // Events recently added to events_
@@ -51,8 +57,8 @@ public:
     UnfoldingEvent* lastEvent; // The last added event
 
     Configuration plus_config(UnfoldingEvent*);
-    void createEvts(Configuration C, EventSet& result, app::Transition t, EventSet causuality_events, EventSet cause,
-                    EventSet candidateHistory, bool chk, UnfoldingEvent* immPreEvt);
+    void createEvts(Configuration C, EventSet& result, const app::Transition &t,
+                    s_evset_in_t ev_sets, bool chk, UnfoldingEvent* immPreEvt);
     void updateMaxEvent(UnfoldingEvent*);         // update maximal events of the configuration and actors
     UnfoldingEvent* findActorMaxEvt(int actorId); // find maximal event of a Actor whose id = actorId
 

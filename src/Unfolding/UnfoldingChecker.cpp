@@ -163,7 +163,7 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C) const
     return J;
 }
 
-bool checkSdRcCreation(Transition trans, EventSet ancestors, Configuration C)
+bool checkSdRcCreation(Transition const& trans, EventSet ancestors, Configuration C)
 {
 
     int nbTest = 0, nbSend = 0, nbReceive = 0;
@@ -237,10 +237,12 @@ bool checkSdRcCreation(Transition trans, EventSet ancestors, Configuration C)
  *  (the set includes events that can be a direct ancestor)
  *  by combination the transition and all subset (cause)  of the set ancestorSet
  */
-
-void Configuration::createEvts(Configuration C, EventSet& result, Transition t, EventSet causuality_events,
-                               EventSet cause, EventSet ancestorSet, bool chk, UnfoldingEvent* immPreEvt)
+void Configuration::createEvts(Configuration C, EventSet &result, const app::Transition &t, s_evset_in_t ev_sets, bool chk, UnfoldingEvent *immPreEvt)
 {
+    auto causuality_events = ev_sets.causuality_events;
+    auto cause = ev_sets.cause;
+    auto ancestorSet = ev_sets.ancestorSet;
+
     if (ancestorSet.empty()) {
 
         bool chk1 = false;
@@ -281,11 +283,15 @@ void Configuration::createEvts(Configuration C, EventSet& result, Transition t, 
         evtSet3 = ancestorSet;
         evtSet1.insert(a);
         evtSet3.erase(a);
-        createEvts(C, result, t, causuality_events, evtSet1, evtSet3, chk, immPreEvt);
+        s_evset_in_t evsets { causuality_events, evtSet1, evtSet3 };
+        createEvts(C, result, t, evsets, chk, immPreEvt);
         evtSet2 = cause;
         evtSet4 = ancestorSet;
         evtSet4.erase(a);
-        createEvts(C, result, t, causuality_events, evtSet2, evtSet4, chk, immPreEvt);
+        evsets.causuality_events = causuality_events;
+        evsets.cause = evtSet2;
+        evsets.ancestorSet = evtSet4;
+        createEvts(C, result, t, evsets, chk, immPreEvt);
     }
 }
 
@@ -358,8 +364,9 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
 
         EventSet cause;
         EventSet exC1;
-
-        C.createEvts(C, exC1, trans, causalityEvts, cause, ancestorSet, chk, immPreEvt);
+        //EventSet causuality_events, EventSet cause, EventSet ancestorSet
+        s_evset_in evsets = { causalityEvts, cause, ancestorSet };
+        C.createEvts(C, exC1, trans, evsets, chk, immPreEvt);
         exC = uc::EventSet::makeUnion(exC, exC1);
 
         // remove last MaxEvt, sine we already used it in the above
@@ -399,7 +406,8 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
 
                 EventSet exC1;
                 EventSet cause;
-                C.createEvts(C, exC1, trans, causalityEvts, cause, evtSet1, chk, immPreEvt);
+                s_evset_in_t evsets = { causalityEvts, cause, evtSet1 };
+                C.createEvts(C, exC1, trans, evsets, chk, immPreEvt);
                 exC = uc::EventSet::makeUnion(exC, exC1);
             }
         }
@@ -1050,8 +1058,8 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
 
     EventSet cause;
     EventSet exC1;
-
-    C.createEvts(C, exC1, trans, causalityEvts, cause, ancestorSet, chk, immPreEvt);
+    s_evset_in_t evsets = { causalityEvts, cause, ancestorSet };
+    C.createEvts(C, exC1, trans, evsets, chk, immPreEvt);
     exC = uc::EventSet::makeUnion(exC, exC1);
 
     // remove last MaxEvt, sine we already used it before
@@ -1085,8 +1093,8 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
                     evtSet1.insert(evt);
 
             EventSet exC1, cause;
-
-            C.createEvts(C, exC1, trans, causalityEvts, cause, evtSet1, chk, immPreEvt);
+            s_evset_in_t evsets { causalityEvts, cause, evtSet1 };
+            C.createEvts(C, exC1, trans, evsets, chk, immPreEvt);
 
             exC = uc::EventSet::makeUnion(exC, exC1);
         }
