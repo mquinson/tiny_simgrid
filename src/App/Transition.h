@@ -20,10 +20,10 @@ public:
     int lockId     = -1; // used for Mtest and Mwait
 
     bool isDependent(const Transition& other) const;
-    Transition() {}
 
     bool operator<(const Transition& other) const;
 
+    Transition() = default;
     Transition(int read_write, int access_var);
     Transition(int mbId, int commId, const std::string &type);
     Transition(const Transition&) = default;

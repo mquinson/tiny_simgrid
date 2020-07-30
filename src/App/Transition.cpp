@@ -2,17 +2,10 @@
 
 namespace app {
 
-Transition::Transition(int read_write, int access_var)
-{
-    this->read_write = read_write;
-    this->access_var = access_var;
+Transition::Transition(int read_write, int access_var) : read_write(read_write), access_var(access_var) {
 }
 
-Transition::Transition(int mbId, int commId, const std::string& type)
-{
-    this->mailbox_id = mbId;
-    this->commId     = commId;
-    this->type       = type;
+Transition::Transition(int mbId, int commId, const std::string& type) : mailbox_id(mbId), commId(commId), type(type) {
 }
 
 bool Transition::operator<(const Transition& other) const
