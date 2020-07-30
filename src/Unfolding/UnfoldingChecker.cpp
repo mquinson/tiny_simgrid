@@ -7,7 +7,9 @@ class g_var {
 public:
     static unsigned int nb_events;
     static unsigned int nb_traces;
-    static EventSet U, G, gD;
+    static EventSet U;
+    static EventSet G;
+    static EventSet gD;
 };
 
 unsigned int g_var::nb_events = 0;
@@ -438,7 +440,7 @@ The idea here is that, we try to march the communication with all possible commu
 communication, making wait become enabled. When the wait enable, we can create new events
 */
 
-EventSet createWaitEvt(UnfoldingEvent* evt, Configuration C, Transition trans)
+EventSet createWaitEvt(const UnfoldingEvent* evt, Configuration C, Transition const& trans)
 {
     EventSet evtS;
     int nbSdRc     = 0;
