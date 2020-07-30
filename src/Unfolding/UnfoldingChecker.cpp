@@ -189,7 +189,7 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C)
 
         for (auto evt : J1.events_) {
             EventSet history = evt->getHistory();
-            J                = J.makeUnion(J, history);
+              J = uc::EventSet::makeUnion(J, history);
             J.insert(evt);
         }
     }
@@ -227,7 +227,7 @@ bool checkSdRcCreation(Transition trans, EventSet ancestors, Configuration C)
     EventSet ancestorsHist;
 
     for (auto evt : ancestors.events_)
-        ancestorsHist = ancestorsHist.makeUnion(ancestorsHist, evt->getHistory());
+        ancestorsHist = uc::EventSet::makeUnion(ancestorsHist, evt->getHistory());
 
     // check nb send == nb receive ?, if yes they concern the same comm -> test and send/receive are dependent
 
@@ -294,7 +294,7 @@ void Configuration::createEvts(Configuration C, EventSet& result, Transition t, 
         if (chk || chk1) {
             bool send_receiveCheck = true;
             EventSet cause1;
-            cause1 = cause1.makeUnion(cause, causuality_events);
+            cause1 = uc::EventSet::makeUnion(cause, causuality_events);
             // check condition for send/receive action or check enabled for MutexWait action
 
             if (t.type == "Isend" || t.type == "Ireceive") {
@@ -396,7 +396,7 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
         EventSet exC1;
 
         C.createEvts(C, exC1, trans, causalityEvts, cause, ancestorSet, chk, immPreEvt);
-        exC = exC.makeUnion(exC, exC1);
+        exC = uc::EventSet::makeUnion(exC, exC1);
 
         // remove last MaxEvt, sine we already used it in the above
         maxEvtHistory.pop_back();
@@ -409,7 +409,7 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
         for (auto evt : causalityEvts.events_) {
             EventSet H1;
             H1 = evt->getHistory();
-            H  = H.makeUnion(H, H1);
+            H  = uc::EventSet::makeUnion(H, H1);
         }
 
         // put id of evts in H in the the set intS
@@ -436,7 +436,7 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
                 EventSet exC1;
                 EventSet cause;
                 C.createEvts(C, exC1, trans, causalityEvts, cause, evtSet1, chk, immPreEvt);
-                exC = exC.makeUnion(exC, exC1);
+                exC = uc::EventSet::makeUnion(exC, exC1);
             }
         }
     }
@@ -1088,7 +1088,7 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
     EventSet exC1;
 
     C.createEvts(C, exC1, trans, causalityEvts, cause, ancestorSet, chk, immPreEvt);
-    exC = exC.makeUnion(exC, exC1);
+    exC = uc::EventSet::makeUnion(exC, exC1);
 
     // remove last MaxEvt, sine we already used it before
     maxEvtHistory.pop_back();
@@ -1101,7 +1101,7 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
     for (auto evt : causalityEvts.events_) {
         EventSet H1;
         H1 = evt->getHistory();
-        H  = H.makeUnion(H, H1);
+        H  = uc::EventSet::makeUnion(H, H1);
     }
 
     for (auto evtSet : maxEvtHistory) {
@@ -1124,7 +1124,7 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
 
             C.createEvts(C, exC1, trans, causalityEvts, cause, evtSet1, chk, immPreEvt);
 
-            exC = exC.makeUnion(exC, exC1);
+            exC = uc::EventSet::makeUnion(exC, exC1);
         }
     }
 
@@ -1455,7 +1455,7 @@ void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D)
 {
 
     EventSet unionSet, res, res1;
-    unionSet = unionSet.makeUnion(C, D);
+    unionSet = uc::EventSet::makeUnion(C, D);
 
     // building Qcdu
     for (auto e1 : U.events_) {
@@ -1471,10 +1471,10 @@ void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D)
     res1 = res;
     for (auto e1 : res1.events_) {
         EventSet h = e1->getHistory();
-        res        = res.makeUnion(res, h);
+        res        = uc::EventSet::makeUnion(res, h);
     }
 
-    res = res.makeUnion(res, unionSet);
+    res = uc::EventSet::makeUnion(res, unionSet);
     // move e from U to G if the condition is satisfied
 
     if (!res.contains(e)) {

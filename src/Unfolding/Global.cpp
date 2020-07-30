@@ -49,7 +49,7 @@ EventSet UnfoldingEvent::getHistory() const
     }
 }
 
-bool UnfoldingEvent::inHistory(UnfoldingEvent* otherEvent)
+bool UnfoldingEvent::inHistory(UnfoldingEvent* otherEvent) const
 {
     if (this->getHistory().contains(otherEvent))
         return true;

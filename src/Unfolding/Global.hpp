@@ -90,7 +90,7 @@ public:
     bool concernSameComm(UnfoldingEvent* event, UnfoldingEvent* otherEvent);
 
     // check otherEvent is in my history ?
-    bool inHistory(UnfoldingEvent* otherEvent);
+    bool inHistory(UnfoldingEvent* otherEvent) const;
 
     bool isImmediateConflict1(UnfoldingEvent* evt, UnfoldingEvent* otherEvt);
 
