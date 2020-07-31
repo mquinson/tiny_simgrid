@@ -44,6 +44,21 @@ public:
     EventSet plus(UnfoldingEvent*);
 };
 
+class EvtSetTools {
+public:
+    static bool contains(std::set<UnfoldingEvent*> events, UnfoldingEvent* e);
+    static UnfoldingEvent* find(std::set<UnfoldingEvent*> events, UnfoldingEvent* e);
+    static void subtract(std::set<UnfoldingEvent*>& events, std::set<UnfoldingEvent*> otherSet);
+    static bool depends(std::set<UnfoldingEvent*> events, std::set<UnfoldingEvent*> otherSet);
+    static bool isEmptyIntersection(std::set<UnfoldingEvent*> evtS1, std::set<UnfoldingEvent*> evtS2);
+    static std::set<UnfoldingEvent*> makeUnion(std::set<UnfoldingEvent*> s1, std::set<UnfoldingEvent*> s2);
+    static std::set<UnfoldingEvent *> makeIntersection(std::set<UnfoldingEvent *> s1, std::set<UnfoldingEvent *> s2);
+    static void insert(std::set<UnfoldingEvent*>& events, UnfoldingEvent* e);
+    static void erase(std::set<UnfoldingEvent*>& events, UnfoldingEvent* e);
+    static std::set<UnfoldingEvent*> minus(std::set<UnfoldingEvent *> events, UnfoldingEvent* e);
+    static std::set<UnfoldingEvent*> plus(std::set<UnfoldingEvent *> events, UnfoldingEvent* e);
+};
+
 typedef struct s_evset_in {
     EventSet causuality_events;
     EventSet cause;

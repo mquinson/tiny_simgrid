@@ -513,4 +513,108 @@ bool EventSet::isEmptyIntersection(EventSet evtS1, EventSet evtS2)
     return true;
 }
 
+bool EvtSetTools::contains(std::set<UnfoldingEvent*> events, UnfoldingEvent* e)
+{
+    for (auto evt : events)
+        if (*evt == *e)
+            return true;
+    return false;
+}
+
+UnfoldingEvent* EvtSetTools::find(std::set<UnfoldingEvent*> events, UnfoldingEvent* e)
+{
+    for (auto evt : events)
+        if (*evt == *e) {
+            return evt;
+        }
+    return nullptr;
+}
+
+void EvtSetTools::subtract(std::set<UnfoldingEvent*>& events, std::set<UnfoldingEvent*> otherSet)
+{
+    for (auto evt : otherSet)
+        EvtSetTools::erase(events, evt);
+}
+
+
+/** @brief Check if I'm dependent with another EventSet
+ * Here we suppose that 2 given event sets do not have common events
+*/
+bool EvtSetTools::depends(std::set<UnfoldingEvent*> events, std::set<UnfoldingEvent*> otherSet)
+{
+    if (events.empty() || otherSet.empty())
+        return false;
+
+    for (auto e1 : events)
+        for (auto e2 : otherSet)
+            if (e1->transition.isDependent(e2->transition))
+                return true;
+            else if ((e1->transition.type == "Test" &&
+                      (e2->transition.type == "Isend" || e2->transition.type == "Ireceive")) ||
+                     (e2->transition.type == "Test" &&
+                      (e1->transition.type == "Isend" || e1->transition.type == "Ireceive")))
+                if (e1->concernSameComm(e1, e2))
+                    return true;
+
+    return false;
+}
+
+bool EvtSetTools::isEmptyIntersection(std::set<UnfoldingEvent*> evtS1, std::set<UnfoldingEvent*> evtS2)
+{
+    if(evtS1.size() == 0 || evtS2.size() == 0)
+        return false;
+    for(auto evt : evtS2)
+        if(EvtSetTools::contains(evtS1, evt))
+            return false;
+    return true;
+}
+
+std::set<UnfoldingEvent*> EvtSetTools::makeUnion(std::set<UnfoldingEvent*> s1, std::set<UnfoldingEvent*> s2)
+{
+    std::set<UnfoldingEvent*> res = s1;
+    for (auto evt : s2)
+        EvtSetTools::insert(res, evt);
+    return res;
+}
+
+std::set<UnfoldingEvent*> EvtSetTools::makeIntersection(std::set<UnfoldingEvent*> s1, std::set<UnfoldingEvent*> s2)
+{
+    std::set<UnfoldingEvent*> res;
+    std::set_intersection(s1.begin(), s1.end(), s2.begin(), s2.end(),
+                          std::inserter(res, res.begin()));
+    return res;
+}
+
+void EvtSetTools::insert(std::set<UnfoldingEvent*>& events, UnfoldingEvent* e)
+{
+    if(!EvtSetTools::contains(events, e))
+        events.insert(e);
+}
+
+void EvtSetTools::erase(std::set<UnfoldingEvent*>& events, UnfoldingEvent* e)
+{
+    std::set<UnfoldingEvent*> evtS = events;
+    for (auto it : evtS) {
+        if (*it == *e)
+            events.erase(it);
+    }
+}
+
+std::set<UnfoldingEvent*> EvtSetTools::minus(std::set<UnfoldingEvent*> events, UnfoldingEvent* e)
+{
+    std::set<UnfoldingEvent*> res = events;
+    for (auto evt : events)
+        if (*evt == *e)
+            res.erase(e);
+    return res;
+}
+
+std::set<UnfoldingEvent*> EvtSetTools::plus(std::set<UnfoldingEvent *> events, UnfoldingEvent* e)
+{
+    std::set<UnfoldingEvent*> res = events;
+    if (!EvtSetTools::contains(events, e))
+        res.insert(e);
+    return res;
+}
+
 } // namespace uc
