@@ -22,7 +22,7 @@ void UnfoldingEvent::print() const
     if (this->causes.empty())
         std::cout << "-) >";
     else {
-        for (auto evt : this->causes.events_)
+        for (auto evt : this->causes)
             std::cout << "e" << evt->id << ",";
         std::cout << " ) >";
     }
@@ -35,15 +35,15 @@ EventSet UnfoldingEvent::getHistory() const
         return causes;
     else {
         EventSet res;
-        for (auto ancestor : causes.events_) {
+        for (auto ancestor : causes) {
             EventSet h1;
 
             // if event ancestor is already in history set -> we do not need to get it's history
 
-            if (!res.contains(ancestor))
+            if (!EvtSetTools::contains(res, ancestor))
                 h1 = ancestor->getHistory();
-            h1.insert(ancestor);
-            res = uc::EventSet::makeUnion(res, h1);
+            EvtSetTools::insert(h1, ancestor);
+            res = EvtSetTools::makeUnion(res, h1);
         }
         return res;
     }
@@ -51,7 +51,9 @@ EventSet UnfoldingEvent::getHistory() const
 
 bool UnfoldingEvent::inHistory(UnfoldingEvent* otherEvent) const
 {
-    if (this->getHistory().contains(otherEvent))
+    auto history = getHistory();
+    if (EvtSetTools::contains(history, otherEvent))
+//    if (this->getHistory().contains(otherEvent))
         return true;
     return false;
 }
@@ -87,7 +89,7 @@ bool UnfoldingEvent::concernSameComm(UnfoldingEvent* event, UnfoldingEvent* othe
     EventSet testEvtH = testEvt->getHistory();
     EventSet SdRcEvtH = SdRcEvt->getHistory();
 
-    for (auto it : testEvtH.events_)
+    for (auto it : testEvtH)
         if (it->transition.actor_id == testEvt->transition.actor_id && it->transition.commId == comId)
             testedEvt = it;
 
@@ -104,12 +106,12 @@ bool UnfoldingEvent::concernSameComm(UnfoldingEvent* event, UnfoldingEvent* othe
         int nbSend = 0, nbReceive = 0;
 
         // count the number of Isend event before testedEvt
-        for (auto it : testedEvtH.events_)
+        for (auto it : testedEvtH)
             if (it->transition.mailbox_id == mbId && it->transition.type == "Isend")
                 nbSend++;
 
         // count the number of Ireceive event before SdRcEvt
-        for (auto it : SdRcEvtH.events_)
+        for (auto it : SdRcEvtH)
             if (it->transition.mailbox_id == mbId && it->transition.type == "Ireceive")
                 nbReceive++;
 
@@ -125,12 +127,12 @@ bool UnfoldingEvent::concernSameComm(UnfoldingEvent* event, UnfoldingEvent* othe
         int nbSend = 0, nbReceive = 0;
 
         // count the number of Receive event before testedEvt
-        for (auto it : testedEvtH.events_)
+        for (auto it : testedEvtH)
             if (it->transition.mailbox_id == mbId && it->transition.type == "Ireceive")
                 nbReceive++;
 
         // count the number of Isend event before SdRcEvt
-        for (auto it : SdRcEvtH.events_)
+        for (auto it : SdRcEvtH)
             if (it->transition.mailbox_id == mbId && it->transition.type == "Isend")
                 nbSend++;
 
@@ -158,7 +160,7 @@ bool UnfoldingEvent::isConflict(UnfoldingEvent* event, UnfoldingEvent* otherEven
     h2 = otherEvent->getHistory();
 
     // checking causality relation, if they are in a causality relation return false
-    if (h1.contains(otherEvent) || h2.contains(event))
+    if (EvtSetTools::contains(h1, otherEvent) || EvtSetTools::contains(h2, event))
         return false;
 
     // check direct conflict
@@ -166,20 +168,20 @@ bool UnfoldingEvent::isConflict(UnfoldingEvent* event, UnfoldingEvent* otherEven
         return true;
 
     //  if 2 event they have the same causes, just check their last transition
-    if (event->causes == otherEvent->causes)
+    if (event == otherEvent)
         return event->transition.isDependent(otherEvent->transition);
     else {
-        h1.insert(event);
-        h2.insert(otherEvent);
+        EvtSetTools::insert(h1,event);
+        EvtSetTools::insert(h2, otherEvent);
         EventSet his = h1;
         // FIXME remove all common events
-        for (auto evt : his.events_)
-            if (h2.contains(evt)) {
-                h1.erase(evt);
-                h2.erase(evt);
+        for (auto evt : his)
+            if (EvtSetTools::contains(h2, evt)) {
+                EvtSetTools::erase(h1, evt);
+                EvtSetTools::erase(h2, evt);
             }
 
-        return h1.depends(h2);
+        return EvtSetTools::depends(h1, h2);
     }
 }
 
@@ -232,21 +234,21 @@ bool UnfoldingEvent::isImmediateConflict1(UnfoldingEvent* evt1, UnfoldingEvent* 
     EventSet hist11 = hist1, hist21 = hist2;
 
     // if causality ralated - > no immidiate conflict
-    if (hist1.contains(evt2) || hist2.contains(evt1))
+    if (EvtSetTools::contains(hist1, evt2) || EvtSetTools::contains(hist2, evt1))
         return false;
 
-    for (auto e1 : hist1.events_)
-        if (hist2.contains(e1)) {
-            hist11.erase(e1);
-            hist21.erase(e1);
+    for (auto e1 : hist1)
+        if (EvtSetTools::contains(hist2, e1)) {
+            EvtSetTools::erase(hist11, e1);
+            EvtSetTools::erase(hist21, e1);
         }
 
     EventSet evtS1, evtS2;
 
-    evtS1.insert(evt1);
-    evtS2.insert(evt2);
+    EvtSetTools::insert(evtS1, evt1);
+    EvtSetTools::insert(evtS2, evt2);
 
-    if (hist11.depends(hist21) || evtS1.depends(hist21) || evtS2.depends(hist11)) {
+    if (EvtSetTools::depends(hist11, hist21) || EvtSetTools::depends(evtS1, hist21) || EvtSetTools::depends(evtS2, hist11)) {
         return false;
     }
 
@@ -258,11 +260,11 @@ bool UnfoldingEvent::isImmediateConflict1(UnfoldingEvent* evt1, UnfoldingEvent* 
 // checking conflict relation between one event and one configuration or one history, it used when computing enC
 // there is a better way by checking the event with maximal events in the configuration, (change type of enC )
 bool UnfoldingEvent::conflictWithConfig(UnfoldingEvent* event, Configuration config)
-{
-    if (config.size() == 0)
+{    
+    if (config.events_.size() == 0)
         return false;
     // we don't really need to check the whole config. The maximal event should be enough.
-    for (auto evt : config.maxEvent.events_)
+    for (auto evt : config.maxEvent)
         if (event->isConflict(event, evt))
             return true;
     return false;
@@ -286,9 +288,9 @@ bool UnfoldingEvent::operator==(const UnfoldingEvent& other) const
     if (this->causes.size() != other.causes.size())
         return false;
 
-    for (auto it : this->causes.events_) {
+    for (auto it : this->causes) {
         bool chk1 = false;
-        for (auto it1 : other.causes.events_)
+        for (auto it1 : other.causes)
             if (*it == *it1) {
                 chk1 = true;
                 break;
@@ -304,21 +306,21 @@ void Configuration::updateMaxEvent(UnfoldingEvent* e)
 {
     this->lastEvent = e;
     // update the maximal events for current Conf removing causes from maxEvent and adding e to the maxEvent
-    for (auto evt : e->causes.events_) {
-        maxEvent.erase(evt); // setMaxEvents.erase(evt->id);
+    for (auto evt : e->causes) {
+        EvtSetTools::erase(maxEvent, evt); // setMaxEvents.erase(evt->id);
     }
-    maxEvent.insert(e);
+    EvtSetTools::insert(maxEvent, e);
     /* update the maximal events for the actor=>
    removing the evt shares the same actor with e, then adding e to the actorMaxEvent */
 
     std::set<UnfoldingEvent*> to_remove;
 
-    for (auto evt : actorMaxEvent.events_)
+    for (auto evt : actorMaxEvent)
         if (evt->transition.actor_id == e->transition.actor_id)
             to_remove.insert(evt);
     for (auto evt : to_remove)
-        actorMaxEvent.erase(evt);
-    actorMaxEvent.insert(e);
+        EvtSetTools::erase(actorMaxEvent, evt);
+    EvtSetTools::insert(actorMaxEvent, e);
 }
 
 Configuration Configuration::plus_config(UnfoldingEvent* evt)
@@ -328,33 +330,9 @@ Configuration Configuration::plus_config(UnfoldingEvent* evt)
     res.events_       = this->events_;
     res.maxEvent      = this->maxEvent;
     res.actorMaxEvent = this->actorMaxEvent;
-    if (!res.contains(evt))
+    if (!EvtSetTools::contains(res.events_, evt))
         res.events_.insert(evt);
     return res;
-}
-
-bool EventSet::contains(UnfoldingEvent* e)
-{
-    for (auto evt : this->events_)
-        if (*evt == *e)
-            return true;
-    return false;
-}
-
-void EventSet::subtruct(EventSet otherSet)
-{
-    for (auto evt : otherSet.events_)
-        this->erase(evt);
-}
-
-UnfoldingEvent* EventSet::find(UnfoldingEvent* e)
-{
-
-    for (auto evt : this->events_)
-        if (*evt == *e) {
-            return evt;
-        }
-    return nullptr;
 }
 
 UnfoldingEvent* Configuration ::findTestedComm(UnfoldingEvent* testEvt)
@@ -364,153 +342,6 @@ UnfoldingEvent* Configuration ::findTestedComm(UnfoldingEvent* testEvt)
                 it->transition.actor_id == testEvt->transition.actor_id)
             return it;
     return nullptr;
-}
-
-/** @brief Check if I'm dependent with another EventSet
- * Here we suppose that 2 given event sets do not have common events */
-bool EventSet::depends(EventSet s2)
-{
-    if (this->events_.empty() || s2.events_.empty())
-        return false;
-
-    for (auto e1 : this->events_)
-        for (auto e2 : s2.events_)
-            if (e1->transition.isDependent(e2->transition))
-                return true;
-            else if ((e1->transition.type == "Test" &&
-                      (e2->transition.type == "Isend" || e2->transition.type == "Ireceive")) ||
-                     (e2->transition.type == "Test" &&
-                      (e1->transition.type == "Isend" || e1->transition.type == "Ireceive")))
-                if (e1->concernSameComm(e1, e2))
-                    return true;
-
-    return false;
-}
-
-bool EventSet::isConfig()
-{
-    if ((this->size() == 1) && (this->begin()->causes.empty()))
-        return true;
-
-    // checking conflict relation between one event and all other events in the set
-    for (auto e1 : events_) {
-        for (auto e2 : events_) {
-            if (*e1 == *e2)
-                continue;
-
-            if (e1->isConflict(e1, e2))
-                return false;
-        }
-        // Every event of the history should be in the set
-        for (auto ancestor : e1->getHistory().events_)
-            if (!(this->contains(ancestor)))
-                return false;
-    }
-
-    return true;
-}
-
-EventSet EventSet::makeUnion(EventSet s1, EventSet s2)
-{
-    EventSet res = s1;
-    //	res.events_.insert(s1.events_.begin(), s1.events_.end());
-    //	res.events_.insert(s2.events_.begin(), s2.events_.end());
-
-    for (auto evt : s2.events_)
-        res.insert(evt);
-
-    return res;
-}
-
-EventSet EventSet::makeIntersection(EventSet s1, EventSet s2)
-{
-    EventSet res;
-    std::set_intersection(s1.events_.begin(), s1.events_.end(), s2.events_.begin(), s2.events_.end(),
-                          std::inserter(res.events_, res.events_.begin()));
-    return res;
-}
-
-EventSet EventSet::minus(UnfoldingEvent* evt)
-{
-
-    EventSet res;
-    res.events_ = this->events_;
-    for (auto e : this->events_)
-        if (*e == *evt)
-            res.erase(e);
-
-    return res;
-}
-
-EventSet EventSet::plus(UnfoldingEvent* evt)
-{
-    EventSet res;
-    res.events_ = this->events_;
-    if (!res.contains(evt))
-        res.events_.insert(evt);
-    return res;
-}
-
-size_t EventSet::size() const
-{
-    return events_.size();
-}
-
-bool EventSet::empty() const
-{
-    return this->events_.empty();
-}
-
-UnfoldingEvent* EventSet::begin() const
-{
-    return *events_.begin();
-}
-
-UnfoldingEvent* EventSet::end() const
-{
-    return *events_.end();
-}
-
-bool EventSet::operator==(const EventSet& other) const
-{
-
-    return this->events_ == other.events_;
-}
-
-void EventSet::insert(UnfoldingEvent* e)
-{
-    if (!this->contains(e))
-        events_.insert(e);
-}
-
-void EventSet::erase(UnfoldingEvent* e)
-{
-    std::set<UnfoldingEvent*> evtS = this->events_;
-
-    for (auto it : evtS)
-        if (*it == *e)
-            this->events_.erase(it);
-}
-
-bool EventSet::conflictWithEvt(UnfoldingEvent* e)
-{
-    for (auto evt : this->events_)
-        if (evt->isConflict(evt, e))
-            return true;
-    return false;
-}
-
-bool EventSet::isEmptyIntersection(EventSet evtS1, EventSet evtS2)
-{
-
-    if (evtS1.size() == 0 || evtS2.size() == 0)
-        return false;
-
-    for (auto evt : evtS2.events_)
-        if (evtS1.contains(evt))
-            return false;
-
-    return true;
 }
 
 bool EvtSetTools::contains(std::set<UnfoldingEvent*> events, UnfoldingEvent* e)

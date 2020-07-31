@@ -11,38 +11,7 @@ namespace uc {
 
 class UnfoldingEvent;
 
-class EventSet {
-public:
-    EventSet() = default;
-//    EventSet(const EventSet&) = default;
-//    EventSet& operator=(EventSet const&) = default;
-//    EventSet(EventSet&&) = default;
-//    ~EventSet() = default;
-
-    bool contains(UnfoldingEvent* e);
-    UnfoldingEvent* find(UnfoldingEvent* e);
-    void subtruct(EventSet otherSet);
-    bool depends(EventSet s2);
-    bool isConfig();
-    size_t size() const;
-    std::set<UnfoldingEvent*> events_;
-    bool conflictWithEvt(UnfoldingEvent* e);
-    bool isEmptyIntersection(EventSet evtS1, EventSet evtS2);
-
-    static EventSet makeUnion(EventSet s1, EventSet s2);
-    static EventSet makeIntersection(EventSet s1, EventSet s2);
-    const UnfoldingEvent* first();
-    bool empty() const;
-    UnfoldingEvent* begin() const;
-    UnfoldingEvent* end() const;
-
-    void insert(UnfoldingEvent*);
-    void erase(UnfoldingEvent*);
-    bool operator==(const EventSet& other) const;
-
-    EventSet minus(UnfoldingEvent* evt);
-    EventSet plus(UnfoldingEvent*);
-};
+using EventSet = std::set<UnfoldingEvent*>;
 
 class EvtSetTools {
 public:
@@ -65,8 +34,9 @@ typedef struct s_evset_in {
     EventSet ancestorSet;
 } s_evset_in_t;
 
-class Configuration : public EventSet {
+class Configuration {
 public:
+    std::set<UnfoldingEvent*> events_;
     EventSet maxEvent;         // Events recently added to events_
     EventSet actorMaxEvent;    // maximal events of the actors in current configuration
     UnfoldingEvent* lastEvent; // The last added event

@@ -40,7 +40,7 @@ void ksubset(unsigned long sizeD, std::list<UnfoldingEvent*> EvtList, std::list<
         list1.pop_back();
 
         int inter = 0;
-        for (auto it : intS.events_) {
+        for (auto it : intS) {
 
             bool check = false;
             for (auto evt : EvtList1)
@@ -83,9 +83,9 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C) const
 
     /*for each evt in D, add all evt1 in U that is conflict with evt to a set(spike) */
 
-    for (auto evt : D.events_) {
+    for (auto evt : D) {
         EventSet evtSet;
-        for (auto evt1 : g_var::U.events_)
+        for (auto evt1 : g_var::U)
             if (evt->isConflict(evt, evt1))
                 evtSet.insert(evt1);
 
@@ -104,7 +104,7 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C) const
         for (auto it : kSet) {
             EventSet evtS = it;
 
-            for (auto evt : it.events_) {
+            for (auto evt : it) {
 
                 EventSet subC;
                 EventSet sub_history;
@@ -112,7 +112,8 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C) const
                 history.insert(evt);
                 bool chk = false;
 
-                if (!history.isEmptyIntersection(history, D)) {
+                if (!EvtSetTools::isEmptyIntersection(history, D)) {
+//                if (!history.isEmptyIntersection(history, D)) {
 
                     chk = true;
                 } else
@@ -153,9 +154,9 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C) const
 
     {
 
-        for (auto evt : J1.events_) {
+        for (auto evt : J1) {
             EventSet history = evt->getHistory();
-            J = uc::EventSet::makeUnion(J, history);
+            J = EvtSetTools::makeUnion(J, history);
             J.insert(evt);
         }
     }
@@ -168,7 +169,7 @@ bool checkSdRcCreation(Transition const& trans, EventSet ancestors, Configuratio
 
     int nbTest = 0, nbSend = 0, nbReceive = 0;
     UnfoldingEvent* testEvt;
-    for (auto evt : ancestors.events_)
+    for (auto evt : ancestors)
         if (evt->transition.type == "Test" && evt->transition.actor_id != trans.actor_id) {
             nbTest++;
             testEvt = evt;
@@ -190,21 +191,21 @@ bool checkSdRcCreation(Transition const& trans, EventSet ancestors, Configuratio
     EventSet testedEvtHist = testedEvt->getHistory();
     EventSet ancestorsHist;
 
-    for (auto evt : ancestors.events_)
-        ancestorsHist = uc::EventSet::makeUnion(ancestorsHist, evt->getHistory());
+    for (auto evt : ancestors)
+        ancestorsHist = EvtSetTools::makeUnion(ancestorsHist, evt->getHistory());
 
     // check nb send == nb receive ?, if yes they concern the same comm -> test and send/receive are dependent
 
     if (testedEvt->transition.type == "Isend") {
-        for (auto evt : testedEvtHist.events_)
+        for (auto evt : testedEvtHist)
             if (evt->transition.type == "Isend" && evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
                 nbSend++;
 
         int nbReceive1 = 0;
-        for (auto evt : ancestorsHist.events_)
+        for (auto evt : ancestorsHist)
             if (evt->transition.type == "Ireceive" && evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
                 nbReceive1++;
-        for (auto it : ancestors.events_)
+        for (auto it : ancestors)
             if (it->transition.type == "Ireceive" && it->transition.mailbox_id == testedEvt->transition.mailbox_id)
                 nbReceive1++;
 
@@ -214,16 +215,16 @@ bool checkSdRcCreation(Transition const& trans, EventSet ancestors, Configuratio
 
     if (testedEvt->transition.type == "Ireceive") {
 
-        for (auto evt : testedEvtHist.events_)
+        for (auto evt : testedEvtHist)
             if (evt->transition.type == "Ireceive" && evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
                 nbReceive++;
 
         int nbSend1 = 0;
-        for (auto evt : ancestorsHist.events_)
+        for (auto evt : ancestorsHist)
             if (evt->transition.type == "Isend" && evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
                 nbSend1++;
 
-        for (auto it : ancestors.events_)
+        for (auto it : ancestors)
             if (it->transition.type == "Isend" && it->transition.mailbox_id == testedEvt->transition.mailbox_id)
                 nbSend1++;
 
@@ -249,8 +250,8 @@ void Configuration::createEvts(Configuration C, EventSet &result, const app::Tra
         // if immediate precede event is not in the causuality_events, ensure that it is in the history of one event in
         // cause
         if (!chk)
-            for (auto evt : cause.events_)
-                if (evt->getHistory().contains(immPreEvt)) {
+            for (auto evt : cause)
+                if (EvtSetTools::contains(evt->getHistory(), immPreEvt)) {
                     chk1 = true;
                     break;
                 }
@@ -260,7 +261,7 @@ void Configuration::createEvts(Configuration C, EventSet &result, const app::Tra
         if (chk || chk1) {
             bool send_receiveCheck = true;
             EventSet cause1;
-            cause1 = uc::EventSet::makeUnion(cause, causuality_events);
+            cause1 = EvtSetTools::makeUnion(cause, causuality_events);
             // check condition for send/receive action or check enabled for MutexWait action
 
             if (t.type == "Isend" || t.type == "Ireceive") {
@@ -277,7 +278,7 @@ void Configuration::createEvts(Configuration C, EventSet &result, const app::Tra
     }
 
     else {
-        UnfoldingEvent* a = ancestorSet.begin();
+        UnfoldingEvent* a = *(ancestorSet.begin());
         EventSet evtSet1, evtSet2, evtSet3, evtSet4;
         evtSet1 = cause;
         evtSet3 = ancestorSet;
@@ -299,7 +300,7 @@ void Configuration::createEvts(Configuration C, EventSet &result, const app::Tra
 UnfoldingEvent* Configuration::findActorMaxEvt(int id)
 {
     UnfoldingEvent* immPreEvt = nullptr;
-    for (auto evt : this->actorMaxEvent.events_)
+    for (auto evt : this->actorMaxEvent)
         if (evt->transition.actor_id == id)
             immPreEvt = evt;
     return immPreEvt;
@@ -329,7 +330,7 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
 
     else {
         // if immediate precede evt in maxEvent, add it to the causalityEvts
-        for (auto evt : C.maxEvent.events_)
+        for (auto evt : C.maxEvent)
             if (trans.actor_id == evt->transition.actor_id) {
                 causalityEvts.insert(evt);
                 chk = true;
@@ -339,12 +340,12 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
         // else find it in actorMaxEvent to add it into causalityEvts
         immPreEvt = C.findActorMaxEvt(trans.actor_id);
         if (!chk)
-            if (C.lastEvent->getHistory().contains(immPreEvt))
+            if (EvtSetTools::contains(C.lastEvent->getHistory(), immPreEvt))
                 chk = true;
     }
 
-    for (auto evt : C.maxEvent.events_)
-        if (trans.isDependent(evt->transition) && (!causalityEvts.contains(evt)))
+    for (auto evt : C.maxEvent)
+        if (trans.isDependent(evt->transition) && (!EvtSetTools::contains(causalityEvts, evt)))
             ancestorSet.insert(evt);
 
     /*1. Create events from current (last) maximal event of C */
@@ -367,7 +368,7 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
         //EventSet causuality_events, EventSet cause, EventSet ancestorSet
         s_evset_in evsets = { causalityEvts, cause, ancestorSet };
         C.createEvts(C, exC1, trans, evsets, chk, immPreEvt);
-        exC = uc::EventSet::makeUnion(exC, exC1);
+        exC = EvtSetTools::makeUnion(exC, exC1);
 
         // remove last MaxEvt, sine we already used it in the above
         maxEvtHistory.pop_back();
@@ -377,14 +378,14 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
      */
         std::set<int> intS;
         // get all events in the history of the evts in causalityEvts
-        for (auto evt : causalityEvts.events_) {
+        for (auto evt : causalityEvts) {
             EventSet H1;
             H1 = evt->getHistory();
-            H  = uc::EventSet::makeUnion(H, H1);
+            H  = EvtSetTools::makeUnion(H, H1);
         }
 
         // put id of evts in H in the the set intS
-        for (auto evt : H.events_)
+        for (auto evt : H)
             intS.insert(evt->id);
 
         /* compute a set of evt that can generate history (all subset of it)
@@ -400,15 +401,15 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
 
                 // retrieve  evts in congig from intS1 (intS1 store id of evts in C whose transitions are dependent with trans)
                 EventSet evtSet1;
-                for (auto evt : evtSet.events_)
-                    if ((!H.contains(evt)) && evt->transition.isDependent(trans))
+                for (auto evt : evtSet)
+                    if ((!EvtSetTools::contains(H, evt)) && evt->transition.isDependent(trans))
                         evtSet1.insert(evt);
 
                 EventSet exC1;
                 EventSet cause;
                 s_evset_in_t evsets = { causalityEvts, cause, evtSet1 };
                 C.createEvts(C, exC1, trans, evsets, chk, immPreEvt);
-                exC = uc::EventSet::makeUnion(exC, exC1);
+                exC = EvtSetTools::makeUnion(exC, exC1);
             }
         }
     }
@@ -432,7 +433,7 @@ EventSet createWaitEvt(const UnfoldingEvent* evt, Configuration C, Transition co
     if (comType == "Isend") {
         // if waited communication is  send, count the number of send request before the communication
 
-        for (auto evt1 : hist.events_)
+        for (auto evt1 : hist)
             if (evt1->transition.type == "Isend" && evt1->transition.mailbox_id == mbId)
                 nbSdRc++;
 
@@ -445,7 +446,7 @@ EventSet createWaitEvt(const UnfoldingEvent* evt, Configuration C, Transition co
 
                 // count the number of receice requests before the receive that we found above
 
-                for (auto evt3 : hist1.events_)
+                for (auto evt3 : hist1)
                     if (evt3->transition.type == "Ireceive" && evt3->transition.mailbox_id == mbId)
                         nbRc++;
                 if (nbSdRc == nbRc) {
@@ -455,9 +456,9 @@ EventSet createWaitEvt(const UnfoldingEvent* evt, Configuration C, Transition co
                     UnfoldingEvent* maxEvt = C.findActorMaxEvt(evt->transition.actor_id);
                     EventSet maxEvtHist    = maxEvt->getHistory();
 
-                    if (maxEvtHist.contains(evt2))
+                    if (EvtSetTools::contains(maxEvtHist, evt2))
                         ancestors.insert(maxEvt);
-                    else if (hist1.contains(maxEvt))
+                    else if (EvtSetTools::contains(hist1, maxEvt))
                         ancestors.insert(evt2);
                     else {
                         ancestors.insert(maxEvt);
@@ -473,7 +474,7 @@ EventSet createWaitEvt(const UnfoldingEvent* evt, Configuration C, Transition co
     else if (comType == "Ireceive") {
         // if waited communication is send, count the number of send request before the communication
 
-        for (auto evt1 : hist.events_)
+        for (auto evt1 : hist)
             if (evt1->transition.type == "Ireceive" && evt1->transition.mailbox_id == mbId)
                 nbSdRc++;
 
@@ -486,7 +487,7 @@ EventSet createWaitEvt(const UnfoldingEvent* evt, Configuration C, Transition co
 
                 // count the number of receice requests before the receive that we found above
 
-                for (auto evt3 : hist1.events_)
+                for (auto evt3 : hist1)
                     if (evt3->transition.type == "Isend" && evt3->transition.mailbox_id == mbId)
                         nbRc++;
                 if (nbSdRc == nbRc) {
@@ -495,9 +496,9 @@ EventSet createWaitEvt(const UnfoldingEvent* evt, Configuration C, Transition co
                     UnfoldingEvent* maxEvt = C.findActorMaxEvt(evt->transition.actor_id);
                     EventSet maxEvtHist    = maxEvt->getHistory();
 
-                    if (maxEvtHist.contains(evt2))
+                    if (EvtSetTools::contains(maxEvtHist, evt2))
                         ancestors.insert(maxEvt);
-                    else if (hist1.contains(maxEvt))
+                    else if (EvtSetTools::contains(hist1, maxEvt))
                         ancestors.insert(evt2);
                     else {
                         ancestors.insert(maxEvt);
@@ -547,11 +548,11 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
 
     // count the number of isend/ireceive befere evt
     if (comType == "Isend") {
-        for (auto evt1 : hist.events_)
+        for (auto evt1 : hist)
             if (evt1->transition.type == "Isend" && evt1->transition.mailbox_id == mbId)
                 numberSend++;
     } else if (comType == "Ireceive") {
-        for (auto evt1 : hist.events_)
+        for (auto evt1 : hist)
             if (evt1->transition.type == "Ireceive" && evt1->transition.mailbox_id == mbId)
                 numberReceive++;
     }
@@ -576,7 +577,7 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
             // try to march the communication with all possible receice request
             for (auto evt2 : C.events_)
                 if (evt2->transition.type == "Ireceive" && evt2->transition.mailbox_id == mbId and
-                        (!lastEvtHist.contains(evt2))) {
+                        (!EvtSetTools::contains(lastEvtHist, evt2))) {
                     // after find out a receive request
 
                     EventSet hist2 = evt2->getHistory();
@@ -584,7 +585,7 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
 
                     // count the number of receice requests before the receive that we found above
 
-                    for (auto evt3 : hist2.events_)
+                    for (auto evt3 : hist2)
                         if (evt3->transition.type == "Ireceive" && evt3->transition.mailbox_id == mbId)
                             nbReceive++;
                     if (numberSend == nbReceive) {
@@ -606,7 +607,7 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
             // try to march the communication with all possible receice request
             for (auto evt2 : C.events_)
                 if (evt2->transition.type == "Isend" && evt2->transition.mailbox_id == mbId and
-                        (!lastEvtHist.contains(evt2))) {
+                        (!EvtSetTools::contains(lastEvtHist, evt2))) {
                     // after find out a receive request
 
                     EventSet hist2 = evt2->getHistory();
@@ -614,7 +615,7 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
 
                     // count the number of receice requests heppen before the receive that we found above
 
-                    for (auto evt3 : hist2.events_)
+                    for (auto evt3 : hist2)
                         if (evt3->transition.type == "Isend" && evt3->transition.mailbox_id == mbId)
                             nbSend++;
                     if (numberReceive == nbSend) {
@@ -638,14 +639,14 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
         if (comType == "Isend") {
             int nbReceive = 0;
 
-            for (auto evt2 : lastEvtHist.events_)
+            for (auto evt2 : lastEvtHist)
                 if (evt2->transition.type == "Ireceive")
                     nbReceive++;
             if (numberSend == nbReceive) {
 
                 UnfoldingEvent* maxEvt = C.findActorMaxEvt(evt->transition.actor_id);
                 ancestors.insert(C.lastEvent);
-                if (!lastEvtHist.contains(maxEvt))
+                if (!EvtSetTools::contains(lastEvtHist, maxEvt))
                     ancestors.insert(maxEvt);
                 g_var::nb_events++;
                 newEvt2 = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
@@ -654,7 +655,7 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
         } else if (comType == "Ireceive") {
 
             int nbSend = 0;
-            for (auto evt2 : lastEvtHist.events_)
+            for (auto evt2 : lastEvtHist)
                 if (evt2->transition.type == "Isend")
                     nbSend++;
 
@@ -662,7 +663,7 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
                 UnfoldingEvent* maxEvt = C.findActorMaxEvt(evt->transition.actor_id);
 
                 ancestors.insert(C.lastEvent);
-                if (!lastEvtHist.contains(maxEvt))
+                if (!EvtSetTools::contains(lastEvtHist, maxEvt))
                     ancestors.insert(maxEvt);
                 g_var::nb_events++;
                 newEvt2 = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
@@ -700,7 +701,7 @@ EventSet createIsendEvts(Transition trans, Configuration C)
     else if (C.lastEvent->transition.actor_id != trans.actor_id && (!enableChk)) {
         // else find it in actorMaxEvent and check where it is in the history of last Evt
         immPreEvt = C.findActorMaxEvt(trans.actor_id);
-        if (C.lastEvent->getHistory().contains(immPreEvt))
+        if (EvtSetTools::contains(C.lastEvent->getHistory(), immPreEvt))
             enableChk = true;
     }
 
@@ -746,13 +747,13 @@ EventSet createIsendEvts(Transition trans, Configuration C)
                 // tested action is Ireceive, create a new event if it can be marched with the Isend
                 // make sure no ancestor candidate event is in history of other ancestor candidate
 
-                if (testedEvt->transition.type == "Ireceive" && (!lastEvtHist.contains(it)))
-                    if (!immPreEvtHist.contains(it)) {
+                if (testedEvt->transition.type == "Ireceive" && (!EvtSetTools::contains(lastEvtHist, it)))
+                    if (!EvtSetTools::contains(immPreEvtHist, it)) {
                         EventSet ancestorSet1;
                         ancestorSet1.insert(C.lastEvent);
                         ancestorSet1.insert(it);
                         EventSet itHist = it->getHistory();
-                        if ((!itHist.contains(immPreEvt)) && (!enableChk))
+                        if ((!EvtSetTools::contains(itHist, immPreEvt)) && (!enableChk))
                             ancestorSet1.insert(immPreEvt);
 
                         if (checkSdRcCreation(trans, ancestorSet1, C)) {
@@ -782,10 +783,10 @@ EventSet createIsendEvts(Transition trans, Configuration C)
                 EventSet ansestors1;
                 ansestors1.insert(C.lastEvent);
 
-                if (!lastEvtHist.contains(it) && (!immPreEvtHist.contains(it))) {
+                if (!EvtSetTools::contains(lastEvtHist, it) && (!EvtSetTools::contains(immPreEvtHist, it))) {
                     ansestors1.insert(it);
                     EventSet itHist = it->getHistory();
-                    if ((!enableChk) && (!itHist.contains(immPreEvt)))
+                    if ((!enableChk) && (!EvtSetTools::contains(itHist, immPreEvt)))
                         ansestors1.insert(immPreEvt);
 
                     if (checkSdRcCreation(trans, ansestors1, C)) {
@@ -802,15 +803,15 @@ EventSet createIsendEvts(Transition trans, Configuration C)
     if (C.lastEvent->transition.actor_id == trans.actor_id)
         for (auto sEvt : C.events_)
             if (sEvt->transition.type == "Isend" && sEvt->transition.mailbox_id == trans.mailbox_id &&
-                    sEvt->transition.actor_id != trans.actor_id && (!lastEvtHist.contains(sEvt))) {
+                    sEvt->transition.actor_id != trans.actor_id && (!EvtSetTools::contains(lastEvtHist, sEvt))) {
 
                 EventSet rEvtHist = sEvt->getHistory();
                 for (auto tEvt : C.events_)
                     if (tEvt->transition.type == "Test" && tEvt->transition.actor_id != trans.actor_id &&
                             tEvt->transition.mailbox_id == trans.mailbox_id) {
                         UnfoldingEvent* testedEvent = C.findTestedComm(tEvt);
-                        if (testedEvent->transition.type == "Ireveive" && (!lastEvtHist.contains(tEvt)) &&
-                                !(rEvtHist.contains(tEvt)) && (!tEvt->getHistory().contains(sEvt))) {
+                        if (testedEvent->transition.type == "Ireveive" && (!EvtSetTools::contains(lastEvtHist, tEvt)) &&
+                                !(EvtSetTools::contains(rEvtHist, tEvt)) && (!EvtSetTools::contains(tEvt->getHistory(), sEvt))) {
                             EventSet ancestorsSet;
                             ancestorsSet.insert(C.lastEvent);
                             ancestorsSet.insert(sEvt);
@@ -853,7 +854,7 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
     else if (C.lastEvent->transition.actor_id != trans.actor_id && (!enableChk)) {
         // else find it in actorMaxEvent and check where it is in the history of last Evt
         immPreEvt = C.findActorMaxEvt(trans.actor_id);
-        if (C.lastEvent->getHistory().contains(immPreEvt))
+        if (EvtSetTools::contains(C.lastEvent->getHistory(), immPreEvt))
             enableChk = true;
     }
 
@@ -896,14 +897,14 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
                 // tested action is Ireceive, create a new event if it can be marched with the Isend
                 // make sure no ancestor candidate event is in history of other ancestor candidate
 
-                if (testedEvt->transition.type == "Isend" && (!lastEvtHist.contains(it)))
-                    if (!immPreEvtHist.contains(it)) {
+                if (testedEvt->transition.type == "Isend" && (!EvtSetTools::contains(lastEvtHist, it)))
+                    if (!EvtSetTools::contains(immPreEvtHist, it)) {
 
                         EventSet ancestorSet1;
                         ancestorSet1.insert(C.lastEvent);
                         ancestorSet1.insert(it);
                         EventSet itHist = it->getHistory();
-                        if ((!itHist.contains(immPreEvt)) && (!enableChk))
+                        if ((!EvtSetTools::contains(itHist, immPreEvt)) && (!enableChk))
                             ancestorSet1.insert(immPreEvt);
 
                         if (checkSdRcCreation(trans, ancestorSet1, C)) {
@@ -933,10 +934,10 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
                 EventSet ansestors1;
                 ansestors1.insert(C.lastEvent);
 
-                if (!lastEvtHist.contains(it) && (!immPreEvtHist.contains(it))) {
+                if (!EvtSetTools::contains(lastEvtHist, it) && (!EvtSetTools::contains(immPreEvtHist, it))) {
                     ansestors1.insert(it);
                     EventSet itHist = it->getHistory();
-                    if ((!enableChk) && (!itHist.contains(immPreEvt)))
+                    if ((!enableChk) && (!EvtSetTools::contains(itHist, immPreEvt)))
                         ansestors1.insert(immPreEvt);
 
                     if (checkSdRcCreation(trans, ansestors1, C)) {
@@ -953,14 +954,14 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
     if (C.lastEvent->transition.actor_id == trans.actor_id)
         for (auto rEvt : C.events_)
             if (rEvt->transition.type == "Ireceive" && rEvt->transition.mailbox_id == trans.mailbox_id &&
-                    rEvt->transition.actor_id != trans.actor_id && (!lastEvtHist.contains(rEvt))) {
+                    rEvt->transition.actor_id != trans.actor_id && (!EvtSetTools::contains(lastEvtHist, rEvt))) {
                 EventSet rEvtHist = rEvt->getHistory();
                 for (auto tEvt : C.events_)
                     if (tEvt->transition.type == "Test" && tEvt->transition.actor_id != trans.actor_id &&
                             tEvt->transition.mailbox_id == trans.mailbox_id) {
                         UnfoldingEvent* testedEvent = C.findTestedComm(tEvt);
-                        if (testedEvent->transition.type == "Isend" && (!lastEvtHist.contains(tEvt)) &&
-                                !(rEvtHist.contains(tEvt)) && (!tEvt->getHistory().contains(rEvt))) {
+                        if (testedEvent->transition.type == "Isend" && (!EvtSetTools::contains(lastEvtHist, tEvt)) &&
+                                !(EvtSetTools::contains(rEvtHist, tEvt)) && (!EvtSetTools::contains(tEvt->getHistory(), rEvt))) {
                             EventSet ancestorsSet;
                             ancestorsSet.insert(C.lastEvent);
                             ancestorsSet.insert(rEvt);
@@ -1025,7 +1026,7 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
 
         // if immediate precede evt in maxEvent, add it to the causalityEvts
 
-        for (auto evt : C.maxEvent.events_)
+        for (auto evt : C.maxEvent)
             if (trans.actor_id == evt->transition.actor_id) {
                 causalityEvts.insert(evt);
                 chk = true;
@@ -1037,17 +1038,17 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
         if (!chk) {
 
             immPreEvt = C.findActorMaxEvt(trans.actor_id);
-            if (C.lastEvent->getHistory().contains(immPreEvt))
+            if (EvtSetTools::contains(C.lastEvent->getHistory(), immPreEvt))
                 chk = true;
         }
     }
 
     // compute all events are dependent with the transition trans.
 
-    for (auto evt : C.maxEvent.events_)
+    for (auto evt : C.maxEvent)
         if ((trans.isDependent(evt->transition) ||
              (evt->transition.type == "Test" && evt->transition.mailbox_id == trans.mailbox_id)) &&
-                (!causalityEvts.contains(evt)))
+                (!EvtSetTools::contains(causalityEvts, evt)))
             ancestorSet.insert(evt);
 
     if (checkSdRcCreation(trans, causalityEvts, C) && chk) {
@@ -1060,7 +1061,7 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
     EventSet exC1;
     s_evset_in_t evsets = { causalityEvts, cause, ancestorSet };
     C.createEvts(C, exC1, trans, evsets, chk, immPreEvt);
-    exC = uc::EventSet::makeUnion(exC, exC1);
+    exC = EvtSetTools::makeUnion(exC, exC1);
 
     // remove last MaxEvt, sine we already used it before
     maxEvtHistory.pop_back();
@@ -1070,10 +1071,10 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
    */
     std::set<int> intS;
     /* get all events in the history of the evts in causalityEvts */
-    for (auto evt : causalityEvts.events_) {
+    for (auto evt : causalityEvts) {
         EventSet H1;
         H1 = evt->getHistory();
-        H  = uc::EventSet::makeUnion(H, H1);
+        H  = EvtSetTools::makeUnion(H, H1);
     }
 
     for (auto evtSet : maxEvtHistory) {
@@ -1085,8 +1086,8 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
 
             // retrieve  evts from intS1 (intS1 store id of evts in C whose transitions are dependent with trans)
             EventSet evtSet1;
-            for (auto evt : evtSet.events_)
-                if ((!H.contains(evt)) &&
+            for (auto evt : evtSet)
+                if ((!EvtSetTools::contains(H, evt)) &&
                         (evt->transition.isDependent(trans) ||
                          (evt->transition.type == "Test" && trans.mailbox_id == evt->transition.mailbox_id)))
 
@@ -1096,7 +1097,7 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
             s_evset_in_t evsets { causalityEvts, cause, evtSet1 };
             C.createEvts(C, exC1, trans, evsets, chk, immPreEvt);
 
-            exC = uc::EventSet::makeUnion(exC, exC1);
+            exC = EvtSetTools::makeUnion(exC, exC1);
         }
     }
 
@@ -1109,18 +1110,20 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
 
     // in the initial state each actor creates one event
     EventSet causes;
-    if (C.empty()) {
+    if (C.events_.empty()) {
         for (auto p : actors) {
             g_var::nb_events++;
             UnfoldingEvent* newEvent = new UnfoldingEvent(g_var::nb_events, p.trans[0], causes);
-            if (!g_var::U.contains(newEvent)) {
+            if (!EvtSetTools::contains(g_var::U, newEvent)) {
                 g_var::U.insert(newEvent);
                 enC.insert(newEvent);
                 exC.insert(newEvent);
 
             } else {
-                enC.insert(g_var::U.find(newEvent));
-                exC.insert(g_var::U.find(newEvent));
+                auto evt1 = EvtSetTools::find(g_var::U, newEvent);
+                EvtSetTools::insert(enC, evt1);
+                auto evt2 = EvtSetTools::find(g_var::U, newEvent);
+                EvtSetTools::insert(exC, evt2);
             }
         }
 
@@ -1146,13 +1149,14 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                     exC1 = computeExt(C, maxEvtHistory1, trans);
                 }
 
-                for (auto newEvent : exC1.events_)
-                    if (!g_var::U.contains(newEvent)) {
+                for (auto newEvent : exC1)
+                    if (!EvtSetTools::contains(g_var::U, newEvent)) {
                         g_var::U.insert(newEvent);
                         exC.insert(newEvent);
-                    } else
-                        exC.insert(g_var::U.find(newEvent));
-
+                    } else {
+                        auto evt = EvtSetTools::find(g_var::U, newEvent);
+                        exC.insert(evt);
+                    }
             }
 
             // ELSE IF THE TRANSITION IS A isend or i receive
@@ -1161,25 +1165,28 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                      (trans.isDependent(C.lastEvent->transition) ||
                       (C.lastEvent->transition.type == "Test" && C.lastEvent->transition.mailbox_id == trans.mailbox_id))) {
                 EventSet exC1 = createIsendEvts(trans, C);
-                for (auto newEvent : exC1.events_)
-                    if (!g_var::U.contains(newEvent)) {
+                for (auto newEvent : exC1)
+                    if (!EvtSetTools::contains(g_var::U, newEvent)) {
                         g_var::U.insert(newEvent);
                         exC.insert(newEvent);
-                    } else
-                        exC.insert(g_var::U.find(newEvent));
-
+                    } else {
+                        auto evt = EvtSetTools::find(g_var::U, newEvent);
+                        exC.insert(evt);
+                    }
             }
 
             else if (trans.type == "Ireceive" &&
                      (trans.isDependent(C.lastEvent->transition) ||
                       (C.lastEvent->transition.type == "Test" && C.lastEvent->transition.mailbox_id == trans.mailbox_id))) {
                 EventSet exC1 = createIreceiveEvts(trans, C);
-                for (auto newEvent : exC1.events_)
-                    if (!g_var::U.contains(newEvent)) {
+                for (auto newEvent : exC1)
+                    if (!EvtSetTools::contains(g_var::U, newEvent)) {
                         g_var::U.insert(newEvent);
                         exC.insert(newEvent);
-                    } else
-                        exC.insert(g_var::U.find(newEvent));
+                    } else {
+                        auto evt = EvtSetTools::find(g_var::U, newEvent);
+                        exC.insert(evt);
+                    }
 
             }
             // ELSE IF THE TRANSITION IS A WAIT ACTION
@@ -1205,14 +1212,15 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
 
                     // EventSet unionSet = U.makeUnion(U,gD1);
 
-                    for (auto newEvent : newEvts.events_)
-                        if (!g_var::U.contains(newEvent)) {
+                    for (auto newEvent : newEvts)
+                        if (!EvtSetTools::contains(g_var::U, newEvent)) {
                             g_var::U.insert(newEvent);
                             exC.insert(newEvent);
-                        } else
-                            exC.insert(g_var::U.find(newEvent));
+                        } else {
+                            auto evt = EvtSetTools::find(g_var::U, newEvent);
+                            exC.insert(evt);
+                        }
                 }
-
             }
 
             // ELSE IF THE TRANSITION IS A TEST ACTION
@@ -1240,14 +1248,16 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                 {
                     EventSet newEvts = createTestEvt(exC, event, C, trans);
 
-                    for (auto newEvent : newEvts.events_)
-                        if (!g_var::U.contains(newEvent)) {
+                    for (auto newEvent : newEvts)
+                        if (!EvtSetTools::contains(g_var::U, newEvent)) {
 
                             g_var::U.insert(newEvent);
                             exC.insert(newEvent);
+                        } else {
+                            auto evt = EvtSetTools::find(g_var::U, newEvent);
+                            exC.insert(evt);
+                        }
 
-                        } else
-                            exC.insert(g_var::U.find(newEvent));
                 }
 
             }
@@ -1257,16 +1267,18 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                 ancestors.insert(C.lastEvent);
                 g_var::nb_events++;
                 UnfoldingEvent* newEvent = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
-                if (!g_var::U.contains(newEvent)) {
+                if (!EvtSetTools::contains(g_var::U, newEvent)) {
                     g_var::U.insert(newEvent);
                     exC.insert(newEvent);
 
-                } else
-                    exC.insert(g_var::U.find(newEvent));
+                } else {
+                    auto evt = EvtSetTools::find(g_var::U, newEvent);
+                    exC.insert(evt);
+                }
             }
         }
 
-        for (auto evt : exC.events_) {
+        for (auto evt : exC) {
             /* add new event evt to enC if evt's transition is not dependent with any transition of a event
        which is in C and is not in history of evt */
             bool chk          = true;
@@ -1302,7 +1314,6 @@ void UnfoldingChecker::explore(State* state)
 void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistory, EventSet D, EventSet A,
                                UnfoldingEvent* currentEvt, EventSet prev_exC, std::set<Actor> actors)
 {
-
     UnfoldingEvent* e = nullptr;
     EventSet enC, exC = prev_exC; // exC.erase(currentEvt);
 
@@ -1319,15 +1330,15 @@ void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistor
 
     bool chk = true;
     if (enC.size() > 0)
-        for (auto evt : enC.events_)
-            if (!D.contains(evt)) {
+        for (auto evt : enC)
+            if (!EvtSetTools::contains(D, evt)) {
                 chk = false;
                 break;
             }
 
     if (chk) {
 
-        if (C.size() > 0) {
+        if (C.events_.size() > 0) {
 
             g_var::nb_traces++;
             if (this->confs_check_) {
@@ -1359,13 +1370,12 @@ void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistor
     }
 
     if (A.empty()) {
-        e = enC.begin();
+        e = *(enC.begin());
     } else {
 
         // if A is not empty, chose one event in the intersection of A and enC
-        for (auto evt : A.events_)
-            if (enC.contains(evt)) {
-
+        for (auto evt : A)
+            if (EvtSetTools::contains(enC, evt)) {
                 e = evt;
                 break;
             }
@@ -1390,7 +1400,7 @@ void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistor
 
     // UnfoldingEvent* newEvent = e + e.transition;
     Configuration C1 = C;
-    C1.insert(e);
+    EvtSetTools::insert(C1.events_, e);
 
     C1.updateMaxEvent(e);
 
@@ -1399,7 +1409,9 @@ void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistor
 
     maxEvtHistory1.push_back(C1.maxEvent);
 
-    explore(C1, maxEvtHistory1, D, A.minus(e), e, exC.minus(e), actors);
+    auto a_minus = EvtSetTools::minus(A, e);
+    auto exc_minus = EvtSetTools::minus(exC, e);
+    explore(C1, maxEvtHistory1, D, a_minus, e, exc_minus, actors);
 
     EventSet J, U1;
     EventSet Uc = g_var::U;
@@ -1415,8 +1427,8 @@ void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistor
     // J = computeAlt(D2, C);
 
     if (!J.empty()) {
+        EvtSetTools::subtract(J, C.events_);
 
-        J.subtruct(C);
         explore(C, maxEvtHistory, D1, J, currentEvt, prev_exC, actors);
     }
 
@@ -1427,11 +1439,11 @@ void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D)
 {
 
     EventSet unionSet, res, res1;
-    unionSet = uc::EventSet::makeUnion(C, D);
+    unionSet = EvtSetTools::makeUnion(C.events_, D);
 
     // building Qcdu
-    for (auto e1 : g_var::U.events_) {
-        for (auto e2 : unionSet.events_)
+    for (auto e1 : g_var::U) {
+        for (auto e2 : unionSet)
             // add e1 which is immediate conflict with one event in C u D to res
 
             if (e1->isImmediateConflict1(e1, e2)) {
@@ -1441,15 +1453,15 @@ void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D)
     }
 
     res1 = res;
-    for (auto e1 : res1.events_) {
+    for (auto e1 : res1) {
         EventSet h = e1->getHistory();
-        res        = uc::EventSet::makeUnion(res, h);
+        res        = EvtSetTools::makeUnion(res, h);
     }
 
-    res = uc::EventSet::makeUnion(res, unionSet);
+    res = EvtSetTools::makeUnion(res, unionSet);
     // move e from U to G if the condition is satisfied
 
-    if (!res.contains(e)) {
+    if (!EvtSetTools::contains(res, e)) {
         g_var::U.erase(e);
 
         // G.insert(e);
@@ -1457,7 +1469,7 @@ void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D)
 
     // move history of ê from U to G
     EventSet U1 = g_var::U;
-    for (auto evt : U1.events_)
+    for (auto evt : U1)
 
     {
         if (evt->isImmediateConflict1(evt, e)) {
@@ -1465,8 +1477,8 @@ void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D)
             EventSet h = evt->getHistory();
             h.insert(evt);
 
-            for (auto e2 : h.events_)
-                if (!res.contains(e2)) {
+            for (auto e2 : h)
+                if (!EvtSetTools::contains(res, e2)) {
                     g_var::U.erase(e2);
                     //	G.insert(e2);
                 }
