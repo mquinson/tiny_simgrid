@@ -65,7 +65,7 @@ public:
     EventSet conflictEvts;
 
     explicit UnfoldingEvent(State* s) : appState(*s) {}
-    UnfoldingEvent(unsigned int nb_events, app::Transition t, EventSet causes);
+    UnfoldingEvent(unsigned int nb_events, const app::Transition &t, const EventSet &causes);
 //    UnfoldingEvent(unsigned int nb_events, const Transition &t, const EventSet &causes);
     UnfoldingEvent(const UnfoldingEvent&) = default;
     UnfoldingEvent& operator=(UnfoldingEvent const&) = default;

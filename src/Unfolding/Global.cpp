@@ -3,7 +3,7 @@
 namespace uc {
 
 //UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, const Transition &t, const EventSet &causes)
-UnfoldingEvent::UnfoldingEvent(unsigned int nb_events,  app::Transition t,  EventSet causes)
+UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, app::Transition const& t,  EventSet const& causes)
 {
 
     this->id         = nb_events;
