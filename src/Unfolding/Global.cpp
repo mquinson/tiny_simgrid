@@ -22,6 +22,7 @@ void UnfoldingEvent::print() const
     if (this->causes.empty())
         std::cout << "-) >";
     else {
+
         for (auto evt : this->causes)
             std::cout << "e" << evt->id << ",";
         std::cout << " ) >";
@@ -313,7 +314,7 @@ void Configuration::updateMaxEvent(UnfoldingEvent* e)
     /* update the maximal events for the actor=>
    removing the evt shares the same actor with e, then adding e to the actorMaxEvent */
 
-    std::set<UnfoldingEvent*> to_remove;
+    EventSet to_remove;
 
     for (auto evt : actorMaxEvent)
         if (evt->transition.actor_id == e->transition.actor_id)
@@ -344,7 +345,7 @@ UnfoldingEvent* Configuration ::findTestedComm(UnfoldingEvent* testEvt)
     return nullptr;
 }
 
-bool EvtSetTools::contains(std::set<UnfoldingEvent*> events, UnfoldingEvent* e)
+bool EvtSetTools::contains(EventSet events, UnfoldingEvent* e)
 {
     for (auto evt : events)
         if (*evt == *e)
@@ -352,7 +353,7 @@ bool EvtSetTools::contains(std::set<UnfoldingEvent*> events, UnfoldingEvent* e)
     return false;
 }
 
-UnfoldingEvent* EvtSetTools::find(std::set<UnfoldingEvent*> events, UnfoldingEvent* e)
+UnfoldingEvent* EvtSetTools::find(EventSet events, UnfoldingEvent* e)
 {
     for (auto evt : events)
         if (*evt == *e) {
@@ -361,7 +362,7 @@ UnfoldingEvent* EvtSetTools::find(std::set<UnfoldingEvent*> events, UnfoldingEve
     return nullptr;
 }
 
-void EvtSetTools::subtract(std::set<UnfoldingEvent*>& events, std::set<UnfoldingEvent*> otherSet)
+void EvtSetTools::subtract(EventSet& events, EventSet otherSet)
 {
     for (auto evt : otherSet)
         EvtSetTools::erase(events, evt);
@@ -371,7 +372,7 @@ void EvtSetTools::subtract(std::set<UnfoldingEvent*>& events, std::set<Unfolding
 /** @brief Check if I'm dependent with another EventSet
  * Here we suppose that 2 given event sets do not have common events
 */
-bool EvtSetTools::depends(std::set<UnfoldingEvent*> events, std::set<UnfoldingEvent*> otherSet)
+bool EvtSetTools::depends(EventSet events, EventSet otherSet)
 {
     if (events.empty() || otherSet.empty())
         return false;
@@ -390,7 +391,7 @@ bool EvtSetTools::depends(std::set<UnfoldingEvent*> events, std::set<UnfoldingEv
     return false;
 }
 
-bool EvtSetTools::isEmptyIntersection(std::set<UnfoldingEvent*> evtS1, std::set<UnfoldingEvent*> evtS2)
+bool EvtSetTools::isEmptyIntersection(EventSet evtS1, EventSet evtS2)
 {
     if(evtS1.size() == 0 || evtS2.size() == 0)
         return false;
@@ -400,49 +401,49 @@ bool EvtSetTools::isEmptyIntersection(std::set<UnfoldingEvent*> evtS1, std::set<
     return true;
 }
 
-std::set<UnfoldingEvent*> EvtSetTools::makeUnion(std::set<UnfoldingEvent*> s1, std::set<UnfoldingEvent*> s2)
+EventSet EvtSetTools::makeUnion(EventSet s1, EventSet s2)
 {
-    std::set<UnfoldingEvent*> res = s1;
+    EventSet res = s1;
     for (auto evt : s2)
         EvtSetTools::insert(res, evt);
     return res;
 }
 
-std::set<UnfoldingEvent*> EvtSetTools::makeIntersection(std::set<UnfoldingEvent*> s1, std::set<UnfoldingEvent*> s2)
+EventSet EvtSetTools::makeIntersection(EventSet s1, EventSet s2)
 {
-    std::set<UnfoldingEvent*> res;
+    EventSet res;
     std::set_intersection(s1.begin(), s1.end(), s2.begin(), s2.end(),
                           std::inserter(res, res.begin()));
     return res;
 }
 
-void EvtSetTools::insert(std::set<UnfoldingEvent*>& events, UnfoldingEvent* e)
+void EvtSetTools::insert(EventSet& events, UnfoldingEvent* e)
 {
     if(!EvtSetTools::contains(events, e))
         events.insert(e);
 }
 
-void EvtSetTools::erase(std::set<UnfoldingEvent*>& events, UnfoldingEvent* e)
+void EvtSetTools::erase(EventSet& events, UnfoldingEvent* e)
 {
-    std::set<UnfoldingEvent*> evtS = events;
+    EventSet evtS = events;
     for (auto it : evtS) {
         if (*it == *e)
             events.erase(it);
     }
 }
 
-std::set<UnfoldingEvent*> EvtSetTools::minus(std::set<UnfoldingEvent*> events, UnfoldingEvent* e)
+EventSet EvtSetTools::minus(EventSet events, UnfoldingEvent* e)
 {
-    std::set<UnfoldingEvent*> res = events;
+    EventSet res = events;
     for (auto evt : events)
         if (*evt == *e)
             res.erase(e);
     return res;
 }
 
-std::set<UnfoldingEvent*> EvtSetTools::plus(std::set<UnfoldingEvent *> events, UnfoldingEvent* e)
+EventSet EvtSetTools::plus(EventSet events, UnfoldingEvent* e)
 {
-    std::set<UnfoldingEvent*> res = events;
+    EventSet res = events;
     if (!EvtSetTools::contains(events, e))
         res.insert(e);
     return res;

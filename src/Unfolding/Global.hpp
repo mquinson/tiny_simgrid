@@ -15,17 +15,17 @@ using EventSet = std::set<UnfoldingEvent*>;
 
 class EvtSetTools {
 public:
-    static bool contains(std::set<UnfoldingEvent*> events, UnfoldingEvent* e);
-    static UnfoldingEvent* find(std::set<UnfoldingEvent*> events, UnfoldingEvent* e);
-    static void subtract(std::set<UnfoldingEvent*>& events, std::set<UnfoldingEvent*> otherSet);
-    static bool depends(std::set<UnfoldingEvent*> events, std::set<UnfoldingEvent*> otherSet);
-    static bool isEmptyIntersection(std::set<UnfoldingEvent*> evtS1, std::set<UnfoldingEvent*> evtS2);
-    static std::set<UnfoldingEvent*> makeUnion(std::set<UnfoldingEvent*> s1, std::set<UnfoldingEvent*> s2);
-    static std::set<UnfoldingEvent *> makeIntersection(std::set<UnfoldingEvent *> s1, std::set<UnfoldingEvent *> s2);
-    static void insert(std::set<UnfoldingEvent*>& events, UnfoldingEvent* e);
-    static void erase(std::set<UnfoldingEvent*>& events, UnfoldingEvent* e);
-    static std::set<UnfoldingEvent*> minus(std::set<UnfoldingEvent *> events, UnfoldingEvent* e);
-    static std::set<UnfoldingEvent*> plus(std::set<UnfoldingEvent *> events, UnfoldingEvent* e);
+    static bool contains(EventSet events, UnfoldingEvent* e);
+    static UnfoldingEvent* find(EventSet events, UnfoldingEvent* e);
+    static void subtract(EventSet &events, EventSet otherSet);
+    static bool depends(EventSet events, EventSet otherSet);
+    static bool isEmptyIntersection(EventSet evtS1, EventSet evtS2);
+    static EventSet makeUnion(EventSet s1, EventSet s2);
+    static EventSet makeIntersection(EventSet s1, EventSet s2);
+    static void insert(EventSet &events, UnfoldingEvent* e);
+    static void erase(EventSet &events, UnfoldingEvent* e);
+    static EventSet minus(EventSet events, UnfoldingEvent* e);
+    static EventSet plus(EventSet events, UnfoldingEvent* e);
 };
 
 typedef struct s_evset_in {
@@ -36,7 +36,7 @@ typedef struct s_evset_in {
 
 class Configuration {
 public:
-    std::set<UnfoldingEvent*> events_;
+    EventSet events_;
     EventSet maxEvent;         // Events recently added to events_
     EventSet actorMaxEvent;    // maximal events of the actors in current configuration
     UnfoldingEvent* lastEvent; // The last added event
