@@ -30,9 +30,9 @@ public:
     void explore(State* state); // Start the exploration
     // Recursive function
     void explore(Configuration C, std::list<EventSet> maxEvtHistory, EventSet D, EventSet A, UnfoldingEvent* currentEvt,
-                 EventSet prev_enC, std::set<Actor> proc);
+                 EventSet prev_enC, std::deque<Actor> proc);
 
-    void extend(std::set<Actor> proc, Configuration C, std::list<EventSet> maxEvtHistory, EventSet& ExC, EventSet& enC) const;
+    void extend(std::deque<Actor> proc, Configuration C, std::list<EventSet> maxEvtHistory, EventSet& ExC, EventSet& enC) const;
     void remove(UnfoldingEvent* e, Configuration C, EventSet D);
     EventSet KpartialAlt(EventSet D, Configuration C) const;
 

@@ -6,30 +6,7 @@
 using namespace uc;
 using namespace app;
 
-static int nbInt = 0;
-void exhautiveExplore(std::list<State> stateStack, std::list<Transition> transList)
-{
-  State s                        = stateStack.back();
-  std::set<Transition> trans_set = s.getEnabledTransition();
-  if (trans_set.empty()) {
-    nbInt++;
-    std::cout << " \n Interleaving  " << nbInt << ":  ";
-    for (auto t : transList)
-      std::cout << "(t_" << t.id << ",p_" << t.actor_id << "-" << t.type << " )   ";
-
-    stateStack.pop_back();
-  } else {
-    for (auto t : trans_set) {
-      std::list<Transition> transList1 = transList;
-      transList1.push_back(t);
-
-      State s1 = s.execute(t);
-      stateStack.push_back(s1);
-      exhautiveExplore(stateStack, transList1);
-    }
-  }
-}
-bool test_reduction(std::set<Actor> actors, std::set<Mailbox> mailboxes, std::vector<unsigned int> confs,
+bool test_reduction(std::deque<Actor> actors, std::deque<Mailbox> mailboxes, std::vector<unsigned int> confs,
                     unsigned int evt_count)
 {
   UnfoldingChecker UC(confs, evt_count);
@@ -53,7 +30,7 @@ int main(int argc, char** argv)
   EventSet prev_exC;
   Configuration C;
   State* initState;
-  std::set<Actor> actor_set;
+  std::deque<Actor> actor_set;
   std::list<State> stateStack;
 
   int example = 1;
@@ -183,9 +160,9 @@ int main(int argc, char** argv)
 //                      Actor(2, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait")})},
 //                     {Mailbox(1)}, {5, 5}, 13);
 
-      actor_set.insert(Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
-      actor_set.insert(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
-      actor_set.insert(Actor(2, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait")}));
+      actor_set.push_back(Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
+      actor_set.push_back(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
+      actor_set.push_back(Actor(2, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait")}));
 
       initState = new State(3, actor_set, {Mailbox(1)});
 
@@ -204,9 +181,9 @@ int main(int argc, char** argv)
 //                                Transition(1, 1, "Wait")})},
 //                     {Mailbox(1)}, {8, 8}, 22);
 
-      actor_set.insert(Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
-      actor_set.insert(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
-      actor_set.insert(Actor(2, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(1, 1, "Ireceive"),
+      actor_set.push_back(Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
+      actor_set.push_back(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
+      actor_set.push_back(Actor(2, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(1, 1, "Ireceive"),
                                                                  Transition(1, 1, "Wait")}));
 
       initState = new State(3, actor_set, {Mailbox(1)});
@@ -228,11 +205,11 @@ int main(int argc, char** argv)
 //                      Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")})},
 //                     {Mailbox(1)}, {9, 9, 9, 9, 9, 9}, 59);
 
-      actor_set.insert(Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
-      actor_set.insert(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
-      actor_set.insert(Actor(2, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(1, 2, "Ireceive"),
+      actor_set.push_back(Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
+      actor_set.push_back(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
+      actor_set.push_back(Actor(2, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(1, 2, "Ireceive"),
                                                                  Transition(1, 2, "Wait")}));
-      actor_set.insert(Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
+      actor_set.push_back(Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
 
       initState = new State(4, actor_set, {Mailbox(1)});
 
@@ -301,9 +278,9 @@ int main(int argc, char** argv)
     case 19: { // 6 traces
 
       // Transition (maiboxid, commid, type)
-      actor_set.insert(Actor(0, {Transition(1, 2, "Ireceive"), Transition(1, 2, "Test")}));
-      actor_set.insert(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
-      actor_set.insert(Actor(2, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
+      actor_set.push_back(Actor(0, {Transition(1, 2, "Ireceive"), Transition(1, 2, "Test")}));
+      actor_set.push_back(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
+      actor_set.push_back(Actor(2, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
 
       initState         = new State(3, actor_set, {Mailbox(1)});
       UnfoldingEvent* e = new UnfoldingEvent(initState);
@@ -320,10 +297,10 @@ int main(int argc, char** argv)
 
     case 20: { // 18 traces
                // Transition (maiboxid, commid, type)
-      actor_set.insert(Actor(0, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Test"), Transition(1, 2, "Ireceive"),
+      actor_set.push_back(Actor(0, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Test"), Transition(1, 2, "Ireceive"),
                                  Transition(1, 2, "Test")}));
-      actor_set.insert(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
-      actor_set.insert(Actor(2, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
+      actor_set.push_back(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
+      actor_set.push_back(Actor(2, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
 
       initState = new State(3, actor_set, {Mailbox(1)});
 
@@ -341,11 +318,11 @@ int main(int argc, char** argv)
     case 21: { // 54 traces
 
       // Transition (maiboxid, commid, type)
-      actor_set.insert(Actor(0, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Test"), Transition(1, 2, "Ireceive"),
+      actor_set.push_back(Actor(0, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Test"), Transition(1, 2, "Ireceive"),
                                  Transition(1, 2, "Test")}));
-      actor_set.insert(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
-      actor_set.insert(Actor(2, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
-      actor_set.insert(Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
+      actor_set.push_back(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
+      actor_set.push_back(Actor(2, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
+      actor_set.push_back(Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
 
       initState = new State(4, actor_set, {Mailbox(1)});
 
@@ -363,13 +340,13 @@ int main(int argc, char** argv)
     case 22: {
 
       // Transition (maiboxid, commid, type)
-      actor_set.insert(Actor(0, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Test"), Transition(1, 2, "Ireceive"),
+      actor_set.push_back(Actor(0, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Test"), Transition(1, 2, "Ireceive"),
                                  Transition(1, 2, "Test"), Transition(1, 3, "Ireceive"), Transition(1, 3, "Test"),
                                  Transition(1, 3, "Ireceive"), Transition(1, 3, "Test")}));
-      actor_set.insert(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
-      actor_set.insert(Actor(2, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
-      actor_set.insert(Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
-      actor_set.insert(Actor(4, {Transition(1, 1, "localComp"), Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
+      actor_set.push_back(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
+      actor_set.push_back(Actor(2, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
+      actor_set.push_back(Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
+      actor_set.push_back(Actor(4, {Transition(1, 1, "localComp"), Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
 
       initState = new State(5, actor_set, {Mailbox(1)});
 
@@ -386,10 +363,10 @@ int main(int argc, char** argv)
 
     case 23: { // 18 traces
       // Transition (maiboxid, commid, type)
-      actor_set.insert(Actor(0, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Test")}));
-      actor_set.insert(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
-      actor_set.insert(Actor(2, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
-      actor_set.insert(Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
+      actor_set.push_back(Actor(0, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Test")}));
+      actor_set.push_back(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
+      actor_set.push_back(Actor(2, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
+      actor_set.push_back(Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
 
       initState = new State(4, actor_set, {Mailbox(1)});
 
@@ -407,10 +384,10 @@ int main(int argc, char** argv)
     case 24: { // 8 traces
 
       // transition (maiboxid, commid, type)
-      actor_set.insert(Actor(0, {Transition(1, 1, "Ireceive")}));
-      actor_set.insert(Actor(1, {Transition(1, 2, "Ireceive"), Transition(1, 2, "Test")}));
-      actor_set.insert(Actor(2, {Transition(1, 3, "Isend")}));
-      actor_set.insert(Actor(3, {Transition(1, 4, "localComp"), Transition(1, 4, "Isend")}));
+      actor_set.push_back(Actor(0, {Transition(1, 1, "Ireceive")}));
+      actor_set.push_back(Actor(1, {Transition(1, 2, "Ireceive"), Transition(1, 2, "Test")}));
+      actor_set.push_back(Actor(2, {Transition(1, 3, "Isend")}));
+      actor_set.push_back(Actor(3, {Transition(1, 4, "localComp"), Transition(1, 4, "Isend")}));
 
       initState         = new State(4, actor_set, {Mailbox(1)});
       UnfoldingEvent* e = new UnfoldingEvent(initState);
@@ -425,18 +402,18 @@ int main(int argc, char** argv)
 
     case 25: { //  master- slaver 4 nodes
       // master node
-      actor_set.insert(Actor(0, {Transition(2, 1, "Isend"), Transition(3, 2, "Isend"), Transition(4, 3, "Isend"),
+      actor_set.push_back(Actor(0, {Transition(2, 1, "Isend"), Transition(3, 2, "Isend"), Transition(4, 3, "Isend"),
                                  Transition(2, 1, "Wait"), Transition(3, 2, "Wait"), Transition(4, 3, "Wait"),
                                  Transition(1, 4, "Ireceive"), Transition(1, 4, "Wait"), Transition(1, 5, "Ireceive"),
                                  Transition(1, 5, "Wait"), Transition(1, 6, "Ireceive"), Transition(1, 6, "Wait")}));
       // client 1
-      actor_set.insert(Actor(1, {Transition(2, 1, "Ireceive"), Transition(2, 1, "Wait"), Transition(0, 0, "localComp"),
+      actor_set.push_back(Actor(1, {Transition(2, 1, "Ireceive"), Transition(2, 1, "Wait"), Transition(0, 0, "localComp"),
                                  Transition(1, 2, "Isend"), Transition(1, 2, "Wait")}));
       // client 2
-      actor_set.insert(Actor(2, {Transition(3, 1, "Ireceive"), Transition(3, 1, "Wait"), Transition(0, 0, "localComp"),
+      actor_set.push_back(Actor(2, {Transition(3, 1, "Ireceive"), Transition(3, 1, "Wait"), Transition(0, 0, "localComp"),
                                  Transition(1, 2, "Isend"), Transition(1, 2, "Wait")}));
       // client 3
-      actor_set.insert(Actor(3, {Transition(4, 1, "Ireceive"), Transition(4, 1, "Wait"), Transition(0, 0, "localComp"),
+      actor_set.push_back(Actor(3, {Transition(4, 1, "Ireceive"), Transition(4, 1, "Wait"), Transition(0, 0, "localComp"),
                                  Transition(1, 2, "Isend"), Transition(1, 2, "Wait")}));
 
       initState = new State(4, actor_set, {Mailbox(1), Mailbox(2), Mailbox(3), Mailbox(4)});
@@ -456,14 +433,14 @@ int main(int argc, char** argv)
       // master node
       // Transition (maiboxid, commid, type)
 
-      actor_set.insert(Actor(0, {Transition(2, 1, "Isend"), Transition(3, 2, "Isend"), Transition(2, 1, "Wait"),
+      actor_set.push_back(Actor(0, {Transition(2, 1, "Isend"), Transition(3, 2, "Isend"), Transition(2, 1, "Wait"),
                                  Transition(3, 2, "Wait"), Transition(1, 3, "Ireceive"), Transition(1, 3, "Wait"),
                                  Transition(1, 4, "Ireceive"), Transition(1, 4, "Wait")}));
       // client 1
-      actor_set.insert(Actor(1, {Transition(2, 1, "Ireceive"), Transition(2, 1, "Wait"), Transition(0, 0, "localComp"),
+      actor_set.push_back(Actor(1, {Transition(2, 1, "Ireceive"), Transition(2, 1, "Wait"), Transition(0, 0, "localComp"),
                                  Transition(1, 2, "Isend"), Transition(1, 2, "Wait")}));
       // client 2
-      actor_set.insert(Actor(2, {Transition(3, 1, "Ireceive"), Transition(3, 1, "Wait"), Transition(0, 0, "localComp"),
+      actor_set.push_back(Actor(2, {Transition(3, 1, "Ireceive"), Transition(3, 1, "Wait"), Transition(0, 0, "localComp"),
                                  Transition(1, 2, "Isend"), Transition(1, 2, "Wait")}));
 
       initState = new State(3, actor_set, {Mailbox(1), Mailbox(2), Mailbox(3)});
@@ -483,20 +460,20 @@ int main(int argc, char** argv)
       // Transition (maiboxid, commid, type)
 
       // node 0
-      actor_set.insert(Actor(0, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(5, 2, "Isend"),
+      actor_set.push_back(Actor(0, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(5, 2, "Isend"),
                                  Transition(5, 2, "Wait"), Transition(1, 3, "Ireceive"), Transition(1, 3, "Wait")}));
       // node 1
-      actor_set.insert(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait"), Transition(4, 2, "Isend"),
+      actor_set.push_back(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait"), Transition(4, 2, "Isend"),
                                  Transition(4, 2, "Wait")}));
 
       // node 2
-      actor_set.insert(Actor(2, {Transition(3, 1, "Ireceive"), Transition(3, 1, "Wait"), Transition(1, 2, "Isend"),
+      actor_set.push_back(Actor(2, {Transition(3, 1, "Ireceive"), Transition(3, 1, "Wait"), Transition(1, 2, "Isend"),
                                  Transition(1, 2, "Wait")}));
       // node 3
-      actor_set.insert(Actor(3, {Transition(4, 1, "Ireceive"), Transition(4, 1, "Wait"), Transition(5, 2, "Ireceive"),
+      actor_set.push_back(Actor(3, {Transition(4, 1, "Ireceive"), Transition(4, 1, "Wait"), Transition(5, 2, "Ireceive"),
                                  Transition(5, 2, "Wait")}));
       // node 4
-      actor_set.insert(Actor(4, {Transition(3, 1, "Isend"), Transition(3, 1, "Wait")}));
+      actor_set.push_back(Actor(4, {Transition(3, 1, "Isend"), Transition(3, 1, "Wait")}));
 
       initState         = new State(5, actor_set, {Mailbox(1), Mailbox(2), Mailbox(3), Mailbox(4), Mailbox(5)});
       UnfoldingEvent* e = new UnfoldingEvent(initState);
@@ -543,14 +520,14 @@ else if (rank == 2)
       // Transition (maiboxid, commid, type)
 
       // node 0
-      actor_set.insert(Actor(0, {Transition(2, 1, "Isend"), Transition(2, 1, "Wait"), Transition(0, 2, "Ireceive"),
+      actor_set.push_back(Actor(0, {Transition(2, 1, "Isend"), Transition(2, 1, "Wait"), Transition(0, 2, "Ireceive"),
                                  Transition(0, 2, "Wait"), Transition(1, 3, "Isend"), Transition(1, 3, "Wait")}));
       // node 1
-      actor_set.insert(Actor(1, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(0, 2, "Isend"),
+      actor_set.push_back(Actor(1, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(0, 2, "Isend"),
                                  Transition(0, 2, "Wait")}));
 
       // node 2
-      actor_set.insert(Actor(2, {Transition(2, 1, "Ireceive"), Transition(2, 1, "Wait")}));
+      actor_set.push_back(Actor(2, {Transition(2, 1, "Ireceive"), Transition(2, 1, "Wait")}));
 
       initState = new State(3, actor_set, {Mailbox(0), Mailbox(1), Mailbox(2)});
 
@@ -565,39 +542,13 @@ else if (rank == 2)
 
     } break;
 
-    case 30: { /*		wait-deadlock
-     if (nprocs < 2)
-     {
-     printf ("not enough tasks\n");
-     }
-     else if (rank == 0)
-     {
-     memset (buf0, 0, buf_size);
-
-     MPI_Irecv (buf1, buf_size, MPI_INT, 1, 0, MPI_COMM_WORLD, &req);
-
-     MPI_Wait (&req, &status);
-
-     MPI_Send (buf0, buf_size, MPI_INT, 1, 0, MPI_COMM_WORLD);
-     }
-     else if (rank == 1)
-     {
-     memset (buf1, 1, buf_size);
-
-     MPI_Irecv (buf0, buf_size, MPI_INT, 0, 0, MPI_COMM_WORLD, &req);
-
-     MPI_Wait (&req, &status);
-
-     MPI_Send (buf1, buf_size, MPI_INT, 0, 0, MPI_COMM_WORLD);
-     }
-     */
-               // Transition (maiboxid, commid, type)
-
+    case 30: {
+      // Transition (maiboxid, commid, type)
       // node 0
-      actor_set.insert(Actor(0, {Transition(0, 1, "Ireceive"), Transition(0, 1, "Wait"), Transition(1, 2, "Isend"),
+      actor_set.push_back(Actor(0, {Transition(0, 1, "Ireceive"), Transition(0, 1, "Wait"), Transition(1, 2, "Isend"),
                                  Transition(1, 2, "Wait")}));
       // node 1
-      actor_set.insert(Actor(1, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(0, 2, "Isend"),
+      actor_set.push_back(Actor(1, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(0, 2, "Isend"),
                                  Transition(0, 2, "Wait")}));
 
       initState = new State(2, actor_set, {Mailbox(0), Mailbox(1)});
@@ -613,52 +564,18 @@ else if (rank == 2)
 
     } break;
 
-    case 31: { /*		waitall-deadlock
-     if (nprocs < 3)
-     {
-     printf ("not enough tasks\n");
-     }
-     else if (rank == 0)
-     {
-     MPI_Irecv (buf0, buf_size, MPI_INT, 1, 0, MPI_COMM_WORLD, &reqs[0]);
-
-     MPI_Irecv (buf1, buf_size, MPI_INT, 1, 0, MPI_COMM_WORLD, &reqs[1]);
-
-     MPI_Waitall (2, reqs, statuses);
-
-     MPI_Send (buf1, buf_size, MPI_INT, 1, 1, MPI_COMM_WORLD);
-     }
-     else if (rank == 1)
-     {
-     memset (buf0, 0, buf_size);
-
-     MPI_Isend (buf0, buf_size, MPI_INT, 0, 0, MPI_COMM_WORLD, &reqs[0]);
-
-     MPI_Isend (buf0, buf_size, MPI_INT, 2, 1, MPI_COMM_WORLD, &reqs[1]);
-
-     MPI_Waitall (2, reqs, statuses);
-
-     MPI_Recv (buf1, buf_size, MPI_INT, 0, 1, MPI_COMM_WORLD, statuses);
-
-     MPI_Send (buf0, buf_size, MPI_INT, 0, 0, MPI_COMM_WORLD);
-     }
-     else if (rank == 2)
-     {
-     MPI_Recv (buf1, buf_size, MPI_INT, 1, 1, MPI_COMM_WORLD, statuses);
-     }
-     */
+    case 31: {
       // Transition (maiboxid, commid, type)
-
       // node 0
-      actor_set.insert(Actor(0, {Transition(0, 1, "Ireceive"), Transition(0, 2, "Ireceive"), Transition(0, 1, "Wait"),
+      actor_set.push_back(Actor(0, {Transition(0, 1, "Ireceive"), Transition(0, 2, "Ireceive"), Transition(0, 1, "Wait"),
                                  Transition(0, 2, "Wait"), Transition(1, 3, "Isend"), Transition(1, 3, "Wait")}));
       // node 1
-      actor_set.insert(Actor(1, {Transition(0, 1, "Isend"), Transition(2, 2, "Isend"), Transition(0, 1, "Wait"),
+      actor_set.push_back(Actor(1, {Transition(0, 1, "Isend"), Transition(2, 2, "Isend"), Transition(0, 1, "Wait"),
                                  Transition(2, 2, "Wait"), Transition(1, 3, "Ireceive"), Transition(1, 3, "Wait"),
                                  Transition(0, 4, "Isend"), Transition(0, 4, "Wait")}));
 
       // node 2
-      actor_set.insert(Actor(2, {Transition(2, 1, "Ireceive"), Transition(2, 1, "Wait")}));
+      actor_set.push_back(Actor(2, {Transition(2, 1, "Ireceive"), Transition(2, 1, "Wait")}));
 
       initState = new State(3, actor_set, {Mailbox(0), Mailbox(1), Mailbox(2)});
 
@@ -671,40 +588,13 @@ else if (rank == 2)
       stateStack.push_back(initState1);
       // exhautiveExplore(stateStack,transList);
     } break;
-    case 32: { /*		no-error-wait-any_src
-     if (nprocs < 2)
-     {
-     printf ("not enough tasks\n");
-     }
-     else if (rank == 0)
-     {
-     memset (buf0, 0, buf_size);
-     MPI_Irecv (buf1, buf_size, MPI_INT,  MPI_ANY_SOURCE, 0, MPI_COMM_WORLD, &req);
-
-     MPI_Send (buf0, buf_size, MPI_INT, 1, 0, MPI_COMM_WORLD);
-
-     MPI_Wait (&req, &status);
-     }
-     else if (rank == 1)
-     {
-     memset (buf1, 1, buf_size);
-
-     MPI_Irecv (buf0, buf_size, MPI_INT, MPI_ANY_SOURCE, 0, MPI_COMM_WORLD, &req);
-
-     MPI_Wait (&req, &status);
-
-     MPI_Send (buf1, buf_size, MPI_INT, 0, 0, MPI_COMM_WORLD);
-     }
-
-*/
-
+    case 32: {
       // Transition (maiboxid, commid, type)
-
       // node 0
-      actor_set.insert(Actor(0, {Transition(0, 1, "Ireceive"), Transition(1, 2, "Isend"), Transition(1, 2, "Wait"),
+      actor_set.push_back(Actor(0, {Transition(0, 1, "Ireceive"), Transition(1, 2, "Isend"), Transition(1, 2, "Wait"),
                                  Transition(0, 1, "Wait")}));
       // node 1
-      actor_set.insert(Actor(1, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(0, 2, "Isend"),
+      actor_set.push_back(Actor(1, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(0, 2, "Isend"),
                                  Transition(0, 2, "Wait")}));
 
       initState = new State(2, actor_set, {Mailbox(0), Mailbox(1)});
@@ -722,50 +612,17 @@ else if (rank == 2)
       // exhautiveExplore(stateStack, transList);
     } break;
 
-    case 33: { /*any_src-can-deadlock3.c
-            if (nprocs < 3)
-        {
-          printf ("not enough tasks\n");
-        }
-      else if (rank == 0)
-        {
-          MPI_Recv (buf1, buf_size, MPI_INT,
-                    MPI_ANY_SOURCE, 0, MPI_COMM_WORLD, &status);
-
-          MPI_Send (buf1, buf_size, MPI_INT, 1, 0, MPI_COMM_WORLD);
-
-          MPI_Recv (buf0, buf_size, MPI_INT,
-                    MPI_ANY_SOURCE, 0, MPI_COMM_WORLD, &status);
-        }
-      else if (rank == 1)
-        {
-          memset (buf0, 0, buf_size);
-
-          MPI_Send (buf0, buf_size, MPI_INT, 0, 0, MPI_COMM_WORLD);
-
-          MPI_Recv (buf1, buf_size, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
-        }
-      else if (rank == 2)
-        {
-          memset (buf1, 1, buf_size);
-
-          //sleep (60);
-
-          MPI_Send (buf1, buf_size, MPI_INT, 0, 0, MPI_COMM_WORLD);
-        }
-
-             */
+    case 33: {
       // Transition (maiboxid, commid, type)
-
       // node 0
-      actor_set.insert(Actor(0, {Transition(0, 1, "Ireceive"), Transition(0, 1, "Wait"), Transition(1, 2, "Isend"),
+      actor_set.push_back(Actor(0, {Transition(0, 1, "Ireceive"), Transition(0, 1, "Wait"), Transition(1, 2, "Isend"),
                                  Transition(1, 2, "Wait"), Transition(0, 3, "Ireceive"), Transition(0, 3, "Wait")}));
       // node 1
-      actor_set.insert(Actor(1, {Transition(0, 1, "Isend"), Transition(0, 1, "Wait"), Transition(1, 2, "Ireceive"),
+      actor_set.push_back(Actor(1, {Transition(0, 1, "Isend"), Transition(0, 1, "Wait"), Transition(1, 2, "Ireceive"),
                                  Transition(1, 2, "Wait")}));
 
       // node 2
-      actor_set.insert(Actor(2, {Transition(0, 0, "Isend"), Transition(0, 0, "Wait")}));
+      actor_set.push_back(Actor(2, {Transition(0, 0, "Isend"), Transition(0, 0, "Wait")}));
 
       initState = new State(3, actor_set, {Mailbox(0), Mailbox(1), Mailbox(2)});
 

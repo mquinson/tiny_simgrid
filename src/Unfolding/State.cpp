@@ -5,7 +5,7 @@ using namespace app;
 
 namespace uc {
 
-State::State(unsigned long nb_actor, std::set<Actor> actors, std::set<Mailbox> mailboxes)
+State::State(unsigned long nb_actor, std::deque<Actor> actors, std::deque<Mailbox> mailboxes)
 {
     this->nb_actors_ = nb_actor;
     this->actors_    = actors;
@@ -15,40 +15,47 @@ State::State(unsigned long nb_actor, std::set<Actor> actors, std::set<Mailbox> m
 /* this function execute a transition from a given state, returning a next state*/
 State State::execute(Transition t)
 {
-    std::set<Actor> actors, actors1;
-    std::set<Mailbox> mail_box;
+    std::deque<Actor> actors/*, actors1*/;
+    std::deque<Mailbox> mail_box;
 
     mail_box = this->mailboxes_;
     actors   = this->actors_;
-    actors1  = this->actors_;
+//    actors1  = this->actors_;
 
     // update the status of the actors of the State, set "executed" = true for the executing transition (t)
+
+    auto index = 0;
     for (auto p : actors)
-        if (p.id == t.actor_id) {
-            actors1.erase(p);
-            p.trans[t.id].executed = true;
-            actors1.insert(p);
-        }
+    {
+        if (p.id == t.actor_id)
+            actors[index].trans[t.id].executed = true;
+        index++;
+    }
     /* if t is send or receive transition, then update the mailbox */
 
+    index = 0;
     if (t.type == "Isend" || t.type == "Ireceive")
-        for (auto mb : mailboxes_)
-            if (mb.id == t.mailbox_id) {
-                mail_box.erase(mb);
-                mb.update(t);
-                mail_box.insert(mb);
+    {
+        for (auto mb : mail_box)
+        {
+            if (mb.id == t.mailbox_id)
+            {
+                mail_box[index].update(t);
                 break;
             }
+            index++;
+        }
+    }
 
 //    std::set<Actor> test_ac = actors1;
 
-    return State(this->nb_actors_, actors1, mail_box);
+    return State(this->nb_actors_, actors, mail_box);
 }
 
-std::set<Transition> State::getEnabledTransition()
+std::deque<Transition> State::getEnabledTransition()
 {
 
-    std::set<Transition> trans_set;
+    std::deque<Transition> trans_set;
 
     for (auto p : this->actors_)
         for (unsigned long j = 0; j < p.nb_trans; j++)
@@ -62,7 +69,7 @@ std::set<Transition> State::getEnabledTransition()
                 }
 
                 if (chk)
-                    trans_set.insert(p.trans[j]);
+                    trans_set.push_back(p.trans[j]);
 
                 break;
             }

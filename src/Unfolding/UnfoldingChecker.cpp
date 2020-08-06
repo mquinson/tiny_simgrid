@@ -1068,7 +1068,6 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
     /*2. We now compute new evts by using MaxEvts in the past, but we have to ensure that
    * the ancestor events (used to generate history candidate) are not in history of the evts in the causalityEvts
    */
-    std::set<int> intS;
     /* get all events in the history of the evts in causalityEvts */
     for (auto evt : causalityEvts) {
         EventSet H1;
@@ -1103,7 +1102,7 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
     return exC;
 }
 
-void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list<EventSet> maxEvtHistory, EventSet& exC,
+void UnfoldingChecker::extend(std::deque<Actor> actors, Configuration C, std::list<EventSet> maxEvtHistory, EventSet& exC,
                               EventSet& enC) const
 {
 
@@ -1129,7 +1128,7 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
     } else {
         // TODO: TR
         // get all enabled transitions at current appState
-        std::set<Transition> enabledTransitions;
+        std::deque<Transition> enabledTransitions;
         enabledTransitions = C.lastEvent->appState.getEnabledTransition();
 
         // try to create new events from a enabled transition and every maximal_Evt history in maxEvtHistory of C
@@ -1311,7 +1310,7 @@ void UnfoldingChecker::explore(State* state)
 }
 
 void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistory, EventSet D, EventSet A,
-                               UnfoldingEvent* currentEvt, EventSet prev_exC, std::set<Actor> actors)
+                               UnfoldingEvent* currentEvt, EventSet prev_exC, std::deque<Actor> actors)
 {
     UnfoldingEvent* e = nullptr;
     EventSet enC, exC = prev_exC; // exC.erase(currentEvt);
