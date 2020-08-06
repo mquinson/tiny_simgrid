@@ -43,7 +43,7 @@ EventSet UnfoldingEvent::getHistory() const
 
             if (!EvtSetTools::contains(res, ancestor))
                 h1 = ancestor->getHistory();
-            EvtSetTools::insert(h1, ancestor);
+            EvtSetTools::pushBack(h1, ancestor);
             res = EvtSetTools::makeUnion(res, h1);
         }
         return res;
@@ -172,14 +172,14 @@ bool UnfoldingEvent::isConflict(UnfoldingEvent* event, UnfoldingEvent* otherEven
     if (event == otherEvent)
         return event->transition.isDependent(otherEvent->transition);
     else {
-        EvtSetTools::insert(h1,event);
-        EvtSetTools::insert(h2, otherEvent);
+        EvtSetTools::pushBack(h1,event);
+        EvtSetTools::pushBack(h2, otherEvent);
         EventSet his = h1;
         // FIXME remove all common events
         for (auto evt : his)
             if (EvtSetTools::contains(h2, evt)) {
-                EvtSetTools::erase(h1, evt);
-                EvtSetTools::erase(h2, evt);
+                EvtSetTools::remove(h1, evt);
+                EvtSetTools::remove(h2, evt);
             }
 
         return EvtSetTools::depends(h1, h2);
@@ -240,14 +240,14 @@ bool UnfoldingEvent::isImmediateConflict1(UnfoldingEvent* evt1, UnfoldingEvent* 
 
     for (auto e1 : hist1)
         if (EvtSetTools::contains(hist2, e1)) {
-            EvtSetTools::erase(hist11, e1);
-            EvtSetTools::erase(hist21, e1);
+            EvtSetTools::remove(hist11, e1);
+            EvtSetTools::remove(hist21, e1);
         }
 
     EventSet evtS1, evtS2;
 
-    EvtSetTools::insert(evtS1, evt1);
-    EvtSetTools::insert(evtS2, evt2);
+    EvtSetTools::pushBack(evtS1, evt1);
+    EvtSetTools::pushBack(evtS2, evt2);
 
     if (EvtSetTools::depends(hist11, hist21) || EvtSetTools::depends(evtS1, hist21) || EvtSetTools::depends(evtS2, hist11)) {
         return false;
@@ -270,15 +270,6 @@ bool UnfoldingEvent::conflictWithConfig(UnfoldingEvent* event, Configuration con
             return true;
     return false;
 }
-
-// this operator is used for ordering in a set (need a key)
-//bool UnfoldingEvent::operator<(const UnfoldingEvent& other)
-//{
-//    if ((this->transition.actor_id < other.transition.actor_id) || (this->transition.id < other.transition.id) or
-//            (!(this->causes == other.causes)))
-//        return true;
-//    return false;
-//}
 
 /** @brief check semantic equality (same transition, same causes) */
 bool UnfoldingEvent::operator==(const UnfoldingEvent& other) const
@@ -308,9 +299,9 @@ void Configuration::updateMaxEvent(UnfoldingEvent* e)
     this->lastEvent = e;
     // update the maximal events for current Conf removing causes from maxEvent and adding e to the maxEvent
     for (auto evt : e->causes) {
-        EvtSetTools::erase(maxEvent, evt); // setMaxEvents.erase(evt->id);
+        EvtSetTools::remove(maxEvent, evt); // setMaxEvents.erase(evt->id);
     }
-    EvtSetTools::insert(maxEvent, e);
+    EvtSetTools::pushBack(maxEvent, e);
     /* update the maximal events for the actor=>
    removing the evt shares the same actor with e, then adding e to the actorMaxEvent */
 
@@ -318,21 +309,19 @@ void Configuration::updateMaxEvent(UnfoldingEvent* e)
 
     for (auto evt : actorMaxEvent)
         if (evt->transition.actor_id == e->transition.actor_id)
-            to_remove.insert(evt);
+            to_remove.push_back(evt);
     for (auto evt : to_remove)
-        EvtSetTools::erase(actorMaxEvent, evt);
-    EvtSetTools::insert(actorMaxEvent, e);
+        EvtSetTools::remove(actorMaxEvent, evt);
+    EvtSetTools::pushBack(actorMaxEvent, e);
 }
 
 Configuration Configuration::plus_config(UnfoldingEvent* evt)
 {
     Configuration res;
-
     res.events_       = this->events_;
     res.maxEvent      = this->maxEvent;
     res.actorMaxEvent = this->actorMaxEvent;
-    if (!EvtSetTools::contains(res.events_, evt))
-        res.events_.insert(evt);
+    EvtSetTools::pushBack(res.events_, evt);
     return res;
 }
 
@@ -365,7 +354,7 @@ UnfoldingEvent* EvtSetTools::find(EventSet events, UnfoldingEvent* e)
 void EvtSetTools::subtract(EventSet& events, EventSet otherSet)
 {
     for (auto evt : otherSet)
-        EvtSetTools::erase(events, evt);
+        EvtSetTools::remove(events, evt);
 }
 
 
@@ -405,47 +394,56 @@ EventSet EvtSetTools::makeUnion(EventSet s1, EventSet s2)
 {
     EventSet res = s1;
     for (auto evt : s2)
-        EvtSetTools::insert(res, evt);
+        EvtSetTools::pushBack(res, evt);
     return res;
 }
 
-EventSet EvtSetTools::makeIntersection(EventSet s1, EventSet s2)
-{
-    EventSet res;
-    std::set_intersection(s1.begin(), s1.end(), s2.begin(), s2.end(),
-                          std::inserter(res, res.begin()));
-    return res;
-}
-
-void EvtSetTools::insert(EventSet& events, UnfoldingEvent* e)
+void EvtSetTools::pushBack(EventSet& events, UnfoldingEvent* e)
 {
     if(!EvtSetTools::contains(events, e))
-        events.insert(e);
+        events.push_back(e);
 }
 
-void EvtSetTools::erase(EventSet& events, UnfoldingEvent* e)
+void EvtSetTools::remove(EventSet& events, UnfoldingEvent* e)
 {
+    int index {0};
     EventSet evtS = events;
-    for (auto it : evtS) {
+    for(auto it : evtS)
+    {
         if (*it == *e)
-            events.erase(it);
+        {
+            events.erase(events.begin() + index);
+        }
+        else
+        {
+            index++;
+        }
     }
 }
 
 EventSet EvtSetTools::minus(EventSet events, UnfoldingEvent* e)
 {
+    int index {0};
     EventSet res = events;
     for (auto evt : events)
+    {
         if (*evt == *e)
-            res.erase(e);
+        {
+            res.erase(res.begin() + index);
+        }
+        else
+        {
+            index++;
+        }
+    }
     return res;
 }
 
 EventSet EvtSetTools::plus(EventSet events, UnfoldingEvent* e)
 {
     EventSet res = events;
-    if (!EvtSetTools::contains(events, e))
-        res.insert(e);
+    if (!EvtSetTools::contains(res, e))
+        res.push_back(e);
     return res;
 }
 

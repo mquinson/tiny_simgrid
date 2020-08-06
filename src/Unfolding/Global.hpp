@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <algorithm>
-#include <set>
+#include <queue>
 #include "../App/Transition.h"
 #include "State.h"
 
@@ -11,7 +11,7 @@ namespace uc {
 
 class UnfoldingEvent;
 
-using EventSet = std::set<UnfoldingEvent*>;
+using EventSet = std::deque<UnfoldingEvent*>;
 
 class EvtSetTools {
 public:
@@ -21,9 +21,8 @@ public:
     static bool depends(EventSet events, EventSet otherSet);
     static bool isEmptyIntersection(EventSet evtS1, EventSet evtS2);
     static EventSet makeUnion(EventSet s1, EventSet s2);
-    static EventSet makeIntersection(EventSet s1, EventSet s2);
-    static void insert(EventSet &events, UnfoldingEvent* e);
-    static void erase(EventSet &events, UnfoldingEvent* e);
+    static void pushBack(EventSet &events, UnfoldingEvent* e);
+    static void remove(EventSet &events, UnfoldingEvent* e);
     static EventSet minus(EventSet events, UnfoldingEvent* e);
     static EventSet plus(EventSet events, UnfoldingEvent* e);
 };

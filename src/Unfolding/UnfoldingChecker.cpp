@@ -60,7 +60,7 @@ void ksubset(unsigned long sizeD, std::list<UnfoldingEvent*> EvtList, std::list<
             if (n == sizeD - 1) {
                 if (EvtList1.size() == sizeD) {
                     for (auto evt : EvtList1)
-                        J.insert(evt);
+                        EvtSetTools::pushBack(J, evt);
                     return;
                 }
             }
@@ -74,7 +74,6 @@ void ksubset(unsigned long sizeD, std::list<UnfoldingEvent*> EvtList, std::list<
 
 EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C) const
 {
-
     EventSet J;
     EventSet J1;
     EventSet emptySet;
@@ -87,7 +86,7 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C) const
         EventSet evtSet;
         for (auto evt1 : g_var::U)
             if (evt->isConflict(evt, evt1))
-                evtSet.insert(evt1);
+                EvtSetTools::pushBack(evtSet, evt1);
 
         kSet.push_back(evtSet);
     }
@@ -109,7 +108,7 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C) const
                 EventSet subC;
                 EventSet sub_history;
                 EventSet history = evt->getHistory();
-                history.insert(evt);
+                EvtSetTools::pushBack(history, evt);
                 bool chk = false;
 
                 if (!EvtSetTools::isEmptyIntersection(history, D)) {
@@ -124,7 +123,7 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C) const
                         }
 
                 if (chk) {
-                    evtS.erase(evt);
+                    EvtSetTools::remove(evtS, evt);
                 }
             }
 
@@ -157,7 +156,7 @@ EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C) const
         for (auto evt : J1) {
             EventSet history = evt->getHistory();
             J = EvtSetTools::makeUnion(J, history);
-            J.insert(evt);
+            EvtSetTools::pushBack(J, evt);
         }
     }
 
@@ -271,7 +270,7 @@ void Configuration::createEvts(Configuration C, EventSet &result, const app::Tra
             if (send_receiveCheck) {
                 g_var::nb_events++;
                 UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, t, cause1);
-                result.insert(e);
+                EvtSetTools::pushBack(result, e);
             }
         }
         return;
@@ -282,13 +281,13 @@ void Configuration::createEvts(Configuration C, EventSet &result, const app::Tra
         EventSet evtSet1, evtSet2, evtSet3, evtSet4;
         evtSet1 = cause;
         evtSet3 = ancestorSet;
-        evtSet1.insert(a);
-        evtSet3.erase(a);
+        EvtSetTools::pushBack(evtSet1, a);
+        EvtSetTools::remove(evtSet3, a);
         s_evset_in_t evsets { causuality_events, evtSet1, evtSet3 };
         createEvts(C, result, t, evsets, chk, immPreEvt);
         evtSet2 = cause;
         evtSet4 = ancestorSet;
-        evtSet4.erase(a);
+        EvtSetTools::remove(evtSet4, a);
         evsets.causuality_events = causuality_events;
         evsets.cause = evtSet2;
         evsets.ancestorSet = evtSet4;
@@ -317,7 +316,7 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
     UnfoldingEvent* immPreEvt = nullptr;
 
     // add causality evts to causalityEvts set, firstly add last event to causalityEvts
-    causalityEvts.insert(C.lastEvent);
+    EvtSetTools::pushBack(causalityEvts, C.lastEvent);
 
     /* add the immediate precede evt of transition trans to the causalityEvts
    *  used to make sure trans is enabled (Ti is enlabled if Ti-1 is aready fined)
@@ -332,7 +331,7 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
         // if immediate precede evt in maxEvent, add it to the causalityEvts
         for (auto evt : C.maxEvent)
             if (trans.actor_id == evt->transition.actor_id) {
-                causalityEvts.insert(evt);
+                EvtSetTools::pushBack(causalityEvts, evt);
                 chk = true;
                 break;
             }
@@ -346,7 +345,7 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
 
     for (auto evt : C.maxEvent)
         if (trans.isDependent(evt->transition) && (!EvtSetTools::contains(causalityEvts, evt)))
-            ancestorSet.insert(evt);
+            EvtSetTools::pushBack(ancestorSet, evt);
 
     /*1. Create events from current (last) maximal event of C */
     // 1.1 if only last evt and immidiate precede event are dependent with trans -> only one evt is created
@@ -356,7 +355,7 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
 
         /* in this case only one event is created, since all MaxEvts are in the history of lastEvt*/
         UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, causalityEvts);
-        exC.insert(e);
+        EvtSetTools::pushBack(exC, e);
 
     }
 
@@ -376,7 +375,7 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
         /*2. We now compute new evts by using MaxEvts in the past, but we have to ensure that
      * the ancestor events (used to generate history candidate) are not in history of the evts in the causalityEvts
      */
-        std::set<int> intS;
+        std::vector<int> intS;
         // get all events in the history of the evts in causalityEvts
         for (auto evt : causalityEvts) {
             EventSet H1;
@@ -386,7 +385,7 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
 
         // put id of evts in H in the the set intS
         for (auto evt : H)
-            intS.insert(evt->id);
+            intS.push_back(evt->id);
 
         /* compute a set of evt that can generate history (all subset of it)
      by getting evts in the maximal evts but not in the history of causalityEvts*/
@@ -403,7 +402,7 @@ EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transiti
                 EventSet evtSet1;
                 for (auto evt : evtSet)
                     if ((!EvtSetTools::contains(H, evt)) && evt->transition.isDependent(trans))
-                        evtSet1.insert(evt);
+                        EvtSetTools::pushBack(evtSet1, evt);
 
                 EventSet exC1;
                 EventSet cause;
@@ -457,16 +456,16 @@ EventSet createWaitEvt(const UnfoldingEvent* evt, Configuration C, Transition co
                     EventSet maxEvtHist    = maxEvt->getHistory();
 
                     if (EvtSetTools::contains(maxEvtHist, evt2))
-                        ancestors.insert(maxEvt);
+                        EvtSetTools::pushBack(ancestors, maxEvt);
                     else if (EvtSetTools::contains(hist1, maxEvt))
-                        ancestors.insert(evt2);
+                        EvtSetTools::pushBack(ancestors, evt2);
                     else {
-                        ancestors.insert(maxEvt);
-                        ancestors.insert(evt2);
+                        EvtSetTools::pushBack(ancestors, maxEvt);
+                        EvtSetTools::pushBack(ancestors, evt2);
                     }
                     g_var::nb_events++;
                     UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
-                    evtS.insert(e);
+                    EvtSetTools::pushBack(evtS, e);
                 }
             }
     }
@@ -497,16 +496,16 @@ EventSet createWaitEvt(const UnfoldingEvent* evt, Configuration C, Transition co
                     EventSet maxEvtHist    = maxEvt->getHistory();
 
                     if (EvtSetTools::contains(maxEvtHist, evt2))
-                        ancestors.insert(maxEvt);
+                        EvtSetTools::pushBack(ancestors, maxEvt);
                     else if (EvtSetTools::contains(hist1, maxEvt))
-                        ancestors.insert(evt2);
+                        EvtSetTools::pushBack(ancestors, evt2);
                     else {
-                        ancestors.insert(maxEvt);
-                        ancestors.insert(evt2);
+                        EvtSetTools::pushBack(ancestors, maxEvt);
+                        EvtSetTools::pushBack(ancestors, evt2);
                     }
                     g_var::nb_events++;
                     UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
-                    evtS.insert(e);
+                    EvtSetTools::pushBack(evtS, e);
                 }
             }
     }
@@ -563,11 +562,11 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
     {
         EventSet maxEvtHist = C.lastEvent->getHistory();
 
-        ancestors.insert(C.lastEvent);
+        EvtSetTools::pushBack(ancestors, C.lastEvent);
         g_var::nb_events++;
         newEvt1 = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
 
-        evtS.insert(newEvt1);
+        EvtSetTools::pushBack(evtS, newEvt1);
 
         /* Now try to create newEvt2 if there is a pending communication can be march
            with the communication tested by the Test action */
@@ -592,11 +591,11 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
                         /* if the number send = number receive, we can march the send communication with the rececive
              * -> create an new event ( newEvt2 in the figure) */
 
-                        ancestors.insert(evt2);
+                        EvtSetTools::pushBack(ancestors, evt2);
                         g_var::nb_events++;
                         newEvt2 = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
 
-                        evtS.insert(newEvt2);
+                        EvtSetTools::pushBack(evtS, newEvt2);
                     }
                 }
         }
@@ -623,10 +622,10 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
                         /* if the number send = number receive, we can march the send communication with the rececive
              * -> create an new event ( newEvt2 in the figure) */
 
-                        ancestors.insert(evt2);
+                        EvtSetTools::pushBack(ancestors, evt2);
                         g_var::nb_events++;
                         newEvt2 = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
-                        evtS.insert(newEvt2);
+                        EvtSetTools::pushBack(evtS, newEvt2);
                     }
                 }
         }
@@ -645,12 +644,12 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
             if (numberSend == nbReceive) {
 
                 UnfoldingEvent* maxEvt = C.findActorMaxEvt(evt->transition.actor_id);
-                ancestors.insert(C.lastEvent);
+                EvtSetTools::pushBack(ancestors, C.lastEvent);
                 if (!EvtSetTools::contains(lastEvtHist, maxEvt))
-                    ancestors.insert(maxEvt);
+                    EvtSetTools::pushBack(ancestors, maxEvt);
                 g_var::nb_events++;
                 newEvt2 = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
-                evtS.insert(newEvt2);
+                EvtSetTools::pushBack(evtS, newEvt2);
             }
         } else if (comType == "Ireceive") {
 
@@ -662,12 +661,12 @@ EventSet createTestEvt(EventSet exC, UnfoldingEvent* evt, Configuration C, Trans
             if (numberReceive == nbSend) {
                 UnfoldingEvent* maxEvt = C.findActorMaxEvt(evt->transition.actor_id);
 
-                ancestors.insert(C.lastEvent);
+                EvtSetTools::pushBack(ancestors, C.lastEvent);
                 if (!EvtSetTools::contains(lastEvtHist, maxEvt))
-                    ancestors.insert(maxEvt);
+                    EvtSetTools::pushBack(ancestors, maxEvt);
                 g_var::nb_events++;
                 newEvt2 = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
-                evtS.insert(newEvt2);
+                EvtSetTools::pushBack(evtS, newEvt2);
             }
         }
     }
@@ -713,13 +712,13 @@ EventSet createIsendEvts(Transition trans, Configuration C)
     if (trans.id != 0)
         immPreEvtHist = immPreEvt->getHistory();
 
-    ancestorSet.insert(C.lastEvent);
+    EvtSetTools::pushBack(ancestorSet, C.lastEvent);
 
     // if last event is preEvt(trans) always create a new event.
     if (C.lastEvent->transition.actor_id == trans.actor_id) {
         g_var::nb_events++;
         UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorSet);
-        exC.insert(e);
+        EvtSetTools::pushBack(exC, e);
     }
     // else if last event is Isend try to create a new event .
     else if (C.lastEvent->transition.type == "Isend") {
@@ -727,12 +726,12 @@ EventSet createIsendEvts(Transition trans, Configuration C)
         if (enableChk) {
             g_var::nb_events++;
             UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorSet);
-            exC.insert(e);
+            EvtSetTools::pushBack(exC, e);
         } else {
-            ancestorSet.insert(immPreEvt);
+            EvtSetTools::pushBack(ancestorSet, immPreEvt);
             g_var::nb_events++;
             UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorSet);
-            exC.insert(e);
+            EvtSetTools::pushBack(exC, e);
         }
     }
 
@@ -750,16 +749,16 @@ EventSet createIsendEvts(Transition trans, Configuration C)
                 if (testedEvt->transition.type == "Ireceive" && (!EvtSetTools::contains(lastEvtHist, it)))
                     if (!EvtSetTools::contains(immPreEvtHist, it)) {
                         EventSet ancestorSet1;
-                        ancestorSet1.insert(C.lastEvent);
-                        ancestorSet1.insert(it);
+                        EvtSetTools::pushBack(ancestorSet1, C.lastEvent);
+                        EvtSetTools::pushBack(ancestorSet1, it);
                         EventSet itHist = it->getHistory();
                         if ((!EvtSetTools::contains(itHist, immPreEvt)) && (!enableChk))
-                            ancestorSet1.insert(immPreEvt);
+                            EvtSetTools::pushBack(ancestorSet1, immPreEvt);
 
                         if (checkSdRcCreation(trans, ancestorSet1, C)) {
                             g_var::nb_events++;
                             UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorSet1);
-                            exC.insert(e);
+                            EvtSetTools::pushBack(exC, e);
                         }
                     }
             }
@@ -768,31 +767,31 @@ EventSet createIsendEvts(Transition trans, Configuration C)
     if (C.lastEvent->transition.actor_id == trans.actor_id ||
             (C.lastEvent->transition.actor_id != trans.actor_id && C.lastEvent->transition.type == "Test")) {
         EventSet ansestors;
-        ansestors.insert(C.lastEvent);
+        EvtSetTools::pushBack(ansestors, C.lastEvent);
         if (!enableChk)
-            ansestors.insert(immPreEvt);
+            EvtSetTools::pushBack(ansestors, immPreEvt);
         if (checkSdRcCreation(trans, ansestors, C)) {
             g_var::nb_events++;
             UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ansestors);
-            exC.insert(e);
+            EvtSetTools::pushBack(exC, e);
         }
 
         for (auto it : C.events_)
             if (trans.isDependent(it->transition) && trans.actor_id != it->transition.actor_id) {
                 // make sure no ancestor candidate event is in history of other ancestor candidate
                 EventSet ansestors1;
-                ansestors1.insert(C.lastEvent);
+                EvtSetTools::pushBack(ansestors1, C.lastEvent);
 
                 if (!EvtSetTools::contains(lastEvtHist, it) && (!EvtSetTools::contains(immPreEvtHist, it))) {
-                    ansestors1.insert(it);
+                    EvtSetTools::pushBack(ansestors1, it);
                     EventSet itHist = it->getHistory();
                     if ((!enableChk) && (!EvtSetTools::contains(itHist, immPreEvt)))
-                        ansestors1.insert(immPreEvt);
+                        EvtSetTools::pushBack(ansestors1, immPreEvt);
 
                     if (checkSdRcCreation(trans, ansestors1, C)) {
                         g_var::nb_events++;
                         UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ansestors1);
-                        exC.insert(e);
+                        EvtSetTools::pushBack(exC, e);
                     }
                 }
             }
@@ -813,14 +812,14 @@ EventSet createIsendEvts(Transition trans, Configuration C)
                         if (testedEvent->transition.type == "Ireveive" && (!EvtSetTools::contains(lastEvtHist, tEvt)) &&
                                 !(EvtSetTools::contains(rEvtHist, tEvt)) && (!EvtSetTools::contains(tEvt->getHistory(), sEvt))) {
                             EventSet ancestorsSet;
-                            ancestorsSet.insert(C.lastEvent);
-                            ancestorsSet.insert(sEvt);
-                            ancestorsSet.insert(tEvt);
+                            EvtSetTools::pushBack(ancestorsSet, C.lastEvent);
+                            EvtSetTools::pushBack(ancestorsSet, sEvt);
+                            EvtSetTools::pushBack(ancestorsSet, tEvt);
 
                             if (checkSdRcCreation(trans, ancestorsSet, C)) {
                                 g_var::nb_events++;
                                 UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorsSet);
-                                exC.insert(e);
+                                EvtSetTools::pushBack(exC, e);
                             }
                         }
                     }
@@ -864,25 +863,25 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
     if (trans.id != 0)
         immPreEvtHist = immPreEvt->getHistory();
 
-    ancestorSet.insert(C.lastEvent);
+    EvtSetTools::pushBack(ancestorSet, C.lastEvent);
 
     // if last event is preEvt(trans) always create a new event.
     if (C.lastEvent->transition.actor_id == trans.actor_id) {
         g_var::nb_events++;
         UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorSet);
-        exC.insert(e);
+        EvtSetTools::pushBack(exC, e);
     }
     // else if last event is Ireceive try to create a new event .
     else if (C.lastEvent->transition.type == "Ireceive") {
         if (enableChk) {
             g_var::nb_events++;
             UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorSet);
-            exC.insert(e);
+            EvtSetTools::pushBack(exC, e);
         } else {
-            ancestorSet.insert(immPreEvt);
+            EvtSetTools::pushBack(ancestorSet, immPreEvt);
             g_var::nb_events++;
             UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorSet);
-            exC.insert(e);
+            EvtSetTools::pushBack(exC, e);
         }
     }
 
@@ -901,16 +900,16 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
                     if (!EvtSetTools::contains(immPreEvtHist, it)) {
 
                         EventSet ancestorSet1;
-                        ancestorSet1.insert(C.lastEvent);
-                        ancestorSet1.insert(it);
+                        EvtSetTools::pushBack(ancestorSet1, C.lastEvent);
+                        EvtSetTools::pushBack(ancestorSet1, it);
                         EventSet itHist = it->getHistory();
                         if ((!EvtSetTools::contains(itHist, immPreEvt)) && (!enableChk))
-                            ancestorSet1.insert(immPreEvt);
+                            EvtSetTools::pushBack(ancestorSet1, immPreEvt);
 
                         if (checkSdRcCreation(trans, ancestorSet1, C)) {
                             g_var::nb_events++;
                             UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorSet1);
-                            exC.insert(e);
+                            EvtSetTools::pushBack(exC, e);
                         }
                     }
             }
@@ -919,31 +918,31 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
     if (C.lastEvent->transition.actor_id == trans.actor_id ||
             (C.lastEvent->transition.actor_id != trans.actor_id && C.lastEvent->transition.type == "Test")) {
         EventSet ansestors;
-        ansestors.insert(C.lastEvent);
+        EvtSetTools::pushBack(ansestors, C.lastEvent);
         if (!enableChk)
-            ansestors.insert(immPreEvt);
+            EvtSetTools::pushBack(ansestors, immPreEvt);
         if (checkSdRcCreation(trans, ansestors, C)) {
             g_var::nb_events++;
             UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ansestors);
-            exC.insert(e);
+            EvtSetTools::pushBack(exC, e);
         }
 
         for (auto it : C.events_)
             if (trans.isDependent(it->transition) && trans.actor_id != it->transition.actor_id) {
                 // make sure no ancestor candidate event is in history of other ancestor candidate
                 EventSet ansestors1;
-                ansestors1.insert(C.lastEvent);
+                EvtSetTools::pushBack(ansestors1, C.lastEvent);
 
                 if (!EvtSetTools::contains(lastEvtHist, it) && (!EvtSetTools::contains(immPreEvtHist, it))) {
-                    ansestors1.insert(it);
+                    EvtSetTools::pushBack(ansestors1, it);
                     EventSet itHist = it->getHistory();
                     if ((!enableChk) && (!EvtSetTools::contains(itHist, immPreEvt)))
-                        ansestors1.insert(immPreEvt);
+                        EvtSetTools::pushBack(ansestors1, immPreEvt);
 
                     if (checkSdRcCreation(trans, ansestors1, C)) {
                         g_var::nb_events++;
                         UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ansestors1);
-                        exC.insert(e);
+                        EvtSetTools::pushBack(exC, e);
                     }
                 }
             }
@@ -963,15 +962,15 @@ EventSet createIreceiveEvts(Transition trans, Configuration C)
                         if (testedEvent->transition.type == "Isend" && (!EvtSetTools::contains(lastEvtHist, tEvt)) &&
                                 !(EvtSetTools::contains(rEvtHist, tEvt)) && (!EvtSetTools::contains(tEvt->getHistory(), rEvt))) {
                             EventSet ancestorsSet;
-                            ancestorsSet.insert(C.lastEvent);
-                            ancestorsSet.insert(rEvt);
-                            ancestorsSet.insert(tEvt);
+                            EvtSetTools::pushBack(ancestorsSet, C.lastEvent);
+                            EvtSetTools::pushBack(ancestorsSet, rEvt);
+                            EvtSetTools::pushBack(ancestorsSet, tEvt);
 
                             if (checkSdRcCreation(trans, ancestorsSet, C)) {
                                 g_var::nb_events++;
                                 UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, ancestorsSet);
 
-                                exC.insert(e);
+                                EvtSetTools::pushBack(exC, e);
                             }
                         }
                     }
@@ -1009,7 +1008,7 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
     }
 
     // add causality evts to causalityEvts set, firstly add last event to causalityEvts
-    causalityEvts.insert(C.lastEvent);
+    EvtSetTools::pushBack(causalityEvts, C.lastEvent);
 
     /* add the immediate precede evt of transition trans to the causalityEvts
    *  used to make sure trans is enabled (Ti is enlabled if Ti-1 is aready fined)
@@ -1028,7 +1027,7 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
 
         for (auto evt : C.maxEvent)
             if (trans.actor_id == evt->transition.actor_id) {
-                causalityEvts.insert(evt);
+                EvtSetTools::pushBack(causalityEvts, evt);
                 chk = true;
                 break;
             }
@@ -1049,12 +1048,12 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
         if ((trans.isDependent(evt->transition) ||
              (evt->transition.type == "Test" && evt->transition.mailbox_id == trans.mailbox_id)) &&
                 (!EvtSetTools::contains(causalityEvts, evt)))
-            ancestorSet.insert(evt);
+            EvtSetTools::pushBack(ancestorSet, evt);
 
     if (checkSdRcCreation(trans, causalityEvts, C) && chk) {
         g_var::nb_events++;
         UnfoldingEvent* e = new UnfoldingEvent(g_var::nb_events, trans, causalityEvts);
-        exC.insert(e);
+        EvtSetTools::pushBack(exC, e);
     }
 
     EventSet cause;
@@ -1091,7 +1090,7 @@ EventSet createSendReceiveEvts(Transition trans, Configuration C, std::list<Even
                         (evt->transition.isDependent(trans) ||
                          (evt->transition.type == "Test" && trans.mailbox_id == evt->transition.mailbox_id)))
 
-                    evtSet1.insert(evt);
+                    EvtSetTools::pushBack(evtSet1, evt);
 
             EventSet exC1, cause;
             s_evset_in_t evsets { causalityEvts, cause, evtSet1 };
@@ -1115,15 +1114,15 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
             g_var::nb_events++;
             UnfoldingEvent* newEvent = new UnfoldingEvent(g_var::nb_events, p.trans[0], causes);
             if (!EvtSetTools::contains(g_var::U, newEvent)) {
-                g_var::U.insert(newEvent);
-                enC.insert(newEvent);
-                exC.insert(newEvent);
+                EvtSetTools::pushBack(g_var::U, newEvent);
+                EvtSetTools::pushBack(enC, newEvent);
+                EvtSetTools::pushBack(exC, newEvent);
 
             } else {
                 auto evt1 = EvtSetTools::find(g_var::U, newEvent);
-                EvtSetTools::insert(enC, evt1);
+                EvtSetTools::pushBack(enC, evt1);
                 auto evt2 = EvtSetTools::find(g_var::U, newEvent);
-                EvtSetTools::insert(exC, evt2);
+                EvtSetTools::pushBack(exC, evt2);
             }
         }
 
@@ -1151,11 +1150,11 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
 
                 for (auto newEvent : exC1)
                     if (!EvtSetTools::contains(g_var::U, newEvent)) {
-                        g_var::U.insert(newEvent);
-                        exC.insert(newEvent);
+                        EvtSetTools::pushBack(g_var::U, newEvent);
+                        EvtSetTools::pushBack(exC, newEvent);
                     } else {
                         auto evt = EvtSetTools::find(g_var::U, newEvent);
-                        exC.insert(evt);
+                        EvtSetTools::pushBack(exC, evt);
                     }
             }
 
@@ -1167,11 +1166,11 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                 EventSet exC1 = createIsendEvts(trans, C);
                 for (auto newEvent : exC1)
                     if (!EvtSetTools::contains(g_var::U, newEvent)) {
-                        g_var::U.insert(newEvent);
-                        exC.insert(newEvent);
+                        EvtSetTools::pushBack(g_var::U, newEvent);
+                        EvtSetTools::pushBack(exC, newEvent);
                     } else {
                         auto evt = EvtSetTools::find(g_var::U, newEvent);
-                        exC.insert(evt);
+                        EvtSetTools::pushBack(exC, evt);
                     }
             }
 
@@ -1181,11 +1180,11 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                 EventSet exC1 = createIreceiveEvts(trans, C);
                 for (auto newEvent : exC1)
                     if (!EvtSetTools::contains(g_var::U, newEvent)) {
-                        g_var::U.insert(newEvent);
-                        exC.insert(newEvent);
+                        EvtSetTools::pushBack(g_var::U, newEvent);
+                        EvtSetTools::pushBack(exC, newEvent);
                     } else {
                         auto evt = EvtSetTools::find(g_var::U, newEvent);
-                        exC.insert(evt);
+                        EvtSetTools::pushBack(exC, evt);
                     }
 
             }
@@ -1214,11 +1213,11 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
 
                     for (auto newEvent : newEvts)
                         if (!EvtSetTools::contains(g_var::U, newEvent)) {
-                            g_var::U.insert(newEvent);
-                            exC.insert(newEvent);
+                            EvtSetTools::pushBack(g_var::U, newEvent);
+                            EvtSetTools::pushBack(exC, newEvent);
                         } else {
                             auto evt = EvtSetTools::find(g_var::U, newEvent);
-                            exC.insert(evt);
+                            EvtSetTools::pushBack(exC, evt);
                         }
                 }
             }
@@ -1251,11 +1250,11 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                     for (auto newEvent : newEvts)
                         if (!EvtSetTools::contains(g_var::U, newEvent)) {
 
-                            g_var::U.insert(newEvent);
-                            exC.insert(newEvent);
+                            EvtSetTools::pushBack(g_var::U, newEvent);
+                            EvtSetTools::pushBack(exC, newEvent);
                         } else {
                             auto evt = EvtSetTools::find(g_var::U, newEvent);
-                            exC.insert(evt);
+                            EvtSetTools::pushBack(exC, evt);
                         }
 
                 }
@@ -1264,16 +1263,16 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
 
             else if (trans.type == "localComp" && C.lastEvent->transition.actor_id == trans.actor_id) {
                 EventSet ancestors;
-                ancestors.insert(C.lastEvent);
+                EvtSetTools::pushBack(ancestors, C.lastEvent);
                 g_var::nb_events++;
                 UnfoldingEvent* newEvent = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
                 if (!EvtSetTools::contains(g_var::U, newEvent)) {
-                    g_var::U.insert(newEvent);
-                    exC.insert(newEvent);
+                    EvtSetTools::pushBack(g_var::U, newEvent);
+                    EvtSetTools::pushBack(exC, newEvent);
 
                 } else {
                     auto evt = EvtSetTools::find(g_var::U, newEvent);
-                    exC.insert(evt);
+                    EvtSetTools::pushBack(exC, evt);
                 }
             }
         }
@@ -1288,7 +1287,7 @@ void UnfoldingChecker::extend(std::set<Actor> actors, Configuration C, std::list
                     chk = false;
 
             if (chk)
-                enC.insert(evt);
+                EvtSetTools::pushBack(enC, evt);
         }
     }
 }
@@ -1317,14 +1316,14 @@ void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistor
     UnfoldingEvent* e = nullptr;
     EventSet enC, exC = prev_exC; // exC.erase(currentEvt);
 
-    exC.erase(currentEvt);
+    EvtSetTools::remove(exC, currentEvt);
 
     // exC = previous exC - currentEvt + new events
 
     extend(actors, C, maxEvtHistory, exC, enC);
 
     for (auto it : C.events_)
-        exC.erase(it);
+        EvtSetTools::remove(exC, it);
 
     // return when enC \subset of D
 
@@ -1400,7 +1399,7 @@ void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistor
 
     // UnfoldingEvent* newEvent = e + e.transition;
     Configuration C1 = C;
-    EvtSetTools::insert(C1.events_, e);
+    EvtSetTools::pushBack(C1.events_, e);
 
     C1.updateMaxEvent(e);
 
@@ -1417,9 +1416,9 @@ void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistor
     EventSet Uc = g_var::U;
 
     EventSet D1 = D;
-    D1.insert(e);
+    EvtSetTools::pushBack(D1, e);
     EventSet D2 = D;
-    D2.insert(e);
+    EvtSetTools::pushBack(D2, e);
 
     EventSet J1;
 
@@ -1447,7 +1446,7 @@ void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D)
             // add e1 which is immediate conflict with one event in C u D to res
 
             if (e1->isImmediateConflict1(e1, e2)) {
-                res.insert(e1);
+                EvtSetTools::pushBack(res, e1);
                 break;
             }
     }
@@ -1462,7 +1461,7 @@ void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D)
     // move e from U to G if the condition is satisfied
 
     if (!EvtSetTools::contains(res, e)) {
-        g_var::U.erase(e);
+        EvtSetTools::remove(g_var::U, e);
 
         // G.insert(e);
     }
@@ -1475,11 +1474,11 @@ void UnfoldingChecker::remove(UnfoldingEvent* e, Configuration C, EventSet D)
         if (evt->isImmediateConflict1(evt, e)) {
 
             EventSet h = evt->getHistory();
-            h.insert(evt);
+            EvtSetTools::pushBack(h, evt);
 
             for (auto e2 : h)
                 if (!EvtSetTools::contains(res, e2)) {
-                    g_var::U.erase(e2);
+                    EvtSetTools::remove(g_var::U, e2);
                     //	G.insert(e2);
                 }
         }
