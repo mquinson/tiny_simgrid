@@ -178,16 +178,20 @@ int main(int argc, char** argv)
 
     case 13: { // the first simix model -> 2 traces
                // Transition (maiboxid, commid, type)
-      test_reduction({Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}),
-                      Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}),
-                      Actor(2, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait")})},
-                     {Mailbox(1)}, {5, 5}, 13);
+//      test_reduction({Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}),
+//                      Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}),
+//                      Actor(2, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait")})},
+//                     {Mailbox(1)}, {5, 5}, 13);
 
-      std::cout << "\n explore full state space :\n";
+      actor_set.insert(Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
+      actor_set.insert(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
+      actor_set.insert(Actor(2, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait")}));
 
-      State initState1(3, actor_set, {Mailbox(1)});
-      stateStack.push_back(initState1);
-      // exhautiveExplore(stateStack, transList);
+      initState = new State(3, actor_set, {Mailbox(1)});
+
+      UnfoldingEvent* e = new UnfoldingEvent(initState);
+
+      UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
 
     } break;
 
