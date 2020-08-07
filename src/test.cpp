@@ -84,9 +84,17 @@ int main(int argc, char** argv)
     case 5: { // the fifth example - 4 traces
 
       // Transition(read_write, access_variable)
-      test_reduction({Actor(0, {Transition(1, 0), Transition(1, 1)}), Actor(1, {Transition(1, 0), Transition(1, 1)})},
-                     {/* no mailbox */}, {4, 4, 4, 4}, 16);
+//      test_reduction({Actor(0, {Transition(1, 0), Transition(1, 1)}), Actor(1, {Transition(1, 0), Transition(1, 1)})},
+//                     {/* no mailbox */}, {4, 4, 4, 4}, 16);
 
+      actor_set.push_back(Actor(0, {Transition(1, 0), Transition(1, 1)}));
+      actor_set.push_back(Actor(1, {Transition(1, 0), Transition(1, 1)}));
+
+      initState = new State(2, actor_set, {});
+
+      UnfoldingEvent* e = new UnfoldingEvent(initState);
+
+      UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
     } break;
 
     case 6: { // 6th example - 3 traces
