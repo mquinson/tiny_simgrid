@@ -204,6 +204,36 @@ namespace uc
         }
     }
 
+    bool UnfoldingEvent::check_tr_concern_same_comm(bool &chk1, bool &chk2, UnfoldingEvent *evt1, UnfoldingEvent *evt2) const
+    {
+        auto return_val = true;
+        if (!evt1->transition.isDependent(evt2->transition))
+        {
+            chk1 = true;
+            chk2 = true;
+            if (evt1->transition.type == "Test" && (evt2->transition.type == "Isend" || evt2->transition.type == "Ireceive"))
+            {
+                if (!evt1->concernSameComm(evt1, evt2))
+                    return_val = false;
+                else
+                {
+                    chk2 = false;
+                }
+            }
+
+            if (evt2->transition.type == "Test" && (evt1->transition.type == "Isend" || evt1->transition.type == "Ireceive"))
+            {
+                if (!evt1->concernSameComm(evt1, evt2))
+                    return_val = false;
+                else
+                {
+                    chk2 = false;
+                }
+            }
+        }
+        return return_val;
+    }
+
     /** @brief Checks if current event is in immediate conflict with the provided one
  *
  * For that, there is two conditions to meet:
@@ -220,42 +250,21 @@ namespace uc
         if (*evt1 == *evt2)
             return false;
 
-        bool chk1 = false, chk2 = false;
+        auto chk1 = false;
+        auto chk2 = false;
+        auto ret = check_tr_concern_same_comm(chk1, chk2, evt1, evt2);
+        if(!ret)
+            return false;
 
-        if (!evt1->transition.isDependent(evt2->transition))
-        {
-
-            chk1 = true;
-            chk2 = true;
-            if (evt1->transition.type == "Test" && (evt2->transition.type == "Isend" || evt2->transition.type == "Ireceive"))
-            {
-                if (!evt1->concernSameComm(evt1, evt2))
-                    return false;
-                else
-                {
-                    chk2 = false;
-                }
-            }
-
-            if (evt2->transition.type == "Test" && (evt1->transition.type == "Isend" || evt1->transition.type == "Ireceive"))
-            {
-                if (!evt1->concernSameComm(evt1, evt2))
-                    return false;
-                else
-                {
-                    chk2 = false;
-                }
-            }
-        }
         // 2 transitions are not depend and they are one is test other one is send/receive  -> return false
-
         if (chk1 && chk2)
             return false;
 
         // Now, check the second condition
         EventSet hist1 = evt1->getHistory();
         EventSet hist2 = evt2->getHistory();
-        EventSet hist11 = hist1, hist21 = hist2;
+        EventSet hist11 = hist1; 
+        EventSet hist21 = hist2;
 
         // if causality ralated - > no immidiate conflict
         if (EvtSetTools::contains(hist1, evt2) || EvtSetTools::contains(hist2, evt1))
