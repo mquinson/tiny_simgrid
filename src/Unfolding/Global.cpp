@@ -4,7 +4,7 @@ namespace uc
 {
 
     //UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, const Transition &t, const EventSet &causes)
-    UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, app::Transition const &t, EventSet const &causes) : id(nb_events), causes(causes), transition(t)
+    UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, app::Transition const &t, EventSet const &causes) : id(nb_events), transition(t), causes(causes)
     {
     }
 
@@ -66,7 +66,8 @@ namespace uc
         if (testedEvt->transition.type == "Ireceive")
         {
             EventSet testedEvtH = testedEvt->getHistory();
-            int nbSend = 0, nbReceive = 0;
+            int nbSend = 0;
+            int nbReceive = 0;
 
             // count the number of Receive event before testedEvt
             for (auto it : testedEvtH)
@@ -115,9 +116,9 @@ namespace uc
     * */
     bool UnfoldingEvent::concernSameComm(UnfoldingEvent *event, UnfoldingEvent *otherEvent) const
     {
-        UnfoldingEvent *testEvt = nullptr;
-        UnfoldingEvent *SdRcEvt = nullptr;
-        UnfoldingEvent *testedEvt = nullptr;
+        const UnfoldingEvent *testEvt = nullptr;
+        const UnfoldingEvent *SdRcEvt = nullptr;
+        const UnfoldingEvent *testedEvt = nullptr;
 
         if (event->transition.mailbox_id != otherEvent->transition.mailbox_id)
             return false;
@@ -167,14 +168,13 @@ namespace uc
  * In the paper, this.isConflict(other) is written "this # other"
  */
 
-    bool UnfoldingEvent::isConflict(UnfoldingEvent *event, UnfoldingEvent *otherEvent)
+    bool UnfoldingEvent::isConflict(UnfoldingEvent *event, UnfoldingEvent *otherEvent) const
     {
         if (*event == *otherEvent)
             return false;
 
-        EventSet h1, h2;
-        h1 = event->getHistory();
-        h2 = otherEvent->getHistory();
+        EventSet h1 = event->getHistory();
+        EventSet h2 = otherEvent->getHistory();
 
         // checking causality relation, if they are in a causality relation return false
         if (EvtSetTools::contains(h1, otherEvent) || EvtSetTools::contains(h2, event))

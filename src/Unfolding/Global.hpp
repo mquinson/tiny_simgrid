@@ -77,7 +77,7 @@ namespace uc
 
         EventSet getHistory() const;
 
-        bool isConflict(UnfoldingEvent *event, UnfoldingEvent *otherEvent);
+        bool isConflict(UnfoldingEvent *event, UnfoldingEvent *otherEvent) const;
         bool concernSameComm(UnfoldingEvent *event, UnfoldingEvent *otherEvent) const;
 
         // check otherEvent is in my history ?
