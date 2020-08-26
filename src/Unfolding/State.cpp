@@ -1,5 +1,6 @@
 #include "State.h"
 #include <iostream>
+#include <algorithm>
 
 using namespace app;
 
@@ -47,7 +48,8 @@ State State::execute(Transition t)
         }
     }
 
-//    std::set<Actor> test_ac = actors1;
+//    std::deque<Actor> test_ac = actors;
+//    std::deque<Mailbox> test_mb = mail_box;
 
     return State(this->nb_actors_, actors, mail_box);
 }
@@ -73,6 +75,12 @@ std::deque<Transition> State::getEnabledTransition()
 
                 break;
             }
+
+    auto func = [](Transition const& t0, Transition const& t1) 
+    {
+        return ((t0.id < t1.id) || (t0.actor_id < t1.actor_id));        
+    };
+    std::sort(trans_set.begin(), trans_set.end(), func);
 
     return trans_set;
 }
