@@ -14,3 +14,8 @@ tiny_simgrid
 tiny_simgrid.cbp
 CMakeLists.txt.user
 .clang-format
+tsg.code-workspace
+.vscode/launch.json
+.vscode/settings.json
+build/compile_commands.json
+build/Testing/Temporary/LastTest.log

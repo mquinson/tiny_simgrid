@@ -1601,8 +1601,8 @@ communication, making wait become enabled. When the wait enable, we can create n
 
         e->appState = nextState;
 
-        if (e->id == 6)
-            print_debug(e, enC);
+        // if (e->id == 6)
+        //     print_debug(e, enC);
 
         //    app_side_->checkpoint(e->id, nextState.nb_actors_, nextState.actors_, nextState.mailboxes_);
 
