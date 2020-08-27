@@ -139,6 +139,46 @@ namespace uc
         }
     }
 
+    bool remove_conflict_with_c(std::list<EventSet> const &kSet, std::list<EventSet> &kSet1, EventSet const &D, Configuration const& C)
+    {
+        for (auto it : kSet)
+        {
+            EventSet evtS = it;
+            for (auto evt : it)
+            {
+                EventSet subC;
+                EventSet sub_history;
+                EventSet history = evt->getHistory();
+                EvtSetTools::pushBack(history, evt);
+                bool chk = false;
+
+                if (!EvtSetTools::isEmptyIntersection(history, D))
+                    chk = true;
+                else
+                {
+                    for (auto it1 : C.events_)
+                    {
+                        if (it1->isConflict(it1, evt))
+                        {
+                            chk = true;
+                            break;
+                        }
+                    }
+                }
+                if (chk)
+                    EvtSetTools::remove(evtS, evt);
+            }
+
+            if (evtS.empty())
+            {
+                return false;
+            }
+
+            kSet1.push_back(evtS);
+        }
+        return true;
+    }
+
     EventSet UnfoldingChecker::KpartialAlt(EventSet D, Configuration C) const
     {
         EventSet J;
@@ -159,84 +199,33 @@ namespace uc
             kSet.push_back(evtSet);
         }
 
-        std::list<EventSet> kSet1;
-
         if (kSet.size() < D.size())
-        {
             return emptySet;
-        }
 
-        else
-        {
+        std::list<EventSet> kSet1;
+        auto ret = remove_conflict_with_c(kSet, kSet1, D, C);
+        if (!ret)
+            return emptySet;
 
-            // for each spike, remove all evt whose [evt] is conflict with C
-            for (auto it : kSet)
-            {
-                EventSet evtS = it;
+        // building J by chosing one event in each spike such that there are not 2 conflict events in J
+        auto n = 0;
+        std::list<UnfoldingEvent *> EvtList;
 
-                for (auto evt : it)
-                {
-
-                    EventSet subC;
-                    EventSet sub_history;
-                    EventSet history = evt->getHistory();
-                    EvtSetTools::pushBack(history, evt);
-                    bool chk = false;
-
-                    if (!EvtSetTools::isEmptyIntersection(history, D))
-                    {
-                        //                if (!history.isEmptyIntersection(history, D)) {
-
-                        chk = true;
-                    }
-                    else
-                        for (auto it1 : C.events_)
-                            if (it1->isConflict(it1, evt))
-                            {
-                                chk = true;
-                                break;
-                            }
-
-                    if (chk)
-                    {
-                        EvtSetTools::remove(evtS, evt);
-                    }
-                }
-
-                if (evtS.empty())
-                {
-                    return emptySet;
-                }
-
-                kSet1.push_back(evtS);
-            }
-
-            // building J by chosing one event in each spike such that there are not 2 conflict events in J
-            unsigned int n = 0;
-            std::list<UnfoldingEvent *> EvtList;
-
-            ksubset(D.size(), EvtList, kSet1, n, J1);
-        }
+        ksubset(D.size(), EvtList, kSet1, n, J1);
 
         // J1.size() can be < D.size() since one event in J1 can be conflict with some events in D
 
         if (J1.size() == 0)
         {
-
             std::cout << "there is no optimal solution (no alternative) J1 size = " << J1.size() << " \n";
             return emptySet;
         }
 
-        else
-
+        for (auto evt : J1)
         {
-
-            for (auto evt : J1)
-            {
-                EventSet history = evt->getHistory();
-                J = EvtSetTools::makeUnion(J, history);
-                EvtSetTools::pushBack(J, evt);
-            }
+            EventSet history = evt->getHistory();
+            J = EvtSetTools::makeUnion(J, history);
+            EvtSetTools::pushBack(J, evt);
         }
 
         return J;
