@@ -1,5 +1,6 @@
 #include "UnfoldingChecker.h"
 #include <math.h>
+#include <tuple>
 
 namespace uc
 {
@@ -69,13 +70,45 @@ namespace uc
         std::cout << "\n\n";
     }
 
+    // std::tuple<check_is_true, return_from_func, normal_end>
+    std::tuple<bool, bool, bool> func(UnfoldingEvent *it, std::list<UnfoldingEvent*>& EvtList1, EventSet &J, unsigned int n, unsigned long sizeD, int inter)
+    {
+        bool check = false;
+        for (auto evt : EvtList1)
+        {
+            if (it->isConflict(it, evt))
+            {
+                check = true;
+                break;
+            }
+        }
+        if (check)
+            return std::make_tuple(true, false, false);
+
+        // if inter > 0 intS already has a presentative, pop the old one and add the new one
+
+        if (inter > 0)
+            EvtList1.pop_back();
+        EvtList1.push_back(it);
+
+        if (n == sizeD-1)
+        {
+            if (EvtList1.size() == sizeD)
+            {
+                for (auto evt : EvtList1)
+                    EvtSetTools::pushBack(J, evt);
+                return std::make_tuple(false, true, false);;
+            }
+        }
+        return std::make_tuple(false, false, true);;
+    }
+
     /* this function select one event in every EventSet in a list to form a set,
- *  if they are not conflict with each other -> return the set J
- */
+    *  if they are not conflict with each other -> return the set J
+    */
     void ksubset(unsigned long sizeD, std::list<UnfoldingEvent *> EvtList, std::list<EventSet> list, unsigned int n,
                  EventSet &J)
     {
-
         if (J.size() > 0)
             return;
 
@@ -84,42 +117,21 @@ namespace uc
 
         if (list.size() > 0)
         {
-
             EventSet intS = list.back();
 
             std::list<EventSet> list1 = list;
             list1.pop_back();
 
-            int inter = 0;
-            for (auto it : intS)
+            auto inter = 0;
+            for (auto it:intS)
             {
-
-                bool check = false;
-                for (auto evt : EvtList1)
-                    if (it->isConflict(it, evt))
-                    {
-                        check = true;
-                        break;
-                    }
-                if (check)
+                auto tuple = func(it, EvtList1, J, n, sizeD, inter);
+                auto check = std::get<0>(tuple);
+                if(check)
                     continue;
-
-                // if inter > 0 intS already has a presentative, pop the old one and add the new one
-
-                if (inter > 0)
-                    EvtList1.pop_back();
-                EvtList1.push_back(it);
-
-                if (n == sizeD - 1)
-                {
-                    if (EvtList1.size() == sizeD)
-                    {
-                        for (auto evt : EvtList1)
-                            EvtSetTools::pushBack(J, evt);
-                        return;
-                    }
-                }
-
+                auto exit = std::get<1>(tuple);
+                if(exit)
+                    return;
                 if (J.size() == 0)
                     ksubset(sizeD, EvtList1, list1, n + 1, J);
                 inter++;
