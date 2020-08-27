@@ -27,7 +27,6 @@ namespace uc
         static void remove(EventSet &events, UnfoldingEvent *e);
         static EventSet minus(EventSet events, UnfoldingEvent *e);
         static EventSet plus(EventSet events, UnfoldingEvent *e);
-        static bool check_events(const UnfoldingEvent *e1, const UnfoldingEvent *e2);
     };
 
     typedef struct s_evset_in

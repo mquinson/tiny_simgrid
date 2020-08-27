@@ -395,7 +395,7 @@ namespace uc
             EvtSetTools::remove(events, evt);
     }
 
-    bool EvtSetTools::check_events(const UnfoldingEvent *e1, const UnfoldingEvent *e2)
+    bool check_events(const UnfoldingEvent *e1, const UnfoldingEvent *e2)
     {
         if (e1->transition.isDependent(e2->transition))
             return true;        
@@ -422,7 +422,7 @@ namespace uc
         {
             for (auto e2 : otherSet)
             {
-                if(EvtSetTools::check_events(e1, e2))
+                if(check_events(e1, e2))
                     return true;
             }
         }

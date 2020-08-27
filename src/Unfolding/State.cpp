@@ -54,31 +54,36 @@ State State::execute(Transition t)
     return State(this->nb_actors_, actors, mail_box);
 }
 
+void update_transition_set(Actor const &p, std::deque<app::Mailbox> const& mbs, std::deque<Transition> &trans_set)
+{
+    for (auto j=0; j < p.nb_trans; j++)
+    {
+        if (!p.trans[j].executed)
+        {
+            bool chk = true;
+            if (p.trans[j].type == "Wait")
+            {
+                for (auto mb : mbs)
+                {
+                    if (p.trans[j].mailbox_id == mb.id && (!mb.checkComm(p.trans[j])))
+                        chk = false;
+                }
+            }
+            if (chk)
+                trans_set.push_back(p.trans[j]);
+            break;
+        }
+    }
+}
+
 std::deque<Transition> State::getEnabledTransition()
 {
-
     std::deque<Transition> trans_set;
-
     for (auto p : this->actors_)
-        for (unsigned long j = 0; j < p.nb_trans; j++)
-            if (!p.trans[j].executed) {
-                bool chk = true;
-                if (p.trans[j].type == "Wait") {
+        update_transition_set(p, this->mailboxes_, trans_set);
 
-                    for (auto mb : this->mailboxes_)
-                        if (p.trans[j].mailbox_id == mb.id && (!mb.checkComm(p.trans[j])))
-                            chk = false;
-                }
-
-                if (chk)
-                    trans_set.push_back(p.trans[j]);
-
-                break;
-            }
-
-    auto func = [](Transition const& t0, Transition const& t1) 
-    {
-        return ((t0.id < t1.id) || (t0.actor_id < t1.actor_id));        
+    auto func = [](Transition const &t0, Transition const &t1) {
+        return ((t0.id < t1.id) || (t0.actor_id < t1.actor_id));
     };
     std::sort(trans_set.begin(), trans_set.end(), func);
 
