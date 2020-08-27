@@ -54,21 +54,27 @@ State State::execute(Transition t)
     return State(this->nb_actors_, actors, mail_box);
 }
 
-void update_transition_set(Actor const &p, std::deque<app::Mailbox> const& mbs, std::deque<Transition> &trans_set)
+bool check_transition_type(Transition const& tr, std::deque<app::Mailbox> const &mbs)
+{
+    bool chk = true;
+    if (tr.type == "Wait")
+    {
+        for (auto mb : mbs)
+        {
+            if (tr.mailbox_id == mb.id && (!mb.checkComm(tr)))
+                chk = false;
+        }
+    }
+    return chk;
+}
+
+void update_transition_set(Actor const &p, std::deque<app::Mailbox> const &mbs, std::deque<Transition> &trans_set)
 {
     for (auto j=0; j < p.nb_trans; j++)
     {
         if (!p.trans[j].executed)
         {
-            bool chk = true;
-            if (p.trans[j].type == "Wait")
-            {
-                for (auto mb : mbs)
-                {
-                    if (p.trans[j].mailbox_id == mb.id && (!mb.checkComm(p.trans[j])))
-                        chk = false;
-                }
-            }
+            auto chk = check_transition_type(p.trans[j], mbs);
             if (chk)
                 trans_set.push_back(p.trans[j]);
             break;
