@@ -395,9 +395,24 @@ namespace uc
             EvtSetTools::remove(events, evt);
     }
 
+    bool EvtSetTools::check_events(const UnfoldingEvent *e1, const UnfoldingEvent *e2)
+    {
+        if (e1->transition.isDependent(e2->transition))
+            return true;        
+        auto c0 = (e1->transition.type == "Test") && (e2->transition.type == "Isend" || e2->transition.type == "Ireceive");
+        auto c1 = (e2->transition.type == "Test") && (e1->transition.type == "Isend" || e1->transition.type == "Ireceive");
+        if (c0 || c1)
+        {
+            auto c2 = e1->concernSameComm(e1, e2);
+            if (c2)
+                return true;
+        }
+        return false;
+    }
+
     /** @brief Check if I'm dependent with another EventSet
- * Here we suppose that 2 given event sets do not have common events
-*/
+    * Here we suppose that 2 given event sets do not have common events
+    */
     bool EvtSetTools::depends(EventSet const& events, EventSet const& otherSet)
     {
         if (events.empty() || otherSet.empty())
@@ -407,16 +422,8 @@ namespace uc
         {
             for (auto e2 : otherSet)
             {
-                if (e1->transition.isDependent(e2->transition))
+                if(EvtSetTools::check_events(e1, e2))
                     return true;
-                auto c0 = (e1->transition.type == "Test") && (e2->transition.type == "Isend" || e2->transition.type == "Ireceive");
-                auto c1 = (e2->transition.type == "Test") && (e1->transition.type == "Isend" || e1->transition.type == "Ireceive");
-                if (c0 || c1)
-                {
-                    auto c2 = e1->concernSameComm(e1, e2);
-                    if (c2)
-                        return true;
-                }
             }
         }
 
