@@ -17,10 +17,10 @@ namespace uc
     class EvtSetTools
     {
     public:
-        static bool contains(EventSet events, UnfoldingEvent *e);
-        static UnfoldingEvent *find(EventSet events, UnfoldingEvent *e);
-        static void subtract(EventSet &events, EventSet otherSet);
-        static bool depends(EventSet events, EventSet otherSet);
+        static bool contains(const EventSet events, const UnfoldingEvent *e);
+        static UnfoldingEvent *find(const EventSet events, const UnfoldingEvent *e);
+        static void subtract(EventSet &events, EventSet const& otherSet);
+        static bool depends(EventSet const& events, EventSet const& otherSet);
         static bool isEmptyIntersection(EventSet evtS1, EventSet evtS2);
         static EventSet makeUnion(EventSet s1, EventSet s2);
         static void pushBack(EventSet &events, UnfoldingEvent *e);
@@ -44,13 +44,13 @@ namespace uc
         EventSet actorMaxEvent;    // maximal events of the actors in current configuration
         UnfoldingEvent *lastEvent; // The last added event
 
-        Configuration plus_config(UnfoldingEvent *);
+        Configuration plus_config(UnfoldingEvent *) const;
         void createEvts(Configuration C, EventSet &result, const app::Transition &t,
                         s_evset_in_t ev_sets, bool chk, UnfoldingEvent *immPreEvt);
         void updateMaxEvent(UnfoldingEvent *);        // update maximal events of the configuration and actors
         UnfoldingEvent *findActorMaxEvt(int actorId); // find maximal event of a Actor whose id = actorId
 
-        UnfoldingEvent *findTestedComm(UnfoldingEvent *testEvt); // find comm tested by action testTrans
+        UnfoldingEvent *findTestedComm(const UnfoldingEvent *testEvt); // find comm tested by action testTrans
 
         Configuration() = default;
         Configuration(const Configuration &) = default;
@@ -78,14 +78,14 @@ namespace uc
         EventSet getHistory() const;
 
         bool isConflict(UnfoldingEvent *event, UnfoldingEvent *otherEvent) const;
-        bool concernSameComm(UnfoldingEvent *event, UnfoldingEvent *otherEvent) const;
+        bool concernSameComm(const UnfoldingEvent *event, const UnfoldingEvent *otherEvent) const;
 
         // check otherEvent is in my history ?
         bool inHistory(UnfoldingEvent *otherEvent) const;
 
-        bool isImmediateConflict1(UnfoldingEvent *evt, UnfoldingEvent *otherEvt);
+        bool isImmediateConflict1(UnfoldingEvent *evt, UnfoldingEvent *otherEvt) const;
 
-        bool conflictWithConfig(UnfoldingEvent *event, Configuration config);
+        bool conflictWithConfig(UnfoldingEvent *event, Configuration const& config) const;
         //    bool operator<(const UnfoldingEvent& other);
         bool operator==(const UnfoldingEvent &other) const;
         void print() const;

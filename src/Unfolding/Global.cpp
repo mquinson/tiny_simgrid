@@ -93,7 +93,8 @@ namespace uc
         if (testedEvt->transition.type == "Isend")
         {
             EventSet testedEvtH = testedEvt->getHistory();
-            int nbSend = 0, nbReceive = 0;
+            int nbSend = 0;
+            int nbReceive = 0;
 
             // count the number of Isend event before testedEvt
             for (auto it : testedEvtH)
@@ -114,7 +115,7 @@ namespace uc
     /*Check whether 2 events a Test and a Send/Receive concern the same communication,
     * Here the events are supposed that they are not causality related
     * */
-    bool UnfoldingEvent::concernSameComm(UnfoldingEvent *event, UnfoldingEvent *otherEvent) const
+    bool UnfoldingEvent::concernSameComm(const UnfoldingEvent *event, const UnfoldingEvent *otherEvent) const
     {
         const UnfoldingEvent *testEvt = nullptr;
         const UnfoldingEvent *SdRcEvt = nullptr;
@@ -243,7 +244,7 @@ namespace uc
  *
  * In the paper, e1.isImmediate(e2) will be written "e1 #ⁱ e2"
  */
-    bool UnfoldingEvent::isImmediateConflict1(UnfoldingEvent *evt1, UnfoldingEvent *evt2)
+    bool UnfoldingEvent::isImmediateConflict1(UnfoldingEvent *evt1, UnfoldingEvent *evt2) const
     {
 
         // event e should not conflict with itself
@@ -277,7 +278,8 @@ namespace uc
                 EvtSetTools::remove(hist21, e1);
             }
 
-        EventSet evtS1, evtS2;
+        EventSet evtS1; 
+        EventSet evtS2;
 
         EvtSetTools::pushBack(evtS1, evt1);
         EvtSetTools::pushBack(evtS2, evt2);
@@ -287,14 +289,12 @@ namespace uc
             return false;
         }
 
-        // std::cout <<"se tra ve true nhe ### \n";
-
         return true;
     }
 
     // checking conflict relation between one event and one configuration or one history, it used when computing enC
     // there is a better way by checking the event with maximal events in the configuration, (change type of enC )
-    bool UnfoldingEvent::conflictWithConfig(UnfoldingEvent *event, Configuration config)
+    bool UnfoldingEvent::conflictWithConfig(UnfoldingEvent *event, Configuration const& config) const 
     {
         if (config.events_.size() == 0)
             return false;
@@ -336,7 +336,7 @@ namespace uc
         // update the maximal events for current Conf removing causes from maxEvent and adding e to the maxEvent
         for (auto evt : e->causes)
         {
-            EvtSetTools::remove(maxEvent, evt); // setMaxEvents.erase(evt->id);
+            EvtSetTools::remove(maxEvent, evt);
         }
         EvtSetTools::pushBack(maxEvent, e);
         /* update the maximal events for the actor=>
@@ -352,7 +352,7 @@ namespace uc
         EvtSetTools::pushBack(actorMaxEvent, e);
     }
 
-    Configuration Configuration::plus_config(UnfoldingEvent *evt)
+    Configuration Configuration::plus_config(UnfoldingEvent *evt) const
     {
         Configuration res;
         res.events_ = this->events_;
@@ -362,7 +362,7 @@ namespace uc
         return res;
     }
 
-    UnfoldingEvent *Configuration ::findTestedComm(UnfoldingEvent *testEvt)
+    UnfoldingEvent *Configuration ::findTestedComm(const UnfoldingEvent *testEvt)
     {
         for (auto it : this->events_)
             if (it->transition.commId == testEvt->transition.commId && it->transition.type != "Test" &&
@@ -371,7 +371,7 @@ namespace uc
         return nullptr;
     }
 
-    bool EvtSetTools::contains(EventSet events, UnfoldingEvent *e)
+    bool EvtSetTools::contains(const EventSet events, const UnfoldingEvent *e)
     {
         for (auto evt : events)
             if (*evt == *e)
@@ -379,7 +379,7 @@ namespace uc
         return false;
     }
 
-    UnfoldingEvent *EvtSetTools::find(EventSet events, UnfoldingEvent *e)
+    UnfoldingEvent *EvtSetTools::find(const EventSet events, const UnfoldingEvent *e)
     {
         for (auto evt : events)
             if (*evt == *e)
@@ -389,7 +389,7 @@ namespace uc
         return nullptr;
     }
 
-    void EvtSetTools::subtract(EventSet &events, EventSet otherSet)
+    void EvtSetTools::subtract(EventSet &events, EventSet const& otherSet)
     {
         for (auto evt : otherSet)
             EvtSetTools::remove(events, evt);
@@ -398,7 +398,7 @@ namespace uc
     /** @brief Check if I'm dependent with another EventSet
  * Here we suppose that 2 given event sets do not have common events
 */
-    bool EvtSetTools::depends(EventSet events, EventSet otherSet)
+    bool EvtSetTools::depends(EventSet const& events, EventSet const& otherSet)
     {
         if (events.empty() || otherSet.empty())
             return false;
