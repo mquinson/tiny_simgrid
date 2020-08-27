@@ -18,7 +18,7 @@ public:
     State(std::deque<app::Actor> actors, std::deque<app::Mailbox> mailboxes) : State(actors.size(), actors, mailboxes) {}
     State(const State&) = default;
     State& operator=(State const&) = default;
-    State(State&&) = default;
+    State(State&&) noexcept = default;
     ~State() = default;
 
     std::deque<app::Transition> getEnabledTransition();
