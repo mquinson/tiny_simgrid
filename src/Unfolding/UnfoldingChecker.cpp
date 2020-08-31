@@ -236,22 +236,79 @@ namespace uc
         return J;
     }
 
+    bool transition_is_IReceive(EventSet const &testedEvtHist, EventSet const& ancestorsHist, EventSet const &ancestors, const UnfoldingEvent *testedEvt)
+    {
+        auto nbReceive = 0;
+        for (auto evt : testedEvtHist)
+        {
+            if (evt->transition.type == "Ireceive" && evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
+                nbReceive++;
+        }
+
+        auto nbSend1 = 0;
+        for (auto evt : ancestorsHist)
+        {
+            if (evt->transition.type == "Isend" && evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
+                nbSend1++;
+        }
+
+        for (auto it : ancestors)
+        {
+            if (it->transition.type == "Isend" && it->transition.mailbox_id == testedEvt->transition.mailbox_id)
+                nbSend1++;
+        }
+
+        if (nbReceive != nbSend1)
+            return false;
+        return true;
+    }
+
+    bool transition_is_ISend(EventSet const &testedEvtHist, EventSet const &ancestorsHist, EventSet const &ancestors, const UnfoldingEvent *testedEvt)
+    {
+        auto nbSend = 0;
+        for (auto evt : testedEvtHist)
+        {
+            if (evt->transition.type == "Isend" && evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
+                nbSend++;
+        }
+
+        auto nbReceive1 = 0;
+        for (auto evt : ancestorsHist)
+        {
+            if (evt->transition.type == "Ireceive" && evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
+                nbReceive1++;
+        }
+
+        for (auto it : ancestors)
+        {
+            if (it->transition.type == "Ireceive" && it->transition.mailbox_id == testedEvt->transition.mailbox_id)
+                nbReceive1++;
+        }
+ 
+        if (nbSend != nbReceive1)
+            return false;
+        
+        return true;
+    }
+
     bool checkSdRcCreation(Transition const &trans, EventSet ancestors, Configuration C)
     {
 
-        int nbTest = 0, nbSend = 0, nbReceive = 0;
+        int nbTest = 0;//, nbSend = 0, nbReceive = 0;
         UnfoldingEvent *testEvt;
         for (auto evt : ancestors)
+        {
             if (evt->transition.type == "Test" && evt->transition.actor_id != trans.actor_id)
             {
                 nbTest++;
                 testEvt = evt;
             }
+        }
 
         // one send/receive can not concern more than one communication
         if (nbTest > 1)
             return false;
-        else if (nbTest == 0)
+        if (nbTest == 0)
             return true;
 
         UnfoldingEvent *testedEvt = C.findTestedComm(testEvt);
@@ -271,41 +328,16 @@ namespace uc
 
         if (testedEvt->transition.type == "Isend")
         {
-            for (auto evt : testedEvtHist)
-                if (evt->transition.type == "Isend" && evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
-                    nbSend++;
-
-            int nbReceive1 = 0;
-            for (auto evt : ancestorsHist)
-                if (evt->transition.type == "Ireceive" && evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
-                    nbReceive1++;
-            for (auto it : ancestors)
-                if (it->transition.type == "Ireceive" && it->transition.mailbox_id == testedEvt->transition.mailbox_id)
-                    nbReceive1++;
-
-            if (nbSend != nbReceive1)
-                return false;
+            auto ret = transition_is_ISend(testedEvtHist, ancestorsHist, ancestors, testedEvt);
+            if(!ret)
+                return ret;
         }
 
         if (testedEvt->transition.type == "Ireceive")
         {
-
-            for (auto evt : testedEvtHist)
-                if (evt->transition.type == "Ireceive" && evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
-                    nbReceive++;
-
-            int nbSend1 = 0;
-            for (auto evt : ancestorsHist)
-                if (evt->transition.type == "Isend" && evt->transition.mailbox_id == testedEvt->transition.mailbox_id)
-                    nbSend1++;
-
-            for (auto it : ancestors)
-                if (it->transition.type == "Isend" && it->transition.mailbox_id == testedEvt->transition.mailbox_id)
-                    nbSend1++;
-
-            if (nbReceive != nbSend1)
-                return false;
+            return transition_is_IReceive(testedEvtHist, ancestorsHist, ancestors, testedEvt);
         }
+
         return true;
     }
 
