@@ -139,6 +139,31 @@ namespace uc
         }
     }
 
+    void check_event_to_remove(UnfoldingEvent *evt, EventSet& evtS, EventSet const &D, Configuration const& C)
+    {
+        EventSet subC;
+        EventSet sub_history;
+        EventSet history = evt->getHistory();
+        EvtSetTools::pushBack(history, evt);
+        bool chk = false;
+
+        if (!EvtSetTools::isEmptyIntersection(history, D))
+            chk = true;
+        else
+        {
+            for (auto it1 : C.events_)
+            {
+                if (it1->isConflict(it1, evt))
+                {
+                    chk = true;
+                    break;
+                }
+            }
+        }
+        if (chk)
+            EvtSetTools::remove(evtS, evt);
+    }
+
     bool remove_conflict_with_c(std::list<EventSet> const &kSet, std::list<EventSet> &kSet1, EventSet const &D, Configuration const& C)
     {
         for (auto it : kSet)
@@ -146,27 +171,7 @@ namespace uc
             EventSet evtS = it;
             for (auto evt : it)
             {
-                EventSet subC;
-                EventSet sub_history;
-                EventSet history = evt->getHistory();
-                EvtSetTools::pushBack(history, evt);
-                bool chk = false;
-
-                if (!EvtSetTools::isEmptyIntersection(history, D))
-                    chk = true;
-                else
-                {
-                    for (auto it1 : C.events_)
-                    {
-                        if (it1->isConflict(it1, evt))
-                        {
-                            chk = true;
-                            break;
-                        }
-                    }
-                }
-                if (chk)
-                    EvtSetTools::remove(evtS, evt);
+                check_event_to_remove(evt, evtS, D, C);
             }
 
             if (evtS.empty())
