@@ -339,9 +339,28 @@ namespace uc
     }
 
     /* this function creating new events from a transition and a set cadidate directed ancestors (ancestorSet)
- *  (the set includes events that can be a direct ancestor)
- *  by combination the transition and all subset (cause)  of the set ancestorSet
- */
+    *  (the set includes events that can be a direct ancestor)
+    *  by combination the transition and all subset (cause)  of the set ancestorSet
+    */
+    bool check_contains(bool chk, EventSet const& cause, const UnfoldingEvent *immPreEvt)
+    {
+        bool chk1 = false;
+        // if immediate precede event is not in the causuality_events, ensure that it is in the history of one event in
+        // cause
+        if (!chk)
+        {
+            for (auto evt : cause)
+            {
+                if (EvtSetTools::contains(evt->getHistory(), immPreEvt))
+                {
+                    chk1 = true;
+                    break;
+                }
+            }
+        }
+        return chk1;
+    }
+
     void Configuration::createEvts(Configuration C, EventSet &result, const app::Transition &t, s_evset_in_t ev_sets, bool chk, UnfoldingEvent *immPreEvt)
     {
         auto causuality_events = ev_sets.causuality_events;
@@ -351,19 +370,11 @@ namespace uc
         if (ancestorSet.empty())
         {
 
-            bool chk1 = false;
-            // if immediate precede event is not in the causuality_events, ensure that it is in the history of one event in
-            // cause
-            if (!chk)
-                for (auto evt : cause)
-                    if (EvtSetTools::contains(evt->getHistory(), immPreEvt))
-                    {
-                        chk1 = true;
-                        break;
-                    }
+            auto chk1 = check_contains(chk, cause, immPreEvt);
+
             /* create a new evt with directed ancestors are cause1,
-     * if all conditions are passed (trans is enabled, any ancestors are not in the history of other ancestors)
-     */
+            * if all conditions are passed (trans is enabled, any ancestors are not in the history of other ancestors)
+            */
             if (chk || chk1)
             {
                 bool send_receiveCheck = true;
