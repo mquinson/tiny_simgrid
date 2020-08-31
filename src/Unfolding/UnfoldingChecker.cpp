@@ -91,16 +91,13 @@ namespace uc
             EvtList1.pop_back();
         EvtList1.push_back(it);
 
-        if (n == sizeD-1)
+        if ((n == sizeD - 1) && (EvtList1.size() == sizeD))
         {
-            if (EvtList1.size() == sizeD)
-            {
-                for (auto evt : EvtList1)
-                    EvtSetTools::pushBack(J, evt);
-                return std::make_tuple(false, true, false);;
-            }
+            for (auto evt : EvtList1)
+                EvtSetTools::pushBack(J, evt);
+            return std::make_tuple(false, true, false);
         }
-        return std::make_tuple(false, false, true);;
+        return std::make_tuple(false, false, true);
     }
 
     /* this function select one event in every EventSet in a list to form a set,
