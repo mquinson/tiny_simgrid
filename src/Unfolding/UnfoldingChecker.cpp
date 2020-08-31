@@ -427,11 +427,73 @@ namespace uc
         return immPreEvt;
     }
 
+    void create_events_from_trans_and_maxEvent(std::tuple<Configuration, bool, Transition const&> t_params,
+                            EventSet const& causalityEvts, UnfoldingEvent *immPreEvt, EventSet const& ancestorSet, 
+                            std::list<EventSet>& maxEvtHistory, EventSet &exC)
+    {
+        auto C = std::get<0>(t_params);
+        auto chk = std::get<1>(t_params); 
+        auto trans = std::get<2>(t_params); 
+
+        EventSet cause;
+        EventSet exC1;
+        EventSet H;
+        
+        //EventSet causuality_events, EventSet cause, EventSet ancestorSet
+        s_evset_in evsets = {causalityEvts, cause, ancestorSet};
+        C.createEvts(C, exC1, trans, evsets, chk, immPreEvt);
+        exC = EvtSetTools::makeUnion(exC, exC1);
+
+        // remove last MaxEvt, sine we already used it in the above
+        maxEvtHistory.pop_back();
+
+        /*2. We now compute new evts by using MaxEvts in the past, but we have to ensure that
+            * the ancestor events (used to generate history candidate) are not in history of the evts in the causalityEvts
+            */
+        std::vector<int> intS;
+        // get all events in the history of the evts in causalityEvts
+        for (auto evt : causalityEvts)
+        {
+            EventSet H1;
+            H1 = evt->getHistory();
+            H = EvtSetTools::makeUnion(H, H1);
+        }
+
+        // put id of evts in H in the the set intS
+        for (auto evt : H)
+            intS.push_back(evt->id);
+
+        /* compute a set of evt that can generate history (all subset of it)
+             by getting evts in the maximal evts but not in the history of causalityEvts*/
+
+        for (auto evtSet : maxEvtHistory)
+        {
+            EventSet evtS;
+
+            // put ids of events that are not in the history of evts in causalityEvts into a set intS1
+            // if history candidate is not empty then try create new evts from its subset
+            if (!evtSet.empty())
+            {
+
+                // retrieve  evts in congig from intS1 (intS1 store id of evts in C whose transitions are dependent with trans)
+                EventSet evtSet1;
+                for (auto evt : evtSet)
+                    if ((!EvtSetTools::contains(H, evt)) && evt->transition.isDependent(trans))
+                        EvtSetTools::pushBack(evtSet1, evt);
+
+                EventSet exC1;
+                EventSet cause;
+                s_evset_in_t evsets = {causalityEvts, cause, evtSet1};
+                C.createEvts(C, exC1, trans, evsets, chk, immPreEvt);
+                exC = EvtSetTools::makeUnion(exC, exC1);
+            }
+        }
+    }
+
     /* this function produces new events from a given transition (trans) and the maxEvtHistory*/
 
     EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transition trans)
     {
-
         bool chk = false;
         EventSet causalityEvts;
         EventSet exC, ancestorSet, H;
@@ -441,10 +503,10 @@ namespace uc
         EvtSetTools::pushBack(causalityEvts, C.lastEvent);
 
         /* add the immediate precede evt of transition trans to the causalityEvts
-   *  used to make sure trans is enabled (Ti is enlabled if Ti-1 is aready fined)
-   chk == true =>  causalityEvts contains immediate precede event of trans Or the immediate precede event is in history
-   of lastEvt.
-   */
+        *  used to make sure trans is enabled (Ti is enlabled if Ti-1 is aready fined)
+        chk == true =>  causalityEvts contains immediate precede event of trans Or the immediate precede event is in history
+        of lastEvt.
+        */
 
         if (trans.id == 0)
             chk = true; // if trans.id ==0 => trans is always enabled do not need to check enable condition ?.
@@ -486,59 +548,8 @@ namespace uc
         else
         {
             // 1.2 else create events from trans and events in current maxEvent
-
-            EventSet cause;
-            EventSet exC1;
-            //EventSet causuality_events, EventSet cause, EventSet ancestorSet
-            s_evset_in evsets = {causalityEvts, cause, ancestorSet};
-            C.createEvts(C, exC1, trans, evsets, chk, immPreEvt);
-            exC = EvtSetTools::makeUnion(exC, exC1);
-
-            // remove last MaxEvt, sine we already used it in the above
-            maxEvtHistory.pop_back();
-
-            /*2. We now compute new evts by using MaxEvts in the past, but we have to ensure that
-     * the ancestor events (used to generate history candidate) are not in history of the evts in the causalityEvts
-     */
-            std::vector<int> intS;
-            // get all events in the history of the evts in causalityEvts
-            for (auto evt : causalityEvts)
-            {
-                EventSet H1;
-                H1 = evt->getHistory();
-                H = EvtSetTools::makeUnion(H, H1);
-            }
-
-            // put id of evts in H in the the set intS
-            for (auto evt : H)
-                intS.push_back(evt->id);
-
-            /* compute a set of evt that can generate history (all subset of it)
-     by getting evts in the maximal evts but not in the history of causalityEvts*/
-
-            for (auto evtSet : maxEvtHistory)
-            {
-                EventSet evtS;
-
-                // put ids of events that are not in the history of evts in causalityEvts into a set intS1
-
-                // if history candidate is not empty then try create new evts from its subset
-                if (!evtSet.empty())
-                {
-
-                    // retrieve  evts in congig from intS1 (intS1 store id of evts in C whose transitions are dependent with trans)
-                    EventSet evtSet1;
-                    for (auto evt : evtSet)
-                        if ((!EvtSetTools::contains(H, evt)) && evt->transition.isDependent(trans))
-                            EvtSetTools::pushBack(evtSet1, evt);
-
-                    EventSet exC1;
-                    EventSet cause;
-                    s_evset_in_t evsets = {causalityEvts, cause, evtSet1};
-                    C.createEvts(C, exC1, trans, evsets, chk, immPreEvt);
-                    exC = EvtSetTools::makeUnion(exC, exC1);
-                }
-            }
+            auto t_params = std::make_tuple(C, chk, trans);
+            create_events_from_trans_and_maxEvent(t_params, causalityEvts, immPreEvt, ancestorSet, maxEvtHistory, exC);
         }
         return exC;
     }
