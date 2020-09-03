@@ -697,6 +697,32 @@ else if (rank == 2)
   }
   break;
 
+  // forte paper
+  case 34:
+  {
+    // Actor0 : c = AsyncReceive(m,-)
+    //          c’= AsyncReceive(m,-)
+    //          TestAny({c’})
+    // Actor1 : c1 = AsyncSend(m,-)
+    // Actor2 : localComp
+    //          c2 = AsyncSend(m,-)
+
+    // Actor0
+    actor_set.push_back(Actor(0, {Transition(0, 1, "Ireceive"), Transition(0, 2, "Ireceive"), Transition(0, 2, "Test")}));
+
+    // Actor1
+    actor_set.push_back(Actor(1, {Transition(0, 1, "Isend")}));
+
+    // Actor2
+    actor_set.push_back(Actor(2, {Transition(0, 0, "localComp"), Transition(0, 1, "Isend")}));
+
+    initState = new State(3, actor_set, {Mailbox(0)});
+
+    UnfoldingEvent *e = new UnfoldingEvent(initState);
+    UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+  }
+  break;
+
   default:
   break;
   }
