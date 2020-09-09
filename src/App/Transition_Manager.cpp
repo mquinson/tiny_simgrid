@@ -28,7 +28,7 @@ std::vector<int> Transition_Manager::get_enabled_transition(int eid) const
     return tr_ids;
 }
 
-std::vector<int> Transition_Manager::get_actors_transitions(std::vector<Actor> &actors, std::vector<Mailbox> &mbs) const
+std::vector<int> Transition_Manager::get_actors_transitions(std::vector<Actor> const& actors, std::vector<Mailbox> const& mbs) const
 {
     std::vector<int> tr_ids;
     return tr_ids;

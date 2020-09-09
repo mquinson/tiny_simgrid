@@ -2,7 +2,7 @@
 
 namespace app {
 
-void AppSide::initialize()
+AppSide::AppSide()
 {
     ac_manager_ = std::unique_ptr<Actor_Manager>(new Actor_Manager());
     tr_manager_ = std::unique_ptr<Transition_Manager>(new Transition_Manager());
@@ -48,10 +48,41 @@ bool AppSide::is_transition_dependent(int tid0, int tid1) const
     return false;
 }
 
-void AppSide::execute_transition(int tid)
-{
+/* this function execute a transition from a given state, returning a next state id*/
+// void AppSide::execute_transition(int aid, int tid) const
+// {
+//     std::deque<Actor> actors;
+//     std::deque<Mailbox> mail_box;
 
-}
+//     mail_box = this->mailboxes_;
+//     actors   = this->actors_;
+
+//     // update the status of the actors of the State, set "executed" = true for the executing transition (t)
+//     auto index = 0;
+//     for (auto p : actors)
+//     {
+//         if (p.id == t.actor_id)
+//             actors[index].trans[t.id].executed = true;
+//         index++;
+//     }
+
+//     /* if t is send or receive transition, then update the mailbox */
+//     index = 0;
+//     if (t.type == "Isend" || t.type == "Ireceive")
+//     {
+//         for (auto mb : mail_box)
+//         {
+//             if (mb.id == t.mailbox_id)
+//             {
+//                 mail_box[index].update(t);
+//                 break;
+//             }
+//             index++;
+//         }
+//     }
+
+//     return State(this->nb_actors_, actors, mail_box);
+// }
 
 int AppSide::get_transition_actor_id(int tid) const
 {
@@ -73,7 +104,7 @@ std::vector<int> AppSide::get_enabled_transition(int eid) const
     return tr_manager_->get_enabled_transition(eid);
 }
 
-string AppSide::get_transition_type(int tid) const
+std::string AppSide::get_transition_type(int tid) const
 {
     return "";
 }

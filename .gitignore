@@ -19,3 +19,6 @@ tsg.code-workspace
 .vscode/settings.json
 build/compile_commands.json
 build/Testing/Temporary/LastTest.log
+tsg_old/tsg_old.pro.user
+build-tsg_old-Desktop-Debug/tsg_old
+build-tsg_old-Desktop-Debug/.qmake.stash

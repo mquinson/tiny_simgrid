@@ -38,7 +38,7 @@ public:
 
 private:
     std::map<int, state_t> states_;
-    std::vector<int> get_actors_transitions(std::vector<Actor>& actors, std::vector<Mailbox>& mbs) const;
+    std::vector<int> get_actors_transitions(std::vector<Actor> const& actors, std::vector<Mailbox> const& mbs) const;
 
 };
 
