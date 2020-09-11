@@ -3,54 +3,61 @@
 
 #include <iostream>
 #include <vector>
-#include <set>
-#include "Actor_Manager.h"
-#include "Transition_Manager.h"
+#include <memory>
+#include <deque>
+#include "Actor.h"
 #include "Mailbox.h"
 
-namespace app {
+namespace app
+{
+    typedef struct TRANSITION_PARAMS_2 
+    {
+        int read_write;
+        int access_var;
+    } S_TRANSITION_PARAMS_2;
 
-class AppSide {
-public:
-    explicit AppSide();
-    AppSide(const AppSide&) = delete;
-    AppSide& operator=(AppSide const&) = delete;
-    AppSide(AppSide&&) = default;
-    ~AppSide() = default;
+    typedef struct TRANSITION_PARAMS_3 
+    {
+        int mailbox_id;
+        int communication_id;
+        const std::string &type;
+    } S_TRANSITION_PARAMS_3;
 
-    /* ACTOR */    
-    template<typename... Ts>
-    Actor* create_actor(int actor_id, Ts&&... ts) {
-        return Actor_Manager::create_actor(actor_id, std::forward<Ts>(ts)...);
+    class AppSide
+    {
+    public:
+        explicit AppSide();
+        AppSide(const AppSide &) = delete;
+        AppSide &operator=(AppSide const &) = delete;
+        AppSide(AppSide &&) = default;
+        ~AppSide() = default;
+
+        /* ACTOR */
+        void create_actor(int actor_id, std::vector<S_TRANSITION_PARAMS_2> tr_params);
+        void create_actor(int actor_id, std::vector<S_TRANSITION_PARAMS_3> tr_params);
+
+        /* TRANSITION */
+        // void checkpoint(int eid, int n_actors, const std::set<Actor> &actors, const std::set<Mailbox> &mailboxes);
+        bool is_transition_dependent(int tid0, int tid1) const;
+        void execute_transition(int aid, int tid) const;
+        std::vector<int> get_enabled_transition(int eid) const;
+        std::string get_transition_type(int tid) const;
+        int get_transition_actor_id(int tid) const;
+        int get_transition_mailbox_id(int tid) const;
+        int get_transition_comm_id(int tid) const;
+
+        /* MAILBOX */
+        void create_mailbox(std::vector<int> mb_ids);
+
+        /* MAILBOX */
+        //    template<typename... Ts>
+        //    void add_to_mailbox_list(Ts... ts);
+        //    inline std::vector<Mailbox> get_mailbox_list() const { return mailbox_list_; }
+
+    private:
+        std::shared_ptr<std::deque<Actor>> actors_;
+        std::shared_ptr<std::deque<Mailbox>> mailboxes_;
     };
-
-    template<typename... Ts>
-    void add_to_actors(Ts&&... ts) {
-        ac_manager_->add_to_actors(std::forward<Ts>(ts)...);
-    }
-
-    /* TRANSITION */
-    Transition* create_transition(short activity, int access_variable);
-    Transition* create_transition(int mailbox_id, int communication_id, short type);
-    void checkpoint(int eid, int n_actors, const std::set<Actor> &actors, const std::set<Mailbox> &mailboxes);
-    bool is_transition_dependent(int tid0, int tid1) const;
-    void execute_transition(int aid, int tid) const;
-    std::vector<int> get_enabled_transition(int eid) const;
-    std::string get_transition_type(int tid) const;
-    int get_transition_actor_id(int tid) const;
-    int get_transition_mailbox_id(int tid) const;
-    int get_transition_comm_id(int tid) const;
-
-    /* MAILBOX */
-//    template<typename... Ts>
-//    void add_to_mailbox_list(Ts... ts);
-//    inline std::vector<Mailbox> get_mailbox_list() const { return mailbox_list_; }
-
-private:
-//    std::vector<Mailbox> mailbox_list_;
-    std::unique_ptr<Actor_Manager> ac_manager_;
-    std::unique_ptr<Transition_Manager> tr_manager_;
-};
 
 } // namespace app
 

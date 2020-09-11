@@ -1,7 +1,7 @@
 #include "App/Actor.h"
 #include "App/Transition.h"
 #include "Unfolding/UnfoldingChecker.h"
-//#include "main_include.hpp"
+#include "main_include.hpp"
 
 using namespace uc;
 using namespace app;
@@ -229,9 +229,12 @@ int main(int argc, char **argv)
   break;
 
   case 15:
-  { // the first simix model -> 6 traces
+  { 
+    // the first simix model -> 6 traces
     // Transition (maiboxid, commid, type)
-    //      TEST_15();
+    
+    TEST_15();
+
     //      test_reduction({Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}),
     //                      Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}),
 
@@ -724,7 +727,7 @@ else if (rank == 2)
   break;
 
   default:
-  break;
+    break;
   }
   clock_t end = clock();
   double elapsed_secs = double(end - begin) / (60 * CLOCKS_PER_SEC);
