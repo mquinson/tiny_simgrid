@@ -4,9 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include <deque>
-#include "Actor.h"
-#include "Mailbox.h"
+#include "StateManager.h"
 
 namespace app
 {
@@ -57,6 +55,7 @@ namespace app
     private:
         std::shared_ptr<std::deque<Actor>> actors_;
         std::shared_ptr<std::deque<Mailbox>> mailboxes_;
+        std::shared_ptr<StateManager> state_manager_;
     };
 
 } // namespace app

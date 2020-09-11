@@ -7,6 +7,7 @@ namespace app
     {
         actors_ = std::make_shared<std::deque<Actor>>();
         mailboxes_ = std::make_shared<std::deque<Mailbox>>();
+        state_manager_ = std::make_shared<StateManager>();
     }
 
     // void AppSide::checkpoint(int eid, int n_actors, const std::set<Actor> &actors, const std::set<Mailbox> &mailboxes)
