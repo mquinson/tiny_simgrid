@@ -33,8 +33,11 @@ namespace app
         Transition(Transition &&) = default;
         ~Transition() = default;
 
-        inline std::string get_tr_tag() const { return tr_tag; } 
-        inline void set_tr_tag(const int actor_id, const unsigned int tr_id) { tr_tag = std::to_string(actor_id) + std::to_string(tr_id); } 
+        inline std::string get_tr_tag() const { return tr_tag; }
+        inline void set_tr_tag(const int actor_id, const unsigned int tr_id)
+        {
+            tr_tag = std::to_string(actor_id) + std::to_string(tr_id);
+        }
 
     private:
         std::string tr_tag = "";

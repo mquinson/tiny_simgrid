@@ -1546,17 +1546,6 @@ communication, making wait become enabled. When the wait enable, we can create n
         auto *e = new UnfoldingEvent(initState, state_id);
 
         explore(C, {EventSet()}, D, A, e, prev_exC, actors);
-        std::cout.flush();
-        if (g_var::nb_traces != confs_expected_.size())
-        {
-            std::cerr << "ERROR: " << confs_expected_.size() << " traces expected, but " << g_var::nb_traces << " observed.\n";
-            error_++;
-        }
-        if (g_var::nb_events != expected_events_)
-        {
-            std::cerr << "ERROR: " << expected_events_ << " unique events expected, but " << g_var::nb_events << " observed.\n";
-            error_++;
-        }
     }
 
     void UnfoldingChecker::explore(State *state)
@@ -1682,7 +1671,8 @@ communication, making wait become enabled. When the wait enable, we can create n
         State nextState = currentEvt->appState.execute(e->transition);
         
         auto curEv_StateId = currentEvt->get_state_id();
-        auto nextState_id = app_side_->execute_transition(curEv_StateId, e->transition);
+        // auto nextState_id = app_side_->execute_transition(curEv_StateId, e->transition);
+        auto nextState_id = app_side_->execute_transition(curEv_StateId, e->get_transition_tag());
         e->set_state_id(nextState_id);
 
         e->appState = nextState;

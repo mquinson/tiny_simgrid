@@ -12,12 +12,12 @@ namespace app
         return id;
     }
 
-    int StateManager::execute_transition(int state_id, Transition const &tr)
+    int StateManager::execute_transition(int state_id, std::string const& transition_tag)
     {
         auto state = find_state(state_id);
         if (state == nullptr)
             return -1;
-        auto next_state = state->execute_transition(tr);
+        auto next_state = state->execute_transition(transition_tag);
         auto id = add_state(std::move(next_state));
         return id;
     }

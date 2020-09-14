@@ -18,7 +18,7 @@ namespace app
         ~AppState() = default;
 
         std::deque<Transition> get_enabled_transitions();
-        AppState execute_transition(Transition tr);
+        AppState execute_transition(std::string const& tr_tag);
 
     private:
         std::deque<Actor> actors_;

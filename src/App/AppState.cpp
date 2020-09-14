@@ -33,27 +33,45 @@ namespace app
     }
         
     /* this function execute a transition from a given state, returning a next state*/
-    AppState AppState::execute_transition(Transition tr)
+    AppState AppState::execute_transition(std::string const& tr_tag)
     {
         auto mailboxs = this->mailboxes_;
         auto actors = this->actors_;
 
         // update the status of the actors of the State, set "executed" = true for the executing transition (t)
         auto index = 0;
-        for (auto p : actors)
+        std::string tr_type {""};
+        auto tr_mb_id = -1;
+        Transition tr;
+        for (auto p:actors)
         {
-            if (p.id == tr.actor_id)
-                actors[index].trans[tr.id].executed = true;
+            auto tr_id = 0;
+            auto found = false;
+            for(auto t:p.trans)
+            {
+                if(t.get_tr_tag() == tr_tag)
+                {
+                    tr = this->actors_[index].trans[tr_id];
+                    actors[index].trans[tr_id].executed = true;
+                    tr_type = actors[index].trans[tr_id].type;
+                    tr_mb_id = actors[index].trans[tr_id].mailbox_id;
+                    found = true;
+                    break;
+                }
+                tr_id++;
+            }
+            if(found)
+                break;
             index++;
         }
 
         /* if t is send or receive transition, then update the mailbox */
         index = 0;
-        if (tr.type == "Isend" || tr.type == "Ireceive")
+        if (tr_type == "Isend" || tr_type == "Ireceive")
         {
             for (auto mb : mailboxs)
             {
-                if (mb.id == tr.mailbox_id)
+                if (mb.id == tr_mb_id)
                 {
                     mailboxs[index].update(tr);
                     break;
