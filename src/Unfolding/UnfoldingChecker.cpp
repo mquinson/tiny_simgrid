@@ -1426,7 +1426,7 @@ communication, making wait become enabled. When the wait enable, we can create n
                         }
 
                     /* we only call function createWaitEvt if the last action is send/ or receive
-          or dependent with the wait (transition in the same actor) */
+                    or dependent with the wait (transition in the same actor) */
 
                     std::string comType = C.lastEvent->transition.type;
                     std::string comType1 = evt->transition.type;
@@ -1516,7 +1516,7 @@ communication, making wait become enabled. When the wait enable, we can create n
             for (auto evt : exC)
             {
                 /* add new event evt to enC if evt's transition is not dependent with any transition of a event
-       which is in C and is not in history of evt */
+                which is in C and is not in history of evt */
                 bool chk = true;
                 EventSet evtHisty = evt->getHistory();
                 for (auto it : C.events_)
@@ -1535,12 +1535,14 @@ communication, making wait become enabled. When the wait enable, we can create n
         Configuration C;
         EventSet prev_exC;
 
+        // TODO: develop and call a create_state() without input arguments
         auto state_actors = actors;
         auto state_mbs = mailboxes;
         auto state_id = app_side_->create_state(std::move(state_actors), std::move(state_mbs));
 
         auto initState = new State(actors.size(), actors, mailboxes);
         // auto *e = new UnfoldingEvent(initState);
+        // TODO: call another constructor
         auto *e = new UnfoldingEvent(initState, state_id);
 
         explore(C, {EventSet()}, D, A, e, prev_exC, actors);

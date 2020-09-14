@@ -98,8 +98,12 @@ namespace uc
         inline int get_state_id() const { return state_id; }
         inline void set_state_id(int sid) { state_id = sid; }
 
+        inline std::string get_transition_tag() const { return transition_tag; }
+        inline void set_transition_tag(std::string const& tr_tag) { transition_tag = tr_tag; }
+
     private:
         int state_id {-1};
+        std::string transition_tag {""};
         bool transition_is_IReceive(const UnfoldingEvent *testedEvt, const UnfoldingEvent *SdRcEvt) const;
         bool transition_is_ISend(const UnfoldingEvent *testedEvt, const UnfoldingEvent *SdRcEvt) const;
         bool check_tr_concern_same_comm(bool &chk1, bool &chk2, UnfoldingEvent *evt1, UnfoldingEvent *evt2) const;

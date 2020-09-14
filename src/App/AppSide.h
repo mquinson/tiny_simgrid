@@ -51,11 +51,6 @@ namespace app
         int create_state(std::deque<Actor>&& actors, std::deque<Mailbox>&& mailboxes); 
         int execute_transition(int state_id, Transition const& tr); 
 
-        /* MAILBOX */
-        //    template<typename... Ts>
-        //    void add_to_mailbox_list(Ts... ts);
-        //    inline std::vector<Mailbox> get_mailbox_list() const { return mailbox_list_; }
-
     private:
         std::shared_ptr<std::deque<Actor>> actors_;
         std::shared_ptr<std::deque<Mailbox>> mailboxes_;

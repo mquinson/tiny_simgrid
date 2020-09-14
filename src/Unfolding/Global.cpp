@@ -6,6 +6,7 @@ namespace uc
     //UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, const Transition &t, const EventSet &causes)
     UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, app::Transition const &t, EventSet const &causes) : id(nb_events), transition(t), causes(causes)
     {
+        set_transition_tag(t.get_tr_tag());
     }
 
     void UnfoldingEvent::print() const

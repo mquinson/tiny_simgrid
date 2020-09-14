@@ -264,6 +264,8 @@ int main(int argc, char **argv)
     actors.push_back(Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
 
     auto mailboxes = {Mailbox(1)};
+    // TODO: develop run() instead of explore
+    // TODO: transplant state creation from uc.explore() to a new function in AppSide()   
     UC.explore(actors, mailboxes);
   }
   break;
