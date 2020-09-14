@@ -8,8 +8,8 @@ namespace app
     {
         auto state = new AppState(std::forward<std::deque<Actor>>(actors), 
                     std::forward<std::deque<Mailbox>>(mailboxes));
-        add_state(std::move(*state));
-        return state_id_;
+        auto id = add_state(std::move(*state));
+        return id;
     }
 
     int StateManager::execute_transition(int state_id, Transition const &tr)
@@ -18,8 +18,8 @@ namespace app
         if (state == nullptr)
             return -1;
         auto next_state = state->execute_transition(tr);
-        add_state(std::move(next_state));
-        return state_id_;
+        auto id = add_state(std::move(next_state));
+        return id;
     }
 
     AppState *StateManager::find_state(int state_id)
@@ -30,10 +30,11 @@ namespace app
         return &(pos->second);
     }
 
-    void StateManager::add_state(AppState &&state)
+    int StateManager::add_state(AppState &&state)
     {
         states_.insert({state_id_, state});
-        state_id_++;
+        auto id = state_id_++;
+        return id;
     }
 
 } // namespace app

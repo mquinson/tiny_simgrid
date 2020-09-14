@@ -10,6 +10,16 @@ namespace app
         state_manager_ = std::make_shared<StateManager>();
     }
 
+    int AppSide::create_state(std::deque<Actor> &&actors, std::deque<Mailbox> &&mailboxes)
+    {
+        return state_manager_->create_state(std::forward<std::deque<Actor>>(actors), std::forward<std::deque<Mailbox>>(mailboxes));
+    }
+
+    int AppSide::execute_transition(int state_id, Transition const &tr)
+    {
+        return state_manager_->execute_transition(state_id, tr);
+    }
+
     // void AppSide::checkpoint(int eid, int n_actors, const std::set<Actor> &actors, const std::set<Mailbox> &mailboxes)
     // {
     //    typedef struct s {

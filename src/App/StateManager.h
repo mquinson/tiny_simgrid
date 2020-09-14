@@ -20,7 +20,7 @@ namespace app
 
     private:
         AppState* find_state(int state_id);
-        void add_state(AppState&& state);
+        int add_state(AppState&& state);
         static int state_id_;
         std::map<int, AppState> states_;
     };

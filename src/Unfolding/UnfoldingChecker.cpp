@@ -1529,11 +1529,43 @@ communication, making wait become enabled. When the wait enable, we can create n
         }
     }
 
+    void UnfoldingChecker::explore(std::deque<Actor> actors, std::deque<Mailbox> mailboxes)
+    {
+        EventSet A, D;
+        Configuration C;
+        EventSet prev_exC;
+
+        auto state_actors = actors;
+        auto state_mbs = mailboxes;
+        auto state_id = app_side_->create_state(std::move(state_actors), std::move(state_mbs));
+
+        auto initState = new State(actors.size(), actors, mailboxes);
+        // auto *e = new UnfoldingEvent(initState);
+        auto *e = new UnfoldingEvent(initState, state_id);
+
+        explore(C, {EventSet()}, D, A, e, prev_exC, actors);
+        std::cout.flush();
+        if (g_var::nb_traces != confs_expected_.size())
+        {
+            std::cerr << "ERROR: " << confs_expected_.size() << " traces expected, but " << g_var::nb_traces << " observed.\n";
+            error_++;
+        }
+        if (g_var::nb_events != expected_events_)
+        {
+            std::cerr << "ERROR: " << expected_events_ << " unique events expected, but " << g_var::nb_events << " observed.\n";
+            error_++;
+        }
+    }
+
     void UnfoldingChecker::explore(State *state)
     {
         EventSet A, D;
         Configuration C;
         EventSet prev_exC;
+
+        auto local_actors = state->actors_;
+        auto local_mbs = state->mailboxes_;
+        app_side_->create_state(std::move(local_actors), std::move(local_mbs));
 
         explore(C, {EventSet()}, D, A, new UnfoldingEvent(state), prev_exC, state->actors_);
         std::cout.flush();
@@ -1615,16 +1647,6 @@ communication, making wait become enabled. When the wait enable, we can create n
             return;
         }
 
-        // auto unsorted = enC;
-
-        // auto func = [](const UnfoldingEvent *e0, const UnfoldingEvent *e1) {
-        //     if ((e0->transition.actor_id < e1->transition.actor_id) || (e0->transition.id < e1->transition.id) ||
-        //         (!(e0->causes == e1->causes)))
-        //         return true;
-        //     return false;
-        // };
-        // std::sort(enC.begin(), enC.end(), func);
-
         if (A.empty())
         {
             e = *(enC.begin());
@@ -1654,16 +1676,13 @@ communication, making wait become enabled. When the wait enable, we can create n
 
         std::cout << "\n";
 
+        
         State nextState = currentEvt->appState.execute(e->transition);
+        auto curEv_StateId = currentEvt->get_state_id();
+        auto nextState_id = app_side_->execute_transition(curEv_StateId, e->transition);
 
         e->appState = nextState;
 
-        // if (e->id == 6)
-        //     print_debug(e, enC);
-
-        //    app_side_->checkpoint(e->id, nextState.nb_actors_, nextState.actors_, nextState.mailboxes_);
-
-        // UnfoldingEvent* newEvent = e + e.transition;
         Configuration C1 = C;
         EvtSetTools::pushBack(C1.events_, e);
 
@@ -1689,7 +1708,6 @@ communication, making wait become enabled. When the wait enable, we can create n
         EventSet J1;
 
         J = KpartialAlt(D1, C);
-        // J = computeAlt(D2, C);
 
         if (!J.empty())
         {

@@ -68,7 +68,8 @@ namespace uc
         EventSet causes;            // used to store directed ancestors of event e
         EventSet conflictEvts;
 
-        explicit UnfoldingEvent(State *s) : appState(*s) {}
+        UnfoldingEvent(State *s) : appState(*s) {}
+        UnfoldingEvent(State *s, int sid) : appState(*s), state_id(sid) {}
         UnfoldingEvent(unsigned int nb_events, const app::Transition &t, const EventSet &causes);
         UnfoldingEvent(const UnfoldingEvent &) = default;
         UnfoldingEvent &operator=(UnfoldingEvent const &) = default;
@@ -90,7 +91,10 @@ namespace uc
         bool operator==(const UnfoldingEvent &other) const;
         void print() const;
 
+        inline int get_state_id() const { return state_id; }
+
     private:
+        int state_id {-1};
         bool transition_is_IReceive(const UnfoldingEvent *testedEvt, const UnfoldingEvent *SdRcEvt) const;
         bool transition_is_ISend(const UnfoldingEvent *testedEvt, const UnfoldingEvent *SdRcEvt) const;
         bool check_tr_concern_same_comm(bool &chk1, bool &chk2, UnfoldingEvent *evt1, UnfoldingEvent *evt2) const;

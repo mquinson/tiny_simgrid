@@ -244,17 +244,27 @@ int main(int argc, char **argv)
     //                      Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")})},
     //                     {Mailbox(1)}, {9, 9, 9, 9, 9, 9}, 59);
 
-    actor_set.push_back(Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
-    actor_set.push_back(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
-    actor_set.push_back(Actor(2, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(1, 2, "Ireceive"),
+    // actor_set.push_back(Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
+    // actor_set.push_back(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
+    // actor_set.push_back(Actor(2, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(1, 2, "Ireceive"),
+    //                               Transition(1, 2, "Wait")}));
+    // actor_set.push_back(Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
+
+    // initState = new State(4, actor_set, {Mailbox(1)});
+
+    // UnfoldingEvent *e = new UnfoldingEvent(initState);
+
+    // UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+
+    std::deque<Actor> actors;
+    actors.push_back(Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
+    actors.push_back(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
+    actors.push_back(Actor(2, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(1, 2, "Ireceive"),
                                   Transition(1, 2, "Wait")}));
-    actor_set.push_back(Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
+    actors.push_back(Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
 
-    initState = new State(4, actor_set, {Mailbox(1)});
-
-    UnfoldingEvent *e = new UnfoldingEvent(initState);
-
-    UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+    auto mailboxes = {Mailbox(1)};
+    UC.explore(actors, mailboxes);
   }
   break;
 

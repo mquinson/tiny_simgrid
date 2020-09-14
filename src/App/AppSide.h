@@ -47,6 +47,10 @@ namespace app
         /* MAILBOX */
         void create_mailbox(std::vector<int> mb_ids);
 
+        /* STATE */
+        int create_state(std::deque<Actor>&& actors, std::deque<Mailbox>&& mailboxes); 
+        int execute_transition(int state_id, Transition const& tr); 
+
         /* MAILBOX */
         //    template<typename... Ts>
         //    void add_to_mailbox_list(Ts... ts);
