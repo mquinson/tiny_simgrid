@@ -63,13 +63,17 @@ namespace uc
     {
     public:
         int id = -1;
+        // TODO: eliminate appState
         State appState;
+        // TODO: eliminate transition
         app::Transition transition; // The last transition made to reach that state
         EventSet causes;            // used to store directed ancestors of event e
         EventSet conflictEvts;
 
+        // TODO: eliminate constructors
         UnfoldingEvent(State *s) : appState(*s) {}
         UnfoldingEvent(State *s, int sid) : appState(*s), state_id(sid) {}
+        //TODO: eliminate constructor        
         UnfoldingEvent(unsigned int nb_events, const app::Transition &t, const EventSet &causes);
         UnfoldingEvent(const UnfoldingEvent &) = default;
         UnfoldingEvent &operator=(UnfoldingEvent const &) = default;
@@ -92,6 +96,7 @@ namespace uc
         void print() const;
 
         inline int get_state_id() const { return state_id; }
+        inline void set_state_id(int sid) { state_id = sid; }
 
     private:
         int state_id {-1};

@@ -1675,11 +1675,13 @@ communication, making wait become enabled. When the wait enable, we can create n
         e->print();
 
         std::cout << "\n";
-
         
+        // TODO: eliminate nextState
         State nextState = currentEvt->appState.execute(e->transition);
+        
         auto curEv_StateId = currentEvt->get_state_id();
         auto nextState_id = app_side_->execute_transition(curEv_StateId, e->transition);
+        e->set_state_id(nextState_id);
 
         e->appState = nextState;
 
