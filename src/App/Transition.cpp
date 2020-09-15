@@ -45,7 +45,6 @@ namespace app
         // for read - write model
         else
         {
-
             // if at least one write transition  => dependent
             if ((this->access_var == other.access_var) && ((this->read_write == 1) || (other.read_write == 1)))
                 return true;

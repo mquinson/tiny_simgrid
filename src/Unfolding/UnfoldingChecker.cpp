@@ -1368,8 +1368,14 @@ communication, making wait become enabled. When the wait enable, we can create n
 
             // try to create new events from a enabled transition and every maximal_Evt history in maxEvtHistory of C
             // TODO: TR
+            std::vector<bool> v;
+            auto tag = C.lastEvent->transition.get_tr_tag();
+            for(auto t:enabled_trans_tags)
+                v.push_back(app_side_->check_dependency(t, tag));
+
             for (auto trans : enabledTransitions)
             {
+                auto comp = trans.isDependent(C.lastEvent->transition);
                 // if trans is not a wait action, and is dependent with the transition of last event
                 if (trans.isDependent(C.lastEvent->transition) && trans.type != "Wait" and trans.type != "Test" &&
                     trans.type != "Isend" && trans.type != "Ireceive" && trans.type != "localComp")
@@ -1562,6 +1568,7 @@ communication, making wait become enabled. When the wait enable, we can create n
         auto state_actors = actors;
         auto state_mbs = mailboxes;
         auto state_id = app_side_->create_state(std::move(state_actors), std::move(state_mbs));
+        app_side_->initialize(actors, mailboxes);
 
         auto initState = new State(actors.size(), actors, mailboxes);
         // auto *e = new UnfoldingEvent(initState);
