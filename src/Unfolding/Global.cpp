@@ -9,6 +9,11 @@ namespace uc
         set_transition_tag(t.get_tr_tag());
     }
 
+    UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, std::string const& tr_tag, EventSet const& causes) : id(nb_events), transition_tag(tr_tag), causes(causes)
+    {
+
+    }
+
     void UnfoldingEvent::print() const
     {
 

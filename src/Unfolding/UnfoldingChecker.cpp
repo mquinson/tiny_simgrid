@@ -1317,6 +1317,26 @@ communication, making wait become enabled. When the wait enable, we can create n
         EventSet causes;
         if (C.events_.empty())
         {
+            // auto all_tr0 = app_side_->get_all_tr0_tags(0);
+            // for(auto t:all_tr0)
+            // {
+            //     g_var::nb_events++;
+            //     UnfoldingEvent *newEvent = new UnfoldingEvent(g_var::nb_events, t, causes);
+            //     if (!EvtSetTools::contains(g_var::U, newEvent))
+            //     {
+            //         EvtSetTools::pushBack(g_var::U, newEvent);
+            //         EvtSetTools::pushBack(enC, newEvent);
+            //         EvtSetTools::pushBack(exC, newEvent);
+            //     }
+            //     else
+            //     {
+            //         auto evt1 = EvtSetTools::find(g_var::U, newEvent);
+            //         EvtSetTools::pushBack(enC, evt1);
+            //         auto evt2 = EvtSetTools::find(g_var::U, newEvent);
+            //         EvtSetTools::pushBack(exC, evt2);
+            //     }
+            // }
+
             for (auto p : actors)
             {
                 g_var::nb_events++;
@@ -1338,7 +1358,7 @@ communication, making wait become enabled. When the wait enable, we can create n
         }
         else
         {
-            // TODO: TR
+            // TODO: implement get_enabled_transitions()
             // get all enabled transitions at current appState
             std::deque<Transition> enabledTransitions;
             enabledTransitions = C.lastEvent->appState.getEnabledTransition();

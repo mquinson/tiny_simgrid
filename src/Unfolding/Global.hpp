@@ -75,6 +75,7 @@ namespace uc
         UnfoldingEvent(State *s, int sid) : appState(*s), state_id(sid) {}
         //TODO: eliminate constructor        
         UnfoldingEvent(unsigned int nb_events, const app::Transition &t, const EventSet &causes);
+        UnfoldingEvent(unsigned int nb_events, std::string const& tr_tag, EventSet const& causes);
         UnfoldingEvent(const UnfoldingEvent &) = default;
         UnfoldingEvent &operator=(UnfoldingEvent const &) = default;
         UnfoldingEvent(UnfoldingEvent &&) = default;

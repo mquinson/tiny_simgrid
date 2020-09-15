@@ -31,7 +31,17 @@ namespace app
             }
         }
     }
-        
+
+    std::deque<std::string> AppState::get_all_tr0_tags() const
+    {
+        std::deque<std::string> all_tr0;
+        for (auto p:actors_)
+        {            
+            all_tr0.push_back(p.trans[0].get_tr_tag());
+        }
+        return all_tr0;
+    }
+
     /* this function execute a transition from a given state, returning a next state*/
     AppState AppState::execute_transition(std::string const& tr_tag)
     {

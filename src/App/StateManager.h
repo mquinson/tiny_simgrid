@@ -17,6 +17,8 @@ namespace app
 
         int create_state(std::deque<Actor>&& actors, std::deque<Mailbox>&& mailboxes); 
         int execute_transition(int state_id, std::string const& transition_tag);
+        std::deque<std::string> get_all_tr0_tags(int sid);
+
 
     private:
         AppState* find_state(int state_id);

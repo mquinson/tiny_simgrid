@@ -49,6 +49,7 @@ namespace app
         /* STATE */
         int create_state(std::deque<Actor>&& actors, std::deque<Mailbox>&& mailboxes); 
         int execute_transition(int state_id, std::string const &transition_tag);
+        inline std::deque<std::string> get_all_tr0_tags(int state_id) const { return state_manager_->get_all_tr0_tags(state_id); }
 
     private:
         std::shared_ptr<std::deque<Actor>> actors_;
