@@ -37,7 +37,6 @@ namespace app
         /* TRANSITION */
         // void checkpoint(int eid, int n_actors, const std::set<Actor> &actors, const std::set<Mailbox> &mailboxes);
         bool is_transition_dependent(int tid0, int tid1) const;
-        std::vector<int> get_enabled_transition(int eid) const;
         std::string get_transition_type(int tid) const;
         int get_transition_actor_id(int tid) const;
         int get_transition_mailbox_id(int tid) const;
@@ -48,8 +47,9 @@ namespace app
 
         /* STATE */
         int create_state(std::deque<Actor>&& actors, std::deque<Mailbox>&& mailboxes); 
-        int execute_transition(int state_id, std::string const &transition_tag);
-        inline std::deque<std::string> get_all_tr0_tags(int state_id) const { return state_manager_->get_all_tr0_tags(state_id); }
+        int execute_transition(int state_id, std::string const &transition_tag) const;
+        std::deque<std::string> get_all_tr0_tags(int state_id) const;
+        std::deque<std::string> get_enabled_transitions(int sid) const;
 
     private:
         std::shared_ptr<std::deque<Actor>> actors_;

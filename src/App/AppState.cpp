@@ -93,7 +93,7 @@ namespace app
         return AppState(std::move(actors), std::move(mailboxs));
     }
 
-    std::deque<Transition> AppState::get_enabled_transitions()
+    std::deque<std::string> AppState::get_enabled_transitions()
     {
         std::deque<Transition> trans_set;
         for (auto p : this->actors_)
@@ -104,7 +104,11 @@ namespace app
         };
         std::sort(trans_set.begin(), trans_set.end(), func);
 
-        return trans_set;
+        std::deque<std::string> trans_tags;
+        for(auto t:trans_set)
+            trans_tags.push_back(t.get_tr_tag());
+
+        return trans_tags;
     }
 
 } // namespace app

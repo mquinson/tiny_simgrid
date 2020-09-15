@@ -1318,10 +1318,10 @@ communication, making wait become enabled. When the wait enable, we can create n
         if (C.events_.empty())
         {
             // auto all_tr0 = app_side_->get_all_tr0_tags(0);
-            // for(auto t:all_tr0)
+            // for(auto tag:all_tr0)
             // {
             //     g_var::nb_events++;
-            //     UnfoldingEvent *newEvent = new UnfoldingEvent(g_var::nb_events, t, causes);
+            //     UnfoldingEvent *newEvent = new UnfoldingEvent(g_var::nb_events, tag, causes);
             //     if (!EvtSetTools::contains(g_var::U, newEvent))
             //     {
             //         EvtSetTools::pushBack(g_var::U, newEvent);
@@ -1362,6 +1362,9 @@ communication, making wait become enabled. When the wait enable, we can create n
             // get all enabled transitions at current appState
             std::deque<Transition> enabledTransitions;
             enabledTransitions = C.lastEvent->appState.getEnabledTransition();
+
+            auto state_id = C.lastEvent->get_state_id();
+            std::deque<std::string> enabled_trans_tags = app_side_->get_enabled_transitions(state_id); 
 
             // try to create new events from a enabled transition and every maximal_Evt history in maxEvtHistory of C
             // TODO: TR

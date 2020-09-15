@@ -103,11 +103,12 @@ int main(int argc, char **argv)
     actor_set.push_back(Actor(0, {Transition(1, 0), Transition(1, 1)}));
     actor_set.push_back(Actor(1, {Transition(1, 0), Transition(1, 1)}));
 
-    initState = new State(2, actor_set, {});
+    // initState = new State(2, actor_set, {});
 
-    UnfoldingEvent *e = new UnfoldingEvent(initState);
+    // UnfoldingEvent *e = new UnfoldingEvent(initState);
 
-    UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+    // UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
+    UC.explore(actor_set, {});
   }
   break;
 

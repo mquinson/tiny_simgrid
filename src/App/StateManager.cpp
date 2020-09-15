@@ -18,9 +18,9 @@ namespace app
         return id;
     }
 
-    int StateManager::execute_transition(int state_id, std::string const &transition_tag)
+    int StateManager::execute_transition(int sid, std::string const &transition_tag)
     {
-        auto state = find_state(state_id);
+        auto state = find_state(sid);
         if (state == nullptr)
             return -1;
         auto next_state = state->execute_transition(transition_tag);
@@ -28,9 +28,18 @@ namespace app
         return id;
     }
 
-    AppState *StateManager::find_state(int state_id)
+    std::deque<std::string> StateManager::get_enabled_transitions(int sid)
     {
-        auto pos = states_.find(state_id);
+        std::deque<std::string> enabled_trans;
+        auto state = find_state(sid);
+        if(state == nullptr)
+            return enabled_trans;
+        return state->get_enabled_transitions();
+    }
+
+    AppState *StateManager::find_state(int sid)
+    {
+        auto pos = states_.find(sid);
         if (pos == states_.end())
             return nullptr;
         return &(pos->second);
