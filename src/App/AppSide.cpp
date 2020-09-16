@@ -64,7 +64,7 @@ namespace app
         return state_manager_->get_enabled_transitions(sid);
     }
 
-    bool AppSide::check_dependency(std::string const& tr_tag0, std::string const& tr_tag1) const
+    bool AppSide::check_transition_dependency(std::string const& tr_tag0, std::string const& tr_tag1) const
     {
         Transition tr0;
         Transition tr1;
@@ -102,10 +102,11 @@ namespace app
         std::vector<Transition> trans;
         for (auto i : tr_params)
         {
-            auto tr = new Transition(i.read_write, i.access_var);            
+            auto tr = new Transition(i.read_write, i.access_var);
             trans.push_back(std::move(*tr));
         }
         auto actor = new Actor(actor_id, trans);
+        add_transition(*actor);
         actors_->push_back(std::move(*actor));
     }
 
@@ -118,7 +119,59 @@ namespace app
             trans.push_back(std::move(*tr));
         }
         auto actor = new Actor(actor_id, trans);
+        add_transition(*actor);
         actors_->push_back(std::move(*actor));
+    }
+
+    void AppSide::add_transition(Actor const &actor)
+    {
+        for (auto t : actor.trans)
+        {
+            S_TRANSITION_ATTRS attr;
+            attr.access_var = t.access_var;
+            attr.actor_id = t.actor_id;
+            attr.comm_id = t.commId;
+            attr.id = t.id;
+            attr.lock_id = t.lockId;
+            attr.mailbox_id = t.mailbox_id;
+            attr.mutex_iD = t.mutexID;
+            attr.read_write = t.read_write;
+            attr.type = t.type;
+            transitions_.insert({t.get_tr_tag(), std::move(attr)});
+        }
+    }
+
+    bool AppSide::check_transition_type(std::string const& tr_tag, std::vector<std::string> const& type_names)
+    {
+        bool isEqual = false;
+        auto type = get_transition_type(tr_tag);
+        for (auto t : type_names)
+        {
+            if(t == type)
+            {
+                isEqual = true;
+                break;
+            }
+        }
+        return isEqual;
+    }
+
+    std::string AppSide::get_transition_type(std::string const& tr_tag)
+    {
+        auto attr = find_transition_attrs(tr_tag);
+        if(attr != nullptr)
+        {
+            return attr->type;
+        }
+        return "";
+    }
+
+    S_TRANSITION_ATTRS* AppSide::find_transition_attrs(std::string const& tr_tag)
+    {
+        auto pos = transitions_.find(tr_tag);
+        if (pos == transitions_.end())
+            return nullptr;
+        return &(pos->second);
     }
 
     void AppSide::create_mailbox(std::vector<int> mb_ids)

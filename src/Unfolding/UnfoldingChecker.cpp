@@ -1370,14 +1370,27 @@ communication, making wait become enabled. When the wait enable, we can create n
             // TODO: TR
             std::vector<bool> v;
             auto tag = C.lastEvent->transition.get_tr_tag();
-            for(auto t:enabled_trans_tags)
-                v.push_back(app_side_->check_dependency(t, tag));
+            std::vector<std::string> types = {"Wait", "Test", "Isend", "Ireceive", "localComp"};
+            std::vector<bool> equality_vec;
+            std::vector<std::string> enabled_tr_types;
+            for (auto t : enabled_trans_tags)
+            {
+                auto equality = app_side_->check_transition_type(t, types);
+                auto tr_type = app_side_->get_transition_type(t);
+                equality_vec.push_back(!equality);
+                enabled_tr_types.push_back(tr_type);
+                v.push_back(app_side_->check_transition_dependency(t, tag));
+            }
 
             for (auto trans : enabledTransitions)
             {
+                // TODO: eliminate next 2 lines
                 auto comp = trans.isDependent(C.lastEvent->transition);
+                auto eq = trans.type != "Wait" && trans.type != "Test" &&
+                    trans.type != "Isend" && trans.type != "Ireceive" && trans.type != "localComp";
+
                 // if trans is not a wait action, and is dependent with the transition of last event
-                if (trans.isDependent(C.lastEvent->transition) && trans.type != "Wait" and trans.type != "Test" &&
+                if (trans.isDependent(C.lastEvent->transition) && trans.type != "Wait" && trans.type != "Test" &&
                     trans.type != "Isend" && trans.type != "Ireceive" && trans.type != "localComp")
                 {
 
@@ -1497,7 +1510,7 @@ communication, making wait become enabled. When the wait enable, we can create n
                         }
 
                     /* we only call function createTestEvt if the last action is send or receive
-           or dependent with the test (transition in the same actor) */
+                    or dependent with the test (transition in the same actor) */
 
                     std::string comType = C.lastEvent->transition.type;
                     std::string comType1 = event->transition.type;
