@@ -46,28 +46,28 @@ int main(int argc, char **argv)
   switch (example)
   {
   case 1:
-  { // the first example (in the paper)
+  { 
+    // the first example (in the paper)
     // Transition(read_write, access_variable)
 
-    test_reduction(
-        {
-            Actor(0, {Transition(1, 0)}), // write x
-            Actor(1, {Transition(0, 0)}), // read x
-            Actor(2, {Transition(0, 0)})  // read x
-        },
-        {/* no mailbox */}, {3, 3, 3, 3}, 20);
+    std::deque<Actor> actors;
+    actors.push_back(Actor(0, {Transition(1, 0)})); // write x
+    actors.push_back(Actor(1, {Transition(0, 0)})); // read x
+    actors.push_back(Actor(2, {Transition(0, 0)})); // read x
+    UC.explore(actors, {});
+
   }
   break;
 
   case 2:
-  { // the second example
-    test_reduction(
-        {
-            Actor(1, {Transition(1, 0)}), // P0: write X
-            Actor(2, {Transition(1, 1),   // P1: write Y
-                      Transition(1, 0)})  // P1: write X
-        },
-        {/* no mailbox */}, {3, 3}, 10);
+  { 
+    // TODO: use this test to track the reason of jump in IDs that are assigned to events, then check the procedure with old code.
+    // the second example
+    std::deque<Actor> actors;
+    actors.push_back(Actor(1, {Transition(1, 0)})); // P0: write X
+    actors.push_back(Actor(2, {Transition(1, 1),    // P1: write Y
+                              Transition(1, 0)}));  // P1: write X
+    UC.explore(actors, {});
   }
   break;
 
@@ -85,11 +85,16 @@ int main(int argc, char **argv)
   break;
 
   case 4:
-  { // the fourth example - 6 traces
-
+  { 
+    // TODO: use this test to track the reason of jump in IDs that are assigned to events, then check the procedure with old code. 
+    // the fourth example - 6 traces
     // Transition(read_write, access_variable)
-    test_reduction({Actor(0, {Transition(1, 0)}), Actor(1, {Transition(1, 0)}), Actor(2, {Transition(1, 0)})},
-                   {/* no mailbox */}, {3, 3, 3, 3, 3, 3}, 27);
+    std::deque<Actor> actors;
+    actors.push_back(Actor(0, {Transition(1, 0)}));
+    actors.push_back(Actor(1, {Transition(1, 0)}));
+    actors.push_back(Actor(2, {Transition(1, 0)}));
+
+    UC.explore(actors, {});
   }
   break;
 
@@ -113,11 +118,14 @@ int main(int argc, char **argv)
   break;
 
   case 6:
-  { // 6th example - 3 traces
-
+  { 
+    // 6th example - 3 traces
     // Transition(read_write, access_variable)
-    test_reduction({Actor(0, {Transition(1, 0), Transition(1, 1)}), Actor(1, {Transition(1, 1), Transition(1, 0)})},
-                   {/* no mailbox */}, {4, 4, 4}, 16);
+    std::deque<Actor> actors;
+    actors.push_back(Actor(0, {Transition(1, 0), Transition(1, 1)}));
+    actors.push_back(Actor(1, {Transition(1, 1), Transition(1, 0)}));
+
+    UC.explore(actors, {});
   }
   break;
 
@@ -125,9 +133,12 @@ int main(int argc, char **argv)
   { // 7th example - 4 traces
 
     // Transition(read_write, access_variable)
-    test_reduction(
-        {Actor(0, {Transition(1, 0)}), Actor(1, {Transition(1, 1)}), Actor(2, {Transition(1, 1), Transition(1, 0)})},
-        {/* no mailbox */}, {4, 4, 4, 4}, 27);
+    std::deque<Actor> actors;
+    actors.push_back(Actor(0, {Transition(1, 0)}));
+    actors.push_back(Actor(1, {Transition(1, 1)}));
+    actors.push_back(Actor(2, {Transition(1, 1), Transition(1, 0)}));
+
+    UC.explore(actors, {});
   }
   break;
 
@@ -152,8 +163,11 @@ int main(int argc, char **argv)
   { // 3 traces
 
     // Transition(read_write, access_variable)
-    test_reduction({Actor(0, {Transition(1, 0), Transition(1, 0)}), Actor(1, {Transition(1, 1), Transition(1, 0)})},
-                   {/* no mailbox */}, {4, 4, 4}, 18);
+    std::deque<Actor> actors;
+    actors.push_back(Actor(0, {Transition(1, 0), Transition(1, 0)}));
+    actors.push_back(Actor(1, {Transition(1, 1), Transition(1, 0)}));
+
+    UC.explore(actors, {});
   }
   break;
 
