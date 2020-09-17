@@ -1612,48 +1612,48 @@ namespace uc
 
             auto state_id = C.lastEvent->get_state_id();
             std::deque<std::string> enabled_trans_tags = App::app_side_->get_enabled_transitions(state_id); 
+            
+            auto lastEvt_trans_tag = C.lastEvent->transition.get_tr_tag();
+            auto lastEvt_trans_type = App::app_side_->get_transition_type(lastEvt_trans_tag);
+            auto lastEvt_trans_mb_id = App::app_side_->get_transition_mb_id(lastEvt_trans_tag);
 
             // try to create new events from a enabled transition and every maximal_Evt history in maxEvtHistory of C
-            // TODO: TR
-            std::vector<bool> v;
-            auto tag = C.lastEvent->transition.get_tr_tag();
-            std::vector<std::string> types = {"Wait", "Test", "Isend", "Ireceive", "localComp"};
-            std::vector<bool> equality_vec;
-            std::vector<std::string> enabled_tr_types;
-            for (auto t : enabled_trans_tags)
-            {
-                auto equality = App::app_side_->check_transition_type(t, types);
-                auto tr_type = App::app_side_->get_transition_type(t);
-                equality_vec.push_back(!equality);
-                enabled_tr_types.push_back(tr_type);
-                v.push_back(App::app_side_->check_transition_dependency(t, tag));
-            }
-
+            // TODO: replace trans with trans_tag in the next line
             for (auto trans : enabledTransitions)
             {
                 // TODO: remove next 2 lines
-                auto comp = trans.isDependent(C.lastEvent->transition);
-                auto eq = trans.type != "Wait" && trans.type != "Test" &&
-                    trans.type != "Isend" && trans.type != "Ireceive" && trans.type != "localComp";
+                //auto comp = trans.isDependent(C.lastEvent->transition);
+                //auto eq = trans.type != "Wait" && trans.type != "Test" &&
+                //    trans.type != "Isend" && trans.type != "Ireceive" && trans.type != "localComp";
 
+                // TODO: remove next line when the Transition objects entirely moved to the AppSide
+                auto trans_tag = trans.get_tr_tag();
+                auto trans_type = App::app_side_->get_transition_type(trans_tag);
+                auto trans_mb_id = App::app_side_->get_transition_mb_id(trans_tag);
+
+                auto trans_dependency = App::app_side_->check_transition_dependency(trans_tag, lastEvt_trans_tag);  
+                std::vector<std::string> types = {"Wait", "Test", "Isend", "Ireceive", "localComp"};
+                auto transIsInTypes = App::app_side_->check_transition_type(trans_tag, types);
+
+                auto check0 = trans_dependency && !transIsInTypes;
+                auto check1 = (trans_type == "Isend") &&
+                              (trans_dependency ||
+                              ((lastEvt_trans_type == "Test") && (lastEvt_trans_mb_id == trans_mb_id)));
+                
                 // if trans is not a wait action, and is dependent with the transition of last event
-                if (trans.isDependent(C.lastEvent->transition) && trans.type != "Wait" && trans.type != "Test" &&
-                    trans.type != "Isend" && trans.type != "Ireceive" && trans.type != "localComp")
+                if (check0)
                 {
-
                     EventSet exC1, causalityEvts;
 
-                    // TODO: remove next 2 lines
-                    auto v0 = trans.read_write;
-                    auto v1 = App::app_side_->get_transition_read_write(trans.get_tr_tag());                     
+                    auto trans_read_write = App::app_side_->get_transition_read_write(trans_tag);
 
                     // in maxEvent of C, we only consider events having transitions that are dependent with trans
-                    if (trans.read_write < 2)
+                    if (trans_read_write < 2)
                     {
                         std::list<EventSet> maxEvtHistory1 = maxEvtHistory;
                         exC1 = computeExt(C, maxEvtHistory1, trans);
                         // TODO: remove this
-                        auto exC1_tmp = computeExt(C, maxEvtHistory1, trans.get_tr_tag());
+                        auto exC1_tmp = computeExt(C, maxEvtHistory1, trans_tag);
                     }
 
                     for (auto newEvent : exC1)
@@ -1670,10 +1670,7 @@ namespace uc
                 }
 
                 // ELSE IF THE TRANSITION IS A isend or i receive
-
-                else if (trans.type == "Isend" and
-                         (trans.isDependent(C.lastEvent->transition) ||
-                          (C.lastEvent->transition.type == "Test" && C.lastEvent->transition.mailbox_id == trans.mailbox_id)))
+                else if (check1)
                 {
                     EventSet exC1 = createIsendEvts(trans, C);
                     for (auto newEvent : exC1)
