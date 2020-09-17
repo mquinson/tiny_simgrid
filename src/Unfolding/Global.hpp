@@ -4,6 +4,7 @@
 #include <iostream>
 #include <algorithm>
 #include <queue>
+#include "../App/AppSide.h"
 #include "../App/Transition.h"
 #include "State.h"
 
@@ -11,8 +12,15 @@ namespace uc
 {
 
     class UnfoldingEvent;
-
+    
     using EventSet = std::deque<UnfoldingEvent *>;
+    using AppSide = app::AppSide;
+
+    class App
+    {
+    public:
+        static std::unique_ptr<AppSide> app_side_;
+    };
 
     class EvtSetTools
     {
@@ -47,6 +55,8 @@ namespace uc
         Configuration plus_config(UnfoldingEvent *) const;
         void createEvts(Configuration C, EventSet &result, const app::Transition &t,
                         s_evset_in_t ev_sets, bool chk, UnfoldingEvent *immPreEvt);
+        void createEvts(Configuration C, EventSet &result, const std::string &trans_tag,
+                        s_evset_in_t ev_sets, bool chk, UnfoldingEvent *immPreEvt);
         void updateMaxEvent(UnfoldingEvent *);        // update maximal events of the configuration and actors
         UnfoldingEvent *findActorMaxEvt(int actorId); // find maximal event of a Actor whose id = actorId
 
@@ -63,17 +73,17 @@ namespace uc
     {
     public:
         int id = -1;
-        // TODO: eliminate appState
+        // TODO: remove appState
         State appState;
-        // TODO: eliminate transition
+        // TODO: remove transition
         app::Transition transition; // The last transition made to reach that state
         EventSet causes;            // used to store directed ancestors of event e
         EventSet conflictEvts;
 
-        // TODO: eliminate constructors
+        // TODO: remove constructors
         UnfoldingEvent(State *s) : appState(*s) {}
         UnfoldingEvent(State *s, int sid) : appState(*s), state_id(sid) {}
-        //TODO: eliminate constructor        
+        //TODO: remove constructor        
         UnfoldingEvent(unsigned int nb_events, const app::Transition &t, const EventSet &causes);
         UnfoldingEvent(unsigned int nb_events, std::string const& tr_tag, EventSet const& causes);
         UnfoldingEvent(const UnfoldingEvent &) = default;

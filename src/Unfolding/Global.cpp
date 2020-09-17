@@ -3,6 +3,8 @@
 namespace uc
 {
 
+    std::unique_ptr<app::AppSide> App::app_side_ = std::unique_ptr<app::AppSide>(new app::AppSide());;
+
     //UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, const Transition &t, const EventSet &causes)
     UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, app::Transition const &t, EventSet const &causes) : id(nb_events), transition(t), causes(causes)
     {
@@ -368,12 +370,24 @@ namespace uc
         return res;
     }
 
-    UnfoldingEvent *Configuration ::findTestedComm(const UnfoldingEvent *testEvt)
+    UnfoldingEvent *Configuration::findTestedComm(const UnfoldingEvent *testEvt)
     {
+        auto testEvt_trans_tag = testEvt->get_transition_tag();
         for (auto it : this->events_)
-            if (it->transition.commId == testEvt->transition.commId && it->transition.type != "Test" &&
-                it->transition.actor_id == testEvt->transition.actor_id)
+        {
+            auto it_trans_tag = it->get_transition_tag();
+            
+            auto it_trans_comm_id = App::app_side_->get_transition_comm_id(it_trans_tag) ;
+            auto it_trans_type = App::app_side_->get_transition_type(it_trans_tag);
+            auto it_trans_actor_id = App::app_side_->get_transition_actor_id(it_trans_tag);
+            auto testEvt_trans_comm_id = App::app_side_->get_transition_comm_id(testEvt_trans_tag);
+            auto testEvt_trans_type = App::app_side_->get_transition_type(testEvt_trans_tag);
+            auto testEvt_trans_actor_id = App::app_side_->get_transition_actor_id(testEvt_trans_tag);
+
+            if ((it_trans_comm_id == testEvt_trans_comm_id) && (it_trans_type != "Test") &&
+                it_trans_actor_id == testEvt_trans_actor_id)
                 return it;
+        }
         return nullptr;
     }
 

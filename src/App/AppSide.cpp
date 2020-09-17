@@ -166,6 +166,56 @@ namespace app
         return "";
     }
 
+    int AppSide::get_transition_mb_id(std::string const& tr_tag)
+    {
+        auto attr = find_transition_attrs(tr_tag);
+        if(attr != nullptr)
+        {
+            return attr->mailbox_id;
+        }
+        return -1;
+    }
+
+    int AppSide::get_transition_read_write(std::string const& tr_tag)
+    {
+        auto attr = find_transition_attrs(tr_tag);
+        if(attr != nullptr)
+        {
+            return attr->read_write;
+        }
+        return -1;
+    }
+
+    int AppSide::get_transition_id(std::string const& tr_tag)
+    {
+        auto attr = find_transition_attrs(tr_tag);
+        if(attr != nullptr)
+        {
+            return attr->id;
+        }
+        return -1;
+    }
+
+    int AppSide::get_transition_actor_id(std::string const& tr_tag)
+    {
+        auto attr = find_transition_attrs(tr_tag);
+        if (attr != nullptr)
+        {
+            return attr->actor_id;
+        }
+        return -1;
+    }
+
+    int AppSide::get_transition_comm_id(std::string const &tr_tag)
+    {
+        auto attr = find_transition_attrs(tr_tag);
+        if (attr != nullptr)
+        {
+            return attr->comm_id;
+        }
+        return -1;
+    }
+
     S_TRANSITION_ATTRS* AppSide::find_transition_attrs(std::string const& tr_tag)
     {
         auto pos = transitions_.find(tr_tag);

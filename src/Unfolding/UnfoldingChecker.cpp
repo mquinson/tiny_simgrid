@@ -338,6 +338,63 @@ namespace uc
         return true;
     }
 
+    bool checkSdRcCreation(std::string const &trans_tag, EventSet ancestors, Configuration C)
+    {
+        int nbTest = 0;
+        UnfoldingEvent *testEvt;
+        for (auto evt : ancestors)
+        {
+            auto evt_trans_type = App::app_side_->get_transition_type(evt->get_transition_tag());
+            auto evt_trans_actor_id = App::app_side_->get_transition_actor_id(evt->get_transition_tag());
+            auto trans_actor_id = App::app_side_->get_transition_actor_id(trans_tag);
+            if ((evt_trans_type == "Test") && (evt_trans_actor_id != trans_actor_id))
+            {
+                nbTest++;
+                testEvt = evt;
+            }
+        }
+
+        // one send/receive can not concern more than one communication
+        if (nbTest > 1)
+            return false;
+        if (nbTest == 0)
+            return true;
+
+        UnfoldingEvent *testedEvt = C.findTestedComm(testEvt);
+
+        //  two sends or receives can not be in the communiation -> not depend
+
+        auto testedEvt_trans_type = App::app_side_->get_transition_type(testedEvt->get_transition_tag());
+        auto testedEvt_mb_id = App::app_side_->get_transition_mb_id(testedEvt->get_transition_tag());
+        auto trans_type = App::app_side_->get_transition_type(trans_tag);
+        auto trans_mb_id = App::app_side_->get_transition_mb_id(trans_tag);
+
+        if (testedEvt_trans_type == trans_type || testedEvt_mb_id != trans_mb_id)
+            return false;
+
+        EventSet testedEvtHist = testedEvt->getHistory();
+        EventSet ancestorsHist;
+
+        for (auto evt : ancestors)
+            ancestorsHist = EvtSetTools::makeUnion(ancestorsHist, evt->getHistory());
+
+        // check nb send == nb receive ?, if yes they concern the same comm -> test and send/receive are dependent
+
+        if (testedEvt_trans_type == "Isend")
+        {
+            auto ret = transition_is_ISend(testedEvtHist, ancestorsHist, ancestors, testedEvt);
+            if(!ret)
+                return ret;
+        }
+
+        if (testedEvt_trans_type == "Ireceive")
+        {
+            return transition_is_IReceive(testedEvtHist, ancestorsHist, ancestors, testedEvt);
+        }
+
+        return true;
+    }
+
     /* this function creating new events from a transition and a set cadidate directed ancestors (ancestorSet)
     *  (the set includes events that can be a direct ancestor)
     *  by combination the transition and all subset (cause)  of the set ancestorSet
@@ -417,6 +474,63 @@ namespace uc
         }
     }
 
+    void Configuration::createEvts(Configuration C, EventSet &result, const std::string &trans_tag, s_evset_in_t ev_sets, bool chk, UnfoldingEvent *immPreEvt)
+    {
+        auto causuality_events = ev_sets.causuality_events;
+        auto cause = ev_sets.cause;
+        auto ancestorSet = ev_sets.ancestorSet;
+
+        auto trans_type = App::app_side_->get_transition_type(trans_tag);
+
+        if (ancestorSet.empty())
+        {
+            auto chk1 = check_contains(chk, cause, immPreEvt);
+
+            /* create a new evt with directed ancestors are cause1,
+            * if all conditions are passed (trans is enabled, any ancestors are not in the history of other ancestors)
+            */
+            if (chk || chk1)
+            {
+                bool send_receiveCheck = true;
+                EventSet cause1;
+                cause1 = EvtSetTools::makeUnion(cause, causuality_events);
+                // check condition for send/receive action or check enabled for MutexWait action
+
+                if (trans_type == "Isend" || trans_type == "Ireceive")
+                {
+                    send_receiveCheck = checkSdRcCreation(trans_tag, cause1, C);
+                }
+
+                if (send_receiveCheck)
+                {
+                    g_var::nb_events++;
+                    UnfoldingEvent *e = new UnfoldingEvent(g_var::nb_events, trans_tag, cause1);
+                    EvtSetTools::pushBack(result, e);
+                }
+            }
+            return;
+        }
+
+        else
+        {
+            UnfoldingEvent *a = *(ancestorSet.begin());
+            EventSet evtSet1, evtSet2, evtSet3, evtSet4;
+            evtSet1 = cause;
+            evtSet3 = ancestorSet;
+            EvtSetTools::pushBack(evtSet1, a);
+            EvtSetTools::remove(evtSet3, a);
+            s_evset_in_t evsets{causuality_events, evtSet1, evtSet3};
+            createEvts(C, result, trans_tag, evsets, chk, immPreEvt);
+            evtSet2 = cause;
+            evtSet4 = ancestorSet;
+            EvtSetTools::remove(evtSet4, a);
+            evsets.causuality_events = causuality_events;
+            evsets.cause = evtSet2;
+            evsets.ancestorSet = evtSet4;
+            createEvts(C, result, trans_tag, evsets, chk, immPreEvt);
+        }
+    }
+
     // gives a event in actorMaxEvent has the id = a given id
     UnfoldingEvent *Configuration::findActorMaxEvt(int id)
     {
@@ -490,8 +604,73 @@ namespace uc
         }
     }
 
-    /* this function produces new events from a given transition (trans) and the maxEvtHistory*/
+    void create_events_from_trans_and_maxEvent(std::tuple<Configuration, bool, std::string const&> t_params,
+                            EventSet const& causalityEvts, UnfoldingEvent *immPreEvt, EventSet const& ancestorSet, 
+                            std::list<EventSet>& maxEvtHistory, EventSet &exC)
+    {
+        auto C = std::get<0>(t_params);
+        auto chk = std::get<1>(t_params); 
+        auto trans_tag = std::get<2>(t_params); 
 
+        EventSet cause;
+        EventSet exC1;
+        EventSet H;
+        
+        //EventSet causuality_events, EventSet cause, EventSet ancestorSet
+        s_evset_in evsets = {causalityEvts, cause, ancestorSet};
+        C.createEvts(C, exC1, trans_tag, evsets, chk, immPreEvt);
+        exC = EvtSetTools::makeUnion(exC, exC1);
+
+        // remove last MaxEvt, sine we already used it in the above
+        maxEvtHistory.pop_back();
+
+        /*2. We now compute new evts by using MaxEvts in the past, but we have to ensure that
+            * the ancestor events (used to generate history candidate) are not in history of the evts in the causalityEvts
+            */
+        std::vector<int> intS;
+        // get all events in the history of the evts in causalityEvts
+        for (auto evt : causalityEvts)
+        {
+            EventSet H1;
+            H1 = evt->getHistory();
+            H = EvtSetTools::makeUnion(H, H1);
+        }
+
+        // put id of evts in H in the the set intS
+        for (auto evt : H)
+            intS.push_back(evt->id);
+
+        /* compute a set of evt that can generate history (all subset of it)
+             by getting evts in the maximal evts but not in the history of causalityEvts*/
+
+        for (auto evtSet : maxEvtHistory)
+        {
+            EventSet evtS;
+
+            // put ids of events that are not in the history of evts in causalityEvts into a set intS1
+            // if history candidate is not empty then try create new evts from its subset
+            if (!evtSet.empty())
+            {
+
+                // retrieve  evts in congig from intS1 (intS1 store id of evts in C whose transitions are dependent with trans)
+                EventSet evtSet1;
+                for (auto evt : evtSet)
+                {
+                    auto evt_trans_tag = evt->get_transition_tag();
+                    auto is_dependent = App::app_side_->check_transition_dependency(evt_trans_tag, trans_tag);
+                    if ((!EvtSetTools::contains(H, evt)) && is_dependent)
+                        EvtSetTools::pushBack(evtSet1, evt);
+                }
+                EventSet exC1;
+                EventSet cause;
+                s_evset_in_t evsets = {causalityEvts, cause, evtSet1};
+                C.createEvts(C, exC1, trans_tag, evsets, chk, immPreEvt);
+                exC = EvtSetTools::makeUnion(exC, exC1);
+            }
+        }
+    }
+
+    /* this function produces new events from a given transition (trans) and the maxEvtHistory*/
     EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transition trans)
     {
         bool chk = false;
@@ -554,12 +733,80 @@ namespace uc
         return exC;
     }
 
-    /* this function creates new events from a wait transition (trans),
-this wait waits a communication (action send/receive) in the the parameter/event evt
-The idea here is that, we try to march the communication with all possible communication to crete a complete
-communication, making wait become enabled. When the wait enable, we can create new events
-*/
+    /* this function produces new events from a given transition (trans) and the maxEvtHistory*/
+    EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, std::string const& trans_tag)
+    {
+        bool chk = false;
+        EventSet causalityEvts;
+        EventSet exC, ancestorSet, H;
+        UnfoldingEvent *immPreEvt = nullptr;
 
+        // add causality evts to causalityEvts set, firstly add last event to causalityEvts
+        EvtSetTools::pushBack(causalityEvts, C.lastEvent);
+
+        /* add the immediate precede evt of transition trans to the causalityEvts
+        *  used to make sure trans is enabled (Ti is enlabled if Ti-1 is aready fined)
+        chk == true =>  causalityEvts contains immediate precede event of trans Or the immediate precede event is in history
+        of lastEvt.
+        */
+
+        auto trans_id = App::app_side_->get_transition_id(trans_tag);
+        auto trans_actor_id = App::app_side_->get_transition_actor_id(trans_tag);
+
+        if (trans_id == 0)
+            chk = true; // if trans.id ==0 => trans is always enabled do not need to check enable condition ?.
+        else
+        {
+            // if immediate precede evt in maxEvent, add it to the causalityEvts
+            for (auto evt : C.maxEvent)
+            {
+                auto evt_trans_actor_id = App::app_side_->get_transition_actor_id(evt->get_transition_tag());     
+                if (trans_actor_id == evt_trans_actor_id)
+                {
+                    EvtSetTools::pushBack(causalityEvts, evt);
+                    chk = true;
+                    break;
+                }
+            }
+            // else find it in actorMaxEvent to add it into causalityEvts
+            immPreEvt = C.findActorMaxEvt(trans_actor_id);
+            if (!chk)
+                if (EvtSetTools::contains(C.lastEvent->getHistory(), immPreEvt))
+                    chk = true;
+        }
+
+        for (auto evt : C.maxEvent)
+        {
+            auto evt_tag = evt->get_transition_tag();
+            auto isDependent = App::app_side_->check_transition_dependency(trans_tag, evt_tag);
+            if (isDependent && (!EvtSetTools::contains(causalityEvts, evt)))
+                EvtSetTools::pushBack(ancestorSet, evt);
+        }
+        
+        /*1. Create events from current (last) maximal event of C */
+        // 1.1 if only last evt and immidiate precede event are dependent with trans -> only one evt is created
+        if (causalityEvts.size() <= 2 && ancestorSet.size() == 0)
+        {
+            g_var::nb_events++;
+
+            /* in this case only one event is created, since all MaxEvts are in the history of lastEvt*/
+            UnfoldingEvent *e = new UnfoldingEvent(g_var::nb_events, trans_tag, causalityEvts);
+            EvtSetTools::pushBack(exC, e);
+        }
+        else
+        {
+            // 1.2 else create events from trans and events in current maxEvent
+            auto t_params = std::make_tuple(C, chk, trans_tag);
+            create_events_from_trans_and_maxEvent(t_params, causalityEvts, immPreEvt, ancestorSet, maxEvtHistory, exC);
+        }
+        return exC;
+    }
+
+    /* this function creates new events from a wait transition (trans),
+    this wait waits a communication (action send/receive) in the the parameter/event evt
+    The idea here is that, we try to march the communication with all possible communication to crete a complete
+    communication, making wait become enabled. When the wait enable, we can create new events
+    */
     EventSet createWaitEvt(const UnfoldingEvent *evt, Configuration C, Transition const &trans)
     {
         EventSet evtS;
@@ -1364,7 +1611,7 @@ communication, making wait become enabled. When the wait enable, we can create n
             enabledTransitions = C.lastEvent->appState.getEnabledTransition();
 
             auto state_id = C.lastEvent->get_state_id();
-            std::deque<std::string> enabled_trans_tags = app_side_->get_enabled_transitions(state_id); 
+            std::deque<std::string> enabled_trans_tags = App::app_side_->get_enabled_transitions(state_id); 
 
             // try to create new events from a enabled transition and every maximal_Evt history in maxEvtHistory of C
             // TODO: TR
@@ -1375,16 +1622,16 @@ communication, making wait become enabled. When the wait enable, we can create n
             std::vector<std::string> enabled_tr_types;
             for (auto t : enabled_trans_tags)
             {
-                auto equality = app_side_->check_transition_type(t, types);
-                auto tr_type = app_side_->get_transition_type(t);
+                auto equality = App::app_side_->check_transition_type(t, types);
+                auto tr_type = App::app_side_->get_transition_type(t);
                 equality_vec.push_back(!equality);
                 enabled_tr_types.push_back(tr_type);
-                v.push_back(app_side_->check_transition_dependency(t, tag));
+                v.push_back(App::app_side_->check_transition_dependency(t, tag));
             }
 
             for (auto trans : enabledTransitions)
             {
-                // TODO: eliminate next 2 lines
+                // TODO: remove next 2 lines
                 auto comp = trans.isDependent(C.lastEvent->transition);
                 auto eq = trans.type != "Wait" && trans.type != "Test" &&
                     trans.type != "Isend" && trans.type != "Ireceive" && trans.type != "localComp";
@@ -1396,12 +1643,17 @@ communication, making wait become enabled. When the wait enable, we can create n
 
                     EventSet exC1, causalityEvts;
 
+                    // TODO: remove next 2 lines
+                    auto v0 = trans.read_write;
+                    auto v1 = App::app_side_->get_transition_read_write(trans.get_tr_tag());                     
+
                     // in maxEvent of C, we only consider events having transitions that are dependent with trans
                     if (trans.read_write < 2)
                     {
                         std::list<EventSet> maxEvtHistory1 = maxEvtHistory;
-
                         exC1 = computeExt(C, maxEvtHistory1, trans);
+                        // TODO: remove this
+                        auto exC1_tmp = computeExt(C, maxEvtHistory1, trans.get_tr_tag());
                     }
 
                     for (auto newEvent : exC1)
@@ -1580,8 +1832,8 @@ communication, making wait become enabled. When the wait enable, we can create n
         // TODO: develop and call a create_state() without input arguments
         auto state_actors = actors;
         auto state_mbs = mailboxes;
-        auto state_id = app_side_->create_state(std::move(state_actors), std::move(state_mbs));
-        app_side_->initialize(actors, mailboxes);
+        auto state_id = App::app_side_->create_state(std::move(state_actors), std::move(state_mbs));
+        App::app_side_->initialize(actors, mailboxes);
 
         auto initState = new State(actors.size(), actors, mailboxes);
         // auto *e = new UnfoldingEvent(initState);
@@ -1599,7 +1851,7 @@ communication, making wait become enabled. When the wait enable, we can create n
 
         auto local_actors = state->actors_;
         auto local_mbs = state->mailboxes_;
-        app_side_->create_state(std::move(local_actors), std::move(local_mbs));
+        App::app_side_->create_state(std::move(local_actors), std::move(local_mbs));
 
         explore(C, {EventSet()}, D, A, new UnfoldingEvent(state), prev_exC, state->actors_);
         std::cout.flush();
@@ -1710,12 +1962,12 @@ communication, making wait become enabled. When the wait enable, we can create n
 
         std::cout << "\n";
         
-        // TODO: eliminate nextState
+        // TODO: remove nextState
         State nextState = currentEvt->appState.execute(e->transition);
         
         auto curEv_StateId = currentEvt->get_state_id();
         // auto nextState_id = app_side_->execute_transition(curEv_StateId, e->transition);
-        auto nextState_id = app_side_->execute_transition(curEv_StateId, e->get_transition_tag());
+        auto nextState_id = App::app_side_->execute_transition(curEv_StateId, e->get_transition_tag());
         e->set_state_id(nextState_id);
 
         e->appState = nextState;

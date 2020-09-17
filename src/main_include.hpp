@@ -3,22 +3,14 @@
 
 #include "App/AppSide.h"
 
-using namespace app;
-
-using AppSide = app::AppSide;
-const std::unique_ptr<AppSide> app_side = std::unique_ptr<AppSide>(new AppSide());
-
 const std::string ISEND = "Isend";
 const std::string IRECEIVE = "Ireceive";
 const std::string TEST = "Test";
 const std::string WAIT = "Wait";
 
-// enum class TrType {
-//     ISend = 0,
-//     IReceive,
-//     Test,
-//     Wait
-// };
+using S_TRANSITION_PARAMS_3 = app::S_TRANSITION_PARAMS_3;
+using AppSide = app::AppSide;
+const std::unique_ptr<AppSide> app_side = std::unique_ptr<AppSide>(new AppSide());
 
 void TEST_15() {
     // the first simix model -> 6 traces

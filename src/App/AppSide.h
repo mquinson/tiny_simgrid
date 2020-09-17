@@ -46,7 +46,7 @@ namespace app
         AppSide(AppSide &&) = default;
         ~AppSide() = default;
 
-        // TODO: eliminate it
+        // TODO: remove this
         void initialize(std::deque<Actor> const &actors, std::deque<Mailbox> const &mbs)
         {
             actors_ = std::make_shared<std::deque<Actor>>(actors);
@@ -65,6 +65,11 @@ namespace app
         bool check_transition_dependency(std::string const &tr_tag0, std::string const &tr_tag1) const;
         bool check_transition_type(std::string const& tr_tag, std::vector<std::string> const& type_names);
         std::string get_transition_type(std::string const& tr_tag);
+        int get_transition_read_write(std::string const& tr_tag);
+        int get_transition_id(std::string const& tr_tag);
+        int get_transition_actor_id(std::string const& tr_tag);
+        int get_transition_mb_id(std::string const& tr_tag);
+        int get_transition_comm_id(std::string const& tr_tag);
 
         /* MAILBOX */
         void create_mailbox(std::vector<int> mb_ids);

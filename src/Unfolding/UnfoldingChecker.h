@@ -3,7 +3,7 @@
 
 #include "list"
 #include "Global.hpp"
-#include "../App/AppSide.h"
+// #include "../App/AppSide.h"
 
 namespace uc
 {
@@ -11,7 +11,9 @@ namespace uc
     using Actor = app::Actor;
     using Transition = app::Transition;
     using Mailbox = app::Mailbox;
-    using AppSide = app::AppSide;
+
+    // using AppSide = app::AppSide;
+    // const std::unique_ptr<AppSide> app_side_ = std::unique_ptr<AppSide>(new AppSide());
 
     class UnfoldingChecker
     {
@@ -21,7 +23,6 @@ namespace uc
         bool confs_check_ = false;
         int error_ = 0;
         unsigned int expected_events_ = 0;
-        std::unique_ptr<AppSide> app_side_ = std::unique_ptr<AppSide>(new AppSide());
 
     public:
         UnfoldingChecker() = default;
