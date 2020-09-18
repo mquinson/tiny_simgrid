@@ -27,6 +27,8 @@ add_executable(${PROJECT}
     ${SRC_DIR}/App/Transition.h
 
     #Unfolding
+    ${SRC_DIR}/Unfolding/CheckerSide.cpp
+    ${SRC_DIR}/Unfolding/CheckerSide.h
     ${SRC_DIR}/Unfolding/Global.cpp
     ${SRC_DIR}/Unfolding/Global.hpp
     ${SRC_DIR}/Unfolding/State.cpp

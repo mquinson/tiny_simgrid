@@ -1820,13 +1820,15 @@ namespace uc
         }
     }
 
-    void UnfoldingChecker::explore(std::deque<Actor> actors, std::deque<Mailbox> mailboxes)
+    void UnfoldingChecker::explore(std::deque<Actor> actors, std::deque<Mailbox> mailboxes, std::shared_ptr<AppSide> app_side)
     {
         EventSet A, D;
         Configuration C;
         EventSet prev_exC;
 
         // TODO: develop and call a create_state() without input arguments
+        if(app_side != nullptr)
+            App::set_app_side(app_side);
         auto state_actors = actors;
         auto state_mbs = mailboxes;
         auto state_id = App::app_side_->create_state(std::move(state_actors), std::move(state_mbs));

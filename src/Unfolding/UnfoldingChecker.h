@@ -3,7 +3,6 @@
 
 #include "list"
 #include "Global.hpp"
-// #include "../App/AppSide.h"
 
 namespace uc
 {
@@ -37,7 +36,7 @@ namespace uc
         void explore(Configuration C, std::list<EventSet> maxEvtHistory, EventSet D, EventSet A, UnfoldingEvent *currentEvt,
                      EventSet prev_enC, std::deque<Actor> proc);
 
-        void explore(std::deque<Actor> actors, std::deque<Mailbox> mailboxes);
+        void explore(std::deque<Actor> actors, std::deque<Mailbox> mailboxes, std::shared_ptr<AppSide> app_side = nullptr);
         void extend(std::deque<Actor> proc, Configuration C, std::list<EventSet> maxEvtHistory, EventSet &ExC, EventSet &enC) const;
         void remove(UnfoldingEvent *e, Configuration C, EventSet D);
         EventSet KpartialAlt(EventSet D, Configuration C) const;

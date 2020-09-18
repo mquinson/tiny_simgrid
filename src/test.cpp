@@ -1,6 +1,5 @@
 #include "App/Actor.h"
 #include "App/Transition.h"
-#include "Unfolding/UnfoldingChecker.h"
 #include "main_include.hpp"
 
 using namespace uc;
@@ -46,7 +45,7 @@ int main(int argc, char **argv)
   switch (example)
   {
   case 1:
-  { 
+  {
     // the first example (in the paper)
     // Transition(read_write, access_variable)
 
@@ -55,38 +54,28 @@ int main(int argc, char **argv)
     actors.push_back(Actor(1, {Transition(0, 0)})); // read x
     actors.push_back(Actor(2, {Transition(0, 0)})); // read x
     UC.explore(actors, {});
-
   }
   break;
 
   case 2:
-  { 
+  {
     // TODO: use this test to track the reason of jump in IDs that are assigned to events, then check the procedure with old code.
     // the second example
     std::deque<Actor> actors;
     actors.push_back(Actor(1, {Transition(1, 0)})); // P0: write X
     actors.push_back(Actor(2, {Transition(1, 1),    // P1: write Y
-                              Transition(1, 0)}));  // P1: write X
+                               Transition(1, 0)})); // P1: write X
     UC.explore(actors, {});
   }
   break;
 
   case 3:
-  { // the third example - 1 trace
-    // Transition(read_write, access_variable)
-    test_reduction(
-        {
-            Actor(0, {Transition(1, 0)}), // P0: write X
-            Actor(1, {Transition(1, 1)}), // P1: write Y
-            Actor(2, {Transition(1, 2)})  // P2: write Z
-        },
-        {/* no mailbox */}, {3}, 3);
-  }
+    TEST_3();
   break;
 
   case 4:
-  { 
-    // TODO: use this test to track the reason of jump in IDs that are assigned to events, then check the procedure with old code. 
+  {
+    // TODO: use this test to track the reason of jump in IDs that are assigned to events, then check the procedure with old code.
     // the fourth example - 6 traces
     // Transition(read_write, access_variable)
     std::deque<Actor> actors;
@@ -118,7 +107,7 @@ int main(int argc, char **argv)
   break;
 
   case 6:
-  { 
+  {
     // 6th example - 3 traces
     // Transition(read_write, access_variable)
     std::deque<Actor> actors;
@@ -143,20 +132,11 @@ int main(int argc, char **argv)
   break;
 
   case 8:
-  { // mutex example - 1 traces
-    // Transition(read_write, access_variable)
-    test_reduction({Actor(0, {Transition(2, 0), Transition(3, 0)}), Actor(1, {Transition(2, 0), Transition(3, 0)})},
-                   {/* no mailbox */}, {2}, 2);
-  }
+    TEST_8();
   break;
 
   case 9:
-  { // mutex example - 1 trace
-    // Transition(read_write, access_variable)
-    test_reduction({Actor(0, {Transition(0, 0), Transition(2, 1), Transition(3, 1)}),
-                    Actor(1, {Transition(2, 1), Transition(3, 1)})},
-                   {/* no mailbox */}, {2}, 2);
-  }
+    TEST_9();
   break;
 
   case 10:
@@ -172,32 +152,11 @@ int main(int argc, char **argv)
   break;
 
   case 11:
-  { // the first simix model -> 2 traces
-    // Transition (maiboxid, commid, type)
-    test_reduction({Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}),
-                    Actor(1, {Transition(1, 1, "Isend")}), Actor(2, {Transition(1, 1, "Ireceive")})},
-                   {Mailbox(1)}, {4, 3}, 9);
-
-    std::cout << "\n explore full state space :\n";
-    State initState1(3, actor_set, {Mailbox(1)});
-    stateStack.push_back(initState1);
-    // exhautiveExplore(stateStack, transList);
-  }
+    TEST_11();
   break;
 
   case 12:
-  { // the 2nd simix model -> 1 trace
-
-    // Transition (maiboxid, commid, type)
-    test_reduction({Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}),
-                    Actor(1, {Transition(2, 1, "Isend")}), Actor(2, {Transition(1, 1, "Ireceive")})},
-                   {Mailbox(1)}, {4}, 4);
-
-    std::cout << "\n explore full state space :\n";
-    State initState1(3, actor_set, {Mailbox(1)});
-    stateStack.push_back(initState1);
-    // exhautiveExplore(stateStack, transList);
-  }
+    TEST_12();
   break;
 
   case 13:
@@ -221,68 +180,11 @@ int main(int argc, char **argv)
   break;
 
   case 14:
-  { // the first simix model -> 2 traces
-
-    // Transition (maiboxid, commid, type)
-    //      test_reduction({Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}),
-    //                      Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}),
-    //                      Actor(2, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(1, 1, "Ireceive"),
-    //                                Transition(1, 1, "Wait")})},
-    //                     {Mailbox(1)}, {8, 8}, 22);
-
-    actor_set.push_back(Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
-    actor_set.push_back(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
-    actor_set.push_back(Actor(2, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(1, 1, "Ireceive"),
-                                  Transition(1, 1, "Wait")}));
-
-    initState = new State(3, actor_set, {Mailbox(1)});
-
-    UnfoldingEvent *e = new UnfoldingEvent(initState);
-
-    UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
-  }
+    TEST_14();
   break;
 
   case 15:
-  { 
-    // the first simix model -> 6 traces
-    // Transition (maiboxid, commid, type)
-    
     TEST_15();
-
-    //      test_reduction({Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}),
-    //                      Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}),
-
-    //                      Actor(2, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(1, 2, "Ireceive"),
-    //                                Transition(1, 2, "Wait")}),
-
-    //                      Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")})},
-    //                     {Mailbox(1)}, {9, 9, 9, 9, 9, 9}, 59);
-
-    // actor_set.push_back(Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
-    // actor_set.push_back(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
-    // actor_set.push_back(Actor(2, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(1, 2, "Ireceive"),
-    //                               Transition(1, 2, "Wait")}));
-    // actor_set.push_back(Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
-
-    // initState = new State(4, actor_set, {Mailbox(1)});
-
-    // UnfoldingEvent *e = new UnfoldingEvent(initState);
-
-    // UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
-
-    std::deque<Actor> actors;
-    actors.push_back(Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
-    actors.push_back(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
-    actors.push_back(Actor(2, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Wait"), Transition(1, 2, "Ireceive"),
-                                  Transition(1, 2, "Wait")}));
-    actors.push_back(Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Wait")}));
-
-    auto mailboxes = {Mailbox(1)};
-    // TODO: develop run() instead of explore
-    // TODO: transplant state creation from uc.explore() to a new function in AppSide()   
-    UC.explore(actors, mailboxes);
-  }
   break;
 
   case 16:
@@ -306,19 +208,7 @@ int main(int argc, char **argv)
   break;
 
   case 17:
-  { //  3 traces
-
-    // Transition (maiboxid, commid, type)
-    test_reduction({Actor(0, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}),
-                    Actor(1, {Transition(1, 1, "Isend")}), Actor(2, {Transition(1, 1, "Ireceive")})},
-                   {Mailbox(1)}, {4, 4, 4}, 14);
-
-    std::cout << "\n explore full state space :\n";
-
-    State initState1(3, actor_set, {Mailbox(1)});
-    stateStack.push_back(initState1);
-    // exhautiveExplore(stateStack, transList);
-  }
+    TEST_17();
   break;
 
   case 18:

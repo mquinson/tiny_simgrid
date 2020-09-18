@@ -41,8 +41,8 @@ namespace app
     {
     public:
         explicit AppSide();
-        AppSide(const AppSide &) = delete;
-        AppSide &operator=(AppSide const &) = delete;
+        AppSide(const AppSide &) = default;
+        AppSide &operator=(AppSide const &) = default;
         AppSide(AppSide &&) = default;
         ~AppSide() = default;
 
@@ -60,6 +60,8 @@ namespace app
         /* ACTOR */
         void create_actor(int actor_id, std::vector<S_TRANSITION_PARAMS_2> tr_params);
         void create_actor(int actor_id, std::vector<S_TRANSITION_PARAMS_3> tr_params);
+        // TODO: remove this function
+        std::deque<Actor> get_actors();
 
         /* TRANSITION */
         bool check_transition_dependency(std::string const &tr_tag0, std::string const &tr_tag1) const;
@@ -73,6 +75,8 @@ namespace app
 
         /* MAILBOX */
         void create_mailbox(std::vector<int> mb_ids);
+        // TODO: remove this function
+        std::deque<Mailbox> get_mbs();
 
         /* STATE */
         int create_state(std::deque<Actor> &&actors, std::deque<Mailbox> &&mailboxes);

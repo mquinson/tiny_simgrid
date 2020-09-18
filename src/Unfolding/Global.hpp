@@ -19,7 +19,8 @@ namespace uc
     class App
     {
     public:
-        static std::unique_ptr<AppSide> app_side_;
+        static std::shared_ptr<AppSide> app_side_;
+        static void set_app_side(std::shared_ptr<AppSide> app_side);
     };
 
     class EvtSetTools

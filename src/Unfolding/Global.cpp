@@ -3,7 +3,11 @@
 namespace uc
 {
 
-    std::unique_ptr<app::AppSide> App::app_side_ = std::unique_ptr<app::AppSide>(new app::AppSide());;
+    std::shared_ptr<AppSide> App::app_side_ = std::make_shared<AppSide>();
+    void App::set_app_side(std::shared_ptr<AppSide> app_side)
+    {
+        app_side_ = app_side; 
+    }
 
     //UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, const Transition &t, const EventSet &causes)
     UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, app::Transition const &t, EventSet const &causes) : id(nb_events), transition(t), causes(causes)
@@ -348,7 +352,7 @@ namespace uc
         }
         EvtSetTools::pushBack(maxEvent, e);
         /* update the maximal events for the actor=>
-   removing the evt shares the same actor with e, then adding e to the actorMaxEvent */
+        removing the evt shares the same actor with e, then adding e to the actorMaxEvent */
 
         EventSet to_remove;
 
