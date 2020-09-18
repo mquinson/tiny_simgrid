@@ -1082,6 +1082,7 @@ namespace uc
         return evtS;
     }
 
+    // TODO: remove this function
     EventSet createIsendEvts(Transition trans, Configuration C)
     {
 
@@ -1251,6 +1252,226 @@ namespace uc
                             }
                         }
                 }
+
+        return exC;
+    }
+
+    EventSet createIsendEvts(std::string const& trans_tag, Configuration C)
+    {
+        bool enableChk = false;
+
+        EventSet exC, EvtSet, causalityEvts, ancestorSet;
+        UnfoldingEvent *testedEvt, *immPreEvt;
+
+        auto trans_type = App::app_side_->get_transition_type(trans_tag);
+        auto trans_actor_id = App::app_side_->get_transition_actor_id(trans_tag);
+        auto trans_mb_id = App::app_side_->get_transition_mb_id(trans_tag);
+        auto trans_id = App::app_side_->get_transition_id(trans_tag);
+
+        auto lastEvt_trans_tag = C.lastEvent->transition.get_tr_tag();
+        auto lastEvt_trans_type = App::app_side_->get_transition_type(lastEvt_trans_tag);
+        auto lastEvt_trans_actor_id = App::app_side_->get_transition_actor_id(lastEvt_trans_tag);
+
+        auto check0 = (lastEvt_trans_type == "Test") && (lastEvt_trans_actor_id != trans_actor_id);
+
+        /* if trans is not dependent with the last transition -> return */
+        if (check0)
+        {
+            // get the communication tested by Test
+            testedEvt = C.findTestedComm(C.lastEvent);
+
+            auto testedEvt_trans_tag = testedEvt->transition.get_tr_tag();
+            auto testedEvt_trans_type = App::app_side_->get_transition_type(testedEvt_trans_tag);
+            auto testedEvt_trans_mb_id = App::app_side_->get_transition_mb_id(testedEvt_trans_tag);
+
+            auto check1 = (trans_type == testedEvt_trans_type) || (trans_mb_id != testedEvt_trans_mb_id);
+
+            // two sends or two receives can not be in the same communication -> not denpendent
+            if (check1)
+                return EvtSet;
+        }
+
+        // if trans.id ==0 => trans is always enabled do not need to check enable condition ?.
+        auto check2 = (trans_id == 0) || (lastEvt_trans_actor_id == trans_actor_id);
+        if (check2)
+            enableChk = true;
+        /* enableChk = true -> trans is ensured enabled or his pre evt is in the causalityEvts  */
+        else if ((lastEvt_trans_actor_id != trans_actor_id) && (!enableChk))
+        {
+            // else find it in actorMaxEvent and check where it is in the history of last Evt
+            immPreEvt = C.findActorMaxEvt(trans_actor_id);
+            if (EvtSetTools::contains(C.lastEvent->getHistory(), immPreEvt))
+                enableChk = true;
+        }
+
+        immPreEvt = C.findActorMaxEvt(trans_actor_id);
+
+        EventSet lastEvtHist = C.lastEvent->getHistory();
+
+        EventSet immPreEvtHist;
+        if (trans_id != 0)
+            immPreEvtHist = immPreEvt->getHistory();
+
+        EvtSetTools::pushBack(ancestorSet, C.lastEvent);
+
+        // if last event is preEvt(trans) always create a new event.
+        if (lastEvt_trans_actor_id == trans_actor_id)
+        {
+            g_var::nb_events++;
+            UnfoldingEvent *e = new UnfoldingEvent(g_var::nb_events, trans_tag, ancestorSet);
+            EvtSetTools::pushBack(exC, e);
+        }
+        // else if last event is Isend try to create a new event .
+        else if (lastEvt_trans_type == "Isend")
+        {
+            if (!enableChk)
+                EvtSetTools::pushBack(ancestorSet, immPreEvt);
+            g_var::nb_events++;
+            UnfoldingEvent *e = new UnfoldingEvent(g_var::nb_events, trans_tag, ancestorSet);
+            EvtSetTools::pushBack(exC, e);
+        }
+
+        // if last evt = preEvt(Isend) or last evt is a Isend, then try to combine with Test
+        auto trans_is_dependent = App::app_side_->check_transition_dependency(trans_tag, lastEvt_trans_tag); 
+        if (trans_is_dependent)
+        {
+            for (auto it : C.events_)
+            {
+                auto it_trans_tag = it->get_transition_tag();
+                auto it_trans_type = App::app_side_->get_transition_type(it_trans_tag);
+                auto it_trans_mb_id = App::app_side_->get_transition_mb_id(it_trans_tag);
+
+                if ((it_trans_type == "Test") && (it_trans_mb_id == trans_mb_id))
+                {
+                    UnfoldingEvent *testedEvt;
+                    
+                    // retrive the communication tested by the the
+                    testedEvt = C.findTestedComm(it);
+
+                    // tested action is Ireceive, create a new event if it can be marched with the Isend
+                    // make sure no ancestor candidate event is in history of other ancestor candidate
+
+                    auto testedEvt_trans_tag = testedEvt->get_transition_tag();
+                    auto testedEvt_trans_type = App::app_side_->get_transition_type(testedEvt_trans_tag);
+
+                    if ((testedEvt_trans_type == "Ireceive") && (!EvtSetTools::contains(lastEvtHist, it)))
+                    {
+                        if (!EvtSetTools::contains(immPreEvtHist, it))
+                        {
+                            EventSet ancestorSet1;
+                            EvtSetTools::pushBack(ancestorSet1, C.lastEvent);
+                            EvtSetTools::pushBack(ancestorSet1, it);
+                            EventSet itHist = it->getHistory();
+                            if ((!EvtSetTools::contains(itHist, immPreEvt)) && (!enableChk))
+                                EvtSetTools::pushBack(ancestorSet1, immPreEvt);
+
+                            if (checkSdRcCreation(trans_tag, ancestorSet1, C))
+                            {
+                                g_var::nb_events++;
+                                UnfoldingEvent *e = new UnfoldingEvent(g_var::nb_events, trans_tag, ancestorSet1);
+                                EvtSetTools::pushBack(exC, e);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // else if last event is a Test
+        auto check3 = (lastEvt_trans_actor_id == trans_actor_id) ||
+            ((lastEvt_trans_actor_id != trans_actor_id) && (lastEvt_trans_type == "Test")); 
+        if (check3)
+        {
+            EventSet ansestors;
+            EvtSetTools::pushBack(ansestors, C.lastEvent);
+            if (!enableChk)
+                EvtSetTools::pushBack(ansestors, immPreEvt);
+            if (checkSdRcCreation(trans_tag, ansestors, C))
+            {
+                g_var::nb_events++;
+                UnfoldingEvent *e = new UnfoldingEvent(g_var::nb_events, trans_tag, ansestors);
+                EvtSetTools::pushBack(exC, e);
+            }
+
+            for (auto it : C.events_)
+            {
+                auto it_trans_tag = it->get_transition_tag();
+                auto trans_dependency = App::app_side_->check_transition_dependency(trans_tag, it_trans_tag);
+                auto it_trans_actor_id = App::app_side_->get_transition_actor_id(it_trans_tag);
+
+                if (trans_dependency && (trans_actor_id != it_trans_actor_id))
+                {
+                    // make sure no ancestor candidate event is in history of other ancestor candidate
+                    EventSet ansestors1;
+                    EvtSetTools::pushBack(ansestors1, C.lastEvent);
+
+                    if (!EvtSetTools::contains(lastEvtHist, it) && (!EvtSetTools::contains(immPreEvtHist, it)))
+                    {
+                        EvtSetTools::pushBack(ansestors1, it);
+                        EventSet itHist = it->getHistory();
+                        if ((!enableChk) && (!EvtSetTools::contains(itHist, immPreEvt)))
+                            EvtSetTools::pushBack(ansestors1, immPreEvt);
+
+                        if (checkSdRcCreation(trans_tag, ansestors1, C))
+                        {
+                            g_var::nb_events++;
+                            UnfoldingEvent *e = new UnfoldingEvent(g_var::nb_events, trans_tag, ansestors1);
+                            EvtSetTools::pushBack(exC, e);
+                        }
+                    }
+                }
+            }
+        }
+
+        // now combine send and test actions, forming a ancestors set including 3 events
+        if (lastEvt_trans_actor_id == trans_actor_id)
+        {
+            for (auto sEvt : C.events_)
+            {
+                auto sEvt_trans_tag = sEvt->get_transition_tag();
+                auto sEvt_trans_type = App::app_side_->get_transition_type(sEvt_trans_tag);
+                auto sEvt_trans_mb_id = App::app_side_->get_transition_mb_id(sEvt_trans_tag);
+                auto sEvt_trans_actor_id = App::app_side_->get_transition_actor_id(sEvt_trans_tag);
+
+                auto check4 = (sEvt_trans_type == "Isend") && (sEvt_trans_mb_id == trans_mb_id) &&
+                    (sEvt_trans_actor_id != trans_actor_id) && (!EvtSetTools::contains(lastEvtHist, sEvt));
+                if (check4)
+                {
+                    EventSet rEvtHist = sEvt->getHistory();
+                    for (auto tEvt : C.events_)
+                    {
+                        auto tEvt_trans_tag = tEvt->get_transition_tag();
+                        auto tEvt_trans_type = App::app_side_->get_transition_type(tEvt_trans_tag);
+                        auto tEvt_trans_mb_id = App::app_side_->get_transition_mb_id(tEvt_trans_tag);
+                        auto tEvt_trans_actor_id = App::app_side_->get_transition_actor_id(tEvt_trans_tag);
+                        auto check5 = (tEvt_trans_type == "Test") && (tEvt_trans_actor_id != trans_actor_id) &&
+                                      (tEvt_trans_mb_id == trans_mb_id);
+                        if (check5)
+                        {
+                            UnfoldingEvent *testedEvent = C.findTestedComm(tEvt);
+                            auto testedEvt_trans_tag = testedEvent->get_transition_tag();
+                            auto testedEvt_trans_type = App::app_side_->get_transition_type(testedEvt_trans_tag); 
+
+                            if ((testedEvt_trans_type == "Ireveive") && (!EvtSetTools::contains(lastEvtHist, tEvt)) &&
+                                !(EvtSetTools::contains(rEvtHist, tEvt)) && (!EvtSetTools::contains(tEvt->getHistory(), sEvt)))
+                            {
+                                EventSet ancestorsSet;
+                                EvtSetTools::pushBack(ancestorsSet, C.lastEvent);
+                                EvtSetTools::pushBack(ancestorsSet, sEvt);
+                                EvtSetTools::pushBack(ancestorsSet, tEvt);
+
+                                if (checkSdRcCreation(trans_tag, ancestorsSet, C))
+                                {
+                                    g_var::nb_events++;
+                                    UnfoldingEvent *e = new UnfoldingEvent(g_var::nb_events, trans_tag, ancestorsSet);
+                                    EvtSetTools::pushBack(exC, e);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         return exC;
     }
@@ -1672,7 +1893,10 @@ namespace uc
                 // ELSE IF THE TRANSITION IS A isend or i receive
                 else if (check1)
                 {
+                    // TODO: remove the following line
                     EventSet exC1 = createIsendEvts(trans, C);
+                    EventSet exC1_tmp = createIsendEvts(trans_tag, C);
+
                     for (auto newEvent : exC1)
                         if (!EvtSetTools::contains(g_var::U, newEvent))
                         {
@@ -1742,9 +1966,7 @@ namespace uc
                             }
                     }
                 }
-
                 // ELSE IF THE TRANSITION IS A TEST ACTION
-
                 else if (trans.type == "Test")
                 {
 
@@ -1784,7 +2006,6 @@ namespace uc
                             }
                     }
                 }
-
                 else if (trans.type == "localComp" && C.lastEvent->transition.actor_id == trans.actor_id)
                 {
                     EventSet ancestors;

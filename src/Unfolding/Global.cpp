@@ -387,9 +387,9 @@ namespace uc
             auto testEvt_trans_comm_id = App::app_side_->get_transition_comm_id(testEvt_trans_tag);
             auto testEvt_trans_type = App::app_side_->get_transition_type(testEvt_trans_tag);
             auto testEvt_trans_actor_id = App::app_side_->get_transition_actor_id(testEvt_trans_tag);
-
-            if ((it_trans_comm_id == testEvt_trans_comm_id) && (it_trans_type != "Test") &&
-                it_trans_actor_id == testEvt_trans_actor_id)
+            auto check = (it_trans_comm_id == testEvt_trans_comm_id) && 
+                         (it_trans_type != "Test") && (it_trans_actor_id == testEvt_trans_actor_id);
+            if (check)
                 return it;
         }
         return nullptr;

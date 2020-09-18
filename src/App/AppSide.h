@@ -72,6 +72,7 @@ namespace app
         int get_transition_actor_id(std::string const& tr_tag);
         int get_transition_mb_id(std::string const& tr_tag);
         int get_transition_comm_id(std::string const& tr_tag);
+        
 
         /* MAILBOX */
         void create_mailbox(std::vector<int> mb_ids);
