@@ -71,7 +71,7 @@ int main(int argc, char **argv)
 
   case 3:
     TEST_3();
-  break;
+    break;
 
   case 4:
   {
@@ -133,11 +133,11 @@ int main(int argc, char **argv)
 
   case 8:
     TEST_8();
-  break;
+    break;
 
   case 9:
     TEST_9();
-  break;
+    break;
 
   case 10:
   { // 3 traces
@@ -153,11 +153,11 @@ int main(int argc, char **argv)
 
   case 11:
     TEST_11();
-  break;
+    break;
 
   case 12:
     TEST_12();
-  break;
+    break;
 
   case 13:
   { // the first simix model -> 2 traces
@@ -181,11 +181,11 @@ int main(int argc, char **argv)
 
   case 14:
     TEST_14();
-  break;
+    break;
 
   case 15:
     TEST_15();
-  break;
+    break;
 
   case 16:
   { // the first simix model -> 6 traces
@@ -209,7 +209,7 @@ int main(int argc, char **argv)
 
   case 17:
     TEST_17();
-  break;
+    break;
 
   case 18:
   { // 162 traces
@@ -328,25 +328,8 @@ int main(int argc, char **argv)
   break;
 
   case 23:
-  { // 18 traces
-    // Transition (maiboxid, commid, type)
-    actor_set.push_back(Actor(0, {Transition(1, 1, "Ireceive"), Transition(1, 1, "Test")}));
-    actor_set.push_back(Actor(1, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
-    actor_set.push_back(Actor(2, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
-    actor_set.push_back(Actor(3, {Transition(1, 1, "Isend"), Transition(1, 1, "Test")}));
-
-    initState = new State(4, actor_set, {Mailbox(1)});
-
-    UnfoldingEvent *e = new UnfoldingEvent(initState);
-    UC.explore(C, {EventSet()}, D, A, e, prev_exC, actor_set);
-
-    std::cout << "\n explore full state space :\n";
-
-    State initState1(3, actor_set, {Mailbox(1)});
-    stateStack.push_back(initState1);
-    // exhautiveExplore(stateStack, transList);
-  }
-  break;
+    TEST_23();
+    break;
 
   case 24:
   { // 8 traces

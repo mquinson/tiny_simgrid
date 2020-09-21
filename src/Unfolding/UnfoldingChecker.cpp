@@ -541,6 +541,7 @@ namespace uc
         return immPreEvt;
     }
 
+    // TODO: remove this function    
     void create_events_from_trans_and_maxEvent(std::tuple<Configuration, bool, Transition const&> t_params,
                             EventSet const& causalityEvts, UnfoldingEvent *immPreEvt, EventSet const& ancestorSet, 
                             std::list<EventSet>& maxEvtHistory, EventSet &exC)
@@ -670,6 +671,7 @@ namespace uc
         }
     }
 
+    // TODO: remove this function
     /* this function produces new events from a given transition (trans) and the maxEvtHistory*/
     EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, Transition trans)
     {
@@ -802,6 +804,7 @@ namespace uc
         return exC;
     }
 
+    // TODO: remove this function
     /* this function creates new events from a wait transition (trans),
     this wait waits a communication (action send/receive) in the the parameter/event evt
     The idea here is that, we try to march the communication with all possible communication to crete a complete
@@ -1062,6 +1065,7 @@ namespace uc
         return evtS;
     }
 
+    // TODO: remove this function
     EventSet createTestEvt(EventSet exC, UnfoldingEvent *evt, Configuration C, Transition trans)
     {
 
@@ -1229,6 +1233,246 @@ namespace uc
                         EvtSetTools::pushBack(ancestors, maxEvt);
                     g_var::nb_events++;
                     newEvt2 = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
+                    EvtSetTools::pushBack(evtS, newEvt2);
+                }
+            }
+        }
+
+        return evtS;
+    }
+
+    EventSet createTestEvt(EventSet exC, UnfoldingEvent *evt, Configuration C, std::string const& trans_tag)
+    {
+        EventSet evtS;
+        int numberSend = 0;
+        int numberReceive = 0;
+        EventSet hist = evt->getHistory();
+        EventSet lastEvtHist = C.lastEvent->getHistory();
+
+        auto evt_trans_tag = evt->get_transition_tag();
+        // (type, (actor_id, mb_id, trans_id))
+        auto evt_trans_attrs = App::app_side_->get_transition_attrs(evt_trans_tag); 
+        auto comType = evt_trans_attrs.first;
+        auto evt_trans_actor_id = std::get<0>(evt_trans_attrs.second); 
+        auto mbId = std::get<1>(evt_trans_attrs.second);
+
+        auto lastEvt_trans_tag = C.lastEvent->get_transition_tag();
+        // (type, (actor_id, mb_id, trans_id))
+        auto lastEvt_trans_attrs = App::app_side_->get_transition_attrs(lastEvt_trans_tag); 
+        auto lastEvt_trans_type = lastEvt_trans_attrs.first;
+        auto lastEvt_trans_actor_id = std::get<0>(lastEvt_trans_attrs.second);
+
+        // (type, (actor_id, mb_id, trans_id))
+        auto trans_attrs = App::app_side_->get_transition_attrs(trans_tag); 
+        auto trans_type = trans_attrs.first;
+        auto trans_actor_id = std::get<0>(trans_attrs.second);
+
+        UnfoldingEvent *newEvt1 = nullptr; 
+        UnfoldingEvent *newEvt2 = nullptr;
+        EventSet ancestors;
+
+        /* since action test is always enabled, create a new event although there is no pending Ireceive
+       * to march with the send (create ewEvt1)
+       *
+                                                       /--------\
+                                                      /          \
+                 evt=<Isend,ancestors>     evt2=<IReceive,ancestors>
+                                                / \           /
+                                               /	 \  	   /
+                                              /	  \       /
+                                         /       \     /
+        ewEvt1 =<Test1,(e1, e2)>     newEvt2 =<Test1, (e1, e2)>
+       * */
+
+        /*1. last evt = pre evt -> create at least one event
+        *						   |-> pre evt is in the history of last evt
+        *2. last evt != pre evt =>  |-> TRY TO create one evt
+                               |-> pre evt is not in the history of last evt
+        */
+
+        // count the number of isend/ireceive befere evt
+        if (comType == "Isend")
+        {
+            for (auto evt1 : hist)
+            {
+                auto evt1_trans_tag = evt1->get_transition_tag();
+                // (type, (actor_id, mb_id, trans_id))
+                auto evt1_trans_attrs = App::app_side_->get_transition_attrs(evt1_trans_tag);
+                auto evt1_trans_type = evt1_trans_attrs.first;
+                auto evt1_trans_mb_id = std::get<1>(evt1_trans_attrs.second);
+
+                if ((evt1_trans_type == "Isend") && (evt1_trans_mb_id == mbId))
+                    numberSend++;
+            }
+        }
+        else if (comType == "Ireceive")
+        {
+            for (auto evt1 : hist)
+            {
+                auto evt1_trans_tag = evt1->get_transition_tag();
+                // (type, (actor_id, mb_id, trans_id))
+                auto evt1_trans_attrs = App::app_side_->get_transition_attrs(evt1_trans_tag);
+                auto evt1_trans_type = evt1_trans_attrs.first;
+                auto evt1_trans_mb_id = std::get<1>(evt1_trans_attrs.second);
+
+                if ((evt1_trans_type == "Ireceive") && (evt1_trans_mb_id == mbId))
+                    numberReceive++;
+            }
+        }
+
+        // if last evt is the pre evt -> create at least one evt
+        if (lastEvt_trans_actor_id == trans_actor_id)
+        // maxEvt =  C.findActorMaxEvt(evt->transition.actor_id);
+        {
+            EventSet maxEvtHist = C.lastEvent->getHistory();
+
+            EvtSetTools::pushBack(ancestors, C.lastEvent);
+            g_var::nb_events++;
+            newEvt1 = new UnfoldingEvent(g_var::nb_events, trans_tag, ancestors);
+
+            EvtSetTools::pushBack(evtS, newEvt1);
+
+            /* Now try to create newEvt2 if there is a pending communication can be march
+           with the communication tested by the Test action */
+
+            if (comType == "Isend")
+            {
+                // try to march the communication with all possible receice request
+                for (auto evt2 : C.events_)
+                {
+                    auto evt2_trans_tag = evt2->get_transition_tag();
+                    // (type, (actor_id, mb_id, trans_id))
+                    auto evt2_trans_attrs = App::app_side_->get_transition_attrs(evt2_trans_tag);
+                    auto evt2_trans_type = evt2_trans_attrs.first;
+                    auto evt2_trans_mb_id = std::get<1>(evt2_trans_attrs.second);
+
+                    auto check_ireceive = (evt2_trans_type == "Ireceive") && 
+                                          (evt2_trans_mb_id == mbId) &&
+                                          (!EvtSetTools::contains(lastEvtHist, evt2));  
+                    if (check_ireceive)
+                    {
+                        // after find out a receive request
+                        EventSet hist2 = evt2->getHistory();
+                        int nbReceive = 0;
+
+                        // count the number of receice requests before the receive that we found above
+
+                        for (auto evt3 : hist2)
+                        {
+                            auto evt3_trans_tag = evt3->get_transition_tag();
+                            // (type, (actor_id, mb_id, trans_id))
+                            auto evt3_trans_attrs = App::app_side_->get_transition_attrs(evt3_trans_tag);
+                            auto evt3_trans_type = evt3_trans_attrs.first;
+                            auto evt3_trans_mb_id = std::get<1>(evt3_trans_attrs.second);
+
+                            if ((evt3_trans_type == "Ireceive") && (evt3_trans_mb_id == mbId))
+                                nbReceive++;
+                        }
+                        if (numberSend == nbReceive)
+                        {
+                            /* if the number send = number receive, we can march the send communication with the rececive
+                            * -> create an new event ( newEvt2 in the figure) */
+                            EvtSetTools::pushBack(ancestors, evt2);
+                            g_var::nb_events++;
+                            newEvt2 = new UnfoldingEvent(g_var::nb_events, trans_tag, ancestors);
+                            EvtSetTools::pushBack(evtS, newEvt2);
+                        }
+                    }
+                }
+            }            
+            else if (comType == "Ireceive") // do the same for a receive
+            {
+                // try to march the communication with all possible receice request
+                for (auto evt2 : C.events_)
+                {
+                    auto evt2_trans_tag = evt2->get_transition_tag();
+                    // (type, (actor_id, mb_id, trans_id))
+                    auto evt2_trans_attrs = App::app_side_->get_transition_attrs(evt2_trans_tag);
+                    auto evt2_trans_type = evt2_trans_attrs.first;
+                    auto evt2_trans_mb_id = std::get<1>(evt2_trans_attrs.second);
+
+                    auto check_isend = (evt2->transition.type == "Isend") && 
+                                        (evt2->transition.mailbox_id == mbId) &&
+                                        (!EvtSetTools::contains(lastEvtHist, evt2));
+                    if (check_isend)
+                    {
+                        // after find out a receive request
+                        EventSet hist2 = evt2->getHistory();
+                        int nbSend = 0;
+
+                        // count the number of receice requests heppen before the receive that we found above
+
+                        for (auto evt3 : hist2)
+                        {
+                            auto evt3_trans_tag = evt3->get_transition_tag();
+                            // (type, (actor_id, mb_id, trans_id))
+                            auto evt3_trans_attrs = App::app_side_->get_transition_attrs(evt3_trans_tag);
+                            auto evt3_trans_type = evt3_trans_attrs.first;
+                            auto evt3_trans_mb_id = std::get<1>(evt3_trans_attrs.second);
+
+                            if ((evt3_trans_type == "Isend") && (evt3_trans_mb_id == mbId))
+                                nbSend++;
+                        }
+                        if (numberReceive == nbSend)
+                        {
+
+                            /* if the number send = number receive, we can march the send communication with the rececive
+                            * -> create an new event ( newEvt2 in the figure) */
+
+                            EvtSetTools::pushBack(ancestors, evt2);
+                            g_var::nb_events++;
+                            newEvt2 = new UnfoldingEvent(g_var::nb_events, trans_tag, ancestors);
+                            EvtSetTools::pushBack(evtS, newEvt2);
+                        }
+                    }
+                }
+            }
+        }
+        else // If the last event is evt2 (in figure), try to march evt2 with evt (in figure)
+        {
+            if (comType == "Isend")
+            {
+                int nbReceive = 0;
+
+                for (auto evt2 : lastEvtHist)
+                {
+                    auto evt2_trans_tag = evt2->get_transition_tag();
+                    auto evt2_trans_type = App::app_side_->get_transition_type(evt2_trans_tag);
+
+                    if (evt2_trans_type == "Ireceive")
+                        nbReceive++;
+                }
+                if (numberSend == nbReceive)
+                {
+                    UnfoldingEvent *maxEvt = C.findActorMaxEvt(evt_trans_actor_id);
+                    EvtSetTools::pushBack(ancestors, C.lastEvent);
+                    if (!EvtSetTools::contains(lastEvtHist, maxEvt))
+                        EvtSetTools::pushBack(ancestors, maxEvt);
+                    g_var::nb_events++;
+                    newEvt2 = new UnfoldingEvent(g_var::nb_events, trans_tag, ancestors);
+                    EvtSetTools::pushBack(evtS, newEvt2);
+                }
+            }
+            else if (comType == "Ireceive")
+            {
+                int nbSend = 0;
+                for (auto evt2 : lastEvtHist)
+                {
+                    auto evt2_trans_tag = evt2->get_transition_tag();
+                    auto evt2_trans_type = App::app_side_->get_transition_type(evt2_trans_tag);
+
+                    if (evt2_trans_type == "Isend")
+                        nbSend++;
+                }
+                if (numberReceive == nbSend)
+                {
+                    UnfoldingEvent *maxEvt = C.findActorMaxEvt(evt_trans_actor_id);
+
+                    EvtSetTools::pushBack(ancestors, C.lastEvent);
+                    if (!EvtSetTools::contains(lastEvtHist, maxEvt))
+                        EvtSetTools::pushBack(ancestors, maxEvt);
+                    g_var::nb_events++;
+                    newEvt2 = new UnfoldingEvent(g_var::nb_events, trans_tag, ancestors);
                     EvtSetTools::pushBack(evtS, newEvt2);
                 }
             }
@@ -2240,7 +2484,7 @@ namespace uc
 
                 // TODO: remove the next line
                 auto lastEvt_trans_tag = C.lastEvent->get_transition_tag();
-                // returns (type, (actor_id, mb_id, trans_id))
+                // (type, (actor_id, mb_id, trans_id))
                 auto lastEvt_trans_attrs = App::app_side_->get_transition_attrs(lastEvt_trans_tag);
                 auto lastEvt_trans_type = lastEvt_trans_attrs.first;
                 auto lastEvt_trans_actor_id = std::get<0>(lastEvt_trans_attrs.second);
@@ -2381,30 +2625,37 @@ namespace uc
                     }
                 }
                 // ELSE IF THE TRANSITION IS A TEST ACTION
-                else if (trans.type == "Test")
+                else if (trans_type == "Test")
                 {
-
                     // check which kind of communication (send/receive) tested by the test?
-
                     UnfoldingEvent *event = nullptr;
                     for (auto evt1 : C.events_)
-                        if (evt1->transition.actor_id == trans.actor_id && evt1->transition.commId == trans.commId)
+                    {
+                        auto evt1_trans_tag = evt1->get_transition_tag();
+                        auto evt1_trans_actor_id = App::app_side_->get_transition_actor_id(evt1_trans_tag);
+                        auto evt1_trans_comm_id = App::app_side_->get_transition_comm_id(evt1_trans_tag);
+
+                        if ((evt1_trans_actor_id == trans_actor_id) && (evt1_trans_comm_id == trans_comm_id))
                         {
                             event = evt1;
                             break;
                         }
+                    }
 
                     /* we only call function createTestEvt if the last action is send or receive
                     or dependent with the test (transition in the same actor) */
+                    
+                    auto event_trans_tag = event->get_transition_tag();
+                    auto event_trans_type = App::app_side_->get_transition_type(event_trans_tag); 
 
-                    std::string comType = C.lastEvent->transition.type;
-                    std::string comType1 = event->transition.type;
+                    auto check_test = (lastEvt_trans_actor_id == trans_actor_id) || 
+                                      ((lastEvt_trans_type == "Isend") && (event_trans_type == "Ireceive")) ||
+                                      ((lastEvt_trans_type == "Ireceive") && (event_trans_type == "Isend"));
 
-                    if (C.lastEvent->transition.actor_id == trans.actor_id || (comType == "Isend" && comType1 == "Ireceive") or
-                        (comType == "Ireceive" && comType1 == "Isend"))
-
+                    if (check_test)
                     {
                         EventSet newEvts = createTestEvt(exC, event, C, trans);
+                        EventSet newEvts_tmp = createTestEvt(exC, event, C, trans_tag);
 
                         for (auto newEvent : newEvts)
                             if (!EvtSetTools::contains(g_var::U, newEvent))
@@ -2420,12 +2671,12 @@ namespace uc
                             }
                     }
                 }
-                else if (trans.type == "localComp" && C.lastEvent->transition.actor_id == trans.actor_id)
+                else if ((trans_type == "localComp") && (lastEvt_trans_actor_id == trans_actor_id))
                 {
                     EventSet ancestors;
                     EvtSetTools::pushBack(ancestors, C.lastEvent);
                     g_var::nb_events++;
-                    UnfoldingEvent *newEvent = new UnfoldingEvent(g_var::nb_events, trans, ancestors);
+                    UnfoldingEvent *newEvent = new UnfoldingEvent(g_var::nb_events, trans_tag, ancestors);
                     if (!EvtSetTools::contains(g_var::U, newEvent))
                     {
                         EvtSetTools::pushBack(g_var::U, newEvent);

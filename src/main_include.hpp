@@ -153,4 +153,25 @@ void TEST_17()
     checker_side->run(app_side);
 }
 
+void TEST_23()
+{ 
+    // 18 traces
+    // Transition (maiboxid, commid, type)
+    
+    std::vector<S_TRANSITION_PARAMS_3> p0 = {{1, 1, IRECEIVE}, {1, 1, TEST}};
+    std::vector<S_TRANSITION_PARAMS_3> p1 = {{1, 1, ISEND}, {1, 1, TEST}};
+    std::vector<S_TRANSITION_PARAMS_3> p2 = {{1, 1, ISEND}, {1, 1, TEST}};
+    std::vector<S_TRANSITION_PARAMS_3> p3 = {{1, 1, ISEND}, {1, 1, TEST}};
+
+    app_side->create_actor(0, p0);
+    app_side->create_actor(1, p1);
+    app_side->create_actor(2, p2);
+    app_side->create_actor(3, p3);
+
+    app_side->create_mailbox({1});
+
+    checker_side->run(app_side);
+}
+
+
 #endif // MAIN_INCLUDE_HPP
