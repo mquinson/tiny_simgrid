@@ -907,6 +907,161 @@ namespace uc
         return evtS;
     }
 
+    /* this function creates new events from a wait transition (trans),
+    this wait waits a communication (action send/receive) in the the parameter/event evt
+    The idea here is that, we try to march the communication with all possible communication to crete a complete
+    communication, making wait become enabled. When the wait enable, we can create new events
+    */
+    EventSet createWaitEvt(const UnfoldingEvent *evt, Configuration C, std::string const& trans_tag)
+    {
+        EventSet evtS;
+        int nbSdRc = 0;
+        EventSet hist = evt->getHistory();
+
+        auto evt_trans_tag = evt->get_transition_tag();
+        // (type, (actor_id, mb_id, trans_id))
+        auto evt_trans_attrs = App::app_side_->get_transition_attrs(evt_trans_tag);
+        auto comType = evt_trans_attrs.first;
+        auto evt_trans_actor_id = std::get<0>(evt_trans_attrs.second);
+        auto mbId = std::get<1>(evt_trans_attrs.second);
+
+        if (comType == "Isend")
+        {
+            // if waited communication is  send, count the number of send request before the communication
+            for (auto evt1 : hist)
+            {
+                auto evt1_trans_tag = evt1->get_transition_tag();
+                // (type, (actor_id, mb_id, trans_id))
+                auto evt1_trans_attrs = App::app_side_->get_transition_attrs(evt1_trans_tag);
+                auto evt1_trans_type = evt1_trans_attrs.first;
+                auto evt1_trans_mb_id = std::get<1>(evt1_trans_attrs.second);
+
+                if ((evt1_trans_type == "Isend") && (evt1_trans_mb_id == mbId))
+                    nbSdRc++;
+            }
+            // try to march the communication with all possible receice request
+            for (auto evt2 : C.events_)
+            {
+                auto evt2_trans_tag = evt2->get_transition_tag();
+                // (type, (actor_id, mb_id, trans_id))
+                auto evt2_trans_attrs = App::app_side_->get_transition_attrs(evt2_trans_tag);
+                auto evt2_trans_type = evt2_trans_attrs.first;
+                auto evt2_trans_mb_id = std::get<1>(evt2_trans_attrs.second);
+
+                if ((evt2_trans_type == "Ireceive") && (evt2_trans_mb_id == mbId))
+                {
+                    // after find ount a receive request
+                    EventSet hist1 = evt2->getHistory();
+                    int nbRc = 0;
+
+                    // count the number of receice requests before the receive that we found above
+
+                    for (auto evt3 : hist1)
+                    {
+                        auto evt3_trans_tag = evt3->get_transition_tag();
+                        // (type, (actor_id, mb_id, trans_id))
+                        auto evt3_trans_attrs = App::app_side_->get_transition_attrs(evt3_trans_tag);
+                        auto evt3_trans_type = evt3_trans_attrs.first;
+                        auto evt3_trans_mb_id = std::get<1>(evt3_trans_attrs.second);
+
+                        if ((evt3_trans_type == "Ireceive") && (evt3_trans_mb_id == mbId))
+                            nbRc++;
+                    }
+                    if (nbSdRc == nbRc)
+                    {
+                        // if the number send = number receive, we can march the send communication  with the rececive
+                        EventSet ancestors;
+                        UnfoldingEvent *maxEvt = C.findActorMaxEvt(evt_trans_actor_id);
+                        EventSet maxEvtHist = maxEvt->getHistory();
+
+                        if (EvtSetTools::contains(maxEvtHist, evt2))
+                            EvtSetTools::pushBack(ancestors, maxEvt);
+                        else if (EvtSetTools::contains(hist1, maxEvt))
+                            EvtSetTools::pushBack(ancestors, evt2);
+                        else
+                        {
+                            EvtSetTools::pushBack(ancestors, maxEvt);
+                            EvtSetTools::pushBack(ancestors, evt2);
+                        }
+                        g_var::nb_events++;
+                        UnfoldingEvent *e = new UnfoldingEvent(g_var::nb_events, trans_tag, ancestors);
+                        EvtSetTools::pushBack(evtS, e);
+                    }
+                }
+            }
+        }
+        // do the same for a receive
+        else if (comType == "Ireceive")
+        {
+            // if waited communication is send, count the number of send request before the communication
+
+            for (auto evt1 : hist)
+            {
+                auto evt1_trans_tag = evt1->get_transition_tag();
+                // (type, (actor_id, mb_id, trans_id))
+                auto evt1_trans_attrs = App::app_side_->get_transition_attrs(evt1_trans_tag);
+                auto evt1_trans_type = evt1_trans_attrs.first;
+                auto evt1_trans_mb_id = std::get<1>(evt1_trans_attrs.second);
+
+                if ((evt1_trans_type == "Ireceive") && (evt1_trans_mb_id == mbId))
+                    nbSdRc++;
+            }
+            // try to march the communication with all possible receice request
+            for (auto evt2 : C.events_)
+            {
+                auto evt2_trans_tag = evt2->get_transition_tag();
+                // (type, (actor_id, mb_id, trans_id))
+                auto evt2_trans_attrs = App::app_side_->get_transition_attrs(evt2_trans_tag);
+                auto evt2_trans_type = evt2_trans_attrs.first;
+                auto evt2_trans_mb_id = std::get<1>(evt2_trans_attrs.second);
+
+                if ((evt2_trans_type == "Isend") && (evt2_trans_mb_id == mbId))
+                {
+                    // after find out a receive request
+                    EventSet hist1 = evt2->getHistory();
+                    int nbRc = 0;
+
+                    // count the number of receice requests before the receive that we found above
+
+                    for (auto evt3 : hist1)
+                    {
+                        auto evt3_trans_tag = evt3->get_transition_tag();
+                        // (type, (actor_id, mb_id, trans_id))
+                        auto evt3_trans_attrs = App::app_side_->get_transition_attrs(evt3_trans_tag);
+                        auto evt3_trans_type = evt3_trans_attrs.first;
+                        auto evt3_trans_mb_id = std::get<1>(evt3_trans_attrs.second);
+
+                        if ((evt3_trans_type == "Isend") && (evt3_trans_mb_id == mbId))
+                            nbRc++;
+                    }
+
+                    if (nbSdRc == nbRc)
+                    {
+                        // if the number send = number receive, we can march the send communication  with the rececive
+                        EventSet ancestors;
+                        UnfoldingEvent *maxEvt = C.findActorMaxEvt(evt_trans_actor_id);
+                        EventSet maxEvtHist = maxEvt->getHistory();
+
+                        if (EvtSetTools::contains(maxEvtHist, evt2))
+                            EvtSetTools::pushBack(ancestors, maxEvt);
+                        else if (EvtSetTools::contains(hist1, maxEvt))
+                            EvtSetTools::pushBack(ancestors, evt2);
+                        else
+                        {
+                            EvtSetTools::pushBack(ancestors, maxEvt);
+                            EvtSetTools::pushBack(ancestors, evt2);
+                        }
+                        g_var::nb_events++;
+                        UnfoldingEvent *e = new UnfoldingEvent(g_var::nb_events, trans_tag, ancestors);
+                        EvtSetTools::pushBack(evtS, e);
+                    }
+                }
+            }
+        }
+
+        return evtS;
+    }
+
     EventSet createTestEvt(EventSet exC, UnfoldingEvent *evt, Configuration C, Transition trans)
     {
 
@@ -2083,16 +2238,30 @@ namespace uc
                 //auto eq = trans.type != "Wait" && trans.type != "Test" &&
                 //    trans.type != "Isend" && trans.type != "Ireceive" && trans.type != "localComp";
 
+                // TODO: remove the next line
+                auto lastEvt_trans_tag = C.lastEvent->get_transition_tag();
+                // returns (type, (actor_id, mb_id, trans_id))
+                auto lastEvt_trans_attrs = App::app_side_->get_transition_attrs(lastEvt_trans_tag);
+                auto lastEvt_trans_type = lastEvt_trans_attrs.first;
+                auto lastEvt_trans_actor_id = std::get<0>(lastEvt_trans_attrs.second);
+                auto lastEvt_trans_mb_id = std::get<1>(lastEvt_trans_attrs.second);
+
                 // TODO: remove next line when the Transition objects entirely moved to the AppSide
                 auto trans_tag = trans.get_tr_tag();
-                auto trans_type = App::app_side_->get_transition_type(trans_tag);
-                auto trans_mb_id = App::app_side_->get_transition_mb_id(trans_tag);
 
+                // returns (type, (actor_id, mb_id, trans_id))
+                auto trans_attrs = App::app_side_->get_transition_attrs(trans_tag);
+                auto trans_type = trans_attrs.first;
+                auto trans_actor_id = std::get<0>(trans_attrs.second);
+                auto trans_mb_id = std::get<1>(trans_attrs.second);
+                auto trans_comm_id = App::app_side_->get_transition_comm_id(trans_tag);
                 auto trans_dependency = App::app_side_->check_transition_dependency(trans_tag, lastEvt_trans_tag);  
+                
                 std::vector<std::string> types = {"Wait", "Test", "Isend", "Ireceive", "localComp"};
                 auto transIsInTypes = App::app_side_->check_transition_type(trans_tag, types);
 
                 auto check0 = trans_dependency && !transIsInTypes;
+
                 auto check_isend = (trans_type == "Isend") &&
                               (trans_dependency ||
                               ((lastEvt_trans_type == "Test") && (lastEvt_trans_mb_id == trans_mb_id)));
@@ -2152,7 +2321,8 @@ namespace uc
                 else if (check_ireceive)
                 {
                     EventSet exC1 = createIreceiveEvts(trans, C);
-                    auto exC1_tmp = createIreceiveEvts(trans_tag, C); 
+                    auto exC1_tmp = createIreceiveEvts(trans_tag, C);
+
                     for (auto newEvent : exC1)
                         if (!EvtSetTools::contains(g_var::U, newEvent))
                         {
@@ -2166,30 +2336,36 @@ namespace uc
                         }
                 }
                 // ELSE IF THE TRANSITION IS A WAIT ACTION
-                else if (trans.type == "Wait")
+                else if (trans_type == "Wait")
                 {
-
                     // check which kind of communication (send/receive) waited by the wait?
                     UnfoldingEvent *evt = nullptr;
                     for (auto evt1 : C.events_)
-                        if (evt1->transition.actor_id == trans.actor_id && evt1->transition.commId == trans.commId)
+                    {
+                        auto evt1_trans_tag = evt1->get_transition_tag();
+                        auto evt1_trans_actor_id = App::app_side_->get_transition_actor_id(evt1_trans_tag);    
+                        auto evt1_trans_comm_id = App::app_side_->get_transition_comm_id(evt1_trans_tag);    
+
+                        if ((evt1_trans_actor_id == trans_actor_id) && (evt1_trans_comm_id == trans_comm_id))
                         {
                             evt = evt1;
                             break;
                         }
+                    }
 
                     /* we only call function createWaitEvt if the last action is send/ or receive
                     or dependent with the wait (transition in the same actor) */
+                    auto evt_trans_tag = evt->get_transition_tag();
+                    auto evt_trans_type = App::app_side_->get_transition_type(evt_trans_tag);
 
-                    std::string comType = C.lastEvent->transition.type;
-                    std::string comType1 = evt->transition.type;
+                    auto check_wait = (lastEvt_trans_actor_id == trans_actor_id) || 
+                            (lastEvt_trans_type == "Isend" && evt_trans_type == "Ireceive") ||
+                            (lastEvt_trans_type == "Ireceive" && evt_trans_type == "Isend"); 
 
-                    if (C.lastEvent->transition.actor_id == trans.actor_id || (comType == "Isend" && comType1 == "Ireceive") or
-                        (comType == "Ireceive" && comType1 == "Isend"))
+                    if (check_wait)
                     {
                         EventSet newEvts = createWaitEvt(evt, C, trans);
-
-                        // EventSet unionSet = U.makeUnion(U,gD1);
+                        auto newEvts_tmp = createWaitEvt(evt, C, trans_tag); 
 
                         for (auto newEvent : newEvts)
                             if (!EvtSetTools::contains(g_var::U, newEvent))
