@@ -228,6 +228,24 @@ namespace app
         return -1;
     }
 
+    // returns (type, (actor_id, mb_id, trans_id))
+    std::pair<std::string, std::tuple<int, int, int>> AppSide::get_transition_attrs(std::string const& tr_tag)
+    {
+        std::pair<std::string, std::tuple<int, int, int>> trans_attrs = std::make_pair("", std::make_tuple(-1, -1, -1));
+        auto attr = find_transition_attrs(tr_tag);
+        if(attr != nullptr)
+        {
+            auto type = attr->type;
+            auto actor_id = attr->actor_id;
+            auto mb_id = attr->mailbox_id;
+            auto id = attr->id;
+
+            auto t = std::make_tuple(actor_id, mb_id, id);
+            return std::make_pair(type, t);
+        }
+        return trans_attrs;
+    }
+
     S_TRANSITION_ATTRS* AppSide::find_transition_attrs(std::string const& tr_tag)
     {
         auto pos = transitions_.find(tr_tag);
