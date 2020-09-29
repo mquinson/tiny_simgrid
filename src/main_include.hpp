@@ -18,6 +18,22 @@ std::shared_ptr<AppSide> app_side = std::make_shared<AppSide>();
 using CheckerSide = uc::CheckerSide;
 std::shared_ptr<CheckerSide> checker_side = std::make_shared<CheckerSide>();
 
+void TEST_1()
+{
+    // the first example (in the paper)
+    // Transition(read_write, access_variable)
+
+    std::vector<S_TRANSITION_PARAMS_2> p0 = {{1, 0}}; // P0: write x
+    std::vector<S_TRANSITION_PARAMS_2> p1 = {{0, 0}}; // P1: read x
+    std::vector<S_TRANSITION_PARAMS_2> p2 = {{0, 0}}; // P2: read x
+
+    app_side->create_actor(0, p0);
+    app_side->create_actor(1, p1);
+    app_side->create_actor(2, p2);
+
+    checker_side->run(app_side);
+}
+
 void TEST_3()
 {
     // the third example - 1 trace

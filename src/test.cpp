@@ -45,17 +45,8 @@ int main(int argc, char **argv)
   switch (example)
   {
   case 1:
-  {
-    // the first example (in the paper)
-    // Transition(read_write, access_variable)
-
-    std::deque<Actor> actors;
-    actors.push_back(Actor(0, {Transition(1, 0)})); // write x
-    actors.push_back(Actor(1, {Transition(0, 0)})); // read x
-    actors.push_back(Actor(2, {Transition(0, 0)})); // read x
-    UC.explore(actors, {});
-  }
-  break;
+    TEST_1();
+    break;
 
   case 2:
   {

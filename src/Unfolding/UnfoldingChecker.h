@@ -11,9 +11,6 @@ namespace uc
     using Transition = app::Transition;
     using Mailbox = app::Mailbox;
 
-    // using AppSide = app::AppSide;
-    // const std::unique_ptr<AppSide> app_side_ = std::unique_ptr<AppSide>(new AppSide());
-
     class UnfoldingChecker
     {
         unsigned long expandedStatesCount_ = 0;

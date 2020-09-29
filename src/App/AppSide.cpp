@@ -38,12 +38,11 @@ namespace app
     }
 
     AppSide::AppSide() : actors_(std::make_shared<std::deque<Actor>>()),
-                         mailboxes_(std::make_shared<std::deque<Mailbox>>()), 
-                         state_manager_(std::make_shared<StateManager>()) 
-    {        
-        
+                         mailboxes_(std::make_shared<std::deque<Mailbox>>()),
+                         state_manager_(std::make_shared<StateManager>())
+    {
     }
-    
+
     int AppSide::create_state(std::deque<Actor> &&actors, std::deque<Mailbox> &&mailboxes)
     {
         return state_manager_->create_state(std::forward<std::deque<Actor>>(actors), std::forward<std::deque<Mailbox>>(mailboxes));
@@ -54,17 +53,37 @@ namespace app
         return state_manager_->execute_transition(state_id, transition_tag);
     }
 
-    std::deque<std::string> AppSide::get_all_tr0_tags(int state_id) const
-    {
-        return state_manager_->get_all_tr0_tags(state_id);
-    }
-
     std::deque<std::string> AppSide::get_enabled_transitions(int sid) const
     {
         return state_manager_->get_enabled_transitions(sid);
     }
 
-    bool AppSide::check_transition_dependency(std::string const& tr_tag0, std::string const& tr_tag1) const
+    std::deque<std::string> AppSide::get_trans0_tags() const
+    {
+        std::deque<std::string> all_tr0;
+        auto actors = *(actors_.get());
+        for (auto p : actors)
+            all_tr0.push_back(p.trans[0].get_trans_tag());
+        return all_tr0;
+    }
+
+    bool AppSide::partial_check_transition_equality(std::string const& tr_tag0, std::string const& tr_tag1)
+    {
+        auto attr0 = get_transition_attrs(tr_tag0);
+        auto attr1 = get_transition_attrs(tr_tag1);
+
+        // (type, (actor_id, mb_id, trans_id))
+        auto trans0_actor_id = std::get<0>(attr0.second);
+        auto trans0_trans_id = std::get<2>(attr0.second);
+        auto trans1_actor_id = std::get<0>(attr1.second);
+        auto trans1_trans_id = std::get<2>(attr1.second);
+
+        if ((trans0_trans_id != trans1_trans_id) || (trans0_actor_id != trans1_actor_id))
+            return false;
+        return true;
+    }
+
+    bool AppSide::check_transition_dependency(std::string const &tr_tag0, std::string const &tr_tag1) const
     {
         Transition tr0;
         Transition tr1;
@@ -72,19 +91,19 @@ namespace app
         bool found_tr1 = false;
 
         // Since the dependency check uses some attributes of a Transition that are constant
-        // over the run of the algorithm, it remains independent of algorithm's state (or event's state)  
+        // over the run of the algorithm, it remains independent of algorithm's state (or event's state)
         auto actors = actors_.get();
-        for(auto p:*actors)
+        for (auto p : *actors)
         {
-            for(auto t:p.trans)
+            for (auto t : p.trans)
             {
-                auto tag = t.get_tr_tag();
-                if(tag == tr_tag0)
+                auto tag = t.get_trans_tag();
+                if (tag == tr_tag0)
                 {
                     found_tr0 = true;
                     tr0 = t;
                 }
-                if(tag == tr_tag1)
+                if (tag == tr_tag1)
                 {
                     found_tr1 = true;
                     tr1 = t;
@@ -106,7 +125,7 @@ namespace app
             trans.push_back(std::move(*tr));
         }
         auto actor = new Actor(actor_id, trans);
-        add_transition(*actor);
+        add_transition(actor->trans);
         actors_->push_back(std::move(*actor));
     }
 
@@ -119,7 +138,7 @@ namespace app
             trans.push_back(std::move(*tr));
         }
         auto actor = new Actor(actor_id, trans);
-        add_transition(*actor);
+        add_transition(actor->trans);
         actors_->push_back(std::move(*actor));
     }
 
@@ -135,9 +154,9 @@ namespace app
         return mbs;
     }
 
-    void AppSide::add_transition(Actor const &actor)
+    void AppSide::add_transition(std::vector<Transition> const& transitions)
     {
-        for (auto t : actor.trans)
+        for (auto t : transitions)
         {
             S_TRANSITION_ATTRS attr;
             attr.access_var = t.access_var;
@@ -149,17 +168,17 @@ namespace app
             attr.mutex_iD = t.mutexID;
             attr.read_write = t.read_write;
             attr.type = t.type;
-            transitions_.insert({t.get_tr_tag(), std::move(attr)});
+            transitions_.insert({t.get_trans_tag(), std::move(attr)});
         }
     }
 
-    bool AppSide::check_transition_type(std::string const& tr_tag, std::vector<std::string> const& type_names)
+    bool AppSide::check_transition_type(std::string const &tr_tag, std::vector<std::string> const &type_names)
     {
         bool isEqual = false;
         auto type = get_transition_type(tr_tag);
         for (auto t : type_names)
         {
-            if(t == type)
+            if (t == type)
             {
                 isEqual = true;
                 break;
@@ -168,47 +187,47 @@ namespace app
         return isEqual;
     }
 
-    std::string AppSide::get_transition_type(std::string const& tr_tag)
+    std::string AppSide::get_transition_type(std::string const &tr_tag)
     {
         auto attr = find_transition_attrs(tr_tag);
-        if(attr != nullptr)
+        if (attr != nullptr)
         {
             return attr->type;
         }
         return "";
     }
 
-    int AppSide::get_transition_mb_id(std::string const& tr_tag)
+    int AppSide::get_transition_mb_id(std::string const &tr_tag)
     {
         auto attr = find_transition_attrs(tr_tag);
-        if(attr != nullptr)
+        if (attr != nullptr)
         {
             return attr->mailbox_id;
         }
         return -1;
     }
 
-    int AppSide::get_transition_read_write(std::string const& tr_tag)
+    int AppSide::get_transition_read_write(std::string const &tr_tag)
     {
         auto attr = find_transition_attrs(tr_tag);
-        if(attr != nullptr)
+        if (attr != nullptr)
         {
             return attr->read_write;
         }
         return -1;
     }
 
-    int AppSide::get_transition_id(std::string const& tr_tag)
+    int AppSide::get_transition_id(std::string const &tr_tag)
     {
         auto attr = find_transition_attrs(tr_tag);
-        if(attr != nullptr)
+        if (attr != nullptr)
         {
             return attr->id;
         }
         return -1;
     }
 
-    int AppSide::get_transition_actor_id(std::string const& tr_tag)
+    int AppSide::get_transition_actor_id(std::string const &tr_tag)
     {
         auto attr = find_transition_attrs(tr_tag);
         if (attr != nullptr)
@@ -229,11 +248,11 @@ namespace app
     }
 
     // returns (type, (actor_id, mb_id, trans_id))
-    std::pair<std::string, std::tuple<int, int, int>> AppSide::get_transition_attrs(std::string const& tr_tag)
+    std::pair<std::string, std::tuple<int, int, int>> AppSide::get_transition_attrs(std::string const &tr_tag)
     {
         std::pair<std::string, std::tuple<int, int, int>> trans_attrs = std::make_pair("", std::make_tuple(-1, -1, -1));
         auto attr = find_transition_attrs(tr_tag);
-        if(attr != nullptr)
+        if (attr != nullptr)
         {
             auto type = attr->type;
             auto actor_id = attr->actor_id;
@@ -246,7 +265,7 @@ namespace app
         return trans_attrs;
     }
 
-    S_TRANSITION_ATTRS* AppSide::find_transition_attrs(std::string const& tr_tag)
+    S_TRANSITION_ATTRS *AppSide::find_transition_attrs(std::string const &tr_tag)
     {
         auto pos = transitions_.find(tr_tag);
         if (pos == transitions_.end())

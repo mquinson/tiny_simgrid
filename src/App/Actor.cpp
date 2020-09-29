@@ -10,7 +10,7 @@ namespace app
             this->trans.push_back(trans[i]);
             this->trans[i].id = i;
             this->trans[i].actor_id = id;
-            this->trans[i].set_tr_tag(id, i);
+            this->trans[i].set_trans_tag(id, i);
         }
     }
 
@@ -21,7 +21,7 @@ namespace app
             this->trans.push_back(trans[i]);
             this->trans[i].id = i;
             this->trans[i].actor_id = id;
-            this->trans[i].set_tr_tag(id, i);
+            this->trans[i].set_trans_tag(id, i);
         }
     }
 

@@ -16,8 +16,7 @@ namespace app
         ~StateManager() = default;
 
         int create_state(std::deque<Actor>&& actors, std::deque<Mailbox>&& mailboxes); 
-        int execute_transition(int sid, std::string const& transition_tag);
-        std::deque<std::string> get_all_tr0_tags(int sid);
+        int execute_transition(int sid, std::string const& transition_tag);    
         std::deque<std::string> get_enabled_transitions(int sid);
 
     private:

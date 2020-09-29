@@ -4,12 +4,6 @@ namespace app
 {
     int StateManager::state_id_ = 0;
 
-    std::deque<std::string> StateManager::get_all_tr0_tags(int sid)
-    {
-        auto state = find_state(sid);
-        return state->get_all_tr0_tags(); 
-    }
-
     int StateManager::create_state(std::deque<Actor> &&actors, std::deque<Mailbox> &&mailboxes)
     {
         auto state = new AppState(std::forward<std::deque<Actor>>(actors),

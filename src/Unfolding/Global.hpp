@@ -23,6 +23,13 @@ namespace uc
         static void set_app_side(std::shared_ptr<AppSide> app_side);
     };
 
+    class Util
+    {
+    public:
+        static int INT_DEF;
+        static void get_transition_detail(std::string trans_tag, std::string &type, int &actor_id = INT_DEF, int &mb_id = INT_DEF, int &trans_id = INT_DEF);
+    };
+
     class EvtSetTools
     {
     public:
@@ -54,8 +61,6 @@ namespace uc
         UnfoldingEvent *lastEvent; // The last added event
 
         Configuration plus_config(UnfoldingEvent *) const;
-        void createEvts(Configuration C, EventSet &result, const app::Transition &t,
-                        s_evset_in_t ev_sets, bool chk, UnfoldingEvent *immPreEvt);
         void createEvts(Configuration C, EventSet &result, const std::string &trans_tag,
                         s_evset_in_t ev_sets, bool chk, UnfoldingEvent *immPreEvt);
         void updateMaxEvent(UnfoldingEvent *);        // update maximal events of the configuration and actors
@@ -76,17 +81,13 @@ namespace uc
         int id = -1;
         // TODO: remove appState
         State appState;
-        // TODO: remove transition
-        app::Transition transition; // The last transition made to reach that state
+        // app::Transition transition; // The last transition made to reach that state
         EventSet causes;            // used to store directed ancestors of event e
-        EventSet conflictEvts;
 
         // TODO: remove constructors
         UnfoldingEvent(State *s) : appState(*s) {}
         UnfoldingEvent(State *s, int sid) : appState(*s), state_id(sid) {}
-        //TODO: remove constructor        
-        UnfoldingEvent(unsigned int nb_events, const app::Transition &t, const EventSet &causes);
-        UnfoldingEvent(unsigned int nb_events, std::string const& tr_tag, EventSet const& causes);
+        UnfoldingEvent(unsigned int nb_events, std::string const& trans_tag, EventSet const& causes);
         UnfoldingEvent(const UnfoldingEvent &) = default;
         UnfoldingEvent &operator=(UnfoldingEvent const &) = default;
         UnfoldingEvent(UnfoldingEvent &&) = default;
@@ -103,7 +104,6 @@ namespace uc
         bool isImmediateConflict1(UnfoldingEvent *evt, UnfoldingEvent *otherEvt) const;
 
         bool conflictWithConfig(UnfoldingEvent *event, Configuration const& config) const;
-        //    bool operator<(const UnfoldingEvent& other);
         bool operator==(const UnfoldingEvent &other) const;
         void print() const;
 
@@ -115,7 +115,7 @@ namespace uc
 
     private:
         int state_id {-1};
-        std::string transition_tag {""};
+        std::string transition_tag {""}; // The tag of the last transition that lead to creating the event
         bool transition_is_IReceive(const UnfoldingEvent *testedEvt, const UnfoldingEvent *SdRcEvt) const;
         bool transition_is_ISend(const UnfoldingEvent *testedEvt, const UnfoldingEvent *SdRcEvt) const;
         bool check_tr_concern_same_comm(bool &chk1, bool &chk2, UnfoldingEvent *evt1, UnfoldingEvent *evt2) const;

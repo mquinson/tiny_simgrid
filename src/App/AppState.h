@@ -20,8 +20,6 @@ namespace app
         std::deque<std::string> get_enabled_transitions();
         AppState execute_transition(std::string const& tr_tag);
 
-        std::deque<std::string> get_all_tr0_tags() const;        
-
     private:        
         std::deque<Actor> actors_;
         std::deque<Mailbox> mailboxes_;
