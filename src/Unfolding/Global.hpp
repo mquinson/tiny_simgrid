@@ -5,8 +5,6 @@
 #include <algorithm>
 #include <queue>
 #include "../App/AppSide.h"
-#include "../App/Transition.h"
-#include "State.h"
 
 namespace uc
 {
