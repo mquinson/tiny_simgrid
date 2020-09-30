@@ -79,10 +79,8 @@ namespace uc
     {
     public:
         int id = -1;
-        // TODO: remove appState
-        State appState;
-        // app::Transition transition; // The last transition made to reach that state
         EventSet causes;            // used to store directed ancestors of event e
+        State appState;
 
         // TODO: remove constructors
         UnfoldingEvent(State *s) : appState(*s) {}
