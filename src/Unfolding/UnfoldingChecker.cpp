@@ -1433,8 +1433,7 @@ namespace uc
         }
     }
 
-    void UnfoldingChecker::extend(std::deque<Actor> actors, Configuration C, std::list<EventSet> maxEvtHistory, EventSet &exC,
-                                  EventSet &enC) const
+    void UnfoldingChecker::extend(Configuration C, std::list<EventSet> maxEvtHistory, EventSet &exC, EventSet &enC) const
     {
         // in the initial state each actor creates one event
         if (C.events_.empty())
@@ -1656,68 +1655,33 @@ namespace uc
         }
     }
 
-    void UnfoldingChecker::explore(std::deque<Actor> actors, std::deque<Mailbox> mailboxes, std::shared_ptr<AppSide> app_side)
+    void UnfoldingChecker::explore(std::shared_ptr<AppSide> app_side)
     {
         EventSet A, D;
         Configuration C;
         EventSet prev_exC;
 
-        // TODO: develop and call a create_state() without input arguments
-        if(app_side != nullptr)
-            App::set_app_side(app_side);
-        auto state_actors = actors;
-        auto state_mbs = mailboxes;
-        auto state_id = App::app_side_->create_state(std::move(state_actors), std::move(state_mbs));
+        App::set_app_side(app_side);
+        auto state_id = App::app_side_->create_state({}, {}, true);
+        auto e = new UnfoldingEvent(-1, "", {}, state_id);
 
-        auto initState = new State(actors.size(), actors, mailboxes);
-        // auto *e = new UnfoldingEvent(initState);
-        // TODO: call another constructor
-        auto *e = new UnfoldingEvent(initState, state_id);
-
-        explore(C, {EventSet()}, D, A, e, prev_exC, actors);
-    }
-
-    void UnfoldingChecker::explore(State *state)
-    {
-        EventSet A, D;
-        Configuration C;
-        EventSet prev_exC;
-
-        auto local_actors = state->actors_;
-        auto local_mbs = state->mailboxes_;
-        App::app_side_->create_state(std::move(local_actors), std::move(local_mbs));
-
-        explore(C, {EventSet()}, D, A, new UnfoldingEvent(state), prev_exC, state->actors_);
-        std::cout.flush();
-        if (g_var::nb_traces != confs_expected_.size())
-        {
-            std::cerr << "ERROR: " << confs_expected_.size() << " traces expected, but " << g_var::nb_traces << " observed.\n";
-            error_++;
-        }
-        if (g_var::nb_events != expected_events_)
-        {
-            std::cerr << "ERROR: " << expected_events_ << " unique events expected, but " << g_var::nb_events << " observed.\n";
-            error_++;
-        }
+        explore(C, {EventSet()}, D, A, e, prev_exC);
     }
 
     void UnfoldingChecker::explore(Configuration C, std::list<EventSet> maxEvtHistory, EventSet D, EventSet A,
-                                   UnfoldingEvent *currentEvt, EventSet prev_exC, std::deque<Actor> actors)
+                                   UnfoldingEvent *currentEvt, EventSet prev_exC)
     {
         UnfoldingEvent *e = nullptr;
-        EventSet enC, exC = prev_exC; // exC.erase(currentEvt);
+        EventSet enC, exC = prev_exC;
 
         EvtSetTools::remove(exC, currentEvt);
 
-        // exC = previous exC - currentEvt + new events
-
-        extend(actors, C, maxEvtHistory, exC, enC);
+        extend(C, maxEvtHistory, exC, enC);
 
         for (auto it : C.events_)
             EvtSetTools::remove(exC, it);
 
         // return when enC \subset of D
-
         bool chk = true;
         if (enC.size() > 0)
             for (auto evt : enC)
@@ -1810,7 +1774,7 @@ namespace uc
 
         auto a_minus = EvtSetTools::minus(A, e);
         auto exc_minus = EvtSetTools::minus(exC, e);
-        explore(C1, maxEvtHistory1, D, a_minus, e, exc_minus, actors);
+        explore(C1, maxEvtHistory1, D, a_minus, e, exc_minus);
 
         EventSet J, U1;
         EventSet Uc = g_var::U;
@@ -1828,7 +1792,7 @@ namespace uc
         {
             EvtSetTools::subtract(J, C.events_);
 
-            explore(C, maxEvtHistory, D1, J, currentEvt, prev_exC, actors);
+            explore(C, maxEvtHistory, D1, J, currentEvt, prev_exC);
         }
 
         remove(e, C, D);

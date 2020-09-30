@@ -20,8 +20,8 @@ namespace uc
         trans_id = std::get<2>(trans_attrs.second);
     }
 
-    UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, std::string const &trans_tag, EventSet const &causes) : 
-                                                id(nb_events), transition_tag(trans_tag), causes(causes) {}
+    UnfoldingEvent::UnfoldingEvent(unsigned int nb_events, std::string const &trans_tag, EventSet const &causes, int sid) : 
+                                                id(nb_events), transition_tag(trans_tag), causes(causes), state_id(sid) {}
 
     void UnfoldingEvent::print() const
     {

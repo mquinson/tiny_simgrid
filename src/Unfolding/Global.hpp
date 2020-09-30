@@ -79,13 +79,8 @@ namespace uc
     {
     public:
         int id = -1;
-        EventSet causes;            // used to store directed ancestors of event e
-        State appState;
-
-        // TODO: remove constructors
-        UnfoldingEvent(State *s) : appState(*s) {}
-        UnfoldingEvent(State *s, int sid) : appState(*s), state_id(sid) {}
-        UnfoldingEvent(unsigned int nb_events, std::string const& trans_tag, EventSet const& causes);
+        EventSet causes; // used to store directed ancestors of event e        
+        UnfoldingEvent(unsigned int nb_events, std::string const& trans_tag, EventSet const& causes, int sid = -1);
         UnfoldingEvent(const UnfoldingEvent &) = default;
         UnfoldingEvent &operator=(UnfoldingEvent const &) = default;
         UnfoldingEvent(UnfoldingEvent &&) = default;

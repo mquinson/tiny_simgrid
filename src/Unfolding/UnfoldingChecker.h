@@ -28,13 +28,12 @@ namespace uc
         UnfoldingChecker(UnfoldingChecker &&) = default;
         ~UnfoldingChecker() = default;
 
-        void explore(State *state); // Start the exploration
         // Recursive function
         void explore(Configuration C, std::list<EventSet> maxEvtHistory, EventSet D, EventSet A, UnfoldingEvent *currentEvt,
-                     EventSet prev_enC, std::deque<Actor> proc);
+                     EventSet prev_enC);
 
-        void explore(std::deque<Actor> actors, std::deque<Mailbox> mailboxes, std::shared_ptr<AppSide> app_side = nullptr);
-        void extend(std::deque<Actor> proc, Configuration C, std::list<EventSet> maxEvtHistory, EventSet &ExC, EventSet &enC) const;
+        void explore(std::shared_ptr<AppSide> app_side);
+        void extend(Configuration C, std::list<EventSet> maxEvtHistory, EventSet &ExC, EventSet &enC) const;
         void remove(UnfoldingEvent *e, Configuration C, EventSet D);
         EventSet KpartialAlt(EventSet D, Configuration C) const;
 

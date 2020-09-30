@@ -43,9 +43,15 @@ namespace app
     {
     }
 
-    int AppSide::create_state(std::deque<Actor> &&actors, std::deque<Mailbox> &&mailboxes)
-    {
-        return state_manager_->create_state(std::forward<std::deque<Actor>>(actors), std::forward<std::deque<Mailbox>>(mailboxes));
+    int AppSide::create_state(std::deque<Actor> &&actors, std::deque<Mailbox> &&mailboxes, bool is_state0)
+    {        
+        if(is_state0)
+        {
+            auto ac = *(actors_.get());
+            auto mb = *(mailboxes_.get());
+            return state_manager_->create_state(std::move(ac), std::move(mb));
+        }
+        return state_manager_->create_state(std::move(actors), std::move(mailboxes));
     }
 
     int AppSide::execute_transition(int state_id, std::string const &transition_tag) const

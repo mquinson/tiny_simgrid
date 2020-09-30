@@ -31,8 +31,6 @@ add_executable(${PROJECT}
     ${SRC_DIR}/Unfolding/CheckerSide.h
     ${SRC_DIR}/Unfolding/Global.cpp
     ${SRC_DIR}/Unfolding/Global.hpp
-    ${SRC_DIR}/Unfolding/State.cpp
-    ${SRC_DIR}/Unfolding/State.h
     ${SRC_DIR}/Unfolding/UnfoldingChecker.cpp
     ${SRC_DIR}/Unfolding/UnfoldingChecker.h
     )

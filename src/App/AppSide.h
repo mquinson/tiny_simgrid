@@ -71,7 +71,7 @@ namespace app
         std::deque<Mailbox> get_mbs();
 
         /* STATE */
-        int create_state(std::deque<Actor> &&actors, std::deque<Mailbox> &&mailboxes);
+        int create_state(std::deque<Actor> &&actors, std::deque<Mailbox> &&mailboxes, bool is_state0 = false);
         int execute_transition(int state_id, std::string const &transition_tag) const;
         std::deque<std::string> get_enabled_transitions(int sid) const;
 

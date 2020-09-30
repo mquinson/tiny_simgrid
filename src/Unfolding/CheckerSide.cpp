@@ -6,6 +6,6 @@ namespace uc
     {
         auto actors = app_side->get_actors();
         auto mbs = app_side->get_mbs();
-        uc_->explore(actors, mbs, app_side);
+        uc_->explore(app_side);
     }
 } // namespace uc
