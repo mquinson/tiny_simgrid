@@ -64,6 +64,11 @@ namespace app
         return state_manager_->get_enabled_transitions(sid);
     }
 
+    void AppSide::delete_state(int state_id)
+    {
+        state_manager_->delete_state(state_id);
+    }
+
     std::deque<std::string> AppSide::get_trans0_tags() const
     {
         std::deque<std::string> all_tr0;

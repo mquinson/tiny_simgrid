@@ -12,6 +12,14 @@ namespace app
         return id;
     }
 
+    void StateManager::delete_state(int sid)
+    { 
+        auto state = states_.find(sid);
+        if (state == states_.end())
+            return;
+        states_.erase(state);
+    }
+
     int StateManager::execute_transition(int sid, std::string const &transition_tag)
     {
         auto state = find_state(sid);

@@ -15,13 +15,14 @@ namespace app
         StateManager(StateManager &&) = delete;
         ~StateManager() = default;
 
-        int create_state(std::deque<Actor>&& actors, std::deque<Mailbox>&& mailboxes); 
-        int execute_transition(int sid, std::string const& transition_tag);    
+        int create_state(std::deque<Actor> &&actors, std::deque<Mailbox> &&mailboxes);
+        int execute_transition(int sid, std::string const &transition_tag);
         std::deque<std::string> get_enabled_transitions(int sid);
+        void delete_state(int sid);
 
     private:
-        AppState* find_state(int sid);
-        int add_state(AppState&& state);
+        AppState *find_state(int sid);
+        int add_state(AppState &&state);
         static int state_id_;
         std::map<int, AppState> states_;
     };

@@ -559,13 +559,9 @@ namespace uc
         for (auto it : evtS)
         {
             if (*it == *e)
-            {
                 events.erase(events.begin() + index);
-            }
             else
-            {
                 index++;
-            }
         }
     }
 

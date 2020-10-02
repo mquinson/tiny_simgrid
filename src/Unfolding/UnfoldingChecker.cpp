@@ -22,7 +22,7 @@ namespace uc
     EventSet g_var::gD;
 
     // std::tuple<check_is_true, return_from_func, normal_end>
-    std::tuple<bool, bool, bool> func(UnfoldingEvent *it, std::list<UnfoldingEvent*>& EvtList1, EventSet &J, unsigned int n, unsigned long sizeD, int inter)
+    std::tuple<bool, bool, bool> func(UnfoldingEvent *it, std::list<UnfoldingEvent *> &EvtList1, EventSet &J, unsigned int n, unsigned long sizeD, int inter)
     {
         bool check = false;
         for (auto evt : EvtList1)
@@ -71,14 +71,14 @@ namespace uc
             list1.pop_back();
 
             auto inter = 0;
-            for (auto it:intS)
+            for (auto it : intS)
             {
                 auto tuple = func(it, EvtList1, J, n, sizeD, inter);
                 auto check = std::get<0>(tuple);
-                if(check)
+                if (check)
                     continue;
                 auto exit = std::get<1>(tuple);
-                if(exit)
+                if (exit)
                     return;
                 if (J.size() == 0)
                     ksubset(sizeD, EvtList1, list1, n + 1, J);
@@ -87,7 +87,7 @@ namespace uc
         }
     }
 
-    void check_event_to_remove(UnfoldingEvent *evt, EventSet& evtS, EventSet const &D, Configuration const& C)
+    void check_event_to_remove(UnfoldingEvent *evt, EventSet &evtS, EventSet const &D, Configuration const &C)
     {
         EventSet subC;
         EventSet sub_history;
@@ -112,7 +112,7 @@ namespace uc
             EvtSetTools::remove(evtS, evt);
     }
 
-    bool remove_conflict_with_c(std::list<EventSet> const &kSet, std::list<EventSet> &kSet1, EventSet const &D, Configuration const& C)
+    bool remove_conflict_with_c(std::list<EventSet> const &kSet, std::list<EventSet> &kSet1, EventSet const &D, Configuration const &C)
     {
         for (auto it : kSet)
         {
@@ -184,7 +184,7 @@ namespace uc
         return J;
     }
 
-    bool transition_is_IReceive(EventSet const &testedEvtHist, EventSet const& ancestorsHist, EventSet const &ancestors, const UnfoldingEvent *testedEvt)
+    bool transition_is_IReceive(EventSet const &testedEvtHist, EventSet const &ancestorsHist, EventSet const &ancestors, const UnfoldingEvent *testedEvt)
     {
         auto nbReceive = 0;
         auto testedEvt_trans_mb_id = App::app_side_->get_transition_mb_id(testedEvt->get_transition_tag());
@@ -227,7 +227,7 @@ namespace uc
     bool transition_is_ISend(EventSet const &testedEvtHist, EventSet const &ancestorsHist, EventSet const &ancestors, const UnfoldingEvent *testedEvt)
     {
         auto nbSend = 0;
-        auto testedEvt_trans_mb_id = App::app_side_->get_transition_mb_id(testedEvt->get_transition_tag());        
+        auto testedEvt_trans_mb_id = App::app_side_->get_transition_mb_id(testedEvt->get_transition_tag());
         for (auto evt : testedEvtHist)
         {
             auto evt_trans_tag = evt->get_transition_tag();
@@ -258,10 +258,10 @@ namespace uc
             if ((it_trans_type == "Ireceive") && (it_trans_mb_id == testedEvt_trans_mb_id))
                 nbReceive1++;
         }
- 
+
         if (nbSend != nbReceive1)
             return false;
-        
+
         return true;
     }
 
@@ -273,14 +273,14 @@ namespace uc
         Util::get_transition_detail(trans_tag, trans_type, trans_actor_id, trans_mb_id);
 
         int nbTest = 0;
-        UnfoldingEvent *testEvt;        
+        UnfoldingEvent *testEvt;
         for (auto evt : ancestors)
         {
             auto evt_trans_tag = evt->get_transition_tag();
             std::string evt_trans_type;
             int evt_trans_actor_id;
             Util::get_transition_detail(evt_trans_tag, evt_trans_type, evt_trans_actor_id);
-            
+
             if ((evt_trans_type == "Test") && (evt_trans_actor_id != trans_actor_id))
             {
                 nbTest++;
@@ -315,7 +315,7 @@ namespace uc
         if (testedEvt_trans_type == "Isend")
         {
             auto ret = transition_is_ISend(testedEvtHist, ancestorsHist, ancestors, testedEvt);
-            if(!ret)
+            if (!ret)
                 return ret;
         }
 
@@ -331,7 +331,7 @@ namespace uc
     *  (the set includes events that can be a direct ancestor)
     *  by combination the transition and all subset (cause)  of the set ancestorSet
     */
-    bool check_contains(bool chk, EventSet const& cause, const UnfoldingEvent *immPreEvt)
+    bool check_contains(bool chk, EventSet const &cause, const UnfoldingEvent *immPreEvt)
     {
         bool chk1 = false;
         // if immediate precede event is not in the causuality_events, ensure that it is in the history of one event in
@@ -420,18 +420,18 @@ namespace uc
         return immPreEvt;
     }
 
-    void create_events_from_trans_and_maxEvent(std::tuple<Configuration, bool, std::string const&> t_params,
-                            EventSet const& causalityEvts, UnfoldingEvent *immPreEvt, EventSet const& ancestorSet, 
-                            std::list<EventSet>& maxEvtHistory, EventSet &exC)
+    void create_events_from_trans_and_maxEvent(std::tuple<Configuration, bool, std::string const &> t_params,
+                                               EventSet const &causalityEvts, UnfoldingEvent *immPreEvt, EventSet const &ancestorSet,
+                                               std::list<EventSet> &maxEvtHistory, EventSet &exC)
     {
         auto C = std::get<0>(t_params);
-        auto chk = std::get<1>(t_params); 
-        auto trans_tag = std::get<2>(t_params); 
+        auto chk = std::get<1>(t_params);
+        auto trans_tag = std::get<2>(t_params);
 
         EventSet cause;
         EventSet exC1;
         EventSet H;
-        
+
         //EventSet causuality_events, EventSet cause, EventSet ancestorSet
         s_evset_in evsets = {causalityEvts, cause, ancestorSet};
         C.createEvts(C, exC1, trans_tag, evsets, chk, immPreEvt);
@@ -487,7 +487,7 @@ namespace uc
     }
 
     /* this function produces new events from a given transition (trans) and the maxEvtHistory*/
-    EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, std::string const& trans_tag)
+    EventSet computeExt(Configuration C, std::list<EventSet> maxEvtHistory, std::string const &trans_tag)
     {
         bool chk = false;
         EventSet causalityEvts;
@@ -513,7 +513,7 @@ namespace uc
             // if immediate precede evt in maxEvent, add it to the causalityEvts
             for (auto evt : C.maxEvent)
             {
-                auto evt_trans_actor_id = App::app_side_->get_transition_actor_id(evt->get_transition_tag());     
+                auto evt_trans_actor_id = App::app_side_->get_transition_actor_id(evt->get_transition_tag());
                 if (trans_actor_id == evt_trans_actor_id)
                 {
                     EvtSetTools::pushBack(causalityEvts, evt);
@@ -535,7 +535,7 @@ namespace uc
             if (isDependent && (!EvtSetTools::contains(causalityEvts, evt)))
                 EvtSetTools::pushBack(ancestorSet, evt);
         }
-        
+
         /*1. Create events from current (last) maximal event of C */
         // 1.1 if only last evt and immidiate precede event are dependent with trans -> only one evt is created
         if (causalityEvts.size() <= 2 && ancestorSet.size() == 0)
@@ -560,7 +560,7 @@ namespace uc
     The idea here is that, we try to march the communication with all possible communication to crete a complete
     communication, making wait become enabled. When the wait enable, we can create new events
     */
-    EventSet createWaitEvt(const UnfoldingEvent *evt, Configuration C, std::string const& trans_tag)
+    EventSet createWaitEvt(const UnfoldingEvent *evt, Configuration C, std::string const &trans_tag)
     {
         EventSet evtS;
         int nbSdRc = 0;
@@ -710,7 +710,7 @@ namespace uc
         return evtS;
     }
 
-    EventSet createTestEvt(EventSet exC, UnfoldingEvent *evt, Configuration C, std::string const& trans_tag)
+    EventSet createTestEvt(EventSet exC, UnfoldingEvent *evt, Configuration C, std::string const &trans_tag)
     {
         EventSet evtS;
         int numberSend = 0;
@@ -720,23 +720,23 @@ namespace uc
 
         auto evt_trans_tag = evt->get_transition_tag();
         // (type, (actor_id, mb_id, trans_id))
-        auto evt_trans_attrs = App::app_side_->get_transition_attrs(evt_trans_tag); 
+        auto evt_trans_attrs = App::app_side_->get_transition_attrs(evt_trans_tag);
         auto comType = evt_trans_attrs.first;
-        auto evt_trans_actor_id = std::get<0>(evt_trans_attrs.second); 
+        auto evt_trans_actor_id = std::get<0>(evt_trans_attrs.second);
         auto mbId = std::get<1>(evt_trans_attrs.second);
 
         auto lastEvt_trans_tag = C.lastEvent->get_transition_tag();
         // (type, (actor_id, mb_id, trans_id))
-        auto lastEvt_trans_attrs = App::app_side_->get_transition_attrs(lastEvt_trans_tag); 
+        auto lastEvt_trans_attrs = App::app_side_->get_transition_attrs(lastEvt_trans_tag);
         auto lastEvt_trans_type = lastEvt_trans_attrs.first;
         auto lastEvt_trans_actor_id = std::get<0>(lastEvt_trans_attrs.second);
 
         // (type, (actor_id, mb_id, trans_id))
-        auto trans_attrs = App::app_side_->get_transition_attrs(trans_tag); 
+        auto trans_attrs = App::app_side_->get_transition_attrs(trans_tag);
         auto trans_type = trans_attrs.first;
         auto trans_actor_id = std::get<0>(trans_attrs.second);
 
-        UnfoldingEvent *newEvt1 = nullptr; 
+        UnfoldingEvent *newEvt1 = nullptr;
         UnfoldingEvent *newEvt2 = nullptr;
         EventSet ancestors;
 
@@ -815,9 +815,9 @@ namespace uc
                     auto evt2_trans_type = evt2_trans_attrs.first;
                     auto evt2_trans_mb_id = std::get<1>(evt2_trans_attrs.second);
 
-                    auto check_ireceive = (evt2_trans_type == "Ireceive") && 
+                    auto check_ireceive = (evt2_trans_type == "Ireceive") &&
                                           (evt2_trans_mb_id == mbId) &&
-                                          (!EvtSetTools::contains(lastEvtHist, evt2));  
+                                          (!EvtSetTools::contains(lastEvtHist, evt2));
                     if (check_ireceive)
                     {
                         // after find out a receive request
@@ -848,7 +848,7 @@ namespace uc
                         }
                     }
                 }
-            }            
+            }
             else if (comType == "Ireceive") // do the same for a receive
             {
                 // try to march the communication with all possible receice request
@@ -860,9 +860,9 @@ namespace uc
                     auto evt2_trans_type = evt2_trans_attrs.first;
                     auto evt2_trans_mb_id = std::get<1>(evt2_trans_attrs.second);
 
-                    auto check_isend = (evt2_trans_type == "Isend") && 
-                                        (evt2_trans_mb_id == mbId) &&
-                                        (!EvtSetTools::contains(lastEvtHist, evt2));
+                    auto check_isend = (evt2_trans_type == "Isend") &&
+                                       (evt2_trans_mb_id == mbId) &&
+                                       (!EvtSetTools::contains(lastEvtHist, evt2));
                     if (check_isend)
                     {
                         // after find out a receive request
@@ -950,7 +950,7 @@ namespace uc
         return evtS;
     }
 
-    EventSet createIsendEvts(std::string const& trans_tag, Configuration C)
+    EventSet createIsendEvts(std::string const &trans_tag, Configuration C)
     {
         bool enableChk = false;
 
@@ -1028,7 +1028,7 @@ namespace uc
         }
 
         // if last evt = preEvt(Isend) or last evt is a Isend, then try to combine with Test
-        auto trans_is_dependent = App::app_side_->check_transition_dependency(trans_tag, lastEvt_trans_tag); 
+        auto trans_is_dependent = App::app_side_->check_transition_dependency(trans_tag, lastEvt_trans_tag);
         if (trans_is_dependent)
         {
             for (auto it : C.events_)
@@ -1040,7 +1040,7 @@ namespace uc
                 if ((it_trans_type == "Test") && (it_trans_mb_id == trans_mb_id))
                 {
                     UnfoldingEvent *testedEvt;
-                    
+
                     // retrive the communication tested by the the
                     testedEvt = C.findTestedComm(it);
 
@@ -1075,7 +1075,7 @@ namespace uc
 
         // else if last event is a Test
         auto check3 = (lastEvt_trans_actor_id == trans_actor_id) ||
-            ((lastEvt_trans_actor_id != trans_actor_id) && (lastEvt_trans_type == "Test")); 
+                      ((lastEvt_trans_actor_id != trans_actor_id) && (lastEvt_trans_type == "Test"));
         if (check3)
         {
             EventSet ansestors;
@@ -1131,7 +1131,7 @@ namespace uc
                 Util::get_transition_detail(sEvt_trans_tag, sEvt_trans_type, sEvt_trans_actor_id, sEvt_trans_mb_id);
 
                 auto check4 = (sEvt_trans_type == "Isend") && (sEvt_trans_mb_id == trans_mb_id) &&
-                    (sEvt_trans_actor_id != trans_actor_id) && (!EvtSetTools::contains(lastEvtHist, sEvt));
+                              (sEvt_trans_actor_id != trans_actor_id) && (!EvtSetTools::contains(lastEvtHist, sEvt));
                 if (check4)
                 {
                     EventSet rEvtHist = sEvt->getHistory();
@@ -1149,7 +1149,7 @@ namespace uc
                         {
                             UnfoldingEvent *testedEvent = C.findTestedComm(tEvt);
                             auto testedEvt_trans_tag = testedEvent->get_transition_tag();
-                            auto testedEvt_trans_type = App::app_side_->get_transition_type(testedEvt_trans_tag); 
+                            auto testedEvt_trans_type = App::app_side_->get_transition_type(testedEvt_trans_tag);
 
                             if ((testedEvt_trans_type == "Ireveive") && (!EvtSetTools::contains(lastEvtHist, tEvt)) &&
                                 !(EvtSetTools::contains(rEvtHist, tEvt)) && (!EvtSetTools::contains(tEvt->getHistory(), sEvt)))
@@ -1175,7 +1175,7 @@ namespace uc
         return exC;
     }
 
-    EventSet createIreceiveEvts(std::string const& trans_tag, Configuration C)
+    EventSet createIreceiveEvts(std::string const &trans_tag, Configuration C)
     {
         bool enableChk = false;
 
@@ -1183,12 +1183,12 @@ namespace uc
         UnfoldingEvent *testedEvt, *immPreEvt;
 
         std::string trans_type;
-        int trans_actor_id; 
-        int trans_mb_id; 
-        int trans_id; 
+        int trans_actor_id;
+        int trans_mb_id;
+        int trans_id;
         Util::get_transition_detail(trans_tag, trans_type, trans_actor_id, trans_mb_id, trans_id);
 
-        auto lastEvt_trans_tag = C.lastEvent->get_transition_tag();         
+        auto lastEvt_trans_tag = C.lastEvent->get_transition_tag();
         std::string lastEvt_trans_type;
         int lastEvt_trans_actor_id;
         int lastEvt_trans_mb_id;
@@ -1298,10 +1298,10 @@ namespace uc
                     }
                 }
             }
-        } 
+        }
         // else if last event is a Test
         auto check0 = (lastEvt_trans_actor_id == trans_actor_id) ||
-            ((lastEvt_trans_actor_id != trans_actor_id) && (lastEvt_trans_type == "Test"));
+                      ((lastEvt_trans_actor_id != trans_actor_id) && (lastEvt_trans_type == "Test"));
         if (check0)
         {
             EventSet ansestors;
@@ -1318,8 +1318,8 @@ namespace uc
             for (auto it : C.events_)
             {
                 auto it_trans_tag = it->get_transition_tag();
-                auto it_trans_actor_id = App::app_side_->get_transition_actor_id(it_trans_tag); 
-                auto it_dependency = App::app_side_->check_transition_dependency(it_trans_tag, trans_tag);    
+                auto it_trans_actor_id = App::app_side_->get_transition_actor_id(it_trans_tag);
+                auto it_dependency = App::app_side_->check_transition_dependency(it_trans_tag, trans_tag);
 
                 if (it_dependency && (trans_actor_id != it_trans_actor_id))
                 {
@@ -1357,10 +1357,10 @@ namespace uc
                 auto rEvt_trans_actor_id = std::get<0>(rEvt_trans_attrs.second);
                 auto rEvt_trans_mb_id = std::get<1>(rEvt_trans_attrs.second);
 
-                auto check1 = (rEvt_trans_type == "Ireceive") && 
+                auto check1 = (rEvt_trans_type == "Ireceive") &&
                               (rEvt_trans_mb_id == trans_mb_id) &&
-                              (rEvt_trans_actor_id != trans_actor_id) && 
-                              (!EvtSetTools::contains(lastEvtHist, rEvt));    
+                              (rEvt_trans_actor_id != trans_actor_id) &&
+                              (!EvtSetTools::contains(lastEvtHist, rEvt));
                 if (check1)
                 {
                     EventSet rEvtHist = rEvt->getHistory();
@@ -1373,18 +1373,18 @@ namespace uc
                         auto tEvt_trans_actor_id = std::get<0>(tEvt_trans_attrs.second);
                         auto tEvt_trans_mb_id = std::get<1>(tEvt_trans_attrs.second);
 
-                        auto check2 = (tEvt_trans_type == "Test") && 
+                        auto check2 = (tEvt_trans_type == "Test") &&
                                       (tEvt_trans_actor_id != trans_actor_id) &&
                                       (tEvt_trans_mb_id == trans_mb_id);
                         if (check2)
                         {
                             UnfoldingEvent *testedEvent = C.findTestedComm(tEvt);
                             auto testedEvt_trans_tag = testedEvent->get_transition_tag();
-                            auto testedEvt_trans_type = App::app_side_->get_transition_type(testedEvt_trans_tag); 
+                            auto testedEvt_trans_type = App::app_side_->get_transition_type(testedEvt_trans_tag);
 
-                            auto check3 = (testedEvt_trans_type == "Isend") && 
+                            auto check3 = (testedEvt_trans_type == "Isend") &&
                                           (!EvtSetTools::contains(lastEvtHist, tEvt)) &&
-                                          !(EvtSetTools::contains(rEvtHist, tEvt)) && 
+                                          !(EvtSetTools::contains(rEvtHist, tEvt)) &&
                                           (!EvtSetTools::contains(tEvt->getHistory(), rEvt));
 
                             if (check3)
@@ -1404,7 +1404,7 @@ namespace uc
                         }
                     }
                 }
-            } 
+            }
         }
         return exC;
     }
@@ -1458,21 +1458,21 @@ namespace uc
                 int trans_mb_id;
                 Util::get_transition_detail(trans_tag, trans_type, trans_actor_id, trans_mb_id);
                 auto trans_comm_id = App::app_side_->get_transition_comm_id(trans_tag);
-                auto trans_dependency = App::app_side_->check_transition_dependency(trans_tag, lastEvt_trans_tag);  
-                
+                auto trans_dependency = App::app_side_->check_transition_dependency(trans_tag, lastEvt_trans_tag);
+
                 std::vector<std::string> types = {"Wait", "Test", "Isend", "Ireceive", "localComp"};
                 auto transIsInTypes = App::app_side_->check_transition_type(trans_tag, types);
 
                 auto check_dep_type = trans_dependency && !transIsInTypes;
 
                 auto check_isend = (trans_type == "Isend") &&
-                              (trans_dependency ||
-                              ((lastEvt_trans_type == "Test") && (lastEvt_trans_mb_id == trans_mb_id)));
+                                   (trans_dependency ||
+                                    ((lastEvt_trans_type == "Test") && (lastEvt_trans_mb_id == trans_mb_id)));
 
                 auto check_ireceive = (trans_type == "Ireceive") &&
-                         (trans_dependency ||
-                          ((lastEvt_trans_type == "Test") && (lastEvt_trans_mb_id == trans_mb_id)));                              
-                
+                                      (trans_dependency ||
+                                       ((lastEvt_trans_type == "Test") && (lastEvt_trans_mb_id == trans_mb_id)));
+
                 // if trans is not a wait action, and is dependent with the transition of last event
                 if (check_dep_type)
                 {
@@ -1540,8 +1540,8 @@ namespace uc
                     for (auto evt1 : C.events_)
                     {
                         auto evt1_trans_tag = evt1->get_transition_tag();
-                        auto evt1_trans_actor_id = App::app_side_->get_transition_actor_id(evt1_trans_tag);    
-                        auto evt1_trans_comm_id = App::app_side_->get_transition_comm_id(evt1_trans_tag);    
+                        auto evt1_trans_actor_id = App::app_side_->get_transition_actor_id(evt1_trans_tag);
+                        auto evt1_trans_comm_id = App::app_side_->get_transition_comm_id(evt1_trans_tag);
 
                         if ((evt1_trans_actor_id == trans_actor_id) && (evt1_trans_comm_id == trans_comm_id))
                         {
@@ -1555,13 +1555,13 @@ namespace uc
                     auto evt_trans_tag = evt->get_transition_tag();
                     auto evt_trans_type = App::app_side_->get_transition_type(evt_trans_tag);
 
-                    auto check_wait = (lastEvt_trans_actor_id == trans_actor_id) || 
-                            (lastEvt_trans_type == "Isend" && evt_trans_type == "Ireceive") ||
-                            (lastEvt_trans_type == "Ireceive" && evt_trans_type == "Isend"); 
+                    auto check_wait = (lastEvt_trans_actor_id == trans_actor_id) ||
+                                      (lastEvt_trans_type == "Isend" && evt_trans_type == "Ireceive") ||
+                                      (lastEvt_trans_type == "Ireceive" && evt_trans_type == "Isend");
 
                     if (check_wait)
                     {
-                        auto newEvts = createWaitEvt(evt, C, trans_tag); 
+                        auto newEvts = createWaitEvt(evt, C, trans_tag);
                         for (auto newEvent : newEvts)
                             if (!EvtSetTools::contains(g_var::U, newEvent))
                             {
@@ -1595,11 +1595,11 @@ namespace uc
 
                     /* we only call function createTestEvt if the last action is send or receive
                     or dependent with the test (transition in the same actor) */
-                    
-                    auto event_trans_tag = event->get_transition_tag();
-                    auto event_trans_type = App::app_side_->get_transition_type(event_trans_tag); 
 
-                    auto check_test = (lastEvt_trans_actor_id == trans_actor_id) || 
+                    auto event_trans_tag = event->get_transition_tag();
+                    auto event_trans_type = App::app_side_->get_transition_type(event_trans_tag);
+
+                    auto check_test = (lastEvt_trans_actor_id == trans_actor_id) ||
                                       ((lastEvt_trans_type == "Isend") && (event_trans_type == "Ireceive")) ||
                                       ((lastEvt_trans_type == "Ireceive") && (event_trans_type == "Isend"));
 
@@ -1684,16 +1684,19 @@ namespace uc
         // return when enC \subset of D
         bool chk = true;
         if (enC.size() > 0)
+        {
             for (auto evt : enC)
+            {
                 if (!EvtSetTools::contains(D, evt))
                 {
                     chk = false;
                     break;
                 }
-
+            }
+        }
+        
         if (chk)
         {
-
             if (C.events_.size() > 0)
             {
 
@@ -1748,7 +1751,8 @@ namespace uc
 
         if (e == nullptr)
         {
-            std::cerr << "\n\nSOMETHING WENT WRONG. Event is null." << "\n";
+            std::cerr << "\n\nSOMETHING WENT WRONG. Event is null."
+                      << "\n";
             exit(EXIT_FAILURE);
         }
 
@@ -1757,7 +1761,7 @@ namespace uc
         e->print();
 
         std::cout << "\n";
-        
+
         auto curEv_StateId = currentEvt->get_state_id();
         auto nextState_id = App::app_side_->execute_transition(curEv_StateId, e->get_transition_tag());
         e->set_state_id(nextState_id);
@@ -1808,13 +1812,14 @@ namespace uc
         for (auto e1 : g_var::U)
         {
             for (auto e2 : unionSet)
+            { 
                 // add e1 which is immediate conflict with one event in C u D to res
-
                 if (e1->isImmediateConflict1(e1, e2))
                 {
                     EvtSetTools::pushBack(res, e1);
                     break;
                 }
+            }
         }
 
         res1 = res;
@@ -1830,27 +1835,26 @@ namespace uc
         if (!EvtSetTools::contains(res, e))
         {
             EvtSetTools::remove(g_var::U, e);
-
-            // G.insert(e);
+            App::app_side_->delete_state(e->get_state_id());
         }
 
         // move history of ê from U to G
         EventSet U1 = g_var::U;
         for (auto evt : U1)
-
         {
             if (evt->isImmediateConflict1(evt, e))
             {
-
                 EventSet h = evt->getHistory();
                 EvtSetTools::pushBack(h, evt);
 
                 for (auto e2 : h)
+                {
                     if (!EvtSetTools::contains(res, e2))
                     {
                         EvtSetTools::remove(g_var::U, e2);
-                        //	G.insert(e2);
+                        App::app_side_->delete_state(e2->get_state_id());
                     }
+                }
             }
         }
     }
